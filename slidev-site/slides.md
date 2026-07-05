@@ -338,3 +338,43 @@ drawings:
     </div>
   </div>
 </div>
+
+---
+
+<div class="style-sample style-apple">
+  <div class="apple-hero">
+    <span>方案 E</span>
+    <h2>Apple / Mac 极简演示风</h2>
+    <p>适合把复杂概念讲轻：减少表格密度，用大留白、轻层次和少量状态信息，让观众先抓住核心判断。</p>
+  </div>
+
+  <div class="apple-stage">
+    <div class="apple-window">
+      <div class="apple-window-bar">
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+      <div class="apple-query">对比电子流 EL-001 与 EL-002，找出关键差异</div>
+      <div class="apple-comparison">
+        <div>
+          <span>电子流 A</span>
+          <b>复核中</b>
+          <p>停留 18 小时 · 金额口径新版</p>
+        </div>
+        <div class="apple-arrow">→</div>
+        <div>
+          <span>电子流 B</span>
+          <b>已归档</b>
+          <p>停留 2 小时 · 金额口径旧版</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="apple-insight">
+      <span>Agent 结论</span>
+      <b>差异来自两个地方：流程节点不一致，字段版本不一致。</b>
+      <p>建议先确认 A 是否发生审批回退，再判断是否需要补充归档依据。</p>
+    </div>
+  </div>
+</div>
