@@ -187,21 +187,22 @@ onBeforeUnmount(stopPlaying);
   gap: 18px;
   padding: 16px 18px;
   background: #fff;
-  border: 1px solid #d8dde6;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.06);
 }
 
 .scenario-bar b {
   display: block;
-  color: #111827;
+  color: #1d1d1f;
   font-size: 18px;
   line-height: 1.35;
 }
 
 .bar-label {
-  color: #b7242a;
+  color: #86868b;
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 760;
 }
 
 .demo-controls {
@@ -213,17 +214,18 @@ onBeforeUnmount(stopPlaying);
 .demo-controls button {
   height: 34px;
   padding: 0 12px;
-  border: 1px solid #cfd5df;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
   background: #fff;
-  color: #1f242d;
-  font-weight: 750;
+  color: #1d1d1f;
+  font-weight: 720;
   font-size: 13px;
   cursor: pointer;
 }
 
 .demo-controls button.primary {
-  border-color: #b7242a;
-  background: #b7242a;
+  border-color: #0071e3;
+  background: #0071e3;
   color: #fff;
 }
 
@@ -241,8 +243,9 @@ onBeforeUnmount(stopPlaying);
   gap: 12px;
   padding: 18px;
   background: #fff;
-  border: 1px solid #d8dde6;
-  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.06);
 }
 
 .lane header {
@@ -250,17 +253,17 @@ onBeforeUnmount(stopPlaying);
   align-items: baseline;
   justify-content: space-between;
   padding-bottom: 10px;
-  border-bottom: 2px solid #edf0f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .lane header span {
-  color: #b7242a;
+  color: #0071e3;
   font-size: 15px;
-  font-weight: 850;
+  font-weight: 760;
 }
 
 .lane header b {
-  color: #1f242d;
+  color: #1d1d1f;
   font-size: 23px;
 }
 
@@ -280,8 +283,9 @@ onBeforeUnmount(stopPlaying);
   grid-template-columns: 34px 1fr;
   gap: 10px;
   padding: 10px;
-  border: 1px solid #e2e7ef;
-  background: #f8fafc;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  background: #f5f5f7;
   opacity: 0.55;
   transition: 180ms ease;
 }
@@ -294,8 +298,8 @@ onBeforeUnmount(stopPlaying);
 .step-list li.active,
 .trace-list li.active {
   opacity: 1;
-  border-color: rgba(183, 36, 42, 0.45);
-  background: #fff7f7;
+  border-color: rgba(0, 113, 227, 0.3);
+  background: #f7fbff;
   transform: translateY(-1px);
 }
 
@@ -312,11 +316,12 @@ onBeforeUnmount(stopPlaying);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #202732;
+  border-radius: 8px;
+  background: #1d1d1f;
   color: #fff;
   font-style: normal;
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 760;
 }
 
 .trace-list i {
@@ -326,21 +331,21 @@ onBeforeUnmount(stopPlaying);
 .step-list b,
 .trace-list b {
   display: block;
-  color: #111827;
+  color: #1d1d1f;
   font-size: 15px;
   margin-bottom: 3px;
 }
 
 .step-list p,
 .trace-list p {
-  color: #586173;
+  color: #6e6e73;
   font-size: 13px;
   line-height: 1.35;
   margin: 0;
 }
 
 .agent-lane {
-  border-color: rgba(183, 36, 42, 0.32);
+  border-color: rgba(0, 113, 227, 0.22);
 }
 
 .agent-loop {
@@ -352,31 +357,33 @@ onBeforeUnmount(stopPlaying);
 .loop-node {
   text-align: center;
   padding: 8px 6px;
-  border: 1px solid #d8dde6;
-  background: #f6f8fb;
-  color: #485466;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  background: #f5f5f7;
+  color: #6e6e73;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 760;
 }
 
 .loop-node.active {
-  border-color: #b7242a;
-  background: #b7242a;
+  border-color: #0071e3;
+  background: #0071e3;
   color: #fff;
 }
 
 .lane-result {
   min-height: 54px;
   padding: 11px 13px;
-  background: #202732;
+  border-radius: 8px;
+  background: #1d1d1f;
   color: #fff;
 }
 
 .lane-result span {
   display: block;
-  color: #f3c6c8;
+  color: #a1a1a6;
   font-size: 12px;
-  font-weight: 850;
+  font-weight: 760;
   margin-bottom: 4px;
 }
 
@@ -387,6 +394,6 @@ onBeforeUnmount(stopPlaying);
 }
 
 .agent-result {
-  background: #b7242a;
+  background: #0071e3;
 }
 </style>

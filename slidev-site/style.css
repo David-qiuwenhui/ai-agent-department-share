@@ -1,12 +1,13 @@
 :root {
-  --brand-red: #b7242a;
-  --brand-red-soft: #f8e7e8;
-  --ink: #1f242d;
-  --muted: #667085;
-  --line: #d8dde6;
+  --accent: #0071e3;
+  --accent-soft: #e8f2ff;
+  --ink: #1d1d1f;
+  --muted: #6e6e73;
+  --line: rgba(0, 0, 0, 0.08);
   --panel: #ffffff;
-  --panel-soft: #f6f8fb;
-  --stage-bg: #f3f5f8;
+  --panel-soft: #f5f5f7;
+  --stage-bg: #f5f5f7;
+  --shadow-soft: 0 24px 58px rgba(0, 0, 0, 0.08);
 }
 
 .slidev-layout {
@@ -26,7 +27,7 @@
 .cover-page,
 .slide-page {
   height: 100%;
-  padding: 54px 68px;
+  padding: 58px 72px;
   box-sizing: border-box;
 }
 
@@ -35,37 +36,37 @@
   flex-direction: column;
   justify-content: center;
   background:
-    linear-gradient(90deg, rgba(183, 36, 42, 0.08), transparent 46%),
-    linear-gradient(180deg, #ffffff 0%, #f3f5f8 100%);
+    radial-gradient(circle at 78% 16%, rgba(226, 232, 240, 0.9), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
 }
 
 .cover-kicker {
-  color: var(--brand-red);
-  font-size: 21px;
-  font-weight: 700;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 720;
   margin-bottom: 22px;
 }
 
 .cover-page h1 {
-  font-size: 54px;
-  line-height: 1.12;
-  font-weight: 820;
-  color: #111827;
-  max-width: 980px;
+  font-size: 60px;
+  line-height: 1.08;
+  font-weight: 780;
+  color: var(--ink);
+  max-width: 1040px;
 }
 
 .cover-subtitle {
   margin-top: 24px;
-  color: #4b5563;
+  color: var(--muted);
   font-size: 25px;
   line-height: 1.55;
-  max-width: 900px;
+  max-width: 850px;
 }
 
 .cover-map {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
   margin-top: 58px;
   width: 920px;
 }
@@ -76,12 +77,12 @@
 .build-layer {
   border: 1px solid var(--line);
   background: var(--panel);
-  box-shadow: 0 14px 36px rgba(17, 24, 39, 0.06);
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
 }
 
 .cover-map div {
   padding: 22px 24px;
-  border-top: 4px solid var(--brand-red);
 }
 
 .cover-map b {
@@ -112,17 +113,16 @@
   align-items: center;
   justify-content: center;
   height: 38px;
-  border-top: 3px solid var(--brand-red);
-  color: var(--brand-red);
-  font-weight: 800;
+  color: var(--muted);
+  font-weight: 760;
   font-size: 20px;
 }
 
 .slide-header h2 {
   font-size: 36px;
   line-height: 1.22;
-  font-weight: 800;
-  color: #111827;
+  font-weight: 760;
+  color: var(--ink);
 }
 
 .two-column {
@@ -141,13 +141,13 @@
 }
 
 .panel.strong {
-  border-color: rgba(183, 36, 42, 0.35);
-  background: linear-gradient(180deg, #ffffff 0%, #fff8f8 100%);
+  border-color: rgba(0, 113, 227, 0.22);
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
 }
 
 .panel-label {
-  color: var(--brand-red);
-  font-weight: 800;
+  color: var(--accent);
+  font-weight: 760;
   font-size: 17px;
   margin-bottom: 18px;
 }
@@ -158,7 +158,7 @@
 }
 
 .panel p {
-  color: #4b5563;
+  color: var(--muted);
   font-size: 22px;
   line-height: 1.55;
   min-height: 104px;
@@ -176,6 +176,7 @@
 .loop-diagram div {
   border: 1px solid var(--line);
   background: #fff;
+  border-radius: 8px;
   padding: 12px 16px;
   font-size: 18px;
   font-weight: 700;
@@ -185,7 +186,7 @@
 .loop-diagram i {
   width: 34px;
   height: 2px;
-  background: var(--brand-red);
+  background: var(--accent);
   position: relative;
 }
 
@@ -195,27 +196,31 @@
   position: absolute;
   right: -2px;
   top: -4px;
-  border-left: 8px solid var(--brand-red);
+  border-left: 8px solid var(--accent);
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
 }
 
 .bottom-note {
   margin-top: 30px;
-  padding: 18px 22px;
-  border-left: 5px solid var(--brand-red);
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   background: #ffffff;
-  color: #3f4652;
+  color: #3a3a3c;
   font-size: 22px;
   line-height: 1.45;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.06);
 }
 
 .matrix {
   display: grid;
   grid-template-columns: 170px 1fr 1fr;
   border: 1px solid var(--line);
+  border-radius: 8px;
   background: #fff;
-  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.06);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
 }
 
 .matrix > div {
@@ -236,20 +241,20 @@
 }
 
 .matrix-head {
-  background: #202732;
+  background: #1d1d1f;
   color: #fff;
-  font-weight: 800;
+  font-weight: 760;
   font-size: 24px !important;
 }
 
 .matrix-head:nth-child(3) {
-  background: var(--brand-red);
+  background: #2f7cf6;
 }
 
 .matrix-row-label {
   background: var(--panel-soft);
-  font-weight: 800;
-  color: #111827;
+  font-weight: 760;
+  color: var(--ink);
 }
 
 .demo-slide {
@@ -269,9 +274,9 @@
 
 .part-card span {
   display: block;
-  color: var(--brand-red);
+  color: var(--accent);
   font-size: 18px;
-  font-weight: 850;
+  font-weight: 760;
   margin-bottom: 16px;
 }
 
@@ -282,7 +287,7 @@
 }
 
 .part-card p {
-  color: #4b5563;
+  color: var(--muted);
   font-size: 19px;
   line-height: 1.5;
 }
@@ -313,12 +318,12 @@
 }
 
 .build-layer b {
-  color: var(--brand-red);
+  color: var(--accent);
   font-size: 28px;
 }
 
 .build-layer span {
-  color: #344054;
+  color: #3a3a3c;
   font-size: 25px;
 }
 
