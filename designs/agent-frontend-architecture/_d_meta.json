@@ -1,0 +1,36 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "Agent 前端动态卡片接入架构": {
+      "versions": [
+        {
+          "path": "index.html",
+          "createdAt": "2026-07-05T15:21:16.234Z",
+          "status": "needs-review"
+        }
+      ]
+    },
+    "Agent 前端动态卡片接入架构 SVG": {
+      "versions": [
+        {
+          "path": "diagram/agent-frontend-card-architecture.svg",
+          "createdAt": "2026-07-05T15:23:10.090Z",
+          "status": "needs-review"
+        }
+      ]
+    },
+    "Agent 前端组件演示": {
+      "versions": [
+        {
+          "path": "index.html",
+          "createdAt": "2026-07-05T15:57:53.837Z",
+          "status": "needs-review"
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-07-05T15:21:16.238Z",
+  "updatedAt": "2026-07-05T16:23:01.683Z"
+}
