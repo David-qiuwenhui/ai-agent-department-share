@@ -1,0 +1,14 @@
+.DS_Store
+**/.DS_Store
+
+# PowerPoint/Office temporary lock files
+~$*
+outputs/~$*
+
+# Generated inspection and per-slide render artifacts
+*.inspect.ndjson
+outputs/*/slide-*.png
+
+# Local scratch workspace
+work/
+
