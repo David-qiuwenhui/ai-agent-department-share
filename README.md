@@ -22,6 +22,23 @@ For each slide:
 - `ppt-page-design.md`: Current page-level deck design draft.
 - `outputs/agent-ai-share-editable.pptx`: Editable PowerPoint draft.
 - `outputs/agent-ai-share-editable-montage.png`: Rendered overview for quick review.
+- `slidev-site/`: Web-based Slidev presentation with editable Markdown, CSS, and Vue demo components.
+
+## Slidev Web Version
+
+The Slidev version is useful for live demos and interactive explanation pages.
+
+```bash
+cd slidev-site
+npm install
+npm run dev
+```
+
+Local preview:
+
+```text
+http://localhost:3030/
+```
 
 ## Style Direction
 
@@ -29,4 +46,3 @@ For each slide:
 - High information density.
 - Prefer diagrams and tables over paragraphs.
 - Keep text and slide objects editable for later adjustment in PowerPoint.
-

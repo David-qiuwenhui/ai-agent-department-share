@@ -1,0 +1,16 @@
+{
+  "name": "agent-ai-share-slidev",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "slidev slides.md --port 3030 --open false",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md"
+  },
+  "dependencies": {
+    "@slidev/cli": "52.14.2",
+    "@slidev/theme-seriph": "^0.25.0",
+    "vue": "^3.5.22"
+  }
+}

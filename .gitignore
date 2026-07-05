@@ -9,6 +9,9 @@ outputs/~$*
 *.inspect.ndjson
 outputs/*/slide-*.png
 
+# Slidev local dependencies and build output
+slidev-site/node_modules/
+slidev-site/dist/
+
 # Local scratch workspace
 work/
-
