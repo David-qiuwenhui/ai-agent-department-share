@@ -977,6 +977,288 @@
       border-radius: var(--radius-sm);
     }
 
+    .todo-stage-page {
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+        oklch(0.972 0.012 82);
+    }
+
+    .todo-stage {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 28px;
+    }
+
+    .todo-stage .slide-head {
+      grid-template-columns: 86px 1fr 190px;
+      align-items: center;
+    }
+
+    .todo-stage .num {
+      width: 70px;
+      height: 70px;
+      font-size: 26px;
+    }
+
+    .todo-stage h2 {
+      font-size: 48px;
+      line-height: 1.1;
+    }
+
+    .todo-subtitle {
+      margin-top: 10px;
+      max-width: 1120px;
+      color: var(--muted);
+      font-size: 24px;
+      line-height: 1.4;
+    }
+
+    .todo-lab {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 24px;
+      min-height: 0;
+    }
+
+    .todo-canvas,
+    .todo-demo {
+      min-height: 0;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.12);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .todo-canvas {
+      position: relative;
+      padding: 26px;
+    }
+
+    .todo-banner {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      top: 26px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 780;
+    }
+
+    .todo-diagram-svg {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      top: 84px;
+      bottom: 96px;
+      width: calc(100% - 52px);
+      height: calc(100% - 180px);
+      display: block;
+      overflow: visible;
+    }
+
+    .todo-diagram-svg text {
+      font-family: -apple-system, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      pointer-events: none;
+    }
+
+    .todo-box {
+      fill: oklch(0.99 0.005 82);
+      stroke: var(--blue);
+      stroke-width: 2.6;
+    }
+
+    .todo-box.green {
+      fill: oklch(0.955 0.036 160);
+      stroke: var(--green);
+    }
+
+    .todo-box.amber {
+      fill: oklch(0.975 0.03 62);
+      stroke: var(--amber);
+    }
+
+    .todo-handler-box {
+      fill: oklch(0.985 0.015 160);
+      stroke: var(--green);
+      stroke-width: 3;
+      stroke-dasharray: 10 8;
+    }
+
+    .todo-title {
+      font-size: 23px;
+      font-weight: 900;
+      fill: var(--ink);
+    }
+
+    .todo-meta {
+      font-size: 15px;
+      font-weight: 720;
+      fill: var(--muted);
+    }
+
+    .todo-note {
+      font-size: 16px;
+      font-weight: 820;
+      fill: oklch(0.38 0.07 247);
+    }
+
+    .todo-edge {
+      fill: none;
+      stroke: oklch(0.55 0.025 247);
+      stroke-width: 3;
+      marker-end: url(#todoArrowMuted);
+    }
+
+    .todo-edge.blue { stroke: var(--blue); marker-end: url(#todoArrowBlue); }
+    .todo-edge.green { stroke: var(--green); marker-end: url(#todoArrowGreen); }
+    .todo-edge.amber { stroke: var(--amber); marker-end: url(#todoArrowAmber); }
+    .todo-edge.dashed { stroke-dasharray: 8 8; marker-end: url(#todoArrowMuted); }
+    .todo-edge.dashed.no-arrow { marker-end: none; }
+
+    .todo-nag {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 14px;
+      min-height: 66px;
+      display: grid;
+      grid-template-columns: 172px 1fr;
+      align-items: center;
+      gap: 18px;
+      padding: 12px 18px;
+      border: 2px solid var(--amber);
+      background: oklch(0.985 0.02 62);
+      border-radius: var(--radius-md);
+      color: oklch(0.45 0.105 62);
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .todo-nag strong {
+      color: oklch(0.38 0.11 62);
+      font-size: 22px;
+    }
+
+    .todo-demo {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      padding: 26px;
+    }
+
+    .todo-demo-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .todo-demo-head h3 {
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    .todo-demo-head p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .todo-demo-main {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .todo-code {
+      min-height: 114px;
+      padding: 18px;
+      background: var(--dark);
+      color: oklch(0.82 0.12 160);
+      border-radius: var(--radius-sm);
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 17px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      overflow: hidden;
+    }
+
+    .todo-progress {
+      display: grid;
+      gap: 10px;
+    }
+
+    .todo-list {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .todo-item {
+      display: grid;
+      grid-template-columns: 32px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      min-height: 42px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+      transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, opacity 180ms ease;
+    }
+
+    .todo-item .check {
+      width: 24px;
+      height: 24px;
+      font-size: 13px;
+    }
+
+    .todo-item strong {
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .todo-item .tag {
+      min-width: 54px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .todo-item.done {
+      opacity: 0.56;
+    }
+
+    .todo-item.current {
+      background: oklch(0.93 0.055 160);
+      border-color: var(--green);
+      transform: translateX(2px);
+    }
+
+    .todo-item.drift {
+      background: oklch(0.96 0.04 25);
+      border-color: var(--red);
+    }
+
     .plan-board {
       display: grid;
       grid-template-columns: 0.92fr 1.08fr;
@@ -2622,79 +2904,135 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section data-label="权限治理" data-speaker-notes="如果听众里有业务、合规或管理同事，这页要多停一下。Agent 真正进入工作，不是因为它什么都能做，而是因为它知道哪些事情要停下来问人。">
-      <div class="slide-grid">
+    <section class="todo-stage-page" data-label="TodoWrite" data-speaker-notes="这一页讲 TodoWrite。复杂任务如果没有外显计划，Agent 很容易被最新的工具结果带偏。TodoWrite 把计划变成可观察状态，还能通过提醒机制把模型拉回原始目标。">
+      <div class="todo-stage">
         <header class="slide-head">
           <div class="num">05</div>
           <div>
-            <h2>先划边界，再给自由：企业 Agent 必须有三类权限状态</h2>
+            <span class="kicker">s05 TodoWrite</span>
+            <h2>没有计划的 Agent，做着做着就偏了</h2>
+            <p class="todo-subtitle">复杂重构先写 TODO，把目标、步骤和进度固定在循环里。</p>
           </div>
-          <span class="tag">可控性</span>
+          <span class="tag">Plan + Nag</span>
         </header>
-        <div class="permissions">
-          <div class="policy-card" style="--policy-color: var(--green);">
-            <h3>允许自动执行</h3>
-            <p>只读、可回滚、低影响的动作，可以让 Agent 自己完成，减少人来回确认。</p>
-            <div class="policy-state">Allow</div>
-          </div>
-          <div class="policy-card" style="--policy-color: var(--amber);">
-            <h3>需要人工确认</h3>
-            <p>会改变外部状态、影响他人、成本较高的动作，必须弹出确认和理由。</p>
-            <div class="policy-state">Ask</div>
-          </div>
-          <div class="policy-card" style="--policy-color: var(--red);">
-            <h3>禁止执行</h3>
-            <p>越权访问、破坏性操作、绕过流程的动作，不能通过“提示词”临时放行。</p>
-            <div class="policy-state">Deny</div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="todo-lab">
+          <div class="todo-canvas">
+            <div class="todo-banner">TodoWrite：循环不变，多一个任务清单工具</div>
+            <svg class="todo-diagram-svg" viewBox="0 0 760 460" role="img" aria-label="TodoWrite 机制流程图">
+              <defs>
+                <marker id="todoArrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8994a3"></path>
+                </marker>
+                <marker id="todoArrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b76a8"></path>
+                </marker>
+                <marker id="todoArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#13815c"></path>
+                </marker>
+                <marker id="todoArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#bd6a18"></path>
+                </marker>
+              </defs>
 
-    <section data-label="计划能力" data-speaker-notes="有了循环和工具以后，Agent 可以动手，但还容易走哪算哪。TodoWrite 或 Plan 的价值，是让大任务先变成可检查的步骤，人也能看见它到底打算怎么做。">
-      <div class="slide-grid">
-        <header class="slide-head">
-          <div class="num">06</div>
-          <div>
-            <h2>没有计划的 Agent 只是会动手，有计划才像任务推进者</h2>
+              <path class="todo-edge blue" d="M 184 106 L 226 106"></path>
+              <path class="todo-edge amber" d="M 382 106 L 438 106"></path>
+              <path class="todo-edge green" d="M 580 106 L 610 106"></path>
+              <path class="todo-edge green" d="M 676 286 L 676 330 L 612 330"></path>
+              <path class="todo-edge dashed no-arrow" d="M 510 366 L 510 408 L 86 408 L 86 150"></path>
+              <path class="todo-edge" d="M 304 158 L 304 236"></path>
+
+              <rect class="todo-box" x="34" y="62" width="150" height="88" rx="16"></rect>
+              <text class="todo-title" x="109" y="98">messages[]</text>
+              <text class="todo-meta" x="109" y="126">目标 + 现场</text>
+
+              <rect class="todo-box" x="226" y="54" width="156" height="104" rx="16"></rect>
+              <text class="todo-title" x="304" y="92">LLM</text>
+              <text class="todo-meta" x="304" y="120">判断下一步</text>
+              <text class="todo-meta" x="304" y="142">是否用工具？</text>
+
+              <rect class="todo-box green" x="438" y="56" width="142" height="100" rx="16"></rect>
+              <text class="todo-title" x="509" y="90">Hooks</text>
+              <text class="todo-meta" x="509" y="118">工具前检查</text>
+              <text class="todo-meta" x="509" y="140">PreToolUse</text>
+
+              <rect class="todo-handler-box" x="610" y="34" width="118" height="252" rx="18"></rect>
+              <text class="todo-title" x="669" y="68">工具池</text>
+              <rect class="todo-box" x="630" y="92" width="78" height="36" rx="8"></rect>
+              <text class="todo-meta" x="669" y="110">read / write</text>
+              <rect class="todo-box" x="630" y="142" width="78" height="36" rx="8"></rect>
+              <text class="todo-meta" x="669" y="160">edit / glob</text>
+              <rect class="todo-box green" x="628" y="198" width="82" height="46" rx="10"></rect>
+              <text class="todo-title" x="669" y="216">todo</text>
+              <text class="todo-meta" x="669" y="236">任务清单</text>
+              <text class="todo-note" x="669" y="266">s05 新增</text>
+
+              <rect class="todo-box amber" x="410" y="300" width="202" height="66" rx="14"></rect>
+              <text class="todo-title" x="511" y="326">tool_result</text>
+              <text class="todo-meta" x="511" y="350">结果 + TODO 状态</text>
+
+              <rect class="todo-box green" x="220" y="236" width="168" height="76" rx="38"></rect>
+              <text class="todo-title" x="304" y="266">返回结果</text>
+              <text class="todo-meta" x="304" y="290">不需要工具</text>
+
+              <rect class="label-chip" x="190" y="90" width="30" height="28" rx="7"></rect>
+              <text class="small-label" x="205" y="104">读</text>
+              <rect class="label-chip" x="390" y="90" width="40" height="28" rx="7"></rect>
+              <text class="small-label" x="410" y="104">要工具</text>
+              <rect class="label-chip" x="586" y="90" width="28" height="28" rx="7"></rect>
+              <text class="small-label" x="600" y="104">分发</text>
+              <rect class="label-chip" x="278" y="188" width="52" height="28" rx="7"></rect>
+              <text class="small-label" x="304" y="202">不用工具</text>
+              <rect class="label-chip" x="276" y="392" width="142" height="28" rx="7"></rect>
+              <text class="small-label" x="347" y="406">结果回到 messages</text>
+            </svg>
+            <div class="todo-nag">
+              <strong>Nag Reminder</strong>
+              <span>连续几轮没更新 todo_write，系统会提醒模型：先回到计划，再继续。</span>
+            </div>
           </div>
-          <span class="tag">s05 TodoWrite</span>
-        </header>
-        <div class="plan-board">
-          <div class="task-list" id="taskList">
-            <div class="task current">
-              <div class="check">1</div>
-              <div><strong>明确对比目标</strong><span>状态差异、关键字段差异、建议动作</span></div>
-              <span class="tag">当前</span>
+
+          <aside class="todo-demo">
+            <div class="todo-demo-head">
+              <div>
+                <h3 id="todoNarrativeTitle">复杂任务进入循环</h3>
+                <p id="todoNarrativeCopy">目标很长，先不要急着改文件。</p>
+              </div>
+              <div class="step-counter" id="todoStepCounter">1 / 5</div>
             </div>
-            <div class="task">
-              <div class="check">2</div>
-              <div><strong>读取两条电子流</strong><span>调用查询工具并记录来源</span></div>
-              <span class="tag">等待</span>
-            </div>
-            <div class="task">
-              <div class="check">3</div>
-              <div><strong>提取差异字段</strong><span>节点、时长、金额口径、归档依据</span></div>
-              <span class="tag">等待</span>
-            </div>
-            <div class="task">
-              <div class="check">4</div>
-              <div><strong>输出判断和下一步</strong><span>哪些确定，哪些需要人确认</span></div>
-              <span class="tag">等待</span>
-            </div>
-          </div>
-          <div class="plan-meter">
-            <h3>计划把黑盒行动变成可观察进度</h3>
-            <p class="lead" style="color: rgba(255,255,255,0.68);">你可以随时问：做到哪一步了，卡在哪里，下一步为什么这么做。</p>
-            <div>
-              <div class="meter-label"><span>完成进度</span><strong id="progressLabel">0%</strong></div>
-              <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+            <div class="todo-demo-main">
+              <pre class="todo-code" id="todoArtifactCode">用户：把所有 Python 文件改成 snake_case，然后跑测试，修好失败。</pre>
+              <div class="todo-progress">
+                <div class="meter-label"><span>计划完成度</span><strong id="progressLabel">0%</strong></div>
+                <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+              </div>
+              <div class="todo-list" id="taskList">
+                <div class="todo-item current">
+                  <div class="check">1</div>
+                  <strong>列出 Python 文件</strong>
+                  <span class="tag">当前</span>
+                </div>
+                <div class="todo-item">
+                  <div class="check">2</div>
+                  <strong>统一 snake_case 命名</strong>
+                  <span class="tag">等待</span>
+                </div>
+                <div class="todo-item">
+                  <div class="check">3</div>
+                  <strong>运行测试</strong>
+                  <span class="tag">等待</span>
+                </div>
+                <div class="todo-item">
+                  <div class="check">4</div>
+                  <strong>修复失败并回查命名</strong>
+                  <span class="tag">等待</span>
+                </div>
+              </div>
             </div>
             <div class="inline-actions">
-              <button class="action-btn" type="button" data-action="task-next">完成一步</button>
-              <button class="action-btn secondary" type="button" data-action="task-reset">重置计划</button>
+              <button class="ghost-btn primary" type="button" data-action="task-next">下一步</button>
+              <button class="ghost-btn" type="button" data-action="task-reset">重置</button>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -2702,7 +3040,7 @@ result: 字段口径已确认</pre>
     <section data-label="Skill 按需加载" data-speaker-notes="很多人会把 Skill 理解成提示词模板，但它更像专项操作手册。最重要的是按需加载：先让 Agent 知道有哪些技能，真正需要时再展开完整说明。">
       <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">07</div>
+            <div class="num">06</div>
           <div>
             <h2>Skill 不是把所有知识塞进 prompt，而是按需打开说明书</h2>
           </div>
@@ -2736,7 +3074,7 @@ result: 字段口径已确认</pre>
     <section data-label="上下文和记忆" data-speaker-notes="Context 和 Memory 经常被混在一起。Context 是这次任务现场，Memory 是跨会话保留的长期事实。Context 要会压缩，Memory 要会筛选，不能什么都记。">
       <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">08</div>
+            <div class="num">07</div>
           <div>
             <h2>Context 管这次任务现场，Memory 管长期有用事实</h2>
           </div>
@@ -2770,7 +3108,7 @@ result: 字段口径已确认</pre>
     <section data-label="Subagent 协作" data-speaker-notes="当任务变大，单个上下文会变脏，也会很慢。Subagent 的价值是隔离上下文。主 Agent 只派任务，子 Agent 自己查、自己做，最后把结论带回来。">
       <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">09</div>
+            <div class="num">08</div>
           <div>
             <h2>大任务拆小，每个子 Agent 带着干净上下文去完成一件事</h2>
           </div>
@@ -2803,7 +3141,7 @@ result: 字段口径已确认</pre>
     <section data-label="外部系统和长期运行" data-speaker-notes="再往后，Agent 不只是一次会话里的助手，而是可以接外部系统、后台运行、定时触发。MCP 可以理解成把外部能力接进统一工具池的一种方式。">
       <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">10</div>
+            <div class="num">09</div>
           <div>
             <h2>接入外部能力后，Agent 从会话工具变成任务系统</h2>
           </div>
@@ -2833,7 +3171,7 @@ result: 字段口径已确认</pre>
     <section data-label="完整路径" data-speaker-notes="最后收束。最小 Agent 很小，一个循环加一个工具就够了。真正可用的 Agent 不是另一个更神秘的东西，而是在这个循环外逐步补齐这些 Harness 能力。">
       <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">11</div>
+            <div class="num">10</div>
           <div>
             <h2>机制很多，核心循环只有一个</h2>
           </div>
@@ -2862,7 +3200,7 @@ result: 字段口径已确认</pre>
   <aside class="speaker-console collapsed" id="speakerConsole" aria-label="演讲稿控制台">
     <div class="console-head">
       <strong id="consoleTitle">讲稿</strong>
-      <span class="console-page-count" id="consolePageCount">1/11</span>
+      <span class="console-page-count" id="consolePageCount">1/10</span>
       <button class="console-toggle" type="button" id="consoleToggle" aria-label="收起或展开讲稿">∧</button>
     </div>
     <div class="script-tabs" role="tablist" aria-label="讲稿模式">
@@ -2910,16 +3248,10 @@ result: 字段口径已确认</pre>
         business: "企业里最关心的是边界。比如读取报表可以自动做，提交审批必须确认，删除数据应该禁止。这样的权限设计，比单纯提高模型能力更关键。"
       },
       {
-        title: "权限治理",
-        beginner: "这页可以记三个词：允许、询问、禁止。Agent 不是越自由越好，而是该自动的时候自动，该问人的时候停下来，该拒绝的时候拒绝。",
-        technical: "权限可以做成规则管线：先匹配工具类型和参数，再匹配工作区、风险等级和用户授权。高风险动作进入审批分支，拒绝动作直接返回明确错误。",
-        business: "这就是 Agent 能不能进入真实业务的分水岭。我们不是要一个无法控制的自动化，而是要一个知道边界、过程可追踪、责任能落地的助手。"
-      },
-      {
-        title: "计划能力",
-        beginner: "当任务变大时，Agent 如果不先列计划，就容易想到哪做到哪。计划让我们看见它准备怎么做，也方便中途纠偏。",
-        technical: "TodoWrite 的价值不是形式上的清单，而是把长任务状态外显化。每个 item 有状态，pending、in_progress、completed，模型在执行中更新它，用户和系统都能观察进度。",
-        business: "对部门同事来说，这一层特别容易理解。就像新人接任务要先拆步骤一样，Agent 也应该先让我们看见计划，再开始行动。"
+        title: "TodoWrite",
+        beginner: "复杂任务最怕做着做着偏题。比如本来要把 Python 文件改成 snake_case，测试失败一多，模型可能只顾着修测试，忘了最初目标。TodoWrite 就像任务白板，让模型每一步都能回到计划。",
+        technical: "TodoWrite 本质上是把计划状态外显成工具结果。todo_write 更新 pending、in_progress、completed；如果模型多轮没有更新 TODO，Nag Reminder 会把提醒注入 messages，迫使循环回到计划。",
+        business: "这页的业务直觉是：大任务必须有可见进度。人可以看见 Agent 做到哪一步、为什么转向、有没有忘记目标。计划不是文档负担，而是防偏航机制。"
       },
       {
         title: "Skill 按需加载",
@@ -3339,25 +3671,77 @@ result: 字段口径已确认</pre>
       });
     });
 
+    const todoFrames = [
+      {
+        title: "复杂任务进入循环",
+        copy: "目标很长，先不要急着改文件。",
+        code: "用户：把所有 Python 文件改成 snake_case，然后跑测试，修好失败。",
+        completed: 0,
+        current: 0,
+        drift: []
+      },
+      {
+        title: "先写 TODO",
+        copy: "todo_write 把 10 步重构压成可见清单。",
+        code: "tool: todo_write\n1. 列出 Python 文件\n2. 统一 snake_case 命名\n3. 运行测试\n4. 修复失败并回查命名",
+        completed: 0,
+        current: 0,
+        drift: []
+      },
+      {
+        title: "工具结果开始变多",
+        copy: "改了几个文件，测试失败开始抢注意力。",
+        code: "result: renamed 3 files\npytest: 2 failed\ncontext: 错误日志不断追加到 messages[]",
+        completed: 3,
+        current: 3,
+        drift: []
+      },
+      {
+        title: "注意力被测试失败吸走",
+        copy: "如果不看计划，模型容易忘记 snake_case 这个原始目标。",
+        code: "reminder: Update your todos.\n系统：你已经多轮没有更新 todo_write，先回到计划。",
+        completed: 3,
+        current: 3,
+        drift: [1]
+      },
+      {
+        title: "回到计划完成收尾",
+        copy: "修测试后再回查命名，避免只修失败、不收目标。",
+        code: "tool: todo_write\nstep 4: completed\nresult: snake_case 检查通过，测试通过",
+        completed: 4,
+        current: 3,
+        drift: []
+      }
+    ];
+
     let taskStep = 0;
-    const tasks = Array.from(document.querySelectorAll("#taskList .task"));
+    const tasks = Array.from(document.querySelectorAll("#taskList .todo-item"));
     const progressLabel = document.getElementById("progressLabel");
     const meterFill = document.getElementById("meterFill");
 
     function renderTasks() {
+      const frame = todoFrames[taskStep];
       tasks.forEach((task, index) => {
-        task.classList.toggle("done", index < taskStep);
-        task.classList.toggle("current", index === taskStep && taskStep < tasks.length);
-        task.querySelector(".check").textContent = index < taskStep ? "✓" : String(index + 1);
-        task.querySelector(".tag").textContent = index < taskStep ? "完成" : index === taskStep ? "当前" : "等待";
+        const done = index < frame.completed;
+        const current = index === frame.current && frame.completed < tasks.length;
+        const drift = frame.drift.includes(index);
+        task.classList.toggle("done", done);
+        task.classList.toggle("current", current);
+        task.classList.toggle("drift", drift);
+        task.querySelector(".check").textContent = done ? "✓" : String(index + 1);
+        task.querySelector(".tag").textContent = drift ? "偏航" : done ? "完成" : current ? "当前" : "等待";
       });
-      const progress = Math.round((taskStep / tasks.length) * 100);
-      progressLabel.textContent = `${progress}%`;
-      meterFill.style.setProperty("--progress", `${progress}%`);
+      const progress = Math.round((frame.completed / tasks.length) * 100);
+      if (progressLabel) progressLabel.textContent = `${progress}%`;
+      if (meterFill) meterFill.style.setProperty("--progress", `${progress}%`);
+      document.getElementById("todoNarrativeTitle").textContent = frame.title;
+      document.getElementById("todoNarrativeCopy").textContent = frame.copy;
+      document.getElementById("todoArtifactCode").textContent = frame.code;
+      document.getElementById("todoStepCounter").textContent = `${taskStep + 1} / ${todoFrames.length}`;
     }
 
     document.querySelector("[data-action='task-next']").addEventListener("click", () => {
-      taskStep = Math.min(taskStep + 1, tasks.length);
+      taskStep = Math.min(taskStep + 1, todoFrames.length - 1);
       renderTasks();
     });
 
