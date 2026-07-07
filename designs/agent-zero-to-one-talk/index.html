@@ -556,10 +556,16 @@
     }
 
     .perm-diagram-svg {
-      width: 100%;
-      height: auto;
-      margin-top: 52px;
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      top: 84px;
+      bottom: 62px;
+      width: calc(100% - 52px);
+      height: calc(100% - 146px);
+      margin-top: 0;
       display: block;
+      overflow: visible;
     }
     .perm-diagram-svg text {
       font-family: -apple-system, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
@@ -572,6 +578,36 @@
     .node-amber .node-shape { fill: oklch(0.96 0.045 62); stroke: var(--amber); stroke-width: 2.4; }
     .node-green .node-shape { fill: oklch(0.935 0.04 160); stroke: var(--green); stroke-width: 2.4; }
     .node-red .node-shape { fill: oklch(0.94 0.04 25); stroke: var(--red); stroke-width: 2.4; }
+    .node-muted .node-shape { fill: oklch(0.965 0.018 82); stroke: var(--blue); stroke-width: 2.4; }
+
+    .perm-gate-box {
+      fill: oklch(0.985 0.012 25);
+      stroke: var(--red);
+      stroke-width: 3;
+      stroke-dasharray: 10 8;
+    }
+
+    .perm-gate-step {
+      fill: oklch(0.975 0.03 62);
+      stroke: var(--amber);
+      stroke-width: 2.2;
+      transition: fill 180ms ease, stroke 180ms ease, filter 180ms ease;
+    }
+
+    .perm-gate-step.deny {
+      fill: oklch(0.96 0.035 25);
+      stroke: var(--red);
+    }
+
+    .perm-gate-step.approve {
+      fill: oklch(0.955 0.036 160);
+      stroke: var(--green);
+    }
+
+    .perm-gate-step.active {
+      stroke-width: 4;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+    }
 
     .node-title { font-size: 20px; font-weight: 900; fill: var(--ink); }
     .node-meta  { font-size: 14px; font-weight: 700; fill: var(--muted); }
@@ -590,9 +626,14 @@
     .perm-edge.amber { stroke: var(--amber); marker-end: url(#permArrowAmber); }
     .perm-edge.red { stroke: var(--red); marker-end: url(#permArrowRed); }
     .perm-edge.active { stroke-width: 4; }
+    .perm-edge.dashed {
+      stroke-dasharray: 8 8;
+      marker-end: none;
+    }
     .node-green.active .node-shape,
     .node-amber.active .node-shape,
-    .node-red.active .node-shape {
+    .node-red.active .node-shape,
+    .node-blue.active .node-shape {
       stroke-width: 4;
       filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
     }
@@ -601,6 +642,12 @@
       font-size: 15px;
       font-weight: 900;
       fill: oklch(0.42 0.105 62);
+    }
+
+    .label-chip {
+      fill: var(--white);
+      stroke: oklch(0.86 0.018 82);
+      stroke-width: 1;
     }
 
     .perm-note {
@@ -715,8 +762,6 @@
       font-size: 16px;
       width: 100%;
     }
-
-    .tool-list {
 
     .tool-list {
       display: grid;
@@ -2459,7 +2504,7 @@
         <div class="permission-lab">
           <div class="permission-canvas">
             <div class="perm-banner">工具调用必须穿过权限闸口</div>
-            <svg class="perm-diagram-svg" viewBox="0 0 920 580" role="img" aria-label="工具调用与权限闸口流程图">
+            <svg class="perm-diagram-svg" viewBox="0 0 920 520" role="img" aria-label="工具调用与权限闸口流程图">
               <defs>
                 <marker id="permArrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                   <path d="M 0 0 L 10 5 L 0 10 z" fill="#8994a3"></path>
@@ -2478,51 +2523,66 @@
                 </marker>
               </defs>
 
-              <!-- 工具选择 → 闸口 → 三档分流 -->
-              <path class="perm-edge blue active" d="M 200 80 L 410 80"></path>
-              <path class="perm-edge amber" id="permEdgeGate" d="M 460 130 L 460 200"></path>
-              <path class="perm-edge green" id="permEdgeAuto" d="M 360 250 L 220 380"></path>
-              <path class="perm-edge amber" id="permEdgeConfirm" d="M 460 280 L 460 380"></path>
-              <path class="perm-edge red" id="permEdgeBlock" d="M 560 250 L 700 380"></path>
+              <!-- 循环保留：messages -> LLM -> 权限 -> 工具 -> result -> messages -->
+              <path class="perm-edge blue active" d="M 228 86 L 322 86"></path>
+              <path class="perm-edge amber active" d="M 488 86 L 566 86"></path>
+              <path class="perm-edge green" id="permEdgeAuto" d="M 776 114 L 824 114"></path>
+              <path class="perm-edge amber" id="permEdgeConfirm" d="M 710 262 L 710 318 L 744 318 L 744 332"></path>
+              <path class="perm-edge red" id="permEdgeBlock" d="M 632 262 L 632 318 L 656 318 L 656 332"></path>
+              <path class="perm-edge dashed" d="M 824 204 L 824 428 L 128 428 L 128 128"></path>
+              <path class="perm-edge dashed" d="M 700 394 L 700 428"></path>
 
               <g class="node-blue active">
-                <rect class="node-shape" x="60" y="40" width="140" height="80" rx="16"></rect>
-                <text class="node-title" x="130" y="68">选择工具</text>
-                <text class="node-meta" x="130" y="94">tool_router</text>
+                <rect class="node-shape" x="64" y="42" width="164" height="88" rx="16"></rect>
+                <text class="node-title" x="146" y="78">messages[]</text>
+                <text class="node-meta" x="146" y="106">消息列表</text>
               </g>
 
-              <g class="node-amber">
-                <polygon class="node-shape" points="460,130 560,200 460,270 360,200"></polygon>
-                <text class="node-title" x="460" y="196">权限闸口</text>
-                <text class="node-meta" x="460" y="222">check_policy()</text>
+              <g class="node-blue">
+                <rect class="node-shape" x="322" y="36" width="166" height="100" rx="16"></rect>
+                <text class="node-title" x="405" y="76">LLM</text>
+                <text class="node-meta" x="405" y="106">判断要用工具</text>
               </g>
 
-              <g class="node-green" id="permNodeAuto">
-                <rect class="node-shape" x="160" y="380" width="180" height="80" rx="16"></rect>
-                <text class="node-title" x="250" y="410">✅ 自动执行</text>
-                <text class="node-meta" x="250" y="436">只读 / 查询 / 草稿</text>
+              <g>
+                <rect class="perm-gate-box" x="566" y="24" width="210" height="238" rx="18"></rect>
+                <text class="node-title" x="671" y="58">check_permission()</text>
+
+                <rect class="perm-gate-step deny" id="permGateBlock" x="596" y="82" width="150" height="42" rx="9"></rect>
+                <text class="node-meta" x="671" y="103">闸门 1：拒绝列表</text>
+
+                <rect class="perm-gate-step" id="permGateAuto" x="596" y="140" width="150" height="42" rx="9"></rect>
+                <text class="node-meta" x="671" y="161">闸门 2：规则匹配</text>
+
+                <rect class="perm-gate-step approve" id="permGateConfirm" x="596" y="198" width="150" height="42" rx="9"></rect>
+                <text class="node-meta" x="671" y="219">闸门 3：用户确认</text>
+              </g>
+
+              <g class="node-blue" id="permNodeAuto">
+                <rect class="node-shape" x="824" y="72" width="84" height="132" rx="16"></rect>
+                <text class="node-title" x="866" y="120">工具</text>
+                <text class="node-meta" x="866" y="150">handler</text>
+                <text class="node-meta" x="866" y="176">执行</text>
               </g>
 
               <g class="node-amber" id="permNodeConfirm">
-                <rect class="node-shape" x="370" y="380" width="180" height="80" rx="16"></rect>
-                <text class="node-title" x="460" y="410">⚠️ 需要确认</text>
-                <text class="node-meta" x="460" y="436">写操作 / 接口</text>
+                <rect class="node-shape" x="570" y="332" width="260" height="62" rx="14"></rect>
+                <text class="node-title" x="700" y="363">tool_result</text>
               </g>
 
-              <g class="node-red" id="permNodeBlock">
-                <rect class="node-shape" x="610" y="380" width="180" height="80" rx="16"></rect>
-                <text class="node-title" x="700" y="410">🚫 直接禁止</text>
-                <text class="node-meta" x="700" y="436">删除 / 绕审 / 未授权</text>
+              <g class="node-green">
+                <rect class="node-shape" x="318" y="250" width="172" height="72" rx="36"></rect>
+                <text class="node-title" x="404" y="280">不用工具</text>
+                <text class="node-meta" x="404" y="304">直接返回</text>
               </g>
 
-              <!-- 工具结果回到消息列表 -->
-              <path class="perm-edge green" d="M 250 460 L 250 520 L 130 520 L 130 80 L 60 80" stroke-dasharray="6 6"></path>
-              <text class="small-label" x="200" y="510">结果回传 ↻</text>
-              <text class="small-label" x="240" y="68">是</text>
-              <text class="small-label" x="430" y="164">?</text>
-              <text class="small-label" x="300" y="320">放行</text>
-              <text class="small-label" x="445" y="332">人工</text>
-              <text class="small-label" x="610" y="320">拦下</text>
+              <text class="small-label" x="268" y="70">读上下文</text>
+              <text class="small-label" x="528" y="70">需要工具</text>
+              <text class="small-label" x="803" y="100">通过</text>
+              <rect class="label-chip" x="640" y="288" width="120" height="24" rx="6"></rect>
+              <text class="small-label" x="700" y="300">拒绝 / 回传</text>
+              <rect class="label-chip" x="430" y="412" width="164" height="24" rx="6"></rect>
+              <text class="small-label" x="512" y="424">结果回到 messages</text>
             </svg>
             <div class="perm-note">
               <strong>核心：</strong>
@@ -2928,6 +2988,41 @@ result: 字段口径已确认</pre>
       }
     };
 
+    const permToolData = {
+      read: {
+        title: "读取文档",
+        copy: "只读查询，自动放行。",
+        risk: "低风险",
+        riskLevel: "low",
+        highlightEdge: "auto",
+        code: "tool: read_file\npolicy: auto\nresult: 字段口径已确认"
+      },
+      search: {
+        title: "检索信息",
+        copy: "只读检索，自动放行。",
+        risk: "低风险",
+        riskLevel: "low",
+        highlightEdge: "auto",
+        code: "tool: web_search\npolicy: auto\nresult: 找到 3 条制度依据"
+      },
+      api: {
+        title: "调用接口",
+        copy: "可能访问内部系统，需要确认。",
+        risk: "中风险",
+        riskLevel: "medium",
+        highlightEdge: "confirm",
+        code: "tool: call_api\npolicy: confirm\nresult: 等待用户确认后执行"
+      },
+      shell: {
+        title: "执行命令",
+        copy: "可能改动环境，高风险拦截。",
+        risk: "高风险",
+        riskLevel: "high",
+        highlightEdge: "block",
+        code: "tool: run_bash\npolicy: block\nresult: 已拦截危险命令"
+      }
+    };
+
     const skillData = {
       review: {
         title: "代码审查 Skill",
@@ -3177,42 +3272,47 @@ result: 字段口径已确认</pre>
       renderToolUse();
     });
 
+    function renderPermissionTool(toolKey) {
+      const data = permToolData[toolKey];
+      if (!data) return;
+
+      document.querySelectorAll(".perm-tool").forEach((item) => {
+        item.classList.toggle("active", item.dataset.tool === toolKey);
+      });
+      document.getElementById("permArtifactTitle").textContent = data.title;
+      document.getElementById("permArtifactCopy").textContent = data.copy;
+      document.getElementById("permArtifactCode").textContent = data.code;
+
+      const badge = document.getElementById("permRiskBadge");
+      badge.textContent = data.risk;
+      badge.dataset.risk = data.riskLevel;
+
+      ["auto", "confirm", "block"].forEach((level) => {
+        const suffix = level.charAt(0).toUpperCase() + level.slice(1);
+        const edge = document.getElementById("permEdge" + suffix);
+        const gate = document.getElementById("permGate" + suffix);
+        const node = document.getElementById("permNode" + suffix);
+        if (edge) edge.classList.toggle("active", level === data.highlightEdge);
+        if (gate) gate.classList.toggle("active", level === data.highlightEdge);
+        if (node) node.classList.toggle("active", level === data.highlightEdge);
+      });
+
+      document.getElementById("permNodeConfirm").classList.toggle("active", data.highlightEdge !== "auto");
+      document.querySelectorAll(".mini-policy").forEach((item) => {
+        item.classList.toggle("active", item.dataset.mini === data.highlightEdge);
+      });
+    }
+
     // 第 4 页：权限页工具切换
     document.querySelectorAll(".perm-tool").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".perm-tool").forEach((item) => item.classList.remove("active"));
-        button.classList.add("active");
-        const data = permToolData[button.dataset.tool];
-        document.getElementById("permArtifactTitle").textContent = data.title;
-        document.getElementById("permArtifactCopy").textContent = data.copy;
-        document.getElementById("permArtifactCode").textContent = data.code;
-
-        const badge = document.getElementById("permRiskBadge");
-        badge.textContent = data.risk;
-        badge.dataset.risk = data.riskLevel;
-
-        // 高亮 SVG 三档分支
-        ["auto", "confirm", "block"].forEach((level) => {
-          const edge = document.getElementById("permEdge" + level.charAt(0).toUpperCase() + level.slice(1));
-          const node = document.getElementById("permNode" + level.charAt(0).toUpperCase() + level.slice(1));
-          if (edge) { edge.classList.toggle("active", level === data.highlightEdge); }
-          if (node) { node.classList.toggle("active", level === data.highlightEdge); }
-        });
-
-        // 高亮底部三色小标签
-        document.querySelectorAll(".mini-policy").forEach((m) => m.classList.remove("active"));
-        const target = document.querySelector(`.mini-policy[data-mini="${data.highlightEdge}"]`);
-        if (target) target.classList.add("active");
-      });
+      button.addEventListener("click", () => renderPermissionTool(button.dataset.tool));
     });
 
     document.querySelector("[data-action='perm-reset']").addEventListener("click", () => {
-      document.querySelectorAll(".perm-tool").forEach((b) => b.classList.remove("active"));
-      document.querySelector('.perm-tool[data-tool="read"]').classList.add("active");
-      document.querySelector('.perm-tool[data-tool="read"]').click();
+      renderPermissionTool("read");
     });
 
-        document.querySelectorAll("[data-tool]").forEach((button) => {
+        document.querySelectorAll("[data-tool]:not(.perm-tool)").forEach((button) => {
       button.addEventListener("click", () => {
         document.querySelectorAll("[data-tool]").forEach((item) => item.classList.remove("active"));
         button.classList.add("active");
@@ -3316,6 +3416,7 @@ result: 字段口径已确认</pre>
 
     renderLoopEngine();
     renderToolUse();
+    renderPermissionTool("read");
     renderTasks();
     renderScript();
     if (window.customElements && customElements.whenDefined) {
