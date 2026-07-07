@@ -1,0 +1,18 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "Agent 从 0 到 1交互演讲稿": {
+      "versions": [
+        {
+          "path": "index.html",
+          "createdAt": "2026-07-05T22:58:59.456Z",
+          "status": "needs-review"
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-07-05T22:58:59.457Z",
+  "updatedAt": "2026-07-06T00:48:46.139Z"
+}

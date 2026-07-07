@@ -1,0 +1,3327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>从 0 到 1 建设一个 Agent</title>
+  <style>
+    deck-stage:not(:defined) { visibility: hidden; }
+
+    :root {
+      --paper: oklch(0.965 0.018 82);
+      --paper-2: oklch(0.918 0.024 82);
+      --ink: oklch(0.205 0.024 247);
+      --muted: oklch(0.48 0.026 245);
+      --line: oklch(0.79 0.025 82);
+      --blue: oklch(0.47 0.105 231);
+      --green: oklch(0.47 0.103 160);
+      --amber: oklch(0.62 0.138 62);
+      --red: oklch(0.56 0.145 25);
+      --violet: oklch(0.48 0.102 292);
+      --dark: oklch(0.18 0.025 247);
+      --dark-2: oklch(0.24 0.03 247);
+      --white: oklch(0.99 0.005 82);
+      --shadow: 0 26px 80px rgba(25, 29, 36, 0.18);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--dark);
+      color: var(--ink);
+      font-family: -apple-system, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      letter-spacing: 0;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    section {
+      width: 1920px;
+      height: 1080px;
+      padding: 78px 92px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.045) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        var(--paper);
+      color: var(--ink);
+    }
+
+    .slide-grid {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 52px;
+    }
+
+    .slide-head {
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .num {
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--white);
+      font-size: 28px;
+      font-weight: 850;
+      font-variant-numeric: tabular-nums;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 1160px;
+      font-size: 78px;
+      line-height: 1.04;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    h2 {
+      max-width: 1180px;
+      font-size: 56px;
+      line-height: 1.12;
+      font-weight: 880;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    h3 {
+      font-size: 34px;
+      line-height: 1.18;
+      font-weight: 850;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .kicker,
+    .tag {
+      display: inline-grid;
+      min-height: 42px;
+      align-items: center;
+      padding: 0 16px;
+      border: 1px solid color-mix(in oklch, var(--blue), white 40%);
+      background: color-mix(in oklch, var(--blue), white 88%);
+      color: oklch(0.35 0.09 231);
+      font-size: 20px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .tag {
+      border-color: var(--line);
+      background: rgba(255, 253, 248, 0.82);
+      color: var(--muted);
+    }
+
+    .lead {
+      max-width: 920px;
+      color: var(--muted);
+      font-size: 30px;
+      line-height: 1.62;
+      text-wrap: pretty;
+    }
+
+    .dark-slide {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px) 0 0 / 44px 44px,
+        var(--dark);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .dark-slide .num {
+      border-color: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.92);
+      color: var(--dark);
+    }
+
+    .dark-slide .lead,
+    .dark-slide .tag {
+      color: rgba(255,255,255,0.68);
+    }
+
+    .dark-slide .tag {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .cover-layout {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 78px;
+      align-items: center;
+    }
+
+    .cover-title {
+      display: grid;
+      gap: 36px;
+    }
+
+    .cover-title h1 {
+      font-size: 100px;
+      line-height: 0.98;
+    }
+
+    .formula-board {
+      min-height: 650px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 34px;
+      padding: 42px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-md);
+    }
+
+    .formula {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 20px;
+      align-items: center;
+      font-size: 42px;
+      font-weight: 900;
+    }
+
+    .formula span {
+      min-height: 112px;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: var(--paper-2);
+      border-radius: var(--radius-sm);
+    }
+
+    .formula b {
+      color: var(--amber);
+      font-size: 54px;
+    }
+
+    .build-stack {
+      align-self: end;
+      display: grid;
+      gap: 14px;
+    }
+
+    .stack-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 18px;
+      align-items: center;
+      min-height: 66px;
+      padding: 12px 16px;
+      border-left: 10px solid var(--row-color);
+      background: color-mix(in oklch, var(--row-color), white 88%);
+    }
+
+    .stack-row strong {
+      font-size: 24px;
+    }
+
+    .stack-row span {
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      height: 100%;
+      align-items: stretch;
+    }
+
+    .compare-panel {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 30px;
+      padding: 40px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-md);
+    }
+
+    .compare-panel.agent {
+      background: var(--dark);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .flow-strip {
+      display: grid;
+      gap: 18px;
+      align-content: center;
+    }
+
+    .pill-node {
+      min-height: 76px;
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 14px 18px;
+      background: color-mix(in oklch, var(--node), white 86%);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), background 220ms ease;
+    }
+
+    .compare-panel.agent .pill-node {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .pill-node.is-hot {
+      transform: translateX(18px);
+      background: var(--node);
+      color: var(--white);
+    }
+
+    .pill-node i {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.65);
+      color: var(--node);
+      font-style: normal;
+      font-weight: 900;
+    }
+
+    .pill-node span {
+      font-size: 27px;
+      font-weight: 780;
+    }
+
+    .panel-foot {
+      color: var(--muted);
+      font-size: 26px;
+      line-height: 1.5;
+    }
+
+    .compare-panel.agent .panel-foot {
+      color: rgba(255,255,255,0.62);
+    }
+
+    .runtime {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 42px;
+      height: 100%;
+    }
+
+    .terminal {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 0;
+      background: var(--dark);
+      color: rgba(255,255,255,0.86);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 22px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.66);
+      font-size: 18px;
+      font-weight: 750;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--dot);
+    }
+
+    .terminal-log {
+      padding: 28px;
+      display: grid;
+      align-content: start;
+      gap: 16px;
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 23px;
+      line-height: 1.45;
+      overflow: hidden;
+    }
+
+    .terminal-log div {
+      opacity: 0.42;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .terminal-log div.active {
+      opacity: 1;
+      transform: translateX(8px);
+      color: oklch(0.82 0.12 160);
+    }
+
+    .terminal-actions {
+      display: flex;
+      gap: 14px;
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .action-btn {
+      min-height: 52px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: var(--white);
+      background: var(--blue);
+      font-size: 20px;
+      font-weight: 820;
+      transition: transform 150ms ease, filter 150ms ease;
+    }
+
+    .action-btn.secondary {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .action-btn:active,
+    .ghost-btn:active,
+    .script-tab:active,
+    .chip:active {
+      transform: scale(0.97);
+    }
+
+    .loop-map,
+    .capability-map {
+      display: grid;
+      gap: 20px;
+      align-content: center;
+    }
+
+    .loop-card {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      min-height: 98px;
+      padding: 18px 22px;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+      border-radius: var(--radius-md);
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease;
+    }
+
+    .loop-card.active {
+      transform: translateX(-18px);
+    }
+
+    .loop-card .mark {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      background: color-mix(in oklch, var(--card-color), white 15%);
+      color: white;
+      font-size: 24px;
+      font-weight: 900;
+      border-radius: var(--radius-sm);
+    }
+
+    .loop-card strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+
+    .loop-card span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 21px;
+      line-height: 1.36;
+    }
+
+    .status-badge {
+      min-width: 104px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: color-mix(in oklch, var(--card-color), black 22%);
+      background: color-mix(in oklch, var(--card-color), white 82%);
+      font-size: 18px;
+      font-weight: 850;
+      border-radius: var(--radius-sm);
+    }
+
+    .permission-stage-page {
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+        oklch(0.972 0.012 82);
+    }
+
+    .permission-stage {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 28px;
+    }
+
+    .permission-stage .slide-head {
+      grid-template-columns: 86px 1fr 180px;
+      align-items: center;
+    }
+
+    .permission-stage .num {
+      width: 70px;
+      height: 70px;
+      font-size: 26px;
+    }
+
+    .permission-stage h2 {
+      font-size: 48px;
+      line-height: 1.1;
+    }
+
+    .perm-subtitle {
+      margin-top: 10px;
+      max-width: 1100px;
+      color: var(--muted);
+      font-size: 24px;
+      line-height: 1.4;
+    }
+
+    .permission-lab {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 24px;
+      min-height: 0;
+    }
+
+    .permission-canvas {
+      position: relative;
+      min-height: 0;
+      padding: 26px;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.12);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .perm-banner {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      top: 26px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 780;
+    }
+
+    .perm-diagram-svg {
+      width: 100%;
+      height: auto;
+      margin-top: 52px;
+      display: block;
+    }
+    .perm-diagram-svg text {
+      font-family: -apple-system, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      pointer-events: none;
+    }
+
+    .node-blue .node-shape { fill: oklch(0.935 0.032 231); stroke: var(--blue); stroke-width: 2.4; }
+    .node-amber .node-shape { fill: oklch(0.96 0.045 62); stroke: var(--amber); stroke-width: 2.4; }
+    .node-green .node-shape { fill: oklch(0.935 0.04 160); stroke: var(--green); stroke-width: 2.4; }
+    .node-red .node-shape { fill: oklch(0.94 0.04 25); stroke: var(--red); stroke-width: 2.4; }
+
+    .node-title { font-size: 20px; font-weight: 900; fill: var(--ink); }
+    .node-meta  { font-size: 14px; font-weight: 700; fill: var(--muted); }
+    .node-red .node-title { fill: var(--red); }
+    .node-red .node-meta { fill: oklch(0.56 0.145 25 / 0.7); }
+
+    .perm-edge {
+      fill: none;
+      stroke: oklch(0.55 0.025 247);
+      stroke-width: 2.4;
+      marker-end: url(#permArrowMuted);
+      transition: stroke 220ms ease, stroke-width 220ms ease;
+    }
+    .perm-edge.blue { stroke: var(--blue); marker-end: url(#permArrowBlue); }
+    .perm-edge.green { stroke: var(--green); marker-end: url(#permArrowGreen); }
+    .perm-edge.amber { stroke: var(--amber); marker-end: url(#permArrowAmber); }
+    .perm-edge.red { stroke: var(--red); marker-end: url(#permArrowRed); }
+    .perm-edge.active { stroke-width: 4; }
+    .node-green.active .node-shape,
+    .node-amber.active .node-shape,
+    .node-red.active .node-shape {
+      stroke-width: 4;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+    }
+
+    .small-label {
+      font-size: 15px;
+      font-weight: 900;
+      fill: oklch(0.42 0.105 62);
+    }
+
+    .perm-note {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 14px;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 8px 16px;
+      background: oklch(0.94 0.015 247);
+      color: oklch(0.36 0.04 247);
+      border-radius: var(--radius-md);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+    .perm-note strong {
+      color: var(--ink);
+      font-size: 18px;
+    }
+
+    /* 右侧面板 */
+    .perm-panel {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 0;
+      padding: 26px;
+      gap: 18px;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.12);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .perm-tool-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .perm-tool {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 780;
+      border-radius: var(--radius-sm);
+      transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+    .perm-tool.active {
+      color: var(--white);
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+    .perm-tool .chip-icon { font-size: 18px; line-height: 1; }
+
+    .perm-panel .artifact-code {
+      min-height: 140px;
+      padding: 16px;
+      font-size: 17px;
+    }
+    .perm-panel .artifact-copy {
+      font-size: 19px;
+    }
+    .perm-panel .step-counter {
+      min-width: 72px;
+      height: 34px;
+      font-size: 15px;
+    }
+
+    .perm-policy-mini {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .mini-policy {
+      min-height: 36px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px;
+      align-items: center;
+      padding: 0 8px;
+      border-radius: var(--radius-sm);
+      background: var(--paper-2);
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 800;
+      transition: background 220ms ease, color 220ms ease, transform 220ms ease;
+    }
+    .mini-policy.active {
+      transform: translateY(-2px);
+    }
+    .mini-policy[data-mini="auto"].active { background: oklch(0.47 0.103 160 / 0.15); color: oklch(0.35 0.08 160); }
+    .mini-policy[data-mini="confirm"].active { background: oklch(0.62 0.138 62 / 0.15); color: oklch(0.5 0.1 62); }
+    .mini-policy[data-mini="block"].active { background: oklch(0.56 0.145 25 / 0.15); color: oklch(0.45 0.12 25); }
+
+    .perm-actions {
+      padding-top: 2px;
+    }
+    .perm-actions .ghost-btn {
+      min-height: 38px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .tool-list {
+
+    .tool-list {
+      display: grid;
+      align-content: start;
+      gap: 12px;
+    }
+
+    .chip {
+      width: 100%;
+      min-height: 60px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      padding: 0 18px;
+      font-size: 22px;
+      font-weight: 780;
+      border-radius: var(--radius-sm);
+      transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 150ms ease;
+    }
+
+    .chip.active {
+      color: var(--white);
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+
+    .tool-output {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 22px;
+    }
+
+    .output-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 56px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+
+    .output-title strong {
+      font-size: 27px;
+    }
+
+    .readout {
+      display: grid;
+      align-content: start;
+      gap: 14px;
+      font-size: 24px;
+      line-height: 1.46;
+    }
+
+    .readout p {
+      padding: 18px;
+      background: color-mix(in oklch, var(--green), white 91%);
+      border-radius: var(--radius-sm);
+    }
+
+    .permissions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 28px;
+      height: 100%;
+    }
+
+    .policy-card {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 30px;
+      padding: 32px;
+      border-radius: var(--radius-md);
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+      border-top: 10px solid var(--policy-color);
+    }
+
+    .policy-card p {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.45;
+      text-wrap: pretty;
+    }
+
+    .policy-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .policy-icon {
+      font-size: 28px;
+    }
+    .policy-title {
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--ink);
+    }
+    .policy-card {
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease, box-shadow 220ms ease;
+    }
+    .policy-card.is-active {
+      opacity: 1 !important;
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(25, 29, 36, 0.18);
+    }
+
+    .tool-list .chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chip-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+    .tool-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-size: 17px;
+      color: var(--muted);
+      align-items: center;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    .legend-dot.safe { background: oklch(0.47 0.103 160); }
+    .legend-dot.caution { background: oklch(0.62 0.138 62); }
+    .legend-dot.danger { background: oklch(0.56 0.145 25); }
+
+    .risk-badge {
+      display: inline-grid;
+      place-items: center;
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: var(--radius-sm);
+      color: white;
+      font-size: 18px;
+      font-weight: 850;
+      transition: background 220ms ease, transform 220ms ease;
+    }
+    .risk-badge[data-risk="low"] {
+      background: oklch(0.47 0.103 160);
+    }
+    .risk-badge[data-risk="medium"] {
+      background: oklch(0.62 0.138 62);
+    }
+    .risk-badge[data-risk="high"] {
+      background: oklch(0.56 0.145 25);
+    }
+
+    .readout p {
+      transition: transform 220ms ease;
+    }
+    .readout-tail {
+      color: var(--muted);
+      font-size: 21px !important;
+      background: color-mix(in oklch, var(--amber), white 88%) !important;
+    }
+
+    .tool-flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+    .flow-step {
+      min-height: 42px;
+      padding: 0 14px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: var(--radius-sm);
+      background: var(--paper-2);
+      color: var(--muted);
+      transition: background 220ms ease, color 220ms ease, transform 220ms ease;
+    }
+    .flow-step.active {
+      background: var(--ink);
+      color: white;
+    }
+    .flow-step.tool-on {
+      background: var(--blue);
+      color: white;
+      transform: scale(1.05);
+    }
+    .flow-arrow {
+      color: var(--line);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .policy-state {
+      min-height: 72px;
+      display: grid;
+      place-items: center;
+      color: color-mix(in oklch, var(--policy-color), black 24%);
+      background: color-mix(in oklch, var(--policy-color), white 86%);
+      font-size: 28px;
+      font-weight: 880;
+      border-radius: var(--radius-sm);
+    }
+
+    .plan-board {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 42px;
+      height: 100%;
+    }
+
+    .task-list {
+      display: grid;
+      gap: 16px;
+      align-content: center;
+    }
+
+    .task {
+      display: grid;
+      grid-template-columns: 58px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      min-height: 82px;
+      padding: 14px 18px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .task.done {
+      opacity: 0.52;
+    }
+
+    .task.current {
+      transform: translateX(18px);
+    }
+
+    .check {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--paper-2);
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .task.done .check {
+      background: var(--green);
+      color: white;
+    }
+
+    .task strong {
+      font-size: 25px;
+    }
+
+    .task span {
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .plan-meter {
+      display: grid;
+      align-content: center;
+      gap: 30px;
+      padding: 40px;
+      background: var(--dark);
+      color: rgba(255,255,255,0.88);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+    }
+
+    .meter-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 24px;
+      color: rgba(255,255,255,0.68);
+    }
+
+    .meter {
+      height: 34px;
+      background: rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      width: var(--progress, 0%);
+      height: 100%;
+      background: var(--green);
+      transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .skill-stage {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 34px;
+      height: 100%;
+    }
+
+    .skill-list,
+    .skill-detail,
+    .memory-panel,
+    .team-panel,
+    .connector-panel,
+    .summary-panel {
+      padding: 32px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+    }
+
+    .skill-list {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 22px;
+    }
+
+    .skill-detail {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 26px;
+      min-height: 0;
+    }
+
+    .skill-manifest {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .manifest-item {
+      min-height: 126px;
+      padding: 20px;
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+    }
+
+    .manifest-item strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .manifest-item span {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.42;
+    }
+
+    .loaded-skill {
+      display: grid;
+      align-content: center;
+      min-height: 260px;
+      padding: 28px;
+      background: var(--dark);
+      color: rgba(255,255,255,0.88);
+      border-radius: var(--radius-sm);
+      font-size: 28px;
+      line-height: 1.5;
+    }
+
+    .context-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      height: 100%;
+    }
+
+    .memory-panel {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 24px;
+    }
+
+    .context-stream {
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .context-line {
+      padding: 14px 18px;
+      background: var(--paper);
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.42;
+      border-radius: var(--radius-sm);
+    }
+
+    .context-line.keep {
+      color: var(--ink);
+      background: color-mix(in oklch, var(--green), white 88%);
+      font-weight: 760;
+    }
+
+    .memory-slots {
+      display: grid;
+      align-content: start;
+      gap: 16px;
+    }
+
+    .memory-slot {
+      min-height: 88px;
+      padding: 18px;
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+    }
+
+    .memory-slot strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 22px;
+    }
+
+    .memory-slot span {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.42;
+    }
+
+    .team-board {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 34px;
+      height: 100%;
+    }
+
+    .agent-ring {
+      position: relative;
+      min-height: 0;
+      background: var(--dark);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .agent-ring::before {
+      content: "";
+      position: absolute;
+      inset: 160px;
+      border: 2px dashed rgba(255,255,255,0.16);
+      border-radius: 50%;
+    }
+
+    .avatar {
+      position: absolute;
+      width: 168px;
+      height: 168px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: white;
+      background: var(--avatar-color);
+      border-radius: 50%;
+      font-size: 24px;
+      font-weight: 850;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .avatar.active {
+      transform: scale(1.12);
+    }
+
+    .avatar.main { left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--blue); }
+    .avatar.research { left: 92px; top: 110px; }
+    .avatar.code { right: 96px; top: 118px; }
+    .avatar.test { left: 150px; bottom: 120px; }
+    .avatar.write { right: 138px; bottom: 116px; }
+
+    .team-panel {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 24px;
+    }
+
+    .mailbox {
+      display: grid;
+      align-content: start;
+      gap: 14px;
+    }
+
+    .mail {
+      padding: 18px;
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+      font-size: 21px;
+      line-height: 1.45;
+    }
+
+    .mail strong {
+      color: var(--blue);
+    }
+
+    .connector-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      height: 100%;
+    }
+
+    .connector-panel {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 24px;
+    }
+
+    .connector-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      align-content: start;
+    }
+
+    .connector {
+      min-height: 112px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      padding: 20px;
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .connector.active {
+      background: var(--green);
+      color: white;
+      transform: translateY(-4px);
+    }
+
+    .connector strong {
+      font-size: 24px;
+    }
+
+    .connector span {
+      color: inherit;
+      opacity: 0.72;
+      font-size: 18px;
+    }
+
+    .summary-board {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 42px;
+      height: 100%;
+    }
+
+    .layer-ladder {
+      display: grid;
+      align-content: center;
+      gap: 12px;
+    }
+
+    .ladder-row {
+      display: grid;
+      grid-template-columns: 62px 1fr;
+      gap: 16px;
+      align-items: center;
+      min-height: 66px;
+      padding: 10px 16px;
+      background: color-mix(in oklch, var(--layer-color), white 87%);
+      color: var(--ink);
+      border-radius: var(--radius-sm);
+      transform: translateX(calc(var(--level) * 12px));
+    }
+
+    .ladder-row b {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: var(--layer-color);
+      color: white;
+      border-radius: 50%;
+      font-size: 18px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ladder-row strong {
+      font-size: 24px;
+    }
+
+    .summary-panel {
+      display: grid;
+      align-content: center;
+      gap: 34px;
+      background: var(--dark);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .quote {
+      font-size: 56px;
+      line-height: 1.18;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+
+    .summary-panel p {
+      color: rgba(255,255,255,0.66);
+      font-size: 28px;
+      line-height: 1.58;
+      text-wrap: pretty;
+    }
+
+    .loop-engineering-page {
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+        oklch(0.972 0.012 82);
+    }
+
+    .loop-engineering {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 38px;
+    }
+
+    .loop-engineering .slide-head {
+      grid-template-columns: 86px 1fr 230px;
+      align-items: center;
+    }
+
+    .loop-engineering .num {
+      width: 70px;
+      height: 70px;
+      font-size: 26px;
+    }
+
+    .loop-engineering h1 {
+      max-width: 1220px;
+      font-size: 66px;
+      line-height: 1.08;
+    }
+
+    .loop-subtitle {
+      margin-top: 16px;
+      max-width: 1180px;
+      color: var(--muted);
+      font-size: 27px;
+      line-height: 1.42;
+    }
+
+    .loop-lab {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      min-height: 0;
+    }
+
+    .loop-canvas,
+    .artifact-panel {
+      min-height: 0;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.12);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .loop-canvas {
+      position: relative;
+      padding: 28px;
+    }
+
+    .loop-banner {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      top: 28px;
+      min-height: 64px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(90deg, oklch(0.31 0.075 247), oklch(0.51 0.15 252));
+      color: white;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .loop-diagram-svg {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      top: 108px;
+      bottom: 24px;
+      width: calc(100% - 56px);
+      height: calc(100% - 132px);
+      overflow: visible;
+    }
+
+    .loop-diagram-svg text {
+      font-family: -apple-system, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      fill: var(--ink);
+      letter-spacing: 0;
+      pointer-events: none;
+    }
+
+    .loop-diagram-svg .node-title {
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .loop-diagram-svg .node-meta {
+      font-size: 17px;
+      fill: var(--muted);
+      font-weight: 650;
+    }
+
+    .loop-diagram-svg .small-label {
+      font-size: 16px;
+      font-weight: 900;
+      fill: oklch(0.43 0.105 62);
+    }
+
+    .loop-diagram-svg [data-loop-node],
+    .loop-diagram-svg [data-loop-edge] {
+      transition: opacity 180ms ease, transform 220ms cubic-bezier(0.16, 1, 0.3, 1), filter 220ms ease;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .loop-diagram-svg [data-loop-node].dim,
+    .loop-diagram-svg [data-loop-edge] {
+      opacity: 0.5;
+    }
+
+    .loop-diagram-svg [data-loop-node].active {
+      opacity: 1;
+      transform: translateY(-6px) scale(1.04);
+      filter: drop-shadow(0 18px 24px rgba(21, 90, 130, 0.18));
+    }
+
+    .loop-diagram-svg [data-loop-edge].active {
+      opacity: 1;
+      filter: drop-shadow(0 0 6px rgba(11, 118, 168, 0.24));
+    }
+
+    .loop-diagram-svg .node-shape {
+      fill: oklch(0.965 0.018 82);
+      stroke: var(--blue);
+      stroke-width: 3;
+    }
+
+    .loop-diagram-svg .node-slate .node-shape {
+      stroke: oklch(0.58 0.054 247);
+      stroke-dasharray: 8 7;
+    }
+
+    .loop-diagram-svg .node-amber .node-shape {
+      stroke: var(--amber);
+      fill: oklch(0.975 0.022 62);
+    }
+
+    .loop-diagram-svg .node-green .node-shape {
+      stroke: var(--green);
+      fill: oklch(0.95 0.035 160);
+    }
+
+    .loop-diagram-svg [data-loop-node].active .node-shape {
+      stroke-width: 5;
+      fill: oklch(0.925 0.04 231);
+    }
+
+    .loop-diagram-svg .node-amber.active .node-shape {
+      fill: oklch(0.94 0.045 62);
+    }
+
+    .loop-diagram-svg .node-green.active .node-shape {
+      fill: oklch(0.91 0.06 160);
+    }
+
+    .loop-edge {
+      fill: none;
+      stroke: oklch(0.52 0.02 247);
+      stroke-width: 2.6;
+      marker-end: url(#loopArrowMuted);
+    }
+
+    .loop-edge.blue.active {
+      stroke: var(--blue);
+      marker-end: url(#loopArrowBlue);
+    }
+
+    .loop-edge.amber.active {
+      stroke: var(--amber);
+      marker-end: url(#loopArrowAmber);
+    }
+
+    .loop-edge.green.active {
+      stroke: var(--green);
+      marker-end: url(#loopArrowGreen);
+    }
+
+    .loop-node {
+      position: absolute;
+      min-width: 226px;
+      min-height: 112px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      padding: 18px 22px;
+      border: 4px solid color-mix(in oklch, var(--node-color), white 10%);
+      background: color-mix(in oklch, var(--node-color), white 91%);
+      color: var(--ink);
+      border-radius: 18px;
+      text-align: center;
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, background 220ms ease, opacity 220ms ease;
+      z-index: 2;
+    }
+
+    .loop-node strong {
+      font-size: 28px;
+      line-height: 1.16;
+      font-weight: 900;
+    }
+
+    .loop-node span {
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.28;
+    }
+
+    .loop-node.active {
+      transform: translateY(-8px) scale(1.04);
+      background: color-mix(in oklch, var(--node-color), white 78%);
+      box-shadow: 0 22px 54px color-mix(in srgb, var(--node-color), transparent 64%);
+    }
+
+    .loop-node.dim {
+      opacity: 0.46;
+    }
+
+    .loop-node.goal { left: 118px; top: 122px; --node-color: var(--blue); }
+    .loop-node.messages { left: 118px; top: 278px; --node-color: oklch(0.58 0.054 247); border-style: dashed; }
+    .loop-node.llm { left: 456px; top: 244px; width: 300px; min-height: 140px; --node-color: var(--blue); }
+    .loop-node.decision {
+      left: 532px;
+      top: 430px;
+      width: 210px;
+      min-width: 210px;
+      min-height: 126px;
+      --node-color: var(--amber);
+      border-radius: 10px;
+      transform: rotate(45deg);
+    }
+
+    .loop-node.decision > * {
+      transform: rotate(-45deg);
+    }
+
+    .loop-node.decision.active {
+      transform: rotate(45deg) translateY(-8px) scale(1.04);
+    }
+
+    .loop-node.tool { left: 444px; top: 552px; width: 318px; min-height: 92px; --node-color: var(--amber); }
+    .loop-node.final { right: 34px; top: 464px; width: 210px; min-width: 210px; min-height: 94px; --node-color: var(--green); border-radius: 999px; }
+
+    .loop-arrow {
+      position: absolute;
+      height: 4px;
+      background: color-mix(in oklch, var(--arrow-color), white 28%);
+      transform-origin: left center;
+      opacity: 0.28;
+      transition: opacity 180ms ease, background 180ms ease, box-shadow 180ms ease;
+      z-index: 1;
+    }
+
+    .loop-arrow::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 18px solid color-mix(in oklch, var(--arrow-color), white 28%);
+      transform: translateY(-50%);
+      transition: border-left-color 180ms ease;
+    }
+
+    .loop-arrow.active {
+      opacity: 1;
+      background: var(--arrow-color);
+      box-shadow: 0 0 0 6px color-mix(in oklch, var(--arrow-color), transparent 88%);
+    }
+
+    .loop-arrow.active::after {
+      border-left-color: var(--arrow-color);
+    }
+
+    .loop-arrow.down {
+      width: var(--arrow-length);
+      transform: rotate(90deg);
+    }
+
+    .loop-arrow.left {
+      width: var(--arrow-length);
+      transform: rotate(180deg);
+    }
+
+    .loop-arrow.goal-msg { left: 226px; top: 246px; width: 86px; --arrow-color: var(--blue); transform: rotate(90deg); }
+    .loop-arrow.msg-llm { left: 344px; top: 336px; width: 112px; --arrow-color: var(--blue); }
+    .loop-arrow.llm-decision { left: 616px; top: 386px; --arrow-length: 62px; --arrow-color: var(--amber); }
+    .loop-arrow.decision-tool { left: 630px; top: 546px; --arrow-length: 28px; --arrow-color: var(--amber); }
+    .loop-arrow.tool-msg-a { left: 444px; top: 606px; width: 296px; --arrow-color: var(--amber); transform: rotate(180deg); }
+    .loop-arrow.tool-msg-b { left: 138px; top: 382px; --arrow-length: 224px; --arrow-color: var(--amber); transform: rotate(270deg); }
+    .loop-arrow.decision-final { left: 738px; top: 500px; width: 174px; --arrow-color: var(--green); }
+
+    .loop-label {
+      position: absolute;
+      z-index: 3;
+      padding: 5px 10px;
+      background: color-mix(in oklch, var(--label-color), white 86%);
+      color: color-mix(in oklch, var(--label-color), black 22%);
+      border-radius: var(--radius-sm);
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .loop-label.yes { left: 656px; top: 542px; --label-color: var(--amber); }
+    .loop-label.no { left: 882px; top: 464px; --label-color: var(--green); }
+    .loop-label.back { left: 78px; top: 488px; writing-mode: vertical-rl; --label-color: var(--amber); }
+
+    .loop-core-note {
+      display: none !important;
+      position: absolute;
+      left: 96px;
+      right: 70px;
+      bottom: 18px;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 10px 18px;
+      background: oklch(0.94 0.015 247);
+      color: oklch(0.36 0.04 247);
+      border-radius: var(--radius-md);
+      font-size: 19px;
+      line-height: 1.45;
+    }
+
+    .loop-core-note strong {
+      color: var(--ink);
+      font-size: 21px;
+    }
+
+    .artifact-panel {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 30px;
+      gap: 24px;
+    }
+
+    .artifact-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .artifact-head h3 {
+      font-size: 32px;
+    }
+
+    .step-counter {
+      min-width: 88px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: white;
+      border-radius: var(--radius-sm);
+      font-size: 18px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .artifact-body {
+      display: grid;
+      align-content: start;
+      gap: 18px;
+      min-height: 0;
+    }
+
+    .artifact-copy {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.52;
+      text-wrap: pretty;
+    }
+
+    .artifact-code {
+      min-height: 300px;
+      padding: 22px;
+      background: var(--dark);
+      color: oklch(0.84 0.075 160);
+      border-radius: var(--radius-sm);
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 19px;
+      line-height: 1.54;
+      white-space: pre-wrap;
+      overflow: hidden;
+    }
+
+    .artifact-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-bottom: 54px;
+    }
+
+    .artifact-actions .ghost-btn {
+      min-height: 56px;
+      font-size: 20px;
+    }
+
+    .artifact-actions .primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: white;
+    }
+
+    .tool-use-stage {
+      display: grid;
+      grid-template-columns: 0.96fr 1.04fr;
+      gap: 32px;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .tool-reference,
+    .tool-live {
+      min-height: 0;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.12);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .tool-reference {
+      position: relative;
+      padding: 28px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 18px;
+    }
+
+    .tool-reference-title,
+    .tool-live-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .tool-reference-title h3,
+    .tool-live-title h3 {
+      font-size: 30px;
+    }
+
+    .mini-tag {
+      display: inline-grid;
+      min-height: 34px;
+      align-items: center;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--muted);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .tool-ref-svg {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .tool-ref-svg text {
+      font-family: -apple-system, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      letter-spacing: 0;
+      pointer-events: none;
+    }
+
+    .tool-ref-title {
+      font-size: 24px;
+      font-weight: 900;
+      fill: var(--ink);
+    }
+
+    .tool-ref-meta {
+      font-size: 16px;
+      font-weight: 700;
+      fill: var(--muted);
+    }
+
+    .tool-ref-code {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 22px;
+      font-weight: 850;
+    }
+
+    .tool-ref-small {
+      font-size: 15px;
+      font-weight: 900;
+      fill: oklch(0.42 0.105 62);
+    }
+
+    .tool-ref-box {
+      fill: oklch(0.965 0.018 82);
+      stroke: var(--blue);
+      stroke-width: 3;
+    }
+
+    .tool-ref-decision {
+      fill: oklch(0.975 0.022 62);
+      stroke: var(--amber);
+      stroke-width: 3;
+    }
+
+    .tool-ref-result {
+      fill: oklch(0.95 0.035 160);
+      stroke: var(--green);
+      stroke-width: 3;
+    }
+
+    .tool-ref-map {
+      fill: oklch(0.985 0.017 62);
+      stroke: var(--amber);
+      stroke-width: 3;
+      stroke-dasharray: 9 8;
+    }
+
+    .tool-ref-arrow {
+      fill: none;
+      stroke: oklch(0.55 0.025 247);
+      stroke-width: 2.4;
+      marker-end: url(#toolRefArrow);
+    }
+
+    .tool-ref-arrow.amber {
+      stroke: var(--amber);
+      marker-end: url(#toolRefArrowAmber);
+    }
+
+    .tool-ref-arrow.green {
+      stroke: var(--green);
+      marker-end: url(#toolRefArrowGreen);
+    }
+
+    .handler-chip {
+      fill: oklch(0.955 0.028 160);
+      stroke: var(--green);
+      stroke-width: 2.4;
+    }
+
+    .handler-chip.primary {
+      fill: oklch(0.935 0.032 231);
+      stroke: var(--blue);
+    }
+
+    .tool-live {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 18px;
+      padding: 28px;
+    }
+
+    .tool-step-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .tool-step {
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--muted);
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      font-weight: 850;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .tool-step.active {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    .tool-live-main {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 18px;
+      min-height: 0;
+    }
+
+    .tool-palette {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      padding: 16px;
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+    }
+
+    .tool-option {
+      min-height: 58px;
+      display: grid;
+      align-content: center;
+      gap: 3px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.78);
+      border-radius: var(--radius-sm);
+      transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+    }
+
+    .tool-option.active {
+      border-color: var(--green);
+      background: oklch(0.93 0.055 160);
+      transform: translateX(6px);
+    }
+
+    .tool-option strong {
+      font-size: 20px;
+      line-height: 1.1;
+    }
+
+    .tool-option span {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .tool-live-output {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .tool-call-card {
+      min-height: 118px;
+      display: grid;
+      align-content: center;
+      gap: 10px;
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      background: var(--dark);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .tool-call-card strong {
+      font-size: 25px;
+    }
+
+    .tool-call-card span {
+      color: rgba(255,255,255,0.65);
+      font-size: 18px;
+    }
+
+    .tool-result-card {
+      padding: 18px;
+      background: oklch(0.95 0.035 160);
+      border-radius: var(--radius-sm);
+      color: oklch(0.31 0.075 160);
+      font-size: 21px;
+      line-height: 1.48;
+      font-weight: 760;
+    }
+
+    .tool-use-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding-bottom: 58px;
+    }
+
+    .ghost-btn {
+      min-height: 52px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: rgba(255,255,255,0.78);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      font-size: 20px;
+      font-weight: 780;
+      transition: transform 150ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .ghost-btn:hover,
+    .script-tab:hover,
+    .chip:hover {
+      border-color: var(--ink);
+    }
+
+    .inline-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .speaker-console {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      width: 360px;
+      max-height: calc(100vh - 48px);
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      padding: 12px;
+      background: rgba(255, 253, 248, 0.96);
+      color: var(--ink);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.22);
+      border-radius: var(--radius-md);
+      transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), opacity 160ms ease;
+    }
+
+    .speaker-console.collapsed {
+      width: 232px;
+      grid-template-rows: auto;
+      padding: 9px 10px;
+    }
+
+    .console-head {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+    }
+
+    .console-head strong {
+      font-size: 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .speaker-console.collapsed .console-head strong {
+      font-size: 15px;
+    }
+
+    .console-page-count {
+      min-width: 48px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .console-toggle {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      background: var(--ink);
+      color: var(--white);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      font-weight: 900;
+    }
+
+    .script-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .script-tab {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 780;
+      transition: transform 150ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .script-tab.active {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+
+    .script-body {
+      max-height: 250px;
+      overflow: auto;
+      padding: 12px;
+      background: var(--paper);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      line-height: 1.65;
+      text-wrap: pretty;
+    }
+
+    .script-body p + p {
+      margin-top: 10px;
+    }
+
+    .speaker-console.collapsed .script-tabs,
+    .speaker-console.collapsed .script-body {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .speaker-console {
+        width: min(360px, calc(100vw - 28px));
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .speaker-console.collapsed {
+        width: 218px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <deck-stage width="1920" height="1080" no-rail>
+    <section class="loop-engineering-page" data-label="Loop Engineering" data-speaker-notes="这一页先讲 Loop Engineering。大模型不是一次性把任务做完，而是在一个循环里不断读取上下文、决定是否调用工具、观察结果，再回到上下文，直到模型判断目标已经完成。">
+      <div class="loop-engineering">
+        <header class="slide-head">
+          <div class="num">01</div>
+          <div>
+            <span class="kicker">Loop Engineering</span>
+            <h1>Agent Loop：循环到目标完成</h1>
+            <p class="loop-subtitle">目标进入上下文，模型判断下一步，工具产出结果，再回到上下文。</p>
+          </div>
+        </header>
+        <div class="loop-lab" id="loopEngineering">
+          <div class="loop-canvas">
+            <div class="loop-banner">Agent Loop - 一个 while 循环驱动整个 agent</div>
+
+            <svg class="loop-diagram-svg" viewBox="0 0 920 560" role="img" aria-label="Agent Loop 动态流程图">
+              <defs>
+                <marker id="loopArrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8994a3"></path>
+                </marker>
+                <marker id="loopArrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b76a8"></path>
+                </marker>
+                <marker id="loopArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#bd6a18"></path>
+                </marker>
+                <marker id="loopArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#13815c"></path>
+                </marker>
+              </defs>
+
+              <path class="loop-edge blue active" data-loop-edge="0" d="M 180 92 L 180 132"></path>
+              <path class="loop-edge blue" data-loop-edge="1" d="M 280 178 L 378 178"></path>
+              <path class="loop-edge amber" data-loop-edge="2" d="M 490 234 L 490 270"></path>
+              <path class="loop-edge amber" data-loop-edge="3" d="M 490 390 L 490 432"></path>
+              <path class="loop-edge amber" data-loop-edge="4" d="M 350 472 L 58 472"></path>
+              <path class="loop-edge amber" data-loop-edge="5" d="M 58 472 L 58 178 L 80 178"></path>
+              <path class="loop-edge green" data-loop-edge="6" d="M 610 330 L 690 330"></path>
+
+              <g class="node-blue active" data-loop-node="0">
+                <rect class="node-shape" x="90" y="18" width="180" height="74" rx="16"></rect>
+                <text class="node-title" x="180" y="45">用户目标</text>
+                <text class="node-meta" x="180" y="70">帮我写一份日报</text>
+              </g>
+
+              <g class="node-slate" data-loop-node="1">
+                <rect class="node-shape" x="80" y="132" width="200" height="92" rx="16"></rect>
+                <text class="node-title" x="180" y="161">消息列表</text>
+                <text class="node-meta" x="180" y="188">messages[]</text>
+                <text class="node-meta" x="180" y="209">任务现场</text>
+              </g>
+
+              <g class="node-blue" data-loop-node="2">
+                <rect class="node-shape" x="378" y="118" width="224" height="120" rx="16"></rect>
+                <text class="node-title" x="490" y="151">大模型</text>
+                <text class="node-meta" x="490" y="181">阅读消息历史</text>
+                <text class="node-meta" x="490" y="208">做出判断</text>
+              </g>
+
+              <g class="node-amber" data-loop-node="3">
+                <polygon class="node-shape" points="490,270 610,330 490,390 370,330"></polygon>
+                <text class="node-title" x="490" y="312">用文件工具吗？</text>
+                <text class="node-meta" x="490" y="340">读取 / 写入</text>
+                <text class="node-meta" x="490" y="360">read / write</text>
+              </g>
+
+              <g class="node-amber" data-loop-node="4">
+                <rect class="node-shape" x="350" y="432" width="280" height="88" rx="16"></rect>
+                <text class="node-title" x="490" y="463">执行工具</text>
+                <text class="node-meta" x="490" y="491">查记录 / 整理素材</text>
+              </g>
+
+              <g class="node-green" data-loop-node="6">
+                <rect class="node-shape" x="690" y="288" width="178" height="84" rx="42"></rect>
+                <text class="node-title" x="779" y="320">返回结果</text>
+                <text class="node-meta" x="779" y="348">日报草稿</text>
+              </g>
+
+              <text class="small-label" x="632" y="310">否</text>
+              <text class="small-label" x="524" y="414">是</text>
+              <text class="small-label" x="190" y="444">工具结果</text>
+              <text class="small-label" x="190" y="466">回到消息列表</text>
+            </svg>
+
+            <div class="loop-core-note">
+              <strong>核心：</strong>
+              <span>模型负责判断，系统负责执行。结果回到消息列表，再判断一次。</span>
+            </div>
+          </div>
+
+          <aside class="artifact-panel">
+            <div class="artifact-head">
+              <div>
+                <h3 id="loopArtifactTitle">目标进入循环</h3>
+                <p class="artifact-copy" id="loopArtifactCopy">输入变成任务目标。</p>
+              </div>
+              <div class="step-counter" id="loopStepCounter">1 / 7</div>
+            </div>
+            <div class="artifact-body">
+              <pre class="artifact-code" id="loopArtifactCode">用户：帮我写一份日报</pre>
+            </div>
+            <div class="artifact-actions">
+              <button class="ghost-btn" type="button" data-action="loop-engine-reset">重置</button>
+              <button class="ghost-btn" type="button" data-action="loop-engine-auto">自动播放</button>
+              <button class="ghost-btn primary" type="button" data-action="loop-engine-next">下一步</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="Chatbot vs Agent" data-speaker-notes="先把直觉建立起来。Chatbot 是一次问答，用户问，模型答。Agent 的区别不是回答更长，而是它会围绕目标持续行动，观察结果，然后决定下一步。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">02</div>
+          <div>
+            <h2>Agent 不是更会聊天，而是能围绕目标形成闭环</h2>
+          </div>
+          <span class="tag">从问答到推进</span>
+        </header>
+        <div class="comparison">
+          <div class="compare-panel">
+            <h3>Chat AI：一次问答</h3>
+            <div class="flow-strip" id="chatFlow">
+              <div class="pill-node is-hot" style="--node: var(--blue);"><i>1</i><span>用户提问</span></div>
+              <div class="pill-node" style="--node: var(--blue);"><i>2</i><span>模型回答</span></div>
+            </div>
+            <p class="panel-foot">适合解释、总结、生成文本。路径短，结果主要依赖问题描述。</p>
+          </div>
+          <div class="compare-panel agent">
+            <h3>Agent：持续推进</h3>
+            <div class="flow-strip" id="agentFlow">
+              <div class="pill-node is-hot" style="--node: var(--green);"><i>1</i><span>理解目标</span></div>
+              <div class="pill-node" style="--node: var(--green);"><i>2</i><span>选择行动</span></div>
+              <div class="pill-node" style="--node: var(--green);"><i>3</i><span>观察结果</span></div>
+              <div class="pill-node" style="--node: var(--green);"><i>4</i><span>调整策略</span></div>
+            </div>
+            <p class="panel-foot">适合信息不完整、需要查证、需要多步推进的任务。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="Tool Use" data-speaker-notes="这一页是在 Agent Loop 上加工具。核心循环没有变，变化只是当模型判断需要工具时，系统根据工具名分发到对应处理器。对非技术同事来说，可以把 TOOL_HANDLERS 理解成工具分发表。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">03</div>
+          <div>
+            <h2>Tool Use：循环不变，只加工具分发</h2>
+          </div>
+          <span class="tag">s02 Tool Use</span>
+        </header>
+        <div class="tool-use-stage">
+          <div class="tool-reference">
+            <div class="tool-reference-title">
+              <h3>参照结构</h3>
+              <span class="mini-tag">Loop 保留，新增 TOOL_HANDLERS</span>
+            </div>
+            <svg class="tool-ref-svg" viewBox="0 0 760 620" role="img" aria-label="Tool Use 参照结构">
+              <defs>
+                <marker id="toolRefArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8d99a6"></path>
+                </marker>
+                <marker id="toolRefArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#bd6a18"></path>
+                </marker>
+                <marker id="toolRefArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#13815c"></path>
+                </marker>
+              </defs>
+
+              <path class="tool-ref-arrow" d="M 150 88 L 314 88"></path>
+              <path class="tool-ref-arrow" d="M 415 140 L 415 190"></path>
+              <path class="tool-ref-arrow green" d="M 512 250 L 610 250"></path>
+              <path class="tool-ref-arrow amber" d="M 415 310 L 415 360"></path>
+              <path class="tool-ref-arrow amber" d="M 196 520 L 62 520 L 62 88 L 86 88"></path>
+
+              <rect class="tool-ref-box" x="86" y="38" width="170" height="100" rx="16"></rect>
+              <text class="tool-ref-title" x="171" y="75">用户提问</text>
+              <text class="tool-ref-meta" x="171" y="108">messages[] 消息列表</text>
+
+              <rect class="tool-ref-box" x="314" y="38" width="202" height="112" rx="16"></rect>
+              <text class="tool-ref-title" x="415" y="76">大模型 LLM</text>
+              <text class="tool-ref-meta" x="415" y="112">判断是否用工具</text>
+
+              <polygon class="tool-ref-decision" points="415,190 512,250 415,310 318,250"></polygon>
+              <text class="tool-ref-title" x="415" y="244">tool_use?</text>
+              <text class="tool-ref-meta" x="415" y="272">是否调用工具</text>
+
+              <rect class="tool-ref-result" x="610" y="207" width="126" height="86" rx="42"></rect>
+              <text class="tool-ref-title" x="673" y="241">返回结果</text>
+              <text class="tool-ref-meta" x="673" y="268">结束</text>
+
+              <rect class="tool-ref-map" x="196" y="352" width="438" height="246" rx="18"></rect>
+              <text class="tool-ref-title" x="415" y="392">TOOL_HANDLERS 工具分发表</text>
+
+              <rect class="handler-chip primary" x="230" y="414" width="160" height="52" rx="12"></rect>
+              <text class="tool-ref-title tool-ref-code" x="310" y="432">bash</text>
+              <text class="tool-ref-meta" x="310" y="454">执行命令</text>
+
+              <rect class="handler-chip" x="438" y="414" width="160" height="52" rx="12"></rect>
+              <text class="tool-ref-title tool-ref-code" x="518" y="432">read_file</text>
+              <text class="tool-ref-meta" x="518" y="454">读取文件</text>
+
+              <rect class="handler-chip" x="230" y="482" width="160" height="52" rx="12"></rect>
+              <text class="tool-ref-title tool-ref-code" x="310" y="500">write_file</text>
+              <text class="tool-ref-meta" x="310" y="522">写入文件</text>
+
+              <rect class="handler-chip" x="438" y="482" width="160" height="52" rx="12"></rect>
+              <text class="tool-ref-title tool-ref-code" x="518" y="500">edit_file</text>
+              <text class="tool-ref-meta" x="518" y="522">编辑文件</text>
+
+              <rect class="handler-chip" x="334" y="540" width="160" height="52" rx="12"></rect>
+              <text class="tool-ref-title tool-ref-code" x="414" y="558">glob</text>
+              <text class="tool-ref-meta" x="414" y="581">查找文件</text>
+
+              <text class="tool-ref-small" x="536" y="228">否</text>
+              <text class="tool-ref-small" x="438" y="340">是</text>
+              <text class="tool-ref-small" x="86" y="380" transform="rotate(-90 86 380)">工具结果回到 messages</text>
+            </svg>
+          </div>
+
+          <div class="tool-live" id="toolUseDemo">
+            <div class="tool-live-title">
+              <h3 id="toolUseTitle">动态示例</h3>
+              <span class="step-counter" id="toolUseStepCounter">1 / 5</span>
+            </div>
+            <div class="tool-step-strip">
+              <div class="tool-step active" data-tool-step="0">用户输入目标</div>
+              <div class="tool-step" data-tool-step="1">操作范围判断</div>
+              <div class="tool-step" data-tool-step="2">使用工具分法</div>
+              <div class="tool-step" data-tool-step="3">处理结果回传</div>
+            </div>
+            <div class="tool-live-main">
+              <div class="tool-palette">
+                <div class="tool-option" data-tool-option="bash"><strong>bash</strong><span>执行命令</span></div>
+                <div class="tool-option" data-tool-option="glob"><strong>glob</strong><span>查找文件</span></div>
+                <div class="tool-option" data-tool-option="read_file"><strong>read_file</strong><span>读取文件</span></div>
+                <div class="tool-option" data-tool-option="write_file"><strong>write_file</strong><span>写入文件</span></div>
+                <div class="tool-option" data-tool-option="edit_file"><strong>edit_file</strong><span>编辑文件</span></div>
+              </div>
+              <div class="tool-live-output">
+                <div class="tool-call-card">
+                  <strong id="toolUseCall">用户：帮我写一份日报</strong>
+                  <span id="toolUseReason">目标进入消息列表</span>
+                </div>
+                <div class="tool-result-card" id="toolUseResult">等待模型判断下一步。</div>
+              </div>
+            </div>
+            <div class="tool-use-actions">
+              <button class="ghost-btn" type="button" data-action="tool-use-reset">重置</button>
+              <button class="ghost-btn primary" type="button" data-action="tool-use-next">下一步</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="permission-stage-page" data-label="工具和边界" data-speaker-notes="第二步是给 Agent 手和脚。工具越多，能力越大，但风险也越大。所以工具层通常要和权限层一起讲：会做什么，以及什么情况下不能自己做。">
+      <div class="permission-stage">
+        <header class="slide-head">
+          <div class="num">04</div>
+          <div>
+            <span class="kicker">Tool + Permission</span>
+            <h2>工具让 Agent 能动手，权限决定它能动到哪里</h2>
+            <p class="perm-subtitle">同一个 loop，加了工具就要加闸口：放行、确认、禁止。</p>
+          </div>
+        </header>
+        <div class="permission-lab">
+          <div class="permission-canvas">
+            <div class="perm-banner">工具调用必须穿过权限闸口</div>
+            <svg class="perm-diagram-svg" viewBox="0 0 920 580" role="img" aria-label="工具调用与权限闸口流程图">
+              <defs>
+                <marker id="permArrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8994a3"></path>
+                </marker>
+                <marker id="permArrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b76a8"></path>
+                </marker>
+                <marker id="permArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#bd6a18"></path>
+                </marker>
+                <marker id="permArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#13815c"></path>
+                </marker>
+                <marker id="permArrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#a8301f"></path>
+                </marker>
+              </defs>
+
+              <!-- 工具选择 → 闸口 → 三档分流 -->
+              <path class="perm-edge blue active" d="M 200 80 L 410 80"></path>
+              <path class="perm-edge amber" id="permEdgeGate" d="M 460 130 L 460 200"></path>
+              <path class="perm-edge green" id="permEdgeAuto" d="M 360 250 L 220 380"></path>
+              <path class="perm-edge amber" id="permEdgeConfirm" d="M 460 280 L 460 380"></path>
+              <path class="perm-edge red" id="permEdgeBlock" d="M 560 250 L 700 380"></path>
+
+              <g class="node-blue active">
+                <rect class="node-shape" x="60" y="40" width="140" height="80" rx="16"></rect>
+                <text class="node-title" x="130" y="68">选择工具</text>
+                <text class="node-meta" x="130" y="94">tool_router</text>
+              </g>
+
+              <g class="node-amber">
+                <polygon class="node-shape" points="460,130 560,200 460,270 360,200"></polygon>
+                <text class="node-title" x="460" y="196">权限闸口</text>
+                <text class="node-meta" x="460" y="222">check_policy()</text>
+              </g>
+
+              <g class="node-green" id="permNodeAuto">
+                <rect class="node-shape" x="160" y="380" width="180" height="80" rx="16"></rect>
+                <text class="node-title" x="250" y="410">✅ 自动执行</text>
+                <text class="node-meta" x="250" y="436">只读 / 查询 / 草稿</text>
+              </g>
+
+              <g class="node-amber" id="permNodeConfirm">
+                <rect class="node-shape" x="370" y="380" width="180" height="80" rx="16"></rect>
+                <text class="node-title" x="460" y="410">⚠️ 需要确认</text>
+                <text class="node-meta" x="460" y="436">写操作 / 接口</text>
+              </g>
+
+              <g class="node-red" id="permNodeBlock">
+                <rect class="node-shape" x="610" y="380" width="180" height="80" rx="16"></rect>
+                <text class="node-title" x="700" y="410">🚫 直接禁止</text>
+                <text class="node-meta" x="700" y="436">删除 / 绕审 / 未授权</text>
+              </g>
+
+              <!-- 工具结果回到消息列表 -->
+              <path class="perm-edge green" d="M 250 460 L 250 520 L 130 520 L 130 80 L 60 80" stroke-dasharray="6 6"></path>
+              <text class="small-label" x="200" y="510">结果回传 ↻</text>
+              <text class="small-label" x="240" y="68">是</text>
+              <text class="small-label" x="430" y="164">?</text>
+              <text class="small-label" x="300" y="320">放行</text>
+              <text class="small-label" x="445" y="332">人工</text>
+              <text class="small-label" x="610" y="320">拦下</text>
+            </svg>
+            <div class="perm-note">
+              <strong>核心：</strong>
+              <span>工具决定能力边界，权限决定行动边界。结果都回到上下文。</span>
+            </div>
+          </div>
+
+          <aside class="artifact-panel perm-panel">
+            <div class="artifact-head">
+              <div>
+                <h3 id="permArtifactTitle">读取文档</h3>
+                <p class="artifact-copy" id="permArtifactCopy">只读查询，自动放行。</p>
+              </div>
+              <div class="step-counter" id="permRiskBadge" data-risk="low">低风险</div>
+            </div>
+            <div class="artifact-body">
+              <div class="perm-tool-list" id="permToolList">
+                <button class="perm-tool active" type="button" data-tool="read"><span class="chip-icon">📄</span>读取文档</button>
+                <button class="perm-tool" type="button" data-tool="search"><span class="chip-icon">🔍</span>检索信息</button>
+                <button class="perm-tool" type="button" data-tool="api"><span class="chip-icon">🔌</span>调用接口</button>
+                <button class="perm-tool" type="button" data-tool="shell"><span class="chip-icon">⚡</span>执行命令</button>
+              </div>
+              <pre class="artifact-code" id="permArtifactCode">tool: read_file
+policy: auto
+result: 字段口径已确认</pre>
+            </div>
+            <div class="perm-policy-mini">
+              <div class="mini-policy active" data-mini="auto"><span>✅</span>自动</div>
+              <div class="mini-policy" data-mini="confirm"><span>⚠️</span>确认</div>
+              <div class="mini-policy" data-mini="block"><span>🚫</span>禁止</div>
+            </div>
+            <div class="perm-actions">
+              <button class="ghost-btn" type="button" data-action="perm-reset">重置</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="权限治理" data-speaker-notes="如果听众里有业务、合规或管理同事，这页要多停一下。Agent 真正进入工作，不是因为它什么都能做，而是因为它知道哪些事情要停下来问人。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">05</div>
+          <div>
+            <h2>先划边界，再给自由：企业 Agent 必须有三类权限状态</h2>
+          </div>
+          <span class="tag">可控性</span>
+        </header>
+        <div class="permissions">
+          <div class="policy-card" style="--policy-color: var(--green);">
+            <h3>允许自动执行</h3>
+            <p>只读、可回滚、低影响的动作，可以让 Agent 自己完成，减少人来回确认。</p>
+            <div class="policy-state">Allow</div>
+          </div>
+          <div class="policy-card" style="--policy-color: var(--amber);">
+            <h3>需要人工确认</h3>
+            <p>会改变外部状态、影响他人、成本较高的动作，必须弹出确认和理由。</p>
+            <div class="policy-state">Ask</div>
+          </div>
+          <div class="policy-card" style="--policy-color: var(--red);">
+            <h3>禁止执行</h3>
+            <p>越权访问、破坏性操作、绕过流程的动作，不能通过“提示词”临时放行。</p>
+            <div class="policy-state">Deny</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="计划能力" data-speaker-notes="有了循环和工具以后，Agent 可以动手，但还容易走哪算哪。TodoWrite 或 Plan 的价值，是让大任务先变成可检查的步骤，人也能看见它到底打算怎么做。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">06</div>
+          <div>
+            <h2>没有计划的 Agent 只是会动手，有计划才像任务推进者</h2>
+          </div>
+          <span class="tag">s05 TodoWrite</span>
+        </header>
+        <div class="plan-board">
+          <div class="task-list" id="taskList">
+            <div class="task current">
+              <div class="check">1</div>
+              <div><strong>明确对比目标</strong><span>状态差异、关键字段差异、建议动作</span></div>
+              <span class="tag">当前</span>
+            </div>
+            <div class="task">
+              <div class="check">2</div>
+              <div><strong>读取两条电子流</strong><span>调用查询工具并记录来源</span></div>
+              <span class="tag">等待</span>
+            </div>
+            <div class="task">
+              <div class="check">3</div>
+              <div><strong>提取差异字段</strong><span>节点、时长、金额口径、归档依据</span></div>
+              <span class="tag">等待</span>
+            </div>
+            <div class="task">
+              <div class="check">4</div>
+              <div><strong>输出判断和下一步</strong><span>哪些确定，哪些需要人确认</span></div>
+              <span class="tag">等待</span>
+            </div>
+          </div>
+          <div class="plan-meter">
+            <h3>计划把黑盒行动变成可观察进度</h3>
+            <p class="lead" style="color: rgba(255,255,255,0.68);">你可以随时问：做到哪一步了，卡在哪里，下一步为什么这么做。</p>
+            <div>
+              <div class="meter-label"><span>完成进度</span><strong id="progressLabel">0%</strong></div>
+              <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+            </div>
+            <div class="inline-actions">
+              <button class="action-btn" type="button" data-action="task-next">完成一步</button>
+              <button class="action-btn secondary" type="button" data-action="task-reset">重置计划</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="Skill 按需加载" data-speaker-notes="很多人会把 Skill 理解成提示词模板，但它更像专项操作手册。最重要的是按需加载：先让 Agent 知道有哪些技能，真正需要时再展开完整说明。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">07</div>
+          <div>
+            <h2>Skill 不是把所有知识塞进 prompt，而是按需打开说明书</h2>
+          </div>
+          <span class="tag">s07 Skill Loading</span>
+        </header>
+        <div class="skill-stage">
+          <div class="skill-list">
+            <h3>技能目录</h3>
+            <div class="tool-list">
+              <button class="chip active" type="button" data-skill="review">代码审查</button>
+              <button class="chip" type="button" data-skill="slides">生成演示页</button>
+              <button class="chip" type="button" data-skill="debug">系统排障</button>
+              <button class="chip" type="button" data-skill="wechat">发布公众号</button>
+            </div>
+          </div>
+          <div class="skill-detail">
+            <h3 id="skillTitle">代码审查 Skill</h3>
+            <div class="skill-manifest">
+              <div class="manifest-item"><strong>name</strong><span id="skillName">review</span></div>
+              <div class="manifest-item"><strong>when_to_use</strong><span id="skillWhen">用户要求 review、审查 PR 或评估风险</span></div>
+              <div class="manifest-item"><strong>loaded</strong><span id="skillLoaded">需要时读取完整 SKILL.md</span></div>
+            </div>
+            <div class="loaded-skill" id="loadedSkill">
+              加载后，Agent 得到的是一套工作方法：先看 diff，再按严重程度列问题，最后补充测试风险。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="上下文和记忆" data-speaker-notes="Context 和 Memory 经常被混在一起。Context 是这次任务现场，Memory 是跨会话保留的长期事实。Context 要会压缩，Memory 要会筛选，不能什么都记。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">08</div>
+          <div>
+            <h2>Context 管这次任务现场，Memory 管长期有用事实</h2>
+          </div>
+          <span class="tag">s08 Context Compact + s09 Memory</span>
+        </header>
+        <div class="context-board">
+          <div class="memory-panel">
+            <h3>短期上下文：会满，需要压缩</h3>
+            <div class="context-stream" id="contextStream">
+              <div class="context-line">用户：请对比两条电子流 A 和 B。</div>
+              <div class="context-line">工具：读取 A 的当前节点、停留时长和字段版本。</div>
+              <div class="context-line">工具：读取 B 的归档节点、归档依据和字段版本。</div>
+              <div class="context-line keep">压缩摘要：A 仍在复核中且停留 18 小时，B 已归档，字段版本不一致。</div>
+              <div class="context-line">旧日志：中间查询参数、无关字段、重复响应。</div>
+            </div>
+            <button class="ghost-btn" type="button" data-action="compact-context">压缩上下文</button>
+          </div>
+          <div class="memory-panel">
+            <h3>长期记忆：只保存可复用事实</h3>
+            <div class="memory-slots" id="memorySlots">
+              <div class="memory-slot"><strong>偏好</strong><span>部门分享偏好高信息密度图表，少用营销式页面。</span></div>
+              <div class="memory-slot"><strong>项目事实</strong><span>本次材料主题是 Agent 原理科普和 AI 工具使用分享。</span></div>
+              <div class="memory-slot"><strong>决策</strong><span>讲解采用由简到繁的能力层级，而不是按产品功能罗列。</span></div>
+            </div>
+            <button class="ghost-btn" type="button" data-action="highlight-memory">筛选可记忆内容</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="Subagent 协作" data-speaker-notes="当任务变大，单个上下文会变脏，也会很慢。Subagent 的价值是隔离上下文。主 Agent 只派任务，子 Agent 自己查、自己做，最后把结论带回来。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">09</div>
+          <div>
+            <h2>大任务拆小，每个子 Agent 带着干净上下文去完成一件事</h2>
+          </div>
+          <span class="tag">s06 Subagent + s15 Agent Teams</span>
+        </header>
+        <div class="team-board">
+          <div class="agent-ring" id="agentRing">
+            <div class="avatar main">主 Agent</div>
+            <div class="avatar research" style="--avatar-color: var(--green);">资料<br>研究</div>
+            <div class="avatar code" style="--avatar-color: var(--amber);">代码<br>实现</div>
+            <div class="avatar test" style="--avatar-color: var(--violet);">验证<br>测试</div>
+            <div class="avatar write" style="--avatar-color: var(--red);">总结<br>输出</div>
+          </div>
+          <div class="team-panel">
+            <h3>异步邮箱式协作</h3>
+            <div class="mailbox" id="mailbox">
+              <div class="mail"><strong>主 Agent -> 资料研究：</strong>请整理 learn-claude-code 的章节能力层级。</div>
+              <div class="mail"><strong>资料研究 -> 主 Agent：</strong>已提炼 10 层能力，并标注章节来源。</div>
+              <div class="mail"><strong>主 Agent -> 验证测试：</strong>请检查 HTML 演示是否能切换讲稿和翻页。</div>
+            </div>
+            <div class="inline-actions">
+              <button class="ghost-btn" type="button" data-action="team-next">派发下一位</button>
+              <button class="ghost-btn" type="button" data-action="team-reset">重置</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="外部系统和长期运行" data-speaker-notes="再往后，Agent 不只是一次会话里的助手，而是可以接外部系统、后台运行、定时触发。MCP 可以理解成把外部能力接进统一工具池的一种方式。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">10</div>
+          <div>
+            <h2>接入外部能力后，Agent 从会话工具变成任务系统</h2>
+          </div>
+          <span class="tag">s13 Background + s14 Cron + s19 MCP</span>
+        </header>
+        <div class="connector-board">
+          <div class="connector-panel">
+            <h3>外部能力接入同一个工具池</h3>
+            <div class="connector-grid" id="connectorGrid">
+              <div class="connector active"><strong>文件系统</strong><span>读写项目材料</span></div>
+              <div class="connector"><strong>浏览器</strong><span>查看页面状态</span></div>
+              <div class="connector"><strong>内部 API</strong><span>查询业务数据</span></div>
+              <div class="connector"><strong>数据库</strong><span>检索结构化记录</span></div>
+              <div class="connector"><strong>日历任务</strong><span>按时间触发</span></div>
+              <div class="connector"><strong>消息系统</strong><span>通知人与团队</span></div>
+            </div>
+          </div>
+          <div class="summary-panel">
+            <h3>同一个循环，更多运行形态</h3>
+            <p>慢任务可以放后台，未来任务可以定时触发，外部工具可以通过 MCP 或内部 API 接入。核心仍然是：模型决定下一步，Harness 负责安全执行。</p>
+            <button class="action-btn" type="button" data-action="connector-next">点亮一个能力</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-label="完整路径" data-speaker-notes="最后收束。最小 Agent 很小，一个循环加一个工具就够了。真正可用的 Agent 不是另一个更神秘的东西，而是在这个循环外逐步补齐这些 Harness 能力。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">11</div>
+          <div>
+            <h2>机制很多，核心循环只有一个</h2>
+          </div>
+          <span class="tag">s20 Comprehensive</span>
+        </header>
+        <div class="summary-board">
+          <div class="layer-ladder">
+            <div class="ladder-row" style="--level: 0; --layer-color: var(--blue);"><b>1</b><strong>Agent Loop</strong></div>
+            <div class="ladder-row" style="--level: 1; --layer-color: var(--green);"><b>2</b><strong>Tool Use</strong></div>
+            <div class="ladder-row" style="--level: 2; --layer-color: var(--amber);"><b>3</b><strong>Permission</strong></div>
+            <div class="ladder-row" style="--level: 3; --layer-color: var(--violet);"><b>4</b><strong>Plan / Todo</strong></div>
+            <div class="ladder-row" style="--level: 4; --layer-color: var(--red);"><b>5</b><strong>Skill Loading</strong></div>
+            <div class="ladder-row" style="--level: 5; --layer-color: var(--green);"><b>6</b><strong>Context + Memory</strong></div>
+            <div class="ladder-row" style="--level: 6; --layer-color: var(--blue);"><b>7</b><strong>Subagent + Team</strong></div>
+            <div class="ladder-row" style="--level: 7; --layer-color: var(--amber);"><b>8</b><strong>MCP + Task System</strong></div>
+          </div>
+          <div class="summary-panel">
+            <div class="quote">最小 Agent 只要一个循环。可用 Agent 需要一套 Harness。</div>
+            <p>对业务团队来说，建设 Agent 的关键不是“写一个万能提示词”，而是为具体任务建设可行动、可控、可评估、可迭代的工作环境。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </deck-stage>
+
+  <aside class="speaker-console collapsed" id="speakerConsole" aria-label="演讲稿控制台">
+    <div class="console-head">
+      <strong id="consoleTitle">讲稿</strong>
+      <span class="console-page-count" id="consolePageCount">1/11</span>
+      <button class="console-toggle" type="button" id="consoleToggle" aria-label="收起或展开讲稿">∧</button>
+    </div>
+    <div class="script-tabs" role="tablist" aria-label="讲稿模式">
+      <button class="script-tab active" type="button" data-script-mode="beginner">新手版</button>
+      <button class="script-tab" type="button" data-script-mode="technical">技术版</button>
+      <button class="script-tab" type="button" data-script-mode="business">业务版</button>
+    </div>
+    <div class="script-body" id="scriptBody"></div>
+  </aside>
+
+  <script src="deck-stage.js"></script>
+  <script>
+    const deck = document.querySelector("deck-stage");
+    const scriptBody = document.getElementById("scriptBody");
+    const consoleTitle = document.getElementById("consoleTitle");
+    const consolePageCount = document.getElementById("consolePageCount");
+    const speakerConsole = document.getElementById("speakerConsole");
+    const consoleToggle = document.getElementById("consoleToggle");
+    let currentSlide = 0;
+    let scriptMode = "beginner";
+
+    const scripts = [
+      {
+        title: "Loop Engineering",
+        beginner: "先看这张动态图。AI 做事不是一次性完成，而是一圈一圈地推进：先看目标和现场，再想下一步，要工具就调用工具，工具结果回来以后再想一次。什么时候停？当模型判断目标已经完成，就返回结果。",
+        technical: "这里的 Loop Engineering 可以理解为 Agent 的运行骨架。messages 是任务现场，LLM 负责判断 stop_reason。如果需要工具，就产生 tool_call，系统执行后把 tool_result 追加回 messages，再进入下一轮。",
+        business: "这页想传达一个直觉：Agent 不是一个神奇按钮，而是一种循环推进任务的机制。只要我们能看见每轮的目标、判断、行动和结果，就能管理它、优化它，也能解释它为什么这么做。"
+      },
+      {
+        title: "Chatbot vs Agent",
+        beginner: "Chatbot 更像你问我答。你问一个问题，它给一个回答。Agent 的关键变化是，它拿到目标以后，会自己判断要不要查资料、调用工具、继续验证，直到任务有一个结果。",
+        technical: "从运行结构看，Chatbot 通常是一轮 completion。Agent 是多轮循环，模型输出里可能包含 tool_use，Harness 执行工具，把 tool_result 追加回 messages，然后继续请求模型。",
+        business: "对业务价值来说，这个区别很重要。问答适合知识解释，Agent 适合处理需要多步推进的工作，比如对比流程、生成材料、排查问题、整理结论。"
+      },
+      {
+        title: "Tool Use",
+        beginner: "这一页只加一个东西：工具分发。循环还是刚才那个循环。区别是模型说我要用某个工具，系统就根据工具名找到对应处理器，比如 read_file 是读取文件，write_file 是写入文件。",
+        technical: "Tool Use 的关键是 TOOL_HANDLERS。模型输出 tool_use，里面带工具名和参数。Harness 根据名称 dispatch 到对应 handler，执行后把 tool_result 追加回 messages。",
+        business: "对非技术同事来说，可以把工具池理解为一组可调用的办公动作。AI 判断要做哪一步，系统负责把这个动作交给真正会执行的工具。"
+      },
+      {
+        title: "工具和边界",
+        beginner: "工具就是 Agent 的手。没有工具，它只能说。有了工具，它可以读文档、查系统、调接口。但手越多，越要知道什么能碰，什么不能碰。",
+        technical: "工具层最好做成 dispatch map 或 registry。每个工具有名称、输入 schema、说明和 handler。权限层在 handler 前判断 allow、ask 或 deny，避免把安全逻辑散落到 prompt 里。",
+        business: "企业里最关心的是边界。比如读取报表可以自动做，提交审批必须确认，删除数据应该禁止。这样的权限设计，比单纯提高模型能力更关键。"
+      },
+      {
+        title: "权限治理",
+        beginner: "这页可以记三个词：允许、询问、禁止。Agent 不是越自由越好，而是该自动的时候自动，该问人的时候停下来，该拒绝的时候拒绝。",
+        technical: "权限可以做成规则管线：先匹配工具类型和参数，再匹配工作区、风险等级和用户授权。高风险动作进入审批分支，拒绝动作直接返回明确错误。",
+        business: "这就是 Agent 能不能进入真实业务的分水岭。我们不是要一个无法控制的自动化，而是要一个知道边界、过程可追踪、责任能落地的助手。"
+      },
+      {
+        title: "计划能力",
+        beginner: "当任务变大时，Agent 如果不先列计划，就容易想到哪做到哪。计划让我们看见它准备怎么做，也方便中途纠偏。",
+        technical: "TodoWrite 的价值不是形式上的清单，而是把长任务状态外显化。每个 item 有状态，pending、in_progress、completed，模型在执行中更新它，用户和系统都能观察进度。",
+        business: "对部门同事来说，这一层特别容易理解。就像新人接任务要先拆步骤一样，Agent 也应该先让我们看见计划，再开始行动。"
+      },
+      {
+        title: "Skill 按需加载",
+        beginner: "Skill 可以理解成专项说明书。比如做代码审查、做 PPT、排查问题，各有一套方法。Agent 不需要一开始背下所有说明书，需要用的时候再打开。",
+        technical: "Skill Loading 的关键是两段式：先暴露 manifest，让模型知道有哪些 skill 和触发条件。命中后再读取完整 SKILL.md，把具体流程注入上下文。",
+        business: "这对企业知识管理很有启发。我们不需要把所有制度、流程、模板都塞进一个超长提示词，而是做成按需加载的能力库。"
+      },
+      {
+        title: "上下文和记忆",
+        beginner: "Context 是这次对话和任务现场，Memory 是长期记住的事实。上下文太长要压缩，记忆太多要筛选。不是记得越多越好，而是记得有用。",
+        technical: "Context compact 解决 token budget，Memory 解决跨会话复用。Memory 通常要有 selection、extraction、consolidation 三步，避免把噪声永久化。",
+        business: "这能对应到我们的知识资产。哪些只是一次任务的临时信息，哪些是以后反复有用的项目偏好、流程规则和业务口径，要分开管理。"
+      },
+      {
+        title: "Subagent 协作",
+        beginner: "一个 Agent 做大任务会累，也会把上下文弄得很乱。子 Agent 就像临时小组成员，各自处理一块，最后把结果交给主人。",
+        technical: "Subagent 的核心是 fresh messages，也就是上下文隔离。主 Agent 传入任务说明，子 Agent 独立执行，返回压缩后的结果。团队模式再加持久化身份、邮箱和协议。",
+        business: "这就像把一个复杂项目拆给研究、执行、测试、总结几个角色。好处是并行、清晰，而且每个人只带回结论，不把全部过程都塞给主线。"
+      },
+      {
+        title: "外部系统和长期运行",
+        beginner: "如果 Agent 只在一个聊天窗口里工作，它还是临时助手。接入外部系统、后台任务和定时触发以后，它才开始像一个真正的任务系统。",
+        technical: "MCP 可以理解成外部能力接入工具池的标准化方式。后台任务和 Cron 则让 Agent 不必阻塞在慢操作上，也能在未来时间点被重新唤醒。",
+        business: "落到业务里，就是 Agent 能查内部系统、能等待结果、能定时巡检、能通知人。它开始进入真实流程，而不只是生成一段文字。"
+      },
+      {
+        title: "完整路径",
+        beginner: "最后我们收束一下。最小 Agent 很小，一个循环和一个工具就够了。真正可用的 Agent，是在这个循环外面逐步补上这些能力。",
+        technical: "s20 的重点是，前面的机制并没有改变核心循环。Tool、Permission、Hook、Todo、Skill、Context、Memory、Subagent、MCP 都是 Harness 层能力，服务于同一个 loop。",
+        business: "如果要把 Agent 用进部门工作，建议不要从万能助手开始。先选一个具体任务，跑通最小闭环，再按风险和收益逐步加工具、权限、记忆和系统接入。"
+      }
+    ];
+
+    const toolData = {
+      read: {
+        title: "读取文档",
+        risk: "低风险",
+        copy: [
+          "Agent 读取两条电子流的字段说明，确认“当前节点”和“归档状态”的口径。",
+          "观察结果被追加回上下文，模型据此继续判断下一步。"
+        ]
+      },
+      search: {
+        title: "检索信息",
+        risk: "低风险",
+        copy: [
+          "Agent 检索流程制度和历史案例，确认哪些差异属于正常情况。",
+          "检索结果不会直接当结论，而是作为证据进入下一轮判断。"
+        ]
+      },
+      api: {
+        title: "调用接口",
+        risk: "中风险",
+        copy: [
+          "Agent 调用内部查询接口，读取电子流状态和停留时间。",
+          "如果接口会改变外部状态，需要进入人工确认分支。"
+        ]
+      },
+      shell: {
+        title: "执行命令",
+        risk: "高风险",
+        copy: [
+          "Agent 可以运行本地脚本、测试或构建命令，观察真实输出。",
+          "涉及写入、删除、发布的命令必须走权限审批。"
+        ]
+      }
+    };
+
+    const skillData = {
+      review: {
+        title: "代码审查 Skill",
+        name: "review",
+        when: "用户要求 review、审查 PR 或评估风险",
+        loaded: "需要时读取完整 SKILL.md",
+        detail: "加载后，Agent 得到的是一套工作方法：先看 diff，再按严重程度列问题，最后补充测试风险。"
+      },
+      slides: {
+        title: "演示页 Skill",
+        name: "slide-deck",
+        when: "用户要生成 PPT、HTML 演讲稿或动态演示",
+        loaded: "加载版式、讲稿和验证要求",
+        detail: "加载后，Agent 会把内容拆成视觉页、讲稿、交互控件和验证流程，而不是只写一篇文章。"
+      },
+      debug: {
+        title: "系统排障 Skill",
+        name: "debug",
+        when: "用户报告错误、失败、异常或回归",
+        loaded: "加载系统化排障步骤",
+        detail: "加载后，Agent 先复现和收集证据，再定位根因，避免一看到报错就猜修复。"
+      },
+      wechat: {
+        title: "公众号发布 Skill",
+        name: "post-to-wechat",
+        when: "用户要发布公众号、图文或文章",
+        loaded: "加载发布渠道和格式规则",
+        detail: "加载后，Agent 知道如何转换 Markdown、处理外链引用、检查图片和调用发布流程。"
+      }
+    };
+
+    function setActiveWithin(container, selector, index) {
+      const items = Array.from(container.querySelectorAll(selector));
+      items.forEach((item, i) => item.classList.toggle("active", i === index));
+    }
+
+    function renderScript() {
+      const item = scripts[currentSlide] || scripts[0];
+      consoleTitle.textContent = speakerConsole.classList.contains("collapsed") ? "讲稿" : `讲稿 · ${String(currentSlide + 1).padStart(2, "0")} ${item.title}`;
+      consolePageCount.textContent = `${currentSlide + 1}/${scripts.length}`;
+      scriptBody.innerHTML = `<p>${item[scriptMode]}</p>`;
+      document.querySelectorAll("[data-script-mode]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.scriptMode === scriptMode);
+      });
+    }
+
+    function syncScriptToActiveSlide() {
+      const slides = Array.from(document.querySelectorAll("deck-stage > section"));
+      const activeIndex = slides.findIndex((slide) => slide.hasAttribute("data-deck-active"));
+      if (activeIndex >= 0) {
+        currentSlide = activeIndex;
+      }
+      renderScript();
+      window.postMessage({ slideIndexChanged: currentSlide }, "*");
+    }
+
+    deck.addEventListener("slidechange", (event) => {
+      currentSlide = event.detail.index;
+      renderScript();
+      window.postMessage({ slideIndexChanged: currentSlide }, "*");
+    });
+
+    document.querySelectorAll("[data-script-mode]").forEach((button) => {
+      button.addEventListener("click", () => {
+        scriptMode = button.dataset.scriptMode;
+        renderScript();
+      });
+    });
+
+    consoleToggle.addEventListener("click", () => {
+      speakerConsole.classList.toggle("collapsed");
+      consoleToggle.textContent = speakerConsole.classList.contains("collapsed") ? "∧" : "∨";
+      renderScript();
+    });
+
+    const loopEngineSteps = [
+      {
+        title: "目标",
+        copy: "输入变成任务目标。",
+        code: '用户：帮我写一份日报',
+        node: 0,
+        edges: [0]
+      },
+      {
+        title: "消息列表",
+        copy: "任务现场被保存。",
+        code: 'messages = [\n  { role: "user", content: "帮我写一份日报" }\n]',
+        node: 1,
+        edges: [0, 1]
+      },
+      {
+        title: "模型判断",
+        copy: "模型阅读历史，做出判断。",
+        code: '模型阅读消息历史\n判断：需要先收集今天做了什么\n返回：tool_call',
+        node: 2,
+        edges: [1, 2]
+      },
+      {
+        title: "是否使用文件工具",
+        copy: "判断是否读取或写入文件。",
+        code: 'need_tool = true\n使用文件读取工具：收集素材\n使用文件写入工具：保存日报',
+        node: 3,
+        edges: [2, 3]
+      },
+      {
+        title: "工具调用",
+        copy: "系统执行动作。",
+        code: 'tool_call: read_work_log\n输入：今天的任务记录\n输出：完成事项、阻塞、明日计划',
+        node: 4,
+        edges: [3, 4]
+      },
+      {
+        title: "观察结果",
+        copy: "结果回到现场。",
+        code: 'tool_result:\n完成 3 项需求评审\n修复 1 个线上问题\n明日继续联调\n\n结果追加到 messages',
+        node: 1,
+        edges: [4, 5, 1]
+      },
+      {
+        title: "返回结果",
+        copy: "目标完成，循环停止。",
+        code: 'LLM 再次判断：材料够了\nfinal answer:\n生成日报草稿',
+        node: 6,
+        edges: [1, 2, 6]
+      }
+    ];
+
+    let loopEngineStep = 0;
+    let loopEngineTimer = null;
+
+    function renderLoopEngine() {
+      const step = loopEngineSteps[loopEngineStep];
+      document.querySelectorAll("[data-loop-node]").forEach((node) => {
+        const isActive = Number(node.getAttribute("data-loop-node")) === step.node;
+        node.classList.toggle("active", isActive);
+        node.classList.toggle("dim", !isActive);
+      });
+      document.querySelectorAll("[data-loop-edge]").forEach((edge) => {
+        edge.classList.toggle("active", step.edges.includes(Number(edge.getAttribute("data-loop-edge"))));
+      });
+      document.getElementById("loopArtifactTitle").textContent = step.title;
+      document.getElementById("loopArtifactCopy").textContent = step.copy;
+      document.getElementById("loopArtifactCode").textContent = step.code;
+      document.getElementById("loopStepCounter").textContent = `${loopEngineStep + 1} / ${loopEngineSteps.length}`;
+    }
+
+    function stopLoopEngineAuto() {
+      if (loopEngineTimer) {
+        clearInterval(loopEngineTimer);
+        loopEngineTimer = null;
+      }
+      const autoButton = document.querySelector("[data-action='loop-engine-auto']");
+      if (autoButton) autoButton.textContent = "自动播放";
+    }
+
+    document.querySelector("[data-action='loop-engine-next']").addEventListener("click", () => {
+      stopLoopEngineAuto();
+      loopEngineStep = (loopEngineStep + 1) % loopEngineSteps.length;
+      renderLoopEngine();
+    });
+
+    document.querySelector("[data-action='loop-engine-reset']").addEventListener("click", () => {
+      stopLoopEngineAuto();
+      loopEngineStep = 0;
+      renderLoopEngine();
+    });
+
+    document.querySelector("[data-action='loop-engine-auto']").addEventListener("click", (event) => {
+      if (loopEngineTimer) {
+        stopLoopEngineAuto();
+        return;
+      }
+      event.currentTarget.textContent = "暂停";
+      loopEngineTimer = setInterval(() => {
+        loopEngineStep = (loopEngineStep + 1) % loopEngineSteps.length;
+        renderLoopEngine();
+      }, 1400);
+    });
+
+    const toolUseSteps = [
+      {
+        title: "目标进入消息列表",
+        call: "用户：帮我写一份日报",
+        reason: "目标进入 messages[] 消息列表",
+        result: "模型还没有调用工具。",
+        activeTool: "",
+        activeStep: 0
+      },
+      {
+        title: "模型判断需要查资料",
+        call: "LLM：我需要先找到今天的记录",
+        reason: "选择 glob，查找文件",
+        result: "tool_use: glob(pattern: \"*日报素材*\")",
+        activeTool: "glob",
+        activeStep: 1
+      },
+      {
+        title: "分发到读取工具",
+        call: "TOOL_HANDLERS[\"read_file\"]",
+        reason: "read_file，读取文件",
+        result: "读到：需求评审 3 项，线上问题 1 个，明日继续联调。",
+        activeTool: "read_file",
+        activeStep: 2
+      },
+      {
+        title: "分发到写入工具",
+        call: "TOOL_HANDLERS[\"write_file\"]",
+        reason: "write_file，写入文件",
+        result: "写入：daily-report.md 日报草稿。",
+        activeTool: "write_file",
+        activeStep: 2
+      },
+      {
+        title: "工具结果回到消息列表",
+        call: "tool_result -> messages[]",
+        reason: "结果回流，模型继续判断",
+        result: "模型看到日报已生成，返回最终结果。",
+        activeTool: "",
+        activeStep: 3
+      }
+    ];
+
+    let toolUseStep = 0;
+
+    function renderToolUse() {
+      const step = toolUseSteps[toolUseStep];
+      document.getElementById("toolUseTitle").textContent = step.title;
+      document.getElementById("toolUseStepCounter").textContent = `${toolUseStep + 1} / ${toolUseSteps.length}`;
+      document.getElementById("toolUseCall").textContent = step.call;
+      document.getElementById("toolUseReason").textContent = step.reason;
+      document.getElementById("toolUseResult").textContent = step.result;
+      document.querySelectorAll("[data-tool-option]").forEach((item) => {
+        item.classList.toggle("active", item.getAttribute("data-tool-option") === step.activeTool);
+      });
+      document.querySelectorAll("[data-tool-step]").forEach((item) => {
+        item.classList.toggle("active", Number(item.getAttribute("data-tool-step")) === step.activeStep);
+      });
+    }
+
+    document.querySelector("[data-action='tool-use-next']").addEventListener("click", () => {
+      toolUseStep = (toolUseStep + 1) % toolUseSteps.length;
+      renderToolUse();
+    });
+
+    document.querySelector("[data-action='tool-use-reset']").addEventListener("click", () => {
+      toolUseStep = 0;
+      renderToolUse();
+    });
+
+    // 第 4 页：权限页工具切换
+    document.querySelectorAll(".perm-tool").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".perm-tool").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        const data = permToolData[button.dataset.tool];
+        document.getElementById("permArtifactTitle").textContent = data.title;
+        document.getElementById("permArtifactCopy").textContent = data.copy;
+        document.getElementById("permArtifactCode").textContent = data.code;
+
+        const badge = document.getElementById("permRiskBadge");
+        badge.textContent = data.risk;
+        badge.dataset.risk = data.riskLevel;
+
+        // 高亮 SVG 三档分支
+        ["auto", "confirm", "block"].forEach((level) => {
+          const edge = document.getElementById("permEdge" + level.charAt(0).toUpperCase() + level.slice(1));
+          const node = document.getElementById("permNode" + level.charAt(0).toUpperCase() + level.slice(1));
+          if (edge) { edge.classList.toggle("active", level === data.highlightEdge); }
+          if (node) { node.classList.toggle("active", level === data.highlightEdge); }
+        });
+
+        // 高亮底部三色小标签
+        document.querySelectorAll(".mini-policy").forEach((m) => m.classList.remove("active"));
+        const target = document.querySelector(`.mini-policy[data-mini="${data.highlightEdge}"]`);
+        if (target) target.classList.add("active");
+      });
+    });
+
+    document.querySelector("[data-action='perm-reset']").addEventListener("click", () => {
+      document.querySelectorAll(".perm-tool").forEach((b) => b.classList.remove("active"));
+      document.querySelector('.perm-tool[data-tool="read"]').classList.add("active");
+      document.querySelector('.perm-tool[data-tool="read"]').click();
+    });
+
+        document.querySelectorAll("[data-tool]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-tool]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        const data = toolData[button.dataset.tool];
+        
+        // Update output panel
+        const riskEl = document.getElementById("toolRisk");
+        document.getElementById("toolTitle").textContent = data.title;
+        riskEl.textContent = data.risk;
+        riskEl.dataset.risk = data.riskLevel;
+        document.getElementById("toolReadout").innerHTML = data.copy.map((line) => `<p>${line}</p>`).join("");
+        
+        // Update flow step label
+        document.getElementById("flowToolStep").textContent = data.toolStep;
+        
+        // Update policy card highlights
+        document.querySelectorAll("[data-policy-level]").forEach((card) => {
+          card.classList.remove("is-active");
+        });
+        data.policyHighlight.forEach((level) => {
+          const card = document.querySelector(`[data-policy-level="${level}"]`);
+          if (card) card.classList.add("is-active");
+        });
+      });
+    });
+
+    let taskStep = 0;
+    const tasks = Array.from(document.querySelectorAll("#taskList .task"));
+    const progressLabel = document.getElementById("progressLabel");
+    const meterFill = document.getElementById("meterFill");
+
+    function renderTasks() {
+      tasks.forEach((task, index) => {
+        task.classList.toggle("done", index < taskStep);
+        task.classList.toggle("current", index === taskStep && taskStep < tasks.length);
+        task.querySelector(".check").textContent = index < taskStep ? "✓" : String(index + 1);
+        task.querySelector(".tag").textContent = index < taskStep ? "完成" : index === taskStep ? "当前" : "等待";
+      });
+      const progress = Math.round((taskStep / tasks.length) * 100);
+      progressLabel.textContent = `${progress}%`;
+      meterFill.style.setProperty("--progress", `${progress}%`);
+    }
+
+    document.querySelector("[data-action='task-next']").addEventListener("click", () => {
+      taskStep = Math.min(taskStep + 1, tasks.length);
+      renderTasks();
+    });
+
+    document.querySelector("[data-action='task-reset']").addEventListener("click", () => {
+      taskStep = 0;
+      renderTasks();
+    });
+
+    document.querySelectorAll("[data-skill]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-skill]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        const data = skillData[button.dataset.skill];
+        document.getElementById("skillTitle").textContent = data.title;
+        document.getElementById("skillName").textContent = data.name;
+        document.getElementById("skillWhen").textContent = data.when;
+        document.getElementById("skillLoaded").textContent = data.loaded;
+        document.getElementById("loadedSkill").textContent = data.detail;
+      });
+    });
+
+    document.querySelector("[data-action='compact-context']").addEventListener("click", () => {
+      document.querySelectorAll("#contextStream .context-line").forEach((line) => {
+        if (!line.classList.contains("keep")) line.style.opacity = "0.32";
+      });
+    });
+
+    document.querySelector("[data-action='highlight-memory']").addEventListener("click", () => {
+      document.querySelectorAll("#memorySlots .memory-slot").forEach((slot, index) => {
+        slot.style.background = index === 2
+          ? "color-mix(in oklch, var(--amber), white 84%)"
+          : "color-mix(in oklch, var(--green), white 88%)";
+      });
+    });
+
+    let teamStep = 0;
+    const teamClasses = ["research", "code", "test", "write"];
+    document.querySelector("[data-action='team-next']").addEventListener("click", () => {
+      document.querySelectorAll("#agentRing .avatar").forEach((avatar) => avatar.classList.remove("active"));
+      const activeClass = teamClasses[teamStep % teamClasses.length];
+      document.querySelector(`#agentRing .${activeClass}`).classList.add("active");
+      teamStep += 1;
+    });
+
+    document.querySelector("[data-action='team-reset']").addEventListener("click", () => {
+      teamStep = 0;
+      document.querySelectorAll("#agentRing .avatar").forEach((avatar) => avatar.classList.remove("active"));
+    });
+
+    let connectorStep = 1;
+    const connectors = Array.from(document.querySelectorAll("#connectorGrid .connector"));
+    document.querySelector("[data-action='connector-next']").addEventListener("click", () => {
+      connectors[Math.min(connectorStep, connectors.length - 1)].classList.add("active");
+      connectorStep = Math.min(connectorStep + 1, connectors.length);
+    });
+
+    renderLoopEngine();
+    renderToolUse();
+    renderTasks();
+    renderScript();
+    if (window.customElements && customElements.whenDefined) {
+      customElements.whenDefined("deck-stage").then(() => requestAnimationFrame(syncScriptToActiveSlide));
+    }
+    setTimeout(syncScriptToActiveSlide, 250);
+  </script>
+</body>
+</html>
