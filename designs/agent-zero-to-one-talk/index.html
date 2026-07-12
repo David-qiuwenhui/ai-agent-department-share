@@ -329,6 +329,274 @@
       color: rgba(255,255,255,0.62);
     }
 
+    .intro-page {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.048) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 73% 22%, rgba(32, 139, 107, 0.28), transparent 30%),
+        var(--dark);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .intro-page .num {
+      border-color: rgba(255,255,255,0.76);
+      background: rgba(255,255,255,0.92);
+      color: var(--dark);
+    }
+
+    .intro-page .tag {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .intro-page h2 {
+      max-width: 1320px;
+      font-size: 66px;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .intro-stage {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 42px;
+    }
+
+    .intro-compare {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) 140px minmax(0, 1.08fr);
+      gap: 28px;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .intro-card {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 26px;
+      min-height: 0;
+      padding: 34px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.9);
+      color: var(--ink);
+      box-shadow: 0 30px 86px rgba(0,0,0,0.2);
+      border-radius: var(--radius-md);
+    }
+
+    .intro-card.agent-mode {
+      border-color: rgba(80, 214, 164, 0.28);
+      background: linear-gradient(150deg, rgba(18, 49, 45, 0.98), rgba(21, 34, 48, 0.98));
+      color: rgba(255,255,255,0.92);
+    }
+
+    .intro-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 18px;
+    }
+
+    .intro-card h3 {
+      font-size: 38px;
+    }
+
+    .mode-chip {
+      min-height: 36px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 13px;
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--blue), white 84%);
+      color: oklch(0.34 0.095 231);
+      font-size: 16px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .agent-mode .mode-chip {
+      background: rgba(65, 213, 158, 0.16);
+      color: oklch(0.82 0.12 160);
+    }
+
+    .mode-flow {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .mode-step {
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 16px;
+      border: 1px solid color-mix(in oklch, var(--blue), white 68%);
+      background: color-mix(in oklch, var(--blue), white 91%);
+      border-radius: var(--radius-sm);
+    }
+
+    .mode-step b {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 20px;
+      border-radius: 50%;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mode-step span {
+      display: block;
+      font-size: 25px;
+      font-weight: 840;
+      line-height: 1.18;
+    }
+
+    .mode-step small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 720;
+      line-height: 1.35;
+    }
+
+    .agent-mode .mode-step {
+      border-color: rgba(95, 225, 171, 0.18);
+      background: rgba(255,255,255,0.075);
+    }
+
+    .agent-mode .mode-step b {
+      background: var(--green);
+    }
+
+    .agent-mode .mode-step small {
+      color: rgba(255,255,255,0.58);
+    }
+
+    .mode-foot {
+      min-height: 72px;
+      display: grid;
+      align-content: center;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--paper-2);
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.42;
+      font-weight: 760;
+    }
+
+    .agent-mode .mode-foot {
+      background: rgba(65, 213, 158, 0.12);
+      color: rgba(255,255,255,0.74);
+    }
+
+    .intro-pivot {
+      align-self: center;
+      display: grid;
+      grid-template-rows: 1fr auto 1fr;
+      justify-items: center;
+      min-height: 0;
+      color: rgba(255,255,255,0.74);
+      font-size: 20px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .pivot-line {
+      width: 2px;
+      min-height: 128px;
+      background: linear-gradient(rgba(255,255,255,0.04), rgba(255,255,255,0.42), rgba(255,255,255,0.04));
+    }
+
+    .pivot-mark {
+      width: 112px;
+      min-height: 112px;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      line-height: 1.26;
+      box-shadow: inset 0 0 0 10px rgba(255,255,255,0.04);
+    }
+
+    .intro-thread {
+      display: grid;
+      grid-template-columns: auto repeat(6, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+
+    .intro-thread strong,
+    .thread-item {
+      min-height: 56px;
+      display: grid;
+      place-items: center;
+      padding: 0 18px;
+      border-radius: var(--radius-sm);
+      font-size: 19px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .intro-thread strong {
+      background: rgba(255,255,255,0.9);
+      color: var(--dark);
+    }
+
+    .thread-item {
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.055);
+      color: rgba(255,255,255,0.68);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .intro-page[data-deck-active] .intro-card,
+      .intro-page[data-deck-active] .intro-pivot,
+      .intro-page[data-deck-active] .intro-thread {
+        animation: intro-rise 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      .intro-page[data-deck-active] .agent-mode {
+        animation-delay: 130ms;
+      }
+
+      .intro-page[data-deck-active] .intro-pivot {
+        animation-delay: 70ms;
+      }
+
+      .intro-page[data-deck-active] .intro-thread {
+        animation-delay: 260ms;
+      }
+
+      .intro-page[data-deck-active] .mode-step {
+        animation: intro-step-in 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      .intro-page[data-deck-active] .mode-step:nth-child(1) { animation-delay: 180ms; }
+      .intro-page[data-deck-active] .mode-step:nth-child(2) { animation-delay: 260ms; }
+      .intro-page[data-deck-active] .mode-step:nth-child(3) { animation-delay: 340ms; }
+      .intro-page[data-deck-active] .mode-step:nth-child(4) { animation-delay: 420ms; }
+    }
+
+    @keyframes intro-rise {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes intro-step-in {
+      from { opacity: 0; transform: translateX(-18px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
     .runtime {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
@@ -1211,6 +1479,27 @@
       min-width: 0;
       min-height: 0;
       overflow: hidden;
+    }
+
+    .todo-empty {
+      min-height: 194px;
+      display: none;
+      place-items: center;
+      border: 1px dashed oklch(0.72 0.02 247);
+      background: oklch(0.965 0.006 82);
+      border-radius: var(--radius-sm);
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 780;
+      text-align: center;
+    }
+
+    .todo-list.is-empty .todo-empty {
+      display: grid;
+    }
+
+    .todo-list.is-empty .todo-item {
+      display: none;
     }
 
     .todo-item {
@@ -2516,6 +2805,85 @@
 </head>
 <body>
   <deck-stage width="1920" height="1080" no-rail>
+    <section class="intro-page" data-label="00 Chat vs Agent" data-speaker-notes="这一页作为专题引入。先不要急着讲技术细节，只建立一个直觉：Chat 模式更像一次问答，Agent 模式是围绕目标持续推进。后面所有页面，都是在拆这个持续推进到底由哪些工程能力支撑。">
+      <div class="intro-stage">
+        <header class="slide-head">
+          <div class="num">00</div>
+          <div>
+            <span class="kicker">专题引入</span>
+            <h2>Chat 是一次回答，Agent 是一段可推进的任务过程</h2>
+          </div>
+          <span class="tag">从使用体验进入工程结构</span>
+        </header>
+
+        <div class="intro-compare">
+          <article class="intro-card chat-mode">
+            <div class="intro-card-head">
+              <h3>Chat 模式</h3>
+              <span class="mode-chip">你问，我答</span>
+            </div>
+            <div class="mode-flow">
+              <div class="mode-step">
+                <b>1</b>
+                <div><span>描述问题</span><small>把上下文一次性交给模型</small></div>
+              </div>
+              <div class="mode-step">
+                <b>2</b>
+                <div><span>得到回答</span><small>解释、总结、生成一段内容</small></div>
+              </div>
+              <div class="mode-step">
+                <b>3</b>
+                <div><span>人决定下一步</span><small>继续追问、复制结果、手动执行</small></div>
+              </div>
+            </div>
+            <p class="mode-foot">擅长把话说清楚；任务推进仍主要靠人接力。</p>
+          </article>
+
+          <div class="intro-pivot">
+            <div class="pivot-line"></div>
+            <div class="pivot-mark">差异不在<br>模型名字</div>
+            <div class="pivot-line"></div>
+          </div>
+
+          <article class="intro-card agent-mode">
+            <div class="intro-card-head">
+              <h3>Agent 模式</h3>
+              <span class="mode-chip">给目标，跑闭环</span>
+            </div>
+            <div class="mode-flow">
+              <div class="mode-step">
+                <b>1</b>
+                <div><span>理解目标</span><small>把“要达成什么”放进任务现场</small></div>
+              </div>
+              <div class="mode-step">
+                <b>2</b>
+                <div><span>选择行动</span><small>读资料、调工具、拆计划、请求确认</small></div>
+              </div>
+              <div class="mode-step">
+                <b>3</b>
+                <div><span>观察结果</span><small>把工具输出带回上下文继续判断</small></div>
+              </div>
+              <div class="mode-step">
+                <b>4</b>
+                <div><span>调整并收束</span><small>反复推进，直到结果可交付</small></div>
+              </div>
+            </div>
+            <p class="mode-foot">价值不是“更会聊天”，而是让复杂工作变成可观察、可控制的循环。</p>
+          </article>
+        </div>
+
+        <div class="intro-thread">
+          <strong>接下来拆开</strong>
+          <span class="thread-item">Loop</span>
+          <span class="thread-item">Tool Use</span>
+          <span class="thread-item">Permission</span>
+          <span class="thread-item">Todo</span>
+          <span class="thread-item">Context</span>
+          <span class="thread-item">Subagent</span>
+        </div>
+      </div>
+    </section>
+
     <section class="loop-engineering-page" data-label="Loop Engineering" data-speaker-notes="这一页先讲 Loop Engineering。大模型不是一次性把任务做完，而是在一个循环里不断读取上下文、决定是否调用工具、观察结果，再回到上下文，直到模型判断目标已经完成。">
       <div class="loop-engineering">
         <header class="slide-head">
@@ -2626,42 +2994,10 @@
       </div>
     </section>
 
-    <section data-label="Chatbot vs Agent" data-speaker-notes="先把直觉建立起来。Chatbot 是一次问答，用户问，模型答。Agent 的区别不是回答更长，而是它会围绕目标持续行动，观察结果，然后决定下一步。">
-      <div class="slide-grid">
-        <header class="slide-head">
-          <div class="num">02</div>
-          <div>
-            <h2>Agent 不是更会聊天，而是能围绕目标形成闭环</h2>
-          </div>
-          <span class="tag">从问答到推进</span>
-        </header>
-        <div class="comparison">
-          <div class="compare-panel">
-            <h3>Chat AI：一次问答</h3>
-            <div class="flow-strip" id="chatFlow">
-              <div class="pill-node is-hot" style="--node: var(--blue);"><i>1</i><span>用户提问</span></div>
-              <div class="pill-node" style="--node: var(--blue);"><i>2</i><span>模型回答</span></div>
-            </div>
-            <p class="panel-foot">适合解释、总结、生成文本。路径短，结果主要依赖问题描述。</p>
-          </div>
-          <div class="compare-panel agent">
-            <h3>Agent：持续推进</h3>
-            <div class="flow-strip" id="agentFlow">
-              <div class="pill-node is-hot" style="--node: var(--green);"><i>1</i><span>理解目标</span></div>
-              <div class="pill-node" style="--node: var(--green);"><i>2</i><span>选择行动</span></div>
-              <div class="pill-node" style="--node: var(--green);"><i>3</i><span>观察结果</span></div>
-              <div class="pill-node" style="--node: var(--green);"><i>4</i><span>调整策略</span></div>
-            </div>
-            <p class="panel-foot">适合信息不完整、需要查证、需要多步推进的任务。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section data-label="Tool Use" data-speaker-notes="这一页是在 Agent Loop 上加工具。核心循环没有变，变化只是当模型判断需要工具时，系统根据工具名分发到对应处理器。对非技术同事来说，可以把 TOOL_HANDLERS 理解成工具分发表。">
       <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">03</div>
+          <div class="num">02</div>
           <div>
             <h2>Tool Use：循环不变，只加工具分发</h2>
           </div>
@@ -2776,7 +3112,7 @@
     <section class="permission-stage-page" data-label="工具和边界" data-speaker-notes="第二步是给 Agent 手和脚。工具越多，能力越大，但风险也越大。所以工具层通常要和权限层一起讲：会做什么，以及什么情况下不能自己做。">
       <div class="permission-stage">
         <header class="slide-head">
-          <div class="num">04</div>
+          <div class="num">03</div>
           <div>
             <span class="kicker">Tool + Permission</span>
             <h2>工具让 Agent 能动手，权限决定它能动到哪里</h2>
@@ -2907,7 +3243,7 @@ result: 字段口径已确认</pre>
     <section class="todo-stage-page" data-label="TodoWrite" data-speaker-notes="这一页讲 TodoWrite。复杂任务如果没有外显计划，Agent 很容易被最新的工具结果带偏。TodoWrite 把计划变成可观察状态，还能通过提醒机制把模型拉回原始目标。">
       <div class="todo-stage">
         <header class="slide-head">
-          <div class="num">05</div>
+          <div class="num">04</div>
           <div>
             <span class="kicker">s05 TodoWrite</span>
             <h2>没有计划的 Agent，做着做着就偏了</h2>
@@ -2995,9 +3331,9 @@ result: 字段口径已确认</pre>
             <div class="todo-demo-head">
               <div>
                 <h3 id="todoNarrativeTitle">复杂任务进入循环</h3>
-                <p id="todoNarrativeCopy">目标很长，先不要急着改文件。</p>
+                <p id="todoNarrativeCopy">没有 TODO 时，目标只压在 messages 里。</p>
               </div>
-              <div class="step-counter" id="todoStepCounter">1 / 5</div>
+              <div class="step-counter" id="todoStepCounter">1 / 7</div>
             </div>
             <div class="todo-demo-main">
               <pre class="todo-code" id="todoArtifactCode">用户：把所有 Python 文件改成 snake_case，然后跑测试，修好失败。</pre>
@@ -3006,6 +3342,10 @@ result: 字段口径已确认</pre>
                 <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
               </div>
               <div class="todo-list" id="taskList">
+                <div class="todo-empty">
+                  TODO 尚未创建<br>
+                  目标只在 messages[] 里
+                </div>
                 <div class="todo-item current">
                   <div class="check">1</div>
                   <strong>列出 Python 文件</strong>
@@ -3040,7 +3380,7 @@ result: 字段口径已确认</pre>
     <section data-label="Skill 按需加载" data-speaker-notes="很多人会把 Skill 理解成提示词模板，但它更像专项操作手册。最重要的是按需加载：先让 Agent 知道有哪些技能，真正需要时再展开完整说明。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">06</div>
+            <div class="num">05</div>
           <div>
             <h2>Skill 不是把所有知识塞进 prompt，而是按需打开说明书</h2>
           </div>
@@ -3074,7 +3414,7 @@ result: 字段口径已确认</pre>
     <section data-label="上下文和记忆" data-speaker-notes="Context 和 Memory 经常被混在一起。Context 是这次任务现场，Memory 是跨会话保留的长期事实。Context 要会压缩，Memory 要会筛选，不能什么都记。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">07</div>
+            <div class="num">06</div>
           <div>
             <h2>Context 管这次任务现场，Memory 管长期有用事实</h2>
           </div>
@@ -3108,7 +3448,7 @@ result: 字段口径已确认</pre>
     <section data-label="Subagent 协作" data-speaker-notes="当任务变大，单个上下文会变脏，也会很慢。Subagent 的价值是隔离上下文。主 Agent 只派任务，子 Agent 自己查、自己做，最后把结论带回来。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">08</div>
+            <div class="num">07</div>
           <div>
             <h2>大任务拆小，每个子 Agent 带着干净上下文去完成一件事</h2>
           </div>
@@ -3141,7 +3481,7 @@ result: 字段口径已确认</pre>
     <section data-label="外部系统和长期运行" data-speaker-notes="再往后，Agent 不只是一次会话里的助手，而是可以接外部系统、后台运行、定时触发。MCP 可以理解成把外部能力接进统一工具池的一种方式。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">09</div>
+            <div class="num">08</div>
           <div>
             <h2>接入外部能力后，Agent 从会话工具变成任务系统</h2>
           </div>
@@ -3171,7 +3511,7 @@ result: 字段口径已确认</pre>
     <section data-label="完整路径" data-speaker-notes="最后收束。最小 Agent 很小，一个循环加一个工具就够了。真正可用的 Agent 不是另一个更神秘的东西，而是在这个循环外逐步补齐这些 Harness 能力。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">10</div>
+            <div class="num">09</div>
           <div>
             <h2>机制很多，核心循环只有一个</h2>
           </div>
@@ -3224,16 +3564,16 @@ result: 字段口径已确认</pre>
 
     const scripts = [
       {
-        title: "Loop Engineering",
-        beginner: "先看这张动态图。AI 做事不是一次性完成，而是一圈一圈地推进：先看目标和现场，再想下一步，要工具就调用工具，工具结果回来以后再想一次。什么时候停？当模型判断目标已经完成，就返回结果。",
-        technical: "这里的 Loop Engineering 可以理解为 Agent 的运行骨架。messages 是任务现场，LLM 负责判断 stop_reason。如果需要工具，就产生 tool_call，系统执行后把 tool_result 追加回 messages，再进入下一轮。",
-        business: "这页想传达一个直觉：Agent 不是一个神奇按钮，而是一种循环推进任务的机制。只要我们能看见每轮的目标、判断、行动和结果，就能管理它、优化它，也能解释它为什么这么做。"
+        title: "Chat vs Agent",
+        beginner: "我们先从大家最熟悉的 Chat 开始。Chat 模式更像一次问答：你把问题说清楚，它给你一个回答。Agent 的变化，是它拿到一个目标以后，会自己判断下一步、调用工具、观察结果，再继续推进。",
+        technical: "从运行结构看，Chat 通常是一轮 completion。Agent 是多轮循环，模型输出里可能包含 tool_use，Harness 执行工具，把 tool_result 追加回 messages，然后继续请求模型。",
+        business: "这页想先建立兴趣点：Agent 的价值不是把回答写得更长，而是把一个需要多步推进的工作，变成可观察、可控制、可交付的任务过程。后面我们就拆它背后的 Loop、工具、权限、计划和上下文。"
       },
       {
-        title: "Chatbot vs Agent",
-        beginner: "Chatbot 更像你问我答。你问一个问题，它给一个回答。Agent 的关键变化是，它拿到目标以后，会自己判断要不要查资料、调用工具、继续验证，直到任务有一个结果。",
-        technical: "从运行结构看，Chatbot 通常是一轮 completion。Agent 是多轮循环，模型输出里可能包含 tool_use，Harness 执行工具，把 tool_result 追加回 messages，然后继续请求模型。",
-        business: "对业务价值来说，这个区别很重要。问答适合知识解释，Agent 适合处理需要多步推进的工作，比如对比流程、生成材料、排查问题、整理结论。"
+        title: "Loop Engineering",
+        beginner: "现在把刚才的 Agent 模式拆开看。AI 做事不是一次性完成，而是一圈一圈地推进：先看目标和现场，再想下一步，要工具就调用工具，工具结果回来以后再想一次。什么时候停？当模型判断目标已经完成，就返回结果。",
+        technical: "这里的 Loop Engineering 可以理解为 Agent 的运行骨架。messages 是任务现场，LLM 负责判断 stop_reason。如果需要工具，就产生 tool_call，系统执行后把 tool_result 追加回 messages，再进入下一轮。",
+        business: "这页把第 0 页的直觉落到结构上：Agent 不是一个神奇按钮，而是一种循环推进任务的机制。只要我们能看见每轮的目标、判断、行动和结果，就能管理它、优化它，也能解释它为什么这么做。"
       },
       {
         title: "Tool Use",
@@ -3674,64 +4014,77 @@ result: 字段口径已确认</pre>
     const todoFrames = [
       {
         title: "复杂任务进入循环",
-        copy: "目标很长，先不要急着改文件。",
+        copy: "没有 TODO 时，目标只压在 messages 里。",
         code: "用户：把所有 Python 文件改成 snake_case，然后跑测试，修好失败。",
-        completed: 0,
-        current: 0,
-        drift: []
+        progress: 0,
+        empty: true,
+        states: ["current", "waiting", "waiting", "waiting"]
       },
       {
         title: "先写 TODO",
-        copy: "todo_write 把 10 步重构压成可见清单。",
+        copy: "先把长任务拆成可见检查点。",
         code: "tool: todo_write\n1. 列出 Python 文件\n2. 统一 snake_case 命名\n3. 运行测试\n4. 修复失败并回查命名",
-        completed: 0,
-        current: 0,
-        drift: []
+        progress: 0,
+        states: ["current", "waiting", "waiting", "waiting"]
       },
       {
-        title: "工具结果开始变多",
-        copy: "改了几个文件，测试失败开始抢注意力。",
-        code: "result: renamed 3 files\npytest: 2 failed\ncontext: 错误日志不断追加到 messages[]",
-        completed: 3,
-        current: 3,
-        drift: []
+        title: "开始执行命名",
+        copy: "先找文件，再逐个改成 snake_case。",
+        code: "tool_result:\nfound: 12 Python files\nrenamed: 3 / 12 files\nnext: 继续完成命名",
+        progress: 25,
+        states: ["done", "current", "waiting", "waiting"]
       },
       {
-        title: "注意力被测试失败吸走",
-        copy: "如果不看计划，模型容易忘记 snake_case 这个原始目标。",
+        title: "提前跑测试，注意力被抢走",
+        copy: "测试失败很抢眼，但命名还没做完。",
+        code: "tool_result:\npytest: 2 failed\n风险：snake_case 只完成 3 / 12，模型开始盯着报错",
+        progress: 25,
+        states: ["done", "drift", "current", "waiting"]
+      },
+      {
+        title: "提醒它回到计划",
+        copy: "Nag Reminder 把注意力拉回 TODO。",
         code: "reminder: Update your todos.\n系统：你已经多轮没有更新 todo_write，先回到计划。",
-        completed: 3,
-        current: 3,
-        drift: [1]
+        progress: 25,
+        states: ["done", "current", "waiting", "waiting"]
+      },
+      {
+        title: "先补完命名，再修失败",
+        copy: "任务顺序恢复，不再边改名边修测试。",
+        code: "tool_result:\nrenamed: 12 / 12 files\npytest: 2 failed\nnext: 现在再修失败并回查命名",
+        progress: 75,
+        states: ["done", "done", "done", "current"]
       },
       {
         title: "回到计划完成收尾",
         copy: "修测试后再回查命名，避免只修失败、不收目标。",
         code: "tool: todo_write\nstep 4: completed\nresult: snake_case 检查通过，测试通过",
-        completed: 4,
-        current: 3,
-        drift: []
+        progress: 100,
+        states: ["done", "done", "done", "done"]
       }
     ];
 
     let taskStep = 0;
     const tasks = Array.from(document.querySelectorAll("#taskList .todo-item"));
+    const taskList = document.getElementById("taskList");
     const progressLabel = document.getElementById("progressLabel");
     const meterFill = document.getElementById("meterFill");
 
     function renderTasks() {
       const frame = todoFrames[taskStep];
+      if (taskList) taskList.classList.toggle("is-empty", Boolean(frame.empty));
       tasks.forEach((task, index) => {
-        const done = index < frame.completed;
-        const current = index === frame.current && frame.completed < tasks.length;
-        const drift = frame.drift.includes(index);
+        const state = frame.states[index] || "waiting";
+        const done = state === "done";
+        const current = state === "current";
+        const drift = state === "drift";
         task.classList.toggle("done", done);
         task.classList.toggle("current", current);
         task.classList.toggle("drift", drift);
-        task.querySelector(".check").textContent = done ? "✓" : String(index + 1);
+        task.querySelector(".check").textContent = done ? "✓" : drift ? "!" : String(index + 1);
         task.querySelector(".tag").textContent = drift ? "偏航" : done ? "完成" : current ? "当前" : "等待";
       });
-      const progress = Math.round((frame.completed / tasks.length) * 100);
+      const progress = frame.progress;
       if (progressLabel) progressLabel.textContent = `${progress}%`;
       if (meterFill) meterFill.style.setProperty("--progress", `${progress}%`);
       document.getElementById("todoNarrativeTitle").textContent = frame.title;
