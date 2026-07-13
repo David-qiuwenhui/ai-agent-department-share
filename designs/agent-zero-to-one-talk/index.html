@@ -3043,6 +3043,309 @@
       background: rgba(65, 213, 158, 0.15);
     }
 
+    .subagent-page {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.048) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 78% 18%, rgba(118, 73, 229, 0.26), transparent 30%),
+        var(--dark);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .subagent-page .num {
+      border-color: rgba(255,255,255,0.76);
+      background: rgba(255,255,255,0.92);
+      color: var(--dark);
+    }
+
+    .subagent-page .kicker {
+      border-color: rgba(229, 216, 255, 0.75);
+      background: oklch(0.91 0.04 292);
+      color: oklch(0.38 0.11 292);
+    }
+
+    .subagent-page .tag {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .subagent-page h2 {
+      max-width: 1240px;
+      color: rgba(255,255,255,0.96);
+      font-size: 58px;
+      line-height: 1.08;
+    }
+
+    .subagent-subtitle {
+      margin-top: 12px;
+      max-width: 1160px;
+      color: rgba(255,255,255,0.64);
+      font-size: 24px;
+      line-height: 1.42;
+    }
+
+    .subagent-map {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) 132px minmax(0, 1fr);
+      gap: 22px;
+      height: 100%;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .agent-domain {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 20px;
+      min-height: 0;
+      padding: 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.92);
+      color: var(--ink);
+      box-shadow: 0 30px 86px rgba(0,0,0,0.2);
+    }
+
+    .agent-domain.sub {
+      border-color: rgba(150, 111, 255, 0.45);
+      background: linear-gradient(150deg, rgba(32, 24, 54, 0.98), rgba(27, 35, 58, 0.98));
+      color: rgba(255,255,255,0.92);
+    }
+
+    .agent-domain h3 {
+      font-size: 36px;
+      text-align: center;
+    }
+
+    .parent-flow {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 20px;
+      min-height: 0;
+    }
+
+    .agent-row {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .flow-arrow-text {
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: 26px;
+      font-weight: 900;
+    }
+
+    .agent-block,
+    .tool-handler,
+    .sub-block {
+      min-height: 82px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      padding: 14px 18px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: oklch(0.98 0.012 231);
+      text-align: center;
+    }
+
+    .agent-block strong,
+    .tool-handler strong,
+    .sub-block strong {
+      font-size: 25px;
+      line-height: 1.12;
+    }
+
+    .agent-block span,
+    .tool-handler span,
+    .sub-block span {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 740;
+      line-height: 1.25;
+    }
+
+    .parent-tools {
+      display: grid;
+      gap: 16px;
+      padding: 22px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: oklch(0.955 0.024 231);
+    }
+
+    .parent-tools h4 {
+      margin: 0;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .tool-handler.subspawn {
+      border-color: var(--violet);
+      background: oklch(0.95 0.035 292);
+      color: oklch(0.38 0.11 292);
+    }
+
+    .tool-result-return {
+      justify-self: end;
+      width: 360px;
+      min-height: 74px;
+      display: grid;
+      align-content: center;
+      padding: 14px 22px;
+      border: 2px solid var(--green);
+      border-radius: var(--radius-sm);
+      background: oklch(0.94 0.04 160);
+      color: oklch(0.32 0.085 160);
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .subagent-bridge {
+      display: grid;
+      grid-template-rows: 1fr auto 1fr auto 1fr;
+      justify-items: stretch;
+      align-items: center;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .bridge-line {
+      width: 2px;
+      height: 100%;
+      justify-self: center;
+      background: linear-gradient(rgba(255,255,255,0.04), rgba(255,255,255,0.42), rgba(255,255,255,0.04));
+    }
+
+    .bridge-pill {
+      min-height: 48px;
+      display: grid;
+      place-items: center;
+      padding: 0 14px;
+      border: 2px solid var(--pill-color);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--pill-color), white 91%);
+      color: color-mix(in oklch, var(--pill-color), black 28%);
+      font-size: 19px;
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.18;
+    }
+
+    .sub-flow {
+      display: grid;
+      grid-template-rows: auto 1fr auto auto;
+      gap: 18px;
+      min-height: 0;
+    }
+
+    .sub-top {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .sub-block {
+      border-color: var(--violet);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .sub-block span {
+      color: rgba(255,255,255,0.58);
+    }
+
+    .sub-loop-box {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      min-height: 170px;
+      padding: 24px;
+      border: 2px dashed var(--violet);
+      border-radius: var(--radius-md);
+      background: rgba(126, 78, 229, 0.09);
+      text-align: center;
+    }
+
+    .sub-loop-box strong {
+      font-size: 29px;
+      color: oklch(0.78 0.13 292);
+    }
+
+    .sub-loop-box span {
+      color: rgba(255,255,255,0.68);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .sub-loop-box small {
+      color: rgba(255,255,255,0.42);
+      font-size: 18px;
+      font-weight: 760;
+    }
+
+    .discard-box,
+    .summary-box {
+      min-height: 70px;
+      display: grid;
+      place-items: center;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.28;
+    }
+
+    .discard-box {
+      border: 2px dashed var(--red);
+      background: rgba(195, 64, 42, 0.11);
+      color: oklch(0.76 0.12 25);
+    }
+
+    .summary-box {
+      border: 2px solid var(--green);
+      background: rgba(65, 213, 158, 0.14);
+      color: oklch(0.82 0.115 160);
+    }
+
+    .subagent-legend {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-self: end;
+      margin-top: 18px;
+    }
+
+    .legend-line {
+      min-height: 58px;
+      display: grid;
+      align-content: center;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.68);
+      font-size: 20px;
+      font-weight: 780;
+    }
+
+    .legend-line strong {
+      color: var(--legend-color);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -3699,34 +4002,71 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section data-label="Subagent 协作" data-speaker-notes="当任务变大，单个上下文会变脏，也会很慢。Subagent 的价值是隔离上下文。主 Agent 只派任务，子 Agent 自己查、自己做，最后把结论带回来。">
+    <section class="subagent-page" data-label="Subagent 协作" data-speaker-notes="这一页讲 Subagent 的核心机制。Parent Agent 不把完整对话历史交给子 Agent，而是只传一个 task 描述。Subagent 拿到的是全新的 messages[]，自己跑一段独立 loop，中间几十轮工具调用都不会污染 Parent。最后只提取摘要或最终文本，作为 tool_result 回到 Parent 的 messages[]。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">07</div>
+          <div class="num">07</div>
           <div>
-            <h2>大任务拆小，每个子 Agent 带着干净上下文去完成一件事</h2>
+            <span class="kicker">Subagent</span>
+            <h2>子 Agent 用独立 messages[]，只把最终摘要带回来</h2>
+            <p class="subagent-subtitle">Parent 只派发 task 描述；Subagent 自己循环、自己调用工具，中间过程不污染主上下文。</p>
           </div>
-          <span class="tag">s06 Subagent + s15 Agent Teams</span>
+          <span class="tag">07 / 上下文隔离</span>
         </header>
-        <div class="team-board">
-          <div class="agent-ring" id="agentRing">
-            <div class="avatar main">主 Agent</div>
-            <div class="avatar research" style="--avatar-color: var(--green);">资料<br>研究</div>
-            <div class="avatar code" style="--avatar-color: var(--amber);">代码<br>实现</div>
-            <div class="avatar test" style="--avatar-color: var(--violet);">验证<br>测试</div>
-            <div class="avatar write" style="--avatar-color: var(--red);">总结<br>输出</div>
+
+        <div class="subagent-map">
+          <article class="agent-domain parent">
+            <h3>Parent Agent</h3>
+            <div class="parent-flow">
+              <div class="agent-row">
+                <div class="agent-block"><strong>messages[]</strong><span>主任务现场</span></div>
+                <div class="flow-arrow-text">-></div>
+                <div class="agent-block"><strong>LLM</strong><span>判断是否 tool_use</span></div>
+              </div>
+
+              <div class="parent-tools">
+                <h4>TOOL_HANDLERS</h4>
+                <div class="tool-grid">
+                  <div class="tool-handler"><strong>基础工具</strong><span>bash / read / write / edit / glob</span></div>
+                  <div class="tool-handler subspawn"><strong>task -> spawn</strong><span>创建子 Agent</span></div>
+                </div>
+              </div>
+
+              <div class="tool-result-return">tool_result<br><span>append messages[]</span></div>
+            </div>
+          </article>
+
+          <div class="subagent-bridge">
+            <div class="bridge-line"></div>
+            <div class="bridge-pill" style="--pill-color: var(--violet);">1 task 描述</div>
+            <div class="bridge-line"></div>
+            <div class="bridge-pill" style="--pill-color: var(--green);">2 summary</div>
+            <div class="bridge-line"></div>
           </div>
-          <div class="team-panel">
-            <h3>异步邮箱式协作</h3>
-            <div class="mailbox" id="mailbox">
-              <div class="mail"><strong>主 Agent -> 资料研究：</strong>请整理 learn-claude-code 的章节能力层级。</div>
-              <div class="mail"><strong>资料研究 -> 主 Agent：</strong>已提炼 10 层能力，并标注章节来源。</div>
-              <div class="mail"><strong>主 Agent -> 验证测试：</strong>请检查 HTML 演示是否能切换讲稿和翻页。</div>
+
+          <article class="agent-domain sub">
+            <h3>Subagent（全新上下文）</h3>
+            <div class="sub-flow">
+              <div class="sub-top">
+                <div class="sub-block"><strong>messages = [task]</strong><span>fresh，不继承父对话</span></div>
+                <div class="flow-arrow-text">-></div>
+                <div class="sub-block"><strong>LLM</strong><span>独立判断下一步</span></div>
+              </div>
+
+              <div class="sub-loop-box">
+                <strong>自己的 while 循环（最多 30 轮）</strong>
+                <span>bash · read · write · edit · glob</span>
+                <small>无 task -> 禁止递归 spawn</small>
+              </div>
+
+              <div class="discard-box">中间 30+ 轮工具调用 + 结果<br>全部丢弃</div>
+              <div class="summary-box">只提取最后一段文本 -> 返回给 Parent</div>
             </div>
-            <div class="inline-actions">
-              <button class="ghost-btn" type="button" data-action="team-next">派发下一位</button>
-              <button class="ghost-btn" type="button" data-action="team-reset">重置</button>
-            </div>
+          </article>
+
+          <div class="subagent-legend">
+            <div class="legend-line" style="--legend-color: oklch(0.78 0.13 292);"><strong>s05 保留：</strong>循环、hook、todo_write、基础工具</div>
+            <div class="legend-line" style="--legend-color: oklch(0.82 0.115 160);"><strong>s06 新增：</strong>task 工具 + spawn_subagent()，独立 messages[]，只回传摘要</div>
           </div>
         </div>
       </div>
@@ -3861,9 +4201,9 @@ result: 字段口径已确认</pre>
       },
       {
         title: "Subagent 协作",
-        beginner: "一个 Agent 做大任务会累，也会把上下文弄得很乱。子 Agent 就像临时小组成员，各自处理一块，最后把结果交给主人。",
-        technical: "Subagent 的核心是 fresh messages，也就是上下文隔离。主 Agent 传入任务说明，子 Agent 独立执行，返回压缩后的结果。团队模式再加持久化身份、邮箱和协议。",
-        business: "这就像把一个复杂项目拆给研究、执行、测试、总结几个角色。好处是并行、清晰，而且每个人只带回结论，不把全部过程都塞给主线。"
+        beginner: "Subagent 可以理解成把一小段任务交给一个新的助手。它不会继承主对话的所有历史，只拿到 task 描述，然后自己查资料、调用工具、整理结果。中间过程不带回来，最后只把摘要交给主人。",
+        technical: "Subagent 的核心是 fresh messages。Parent 调用 task 工具时，只传 task description；子 Agent 建立 messages = [task]，独立跑自己的 loop。中间 30 轮工具调用和结果都丢弃，只把 extract_text 或 summary 作为 tool_result 回到 Parent。",
+        business: "对团队任务来说，这相当于让主流程保持干净。研究、验证、总结可以交给子任务完成，但主 Agent 只接收可用结论，不被所有中间日志淹没。"
       },
       {
         title: "外部系统和长期运行",
@@ -4386,17 +4726,24 @@ result: 字段口径已确认</pre>
 
     let teamStep = 0;
     const teamClasses = ["research", "code", "test", "write"];
-    document.querySelector("[data-action='team-next']").addEventListener("click", () => {
-      document.querySelectorAll("#agentRing .avatar").forEach((avatar) => avatar.classList.remove("active"));
-      const activeClass = teamClasses[teamStep % teamClasses.length];
-      document.querySelector(`#agentRing .${activeClass}`).classList.add("active");
-      teamStep += 1;
-    });
+    const teamNextButton = document.querySelector("[data-action='team-next']");
+    const teamResetButton = document.querySelector("[data-action='team-reset']");
+    if (teamNextButton) {
+      teamNextButton.addEventListener("click", () => {
+        document.querySelectorAll("#agentRing .avatar").forEach((avatar) => avatar.classList.remove("active"));
+        const activeClass = teamClasses[teamStep % teamClasses.length];
+        const activeAvatar = document.querySelector(`#agentRing .${activeClass}`);
+        if (activeAvatar) activeAvatar.classList.add("active");
+        teamStep += 1;
+      });
+    }
 
-    document.querySelector("[data-action='team-reset']").addEventListener("click", () => {
-      teamStep = 0;
-      document.querySelectorAll("#agentRing .avatar").forEach((avatar) => avatar.classList.remove("active"));
-    });
+    if (teamResetButton) {
+      teamResetButton.addEventListener("click", () => {
+        teamStep = 0;
+        document.querySelectorAll("#agentRing .avatar").forEach((avatar) => avatar.classList.remove("active"));
+      });
+    }
 
     let connectorStep = 1;
     const connectors = Array.from(document.querySelectorAll("#connectorGrid .connector"));
