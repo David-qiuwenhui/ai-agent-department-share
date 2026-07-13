@@ -1640,15 +1640,40 @@
       transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .skill-stage {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 34px;
-      height: 100%;
+    .skill-loading-page {
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.045) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 82% 22%, rgba(38, 102, 226, 0.14), transparent 32%),
+        var(--paper);
     }
 
-    .skill-list,
-    .skill-detail,
+    .skill-loading-page .kicker {
+      border-color: color-mix(in oklch, var(--green), white 38%);
+      background: color-mix(in oklch, var(--green), white 88%);
+      color: oklch(0.32 0.085 160);
+    }
+
+    .skill-subtitle {
+      margin-top: 12px;
+      max-width: 1180px;
+      color: var(--muted);
+      font-size: 26px;
+      line-height: 1.46;
+      text-wrap: pretty;
+    }
+
+    .skill-stage {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 30px;
+      height: 100%;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .skill-arch,
+    .skill-live,
     .memory-panel,
     .team-panel,
     .connector-panel,
@@ -1659,54 +1684,403 @@
       box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
     }
 
-    .skill-list {
+    .skill-arch {
       display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 22px;
-    }
-
-    .skill-detail {
-      display: grid;
-      grid-template-rows: auto auto 1fr;
-      gap: 26px;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
       min-height: 0;
     }
 
-    .skill-manifest {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .skill-arch-head,
+    .skill-live-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 18px;
     }
 
-    .manifest-item {
-      min-height: 126px;
-      padding: 20px;
-      background: var(--paper);
+    .skill-arch-head h3,
+    .skill-live-head h3 {
+      font-size: 30px;
+    }
+
+    .skill-mini-tag {
+      min-height: 38px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 14px;
+      border: 1px solid color-mix(in oklch, var(--green), white 28%);
       border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--green), white 90%);
+      color: oklch(0.31 0.085 160);
+      font-size: 18px;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+
+    .skill-arch-map {
+      display: grid;
+      grid-template-columns: 1.08fr 34px 1fr 34px 1.3fr 34px 1.46fr;
+      grid-template-rows: auto auto auto;
+      gap: 12px;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .skill-node,
+    .skill-hook,
+    .skill-toolbox,
+    .skill-system-card {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      min-height: 112px;
+      padding: 14px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: oklch(0.985 0.01 231);
+      text-align: center;
+    }
+
+    .skill-node strong,
+    .skill-hook strong,
+    .skill-toolbox strong,
+    .skill-system-card strong {
+      font-size: 24px;
+      line-height: 1.15;
+    }
+
+    .skill-node span,
+    .skill-hook span,
+    .skill-toolbox span,
+    .skill-system-card span {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .skill-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: 26px;
+      font-weight: 900;
+    }
+
+    .skill-return {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 19px;
+      font-weight: 780;
+    }
+
+    .skill-return::before,
+    .skill-return::after {
+      content: "";
+      height: 2px;
+      border-top: 3px dashed rgba(33, 40, 50, 0.34);
+    }
+
+    .skill-hook {
+      border-color: var(--amber);
+      background: oklch(0.97 0.028 62);
+    }
+
+    .skill-toolbox {
+      align-content: start;
+      text-align: left;
+      gap: 14px;
+    }
+
+    .skill-toolbox strong {
+      text-align: center;
+    }
+
+    .skill-tool-pills {
+      display: grid;
+      gap: 10px;
+    }
+
+    .skill-tool-pill {
+      min-height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid color-mix(in oklch, var(--blue), white 18%);
+      border-radius: var(--radius-sm);
+      background: white;
+      color: var(--blue);
+      font-size: 17px;
+      font-weight: 820;
+    }
+
+    .skill-tool-pill.load {
+      border-width: 2px;
+      border-color: var(--green);
+      background: color-mix(in oklch, var(--green), white 88%);
+      color: oklch(0.31 0.085 160);
+      animation: skill-load-pulse 1.7s ease-in-out infinite;
+    }
+
+    .skill-system-row {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .skill-system-card {
+      border-color: var(--green);
+      background: color-mix(in oklch, var(--green), white 92%);
+      text-align: left;
+    }
+
+    .skill-system-card strong {
+      color: oklch(0.31 0.085 160);
+    }
+
+    .skill-two-layer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .skill-layer {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 74px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(33, 40, 50, 0.055);
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.3;
+      font-weight: 760;
+    }
+
+    .layer-square {
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--layer-color);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--layer-color), white 88%);
+    }
+
+    .skill-live {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 14px;
+      min-height: 0;
+      padding: 28px;
+      background: linear-gradient(150deg, rgba(29, 37, 54, 0.98), rgba(20, 26, 39, 0.98));
+      color: rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .skill-live-head h3 {
+      color: rgba(255,255,255,0.94);
+    }
+
+    .skill-live .skill-mini-tag {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+    }
+
+    .skill-request {
+      display: grid;
+      gap: 8px;
+      min-height: 68px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .skill-request strong {
+      color: rgba(255,255,255,0.58);
+      font-size: 17px;
+    }
+
+    .skill-request span {
+      font-size: 22px;
+      font-weight: 830;
+      line-height: 1.3;
+    }
+
+    .skill-shelf {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .skill-shelf .chip {
+      min-height: 50px;
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .skill-shelf .chip.active {
+      border-color: var(--green);
+      background: color-mix(in oklch, var(--green), transparent 74%);
+      color: oklch(0.86 0.11 160);
+      box-shadow: 0 0 0 4px rgba(65, 213, 158, 0.08);
+    }
+
+    .skill-loader {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.68);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .skill-loader-step {
+      min-height: 44px;
+      display: grid;
+      place-items: center;
+      padding: 0 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    .skill-loader-step.active {
+      border-color: var(--green);
+      background: rgba(65, 213, 158, 0.14);
+      color: oklch(0.86 0.11 160);
+    }
+
+    .skill-loader-arrow {
+      color: oklch(0.86 0.11 160);
+      font-size: 22px;
+    }
+
+    .skill-loaded-card {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      min-height: 208px;
+      padding: 16px;
+      border: 1px solid rgba(65, 213, 158, 0.36);
+      border-radius: var(--radius-sm);
+      background:
+        linear-gradient(90deg, rgba(65, 213, 158, 0.13), transparent 62%),
+        rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-loaded-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 42%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transform: translateX(-110%);
+      animation: skill-scan 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      pointer-events: none;
+    }
+
+    .skill-loaded-card h3 {
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.94);
+      font-size: 28px;
+    }
+
+    .skill-manifest {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 12px;
+    }
+
+    .manifest-item {
+      min-height: 64px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
     }
 
     .manifest-item strong {
       display: block;
-      margin-bottom: 10px;
-      font-size: 24px;
+      margin-bottom: 6px;
+      color: rgba(255,255,255,0.52);
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
     }
 
     .manifest-item span {
-      color: var(--muted);
+      color: rgba(255,255,255,0.88);
       font-size: 19px;
-      line-height: 1.42;
+      line-height: 1.24;
+      font-weight: 760;
     }
 
     .loaded-skill {
+      position: relative;
+      z-index: 1;
       display: grid;
       align-content: center;
-      min-height: 260px;
-      padding: 28px;
-      background: var(--dark);
-      color: rgba(255,255,255,0.88);
+      min-height: 64px;
+      padding: 12px 14px;
       border-radius: var(--radius-sm);
-      font-size: 28px;
-      line-height: 1.5;
+      background: rgba(14, 18, 28, 0.5);
+      color: rgba(255,255,255,0.82);
+      font-size: 20px;
+      line-height: 1.34;
+      font-weight: 760;
+    }
+
+    .skill-cost-note {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 48px;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(65, 213, 158, 0.12);
+      color: oklch(0.86 0.11 160);
+      font-size: 19px;
+      font-weight: 830;
+    }
+
+    .skill-cost-note b {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: oklch(0.86 0.11 160);
+      color: var(--dark);
+      font-size: 18px;
+    }
+
+    @keyframes skill-load-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(65, 213, 158, 0.22); }
+      50% { box-shadow: 0 0 0 7px rgba(65, 213, 158, 0); }
+    }
+
+    @keyframes skill-scan {
+      0% { transform: translateX(-110%); }
+      48%, 100% { transform: translateX(260%); }
     }
 
     .context-board {
@@ -1768,6 +2142,371 @@
       color: var(--muted);
       font-size: 19px;
       line-height: 1.42;
+    }
+
+    .compact-page {
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.045) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 80% 18%, rgba(195, 64, 42, 0.12), transparent 32%),
+        var(--paper);
+    }
+
+    .compact-page .kicker {
+      border-color: color-mix(in oklch, var(--amber), white 35%);
+      background: color-mix(in oklch, var(--amber), white 86%);
+      color: oklch(0.43 0.1 62);
+    }
+
+    .compact-subtitle {
+      margin-top: 12px;
+      max-width: 1240px;
+      color: var(--muted);
+      font-size: 26px;
+      line-height: 1.46;
+      text-wrap: pretty;
+    }
+
+    .compact-stage {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: 30px;
+      height: 100%;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .compact-arch,
+    .compact-live {
+      padding: 30px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+    }
+
+    .compact-arch {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+      min-height: 0;
+      background: var(--white);
+    }
+
+    .compact-head,
+    .compact-live-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .compact-head h3,
+    .compact-live-head h3 {
+      font-size: 30px;
+    }
+
+    .compact-pill {
+      min-height: 38px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 14px;
+      border: 1px solid color-mix(in oklch, var(--amber), white 28%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--amber), white 88%);
+      color: oklch(0.43 0.1 62);
+      font-size: 18px;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+
+    .compact-arch-map {
+      display: grid;
+      grid-template-columns: 1fr 48px 1.18fr 48px 1fr;
+      grid-template-rows: auto auto;
+      gap: 14px;
+      min-height: 0;
+      align-items: center;
+    }
+
+    .compact-node,
+    .compact-tools,
+    .compact-result {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      min-height: 104px;
+      padding: 16px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: oklch(0.985 0.01 231);
+      text-align: center;
+    }
+
+    .compact-node strong,
+    .compact-tools strong,
+    .compact-result strong {
+      font-size: 25px;
+      line-height: 1.12;
+    }
+
+    .compact-node span,
+    .compact-tools span,
+    .compact-result span {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .compact-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .compact-pipeline {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 12px;
+      padding: 18px;
+      border: 3px solid var(--amber);
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, oklch(0.975 0.025 82), oklch(0.955 0.034 82));
+    }
+
+    .compact-pipeline-title {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: oklch(0.43 0.1 62);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .compact-layer-card {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      min-height: 108px;
+      padding: 14px;
+      border: 2px solid var(--layer-color);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--layer-color), white 88%);
+      color: color-mix(in oklch, var(--layer-color), black 30%);
+    }
+
+    .compact-layer-card strong {
+      font-size: 21px;
+      line-height: 1.12;
+    }
+
+    .compact-layer-card span {
+      color: color-mix(in oklch, var(--layer-color), black 42%);
+      font-size: 16px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .compact-trigger-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .compact-trigger {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: center;
+      min-height: 62px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(33, 40, 50, 0.055);
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.28;
+      font-weight: 780;
+    }
+
+    .trigger-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--mark-color);
+      color: white;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .compact-live {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto auto;
+      gap: 14px;
+      min-height: 0;
+      background: linear-gradient(150deg, rgba(29, 37, 54, 0.98), rgba(20, 26, 39, 0.98));
+      color: rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .compact-live-head h3 {
+      color: rgba(255,255,255,0.94);
+    }
+
+    .compact-live .compact-pill {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+    }
+
+    .compact-problem {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: center;
+      min-height: 82px;
+      padding: 14px 16px;
+      border: 1px solid rgba(195, 64, 42, 0.44);
+      border-radius: var(--radius-sm);
+      background: rgba(195, 64, 42, 0.13);
+      color: rgba(255,255,255,0.84);
+    }
+
+    .compact-problem b {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: oklch(0.72 0.14 25);
+      color: var(--dark);
+      font-size: 22px;
+    }
+
+    .compact-problem strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 20px;
+    }
+
+    .compact-problem span {
+      color: rgba(255,255,255,0.62);
+      font-size: 17px;
+      line-height: 1.32;
+      font-weight: 720;
+    }
+
+    .compact-meter-card {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .compact-meter-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.68);
+      font-size: 18px;
+      font-weight: 780;
+    }
+
+    .compact-meter-head strong {
+      color: rgba(255,255,255,0.94);
+      font-size: 24px;
+    }
+
+    .context-meter {
+      height: 34px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .context-meter-fill {
+      width: var(--context-fill, 92%);
+      height: 100%;
+      background: var(--context-color, var(--red));
+      transition: width 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms ease;
+    }
+
+    .compact-message-stack {
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      min-height: 188px;
+      overflow: hidden;
+    }
+
+    .compact-msg {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.68);
+      font-size: 16px;
+      font-weight: 760;
+      transition: opacity 240ms ease, transform 240ms ease, background 240ms ease;
+    }
+
+    .compact-msg.keep {
+      background: rgba(65, 213, 158, 0.14);
+      color: oklch(0.86 0.11 160);
+    }
+
+    .compact-msg.trimmed {
+      opacity: 0.42;
+    }
+
+    .compact-msg.gone {
+      opacity: 0.18;
+      transform: translateX(-8px);
+    }
+
+    .compact-status {
+      display: grid;
+      align-content: center;
+      min-height: 74px;
+      padding: 14px 16px;
+      border: 1px solid rgba(65, 213, 158, 0.34);
+      border-radius: var(--radius-sm);
+      background: rgba(65, 213, 158, 0.12);
+      color: oklch(0.86 0.11 160);
+      font-size: 20px;
+      line-height: 1.34;
+      font-weight: 820;
+    }
+
+    .compact-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .compact-actions .ghost-btn {
+      min-height: 46px;
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.78);
+    }
+
+    .compact-actions .ghost-btn.primary {
+      border-color: var(--amber);
+      background: color-mix(in oklch, var(--amber), transparent 76%);
+      color: oklch(0.88 0.12 62);
     }
 
     .team-board {
@@ -3934,70 +4673,236 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section data-label="Skill 按需加载" data-speaker-notes="很多人会把 Skill 理解成提示词模板，但它更像专项操作手册。最重要的是按需加载：先让 Agent 知道有哪些技能，真正需要时再展开完整说明。">
+    <section class="skill-loading-page" data-label="Skill 按需加载" data-speaker-notes="这一页讲 Skill Loading。不要把所有专项知识一次性塞进 prompt。启动时只把技能目录放进 SYSTEM，让模型知道有哪些说明书；真正命中某个任务时，再调用 load_skill 读取完整 SKILL.md，把内容作为 tool_result 带回循环。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">05</div>
+          <div class="num">05</div>
           <div>
-            <h2>Skill 不是把所有知识塞进 prompt，而是按需打开说明书</h2>
+            <span class="kicker">Skill Loading</span>
+            <h2>Skill Loading — 用到的时候才加载</h2>
+            <p class="skill-subtitle">Agent 启动时只看“技能目录”；当任务真的需要某项技能时，再打开完整说明书。</p>
           </div>
-          <span class="tag">s07 Skill Loading</span>
+          <span class="tag">05 / 按需加载</span>
         </header>
         <div class="skill-stage">
-          <div class="skill-list">
-            <h3>技能目录</h3>
-            <div class="tool-list">
+          <article class="skill-arch">
+            <div class="skill-arch-head">
+              <h3>左侧：循环不变，只多一个入口</h3>
+              <span class="skill-mini-tag">目录常驻，正文按需</span>
+            </div>
+
+            <div class="skill-arch-map">
+              <div class="skill-node">
+                <strong>messages[]</strong>
+                <span>当前任务现场</span>
+              </div>
+              <div class="skill-arrow">-></div>
+              <div class="skill-node">
+                <strong>LLM</strong>
+                <span>判断</span>
+              </div>
+              <div class="skill-arrow">-></div>
+              <div class="skill-hook">
+                <strong>trigger_hooks</strong>
+                <span>工具前检查</span>
+              </div>
+              <div class="skill-arrow">-></div>
+              <div class="skill-toolbox">
+                <strong>TOOL_HANDLERS</strong>
+                <div class="skill-tool-pills">
+                  <div class="skill-tool-pill">bash · read · write</div>
+                  <div class="skill-tool-pill">edit · glob · todo</div>
+                  <div class="skill-tool-pill">task / subagent</div>
+                  <div class="skill-tool-pill load">load_skill</div>
+                </div>
+              </div>
+
+              <div class="skill-return">tool_result 追加回 messages[]，循环继续</div>
+
+              <div class="skill-system-row">
+                <div class="skill-system-card">
+                  <strong>1 build_system()</strong>
+                  <span>启动时扫描 skills，只注入名称和触发条件。</span>
+                </div>
+                <div class="skill-system-card">
+                  <strong>2 load_skill(name)</strong>
+                  <span>运行时读取 SKILL.md，把完整方法带回当前任务。</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-two-layer">
+              <div class="skill-layer">
+                <div class="layer-square" style="--layer-color: var(--blue);"></div>
+                <div><strong>目录层：</strong>每轮都带，但很短。</div>
+              </div>
+              <div class="skill-layer">
+                <div class="layer-square" style="--layer-color: var(--green);"></div>
+                <div><strong>内容层：</strong>命中后才加载，少占上下文。</div>
+              </div>
+            </div>
+          </article>
+
+          <aside class="skill-live">
+            <div class="skill-live-head">
+              <h3>右侧：运行时才打开说明书</h3>
+              <span class="skill-mini-tag">点击切换任务</span>
+            </div>
+
+            <div class="skill-request">
+              <strong>用户任务</strong>
+              <span id="skillRequest">帮我审一下这个 PR，重点看风险和测试。</span>
+            </div>
+
+            <div class="skill-shelf">
               <button class="chip active" type="button" data-skill="review">代码审查</button>
-              <button class="chip" type="button" data-skill="slides">生成演示页</button>
+              <button class="chip" type="button" data-skill="slides">演示页</button>
               <button class="chip" type="button" data-skill="debug">系统排障</button>
-              <button class="chip" type="button" data-skill="wechat">发布公众号</button>
+              <button class="chip" type="button" data-skill="wechat">公众号发布</button>
             </div>
-          </div>
-          <div class="skill-detail">
-            <h3 id="skillTitle">代码审查 Skill</h3>
-            <div class="skill-manifest">
-              <div class="manifest-item"><strong>name</strong><span id="skillName">review</span></div>
-              <div class="manifest-item"><strong>when_to_use</strong><span id="skillWhen">用户要求 review、审查 PR 或评估风险</span></div>
-              <div class="manifest-item"><strong>loaded</strong><span id="skillLoaded">需要时读取完整 SKILL.md</span></div>
+
+            <div class="skill-loader">
+              <div class="skill-loader-step active">看目录</div>
+              <div class="skill-loader-arrow">-></div>
+              <div class="skill-loader-step active">命中 Skill</div>
+              <div class="skill-loader-arrow">-></div>
+              <div class="skill-loader-step active">加载全文</div>
             </div>
-            <div class="loaded-skill" id="loadedSkill">
-              加载后，Agent 得到的是一套工作方法：先看 diff，再按严重程度列问题，最后补充测试风险。
+
+            <div class="skill-loaded-card" id="skillLoadedCard">
+              <h3 id="skillTitle">代码审查 Skill</h3>
+              <div class="skill-manifest">
+                <div class="manifest-item"><strong>name</strong><span id="skillName">review</span></div>
+                <div class="manifest-item"><strong>when_to_use</strong><span id="skillWhen">用户要求 review、审查 PR 或评估风险</span></div>
+              </div>
+              <div class="loaded-skill" id="loadedSkill">
+                加载后，Agent 才拿到完整审查方法：先看 diff，再按严重程度列问题，最后补充测试风险。
+              </div>
             </div>
-          </div>
+
+            <div class="skill-cost-note">
+              <b>省</b>
+              <span id="skillLoaded">目录约 100 tokens 常驻；完整说明约 2000 tokens，命中后才花。</span>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section data-label="上下文和记忆" data-speaker-notes="Context 和 Memory 经常被混在一起。Context 是这次任务现场，Memory 是跨会话保留的长期事实。Context 要会压缩，Memory 要会筛选，不能什么都记。">
+    <section class="compact-page" data-label="上下文压缩" data-speaker-notes="这一页讲 Context Compact。Agent 做大项目会不断把文件内容、命令输出和工具结果塞进 messages[]，上下文窗口总会满。Harness 层要在 LLM 调用前插入压缩管线：先跑便宜的文本处理，再在必要时调用 LLM 摘要，最后还有 prompt_too_long 的应急兜底。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">06</div>
+          <div class="num">06</div>
           <div>
-            <h2>Context 管这次任务现场，Memory 管长期有用事实</h2>
+            <span class="kicker">Context Compact</span>
+            <h2>上下文总会满，要有办法腾地方</h2>
+            <p class="compact-subtitle">四层压缩策略：便宜的先跑，贵的后跑。Harness 层负责压缩，换来干净的记忆和更长的会话。</p>
           </div>
-          <span class="tag">s08 Context Compact + s09 Memory</span>
+          <span class="tag">06 / 压缩管线</span>
         </header>
-        <div class="context-board">
-          <div class="memory-panel">
-            <h3>短期上下文：会满，需要压缩</h3>
-            <div class="context-stream" id="contextStream">
-              <div class="context-line">用户：请对比两条电子流 A 和 B。</div>
-              <div class="context-line">工具：读取 A 的当前节点、停留时长和字段版本。</div>
-              <div class="context-line">工具：读取 B 的归档节点、归档依据和字段版本。</div>
-              <div class="context-line keep">压缩摘要：A 仍在复核中且停留 18 小时，B 已归档，字段版本不一致。</div>
-              <div class="context-line">旧日志：中间查询参数、无关字段、重复响应。</div>
+        <div class="compact-stage">
+          <article class="compact-arch">
+            <div class="compact-head">
+              <h3>左侧：压缩插在 LLM 调用前</h3>
+              <span class="compact-pill">便宜先跑，贵的后跑</span>
             </div>
-            <button class="ghost-btn" type="button" data-action="compact-context">压缩上下文</button>
-          </div>
-          <div class="memory-panel">
-            <h3>长期记忆：只保存可复用事实</h3>
-            <div class="memory-slots" id="memorySlots">
-              <div class="memory-slot"><strong>偏好</strong><span>部门分享偏好高信息密度图表，少用营销式页面。</span></div>
-              <div class="memory-slot"><strong>项目事实</strong><span>本次材料主题是 Agent 原理科普和 AI 工具使用分享。</span></div>
-              <div class="memory-slot"><strong>决策</strong><span>讲解采用由简到繁的能力层级，而不是按产品功能罗列。</span></div>
+
+            <div class="compact-arch-map">
+              <div class="compact-node">
+                <strong>messages[]</strong>
+                <span>文件、命令、工具结果都堆在这里</span>
+              </div>
+              <div class="compact-arrow">-></div>
+              <div class="compact-node" style="border-color: var(--amber); background: oklch(0.98 0.028 82);">
+                <strong>压缩管线</strong>
+                <span>每次调用 LLM 前先腾地方</span>
+              </div>
+              <div class="compact-arrow">-></div>
+              <div class="compact-node">
+                <strong>LLM</strong>
+                <span>拿到更干净的上下文</span>
+              </div>
+
+              <div class="compact-pipeline">
+                <div class="compact-pipeline-title">
+                  <span>四层策略</span>
+                  <span>0 API -> 1 API -> 应急裁剪</span>
+                </div>
+                <div class="compact-layer-card" style="--layer-color: var(--green);">
+                  <strong>L3 tool_result_budget</strong>
+                  <span>大结果落盘，只留预览</span>
+                </div>
+                <div class="compact-layer-card" style="--layer-color: var(--blue);">
+                  <strong>L1 snip_compact</strong>
+                  <span>消息太多，裁掉中间</span>
+                </div>
+                <div class="compact-layer-card" style="--layer-color: var(--blue);">
+                  <strong>L2 micro_compact</strong>
+                  <span>旧工具结果变占位</span>
+                </div>
+                <div class="compact-layer-card" style="--layer-color: var(--red);">
+                  <strong>L4 compact_history</strong>
+                  <span>仍超阈值，LLM 摘要</span>
+                </div>
+              </div>
             </div>
-            <button class="ghost-btn" type="button" data-action="highlight-memory">筛选可记忆内容</button>
-          </div>
+
+            <div class="compact-trigger-row">
+              <div class="compact-trigger">
+                <div class="trigger-mark" style="--mark-color: var(--green);">1</div>
+                <div><strong>每轮自动：</strong>L3/L1/L2，0 API。</div>
+              </div>
+              <div class="compact-trigger">
+                <div class="trigger-mark" style="--mark-color: var(--amber);">2</div>
+                <div><strong>阈值触发：</strong>L4 摘要，1 API。</div>
+              </div>
+              <div class="compact-trigger">
+                <div class="trigger-mark" style="--mark-color: var(--red);">3</div>
+                <div><strong>异常兜底：</strong>prompt_too_long 后裁剪重试。</div>
+              </div>
+            </div>
+          </article>
+
+          <aside class="compact-live">
+            <div class="compact-live-head">
+              <h3>右侧：上下文快满时怎么救</h3>
+              <span class="compact-pill" id="compactStepLabel">未压缩</span>
+            </div>
+
+            <div class="compact-problem">
+              <b>!</b>
+              <div>
+                <strong>Agent 跑着跑着不动了</strong>
+                <span>读 30 个文件、跑 20 条命令，输出全堆进 messages[]，API 报 prompt_too_long。</span>
+              </div>
+            </div>
+
+            <div class="compact-meter-card">
+              <div class="compact-meter-head">
+                <span>上下文窗口占用</span>
+                <strong id="contextMeterLabel">96%</strong>
+              </div>
+              <div class="context-meter">
+                <div class="context-meter-fill" id="contextMeterFill"></div>
+              </div>
+            </div>
+
+            <div class="compact-message-stack" id="compactMessageStack">
+              <div class="compact-msg"><span>read</span><strong>1000 行文件</strong><span>4000 tokens</span></div>
+              <div class="compact-msg"><span>read</span><strong>30 个文件内容</strong><span>96K</span></div>
+              <div class="compact-msg"><span>bash</span><strong>20 条命令输出</strong><span>42K</span></div>
+              <div class="compact-msg keep"><span>goal</span><strong>当前目标和约束</strong><span>保留</span></div>
+              <div class="compact-msg"><span>tool</span><strong>旧 tool_result</strong><span>可压缩</span></div>
+              <div class="compact-msg"><span>history</span><strong>早期对话中段</strong><span>可裁掉</span></div>
+            </div>
+
+            <div class="compact-status" id="compactStatus">不压缩，Agent 根本没法在大项目里干活。</div>
+
+            <div class="compact-actions">
+              <button class="ghost-btn" type="button" data-action="compact-reset">重置</button>
+              <button class="ghost-btn primary" type="button" data-action="compact-next">跑下一层压缩</button>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -4118,7 +5023,7 @@ result: 字段口径已确认</pre>
             <div class="ladder-row" style="--level: 2; --layer-color: var(--amber);"><b>3</b><strong>Permission</strong></div>
             <div class="ladder-row" style="--level: 3; --layer-color: var(--violet);"><b>4</b><strong>Plan / Todo</strong></div>
             <div class="ladder-row" style="--level: 4; --layer-color: var(--red);"><b>5</b><strong>Skill Loading</strong></div>
-            <div class="ladder-row" style="--level: 5; --layer-color: var(--green);"><b>6</b><strong>Context + Memory</strong></div>
+            <div class="ladder-row" style="--level: 5; --layer-color: var(--green);"><b>6</b><strong>Context Compact</strong></div>
             <div class="ladder-row" style="--level: 6; --layer-color: var(--blue);"><b>7</b><strong>Subagent + Team</strong></div>
             <div class="ladder-row" style="--level: 7; --layer-color: var(--amber);"><b>8</b><strong>MCP + Task System</strong></div>
           </div>
@@ -4189,15 +5094,15 @@ result: 字段口径已确认</pre>
       },
       {
         title: "Skill 按需加载",
-        beginner: "Skill 可以理解成专项说明书。比如做代码审查、做 PPT、排查问题，各有一套方法。Agent 不需要一开始背下所有说明书，需要用的时候再打开。",
-        technical: "Skill Loading 的关键是两段式：先暴露 manifest，让模型知道有哪些 skill 和触发条件。命中后再读取完整 SKILL.md，把具体流程注入上下文。",
-        business: "这对企业知识管理很有启发。我们不需要把所有制度、流程、模板都塞进一个超长提示词，而是做成按需加载的能力库。"
+        beginner: "Skill 可以理解成一套专项说明书。Agent 启动时不用背完所有说明书，只要先看到目录：有哪些技能、什么时候用。等用户任务真的命中某一项，再把那本说明书打开。",
+        technical: "Skill Loading 是两层设计：目录层在 build_system 阶段注入 SYSTEM prompt，成本小但每轮都在；内容层通过 load_skill(name) 读取完整 SKILL.md，再作为 tool_result 回到 messages。",
+        business: "这对企业知识管理很有启发。制度、流程、模板不需要全部塞进一个超长提示词，而是做成按需加载的能力库：知道在哪里，需要时才展开。"
       },
       {
-        title: "上下文和记忆",
-        beginner: "Context 是这次对话和任务现场，Memory 是长期记住的事实。上下文太长要压缩，记忆太多要筛选。不是记得越多越好，而是记得有用。",
-        technical: "Context compact 解决 token budget，Memory 解决跨会话复用。Memory 通常要有 selection、extraction、consolidation 三步，避免把噪声永久化。",
-        business: "这能对应到我们的知识资产。哪些只是一次任务的临时信息，哪些是以后反复有用的项目偏好、流程规则和业务口径，要分开管理。"
+        title: "上下文压缩",
+        beginner: "Agent 做大项目时，读文件、跑命令、调用工具，结果都会塞进 messages。上下文窗口总会满，满了 API 就会拒绝。所以 Harness 要在每次问模型前，先帮它腾地方。",
+        technical: "Context Compact 是 LLM 调用前的预处理管线。先跑 0 API 的文本压缩：大 tool_result 落盘、裁掉中间旧消息、旧结果变占位；仍超过阈值时再调用 LLM 做 compact_history；如果 API 返回 prompt_too_long，再做 reactive_compact 重试。",
+        business: "对业务团队来说，这页的直觉是：不压缩，Agent 就只能做小任务；有压缩，才可能在大项目里持续工作。压缩做得好，留下的是干净记忆，删掉的是不再有用的噪声。"
       },
       {
         title: "Subagent 协作",
@@ -4293,32 +5198,79 @@ result: 字段口径已确认</pre>
       review: {
         title: "代码审查 Skill",
         name: "review",
+        request: "帮我审一下这个 PR，重点看风险和测试。",
         when: "用户要求 review、审查 PR 或评估风险",
-        loaded: "需要时读取完整 SKILL.md",
-        detail: "加载后，Agent 得到的是一套工作方法：先看 diff，再按严重程度列问题，最后补充测试风险。"
+        loaded: "目录约 100 tokens 常驻；完整说明约 2000 tokens，命中后才花。",
+        detail: "加载后，Agent 才拿到完整审查方法：先看 diff，再按严重程度列问题，最后补充测试风险。"
       },
       slides: {
         title: "演示页 Skill",
         name: "slide-deck",
+        request: "把这段材料做成一页适合部门分享的演示页。",
         when: "用户要生成 PPT、HTML 演讲稿或动态演示",
-        loaded: "加载版式、讲稿和验证要求",
-        detail: "加载后，Agent 会把内容拆成视觉页、讲稿、交互控件和验证流程，而不是只写一篇文章。"
+        loaded: "目录只告诉模型有这个能力；版式和验证细则按需加载。",
+        detail: "加载后，Agent 会按演示页方式工作：先定叙事，再做版式、讲稿、交互效果和截图验证。"
       },
       debug: {
         title: "系统排障 Skill",
         name: "debug",
+        request: "这个页面突然打不开了，帮我找出真正原因。",
         when: "用户报告错误、失败、异常或回归",
-        loaded: "加载系统化排障步骤",
-        detail: "加载后，Agent 先复现和收集证据，再定位根因，避免一看到报错就猜修复。"
+        loaded: "只有出现故障时，才加载排障流程和证据清单。",
+        detail: "加载后，Agent 先复现问题、收集日志和差异，再定位根因，避免看到报错就猜修复。"
       },
       wechat: {
         title: "公众号发布 Skill",
         name: "post-to-wechat",
+        request: "把这篇 Markdown 整理一下，然后发布到公众号。",
         when: "用户要发布公众号、图文或文章",
-        loaded: "加载发布渠道和格式规则",
-        detail: "加载后，Agent 知道如何转换 Markdown、处理外链引用、检查图片和调用发布流程。"
+        loaded: "发布规则不常用；只有发布任务命中时才读取完整步骤。",
+        detail: "加载后，Agent 知道如何转换 Markdown、处理外链引用、检查图片，并按发布渠道执行。"
       }
     };
+
+    const compactFrames = [
+      {
+        label: "未压缩",
+        meter: "96%",
+        fill: "96%",
+        color: "var(--red)",
+        status: "不压缩，Agent 根本没法在大项目里干活。",
+        classes: ["", "", "", "keep", "", ""]
+      },
+      {
+        label: "L3 / 大结果落盘",
+        meter: "72%",
+        fill: "72%",
+        color: "var(--amber)",
+        status: "先把 500KB 的大 tool_result 落到磁盘，messages[] 里只留预览和路径，0 API。",
+        classes: ["trimmed", "trimmed", "", "keep", "trimmed", ""]
+      },
+      {
+        label: "L1 + L2 / 裁旧占位",
+        meter: "44%",
+        fill: "44%",
+        color: "var(--blue)",
+        status: "消息太多就裁掉中间；旧工具结果变成占位符，保留最近 3 条完整结果，0 API。",
+        classes: ["gone", "trimmed", "trimmed", "keep", "gone", "gone"]
+      },
+      {
+        label: "L4 / LLM 摘要",
+        meter: "24%",
+        fill: "24%",
+        color: "var(--green)",
+        status: "仍超阈值时才调用 LLM，把旧对话压成一条摘要。贵，所以后跑。",
+        classes: ["gone", "gone", "trimmed", "keep", "gone", "gone"]
+      },
+      {
+        label: "应急兜底",
+        meter: "18%",
+        fill: "18%",
+        color: "var(--green)",
+        status: "如果 API 仍返回 prompt_too_long，就做 reactive_compact，保留最后任务现场后重试。",
+        classes: ["gone", "gone", "gone", "keep", "gone", "gone"]
+      }
+    ];
 
     function setActiveWithin(container, selector, index) {
       const items = Array.from(container.querySelectorAll(selector));
@@ -4702,27 +5654,55 @@ result: 字段口径已确认</pre>
         document.querySelectorAll("[data-skill]").forEach((item) => item.classList.remove("active"));
         button.classList.add("active");
         const data = skillData[button.dataset.skill];
+        document.getElementById("skillRequest").textContent = data.request;
         document.getElementById("skillTitle").textContent = data.title;
         document.getElementById("skillName").textContent = data.name;
         document.getElementById("skillWhen").textContent = data.when;
         document.getElementById("skillLoaded").textContent = data.loaded;
         document.getElementById("loadedSkill").textContent = data.detail;
+        const loadedCard = document.getElementById("skillLoadedCard");
+        loadedCard.style.animation = "none";
+        loadedCard.offsetHeight;
+        loadedCard.style.animation = "skill-load-pulse 520ms ease";
       });
     });
 
-    document.querySelector("[data-action='compact-context']").addEventListener("click", () => {
-      document.querySelectorAll("#contextStream .context-line").forEach((line) => {
-        if (!line.classList.contains("keep")) line.style.opacity = "0.32";
+    let compactStep = 0;
+    function renderCompact() {
+      const frame = compactFrames[compactStep];
+      const meterFill = document.getElementById("contextMeterFill");
+      const meterLabel = document.getElementById("contextMeterLabel");
+      const stepLabel = document.getElementById("compactStepLabel");
+      const status = document.getElementById("compactStatus");
+      if (!meterFill || !meterLabel || !stepLabel || !status) return;
+      meterFill.style.setProperty("--context-fill", frame.fill);
+      meterFill.style.setProperty("--context-color", frame.color);
+      meterLabel.textContent = frame.meter;
+      stepLabel.textContent = frame.label;
+      status.textContent = frame.status;
+      document.querySelectorAll("#compactMessageStack .compact-msg").forEach((msg, index) => {
+        msg.classList.remove("trimmed", "gone");
+        if (frame.classes[index]) msg.classList.add(frame.classes[index]);
       });
-    });
+    }
 
-    document.querySelector("[data-action='highlight-memory']").addEventListener("click", () => {
-      document.querySelectorAll("#memorySlots .memory-slot").forEach((slot, index) => {
-        slot.style.background = index === 2
-          ? "color-mix(in oklch, var(--amber), white 84%)"
-          : "color-mix(in oklch, var(--green), white 88%)";
+    renderCompact();
+
+    const compactNextButton = document.querySelector("[data-action='compact-next']");
+    const compactResetButton = document.querySelector("[data-action='compact-reset']");
+    if (compactNextButton) {
+      compactNextButton.addEventListener("click", () => {
+        compactStep = Math.min(compactStep + 1, compactFrames.length - 1);
+        renderCompact();
       });
-    });
+    }
+
+    if (compactResetButton) {
+      compactResetButton.addEventListener("click", () => {
+        compactStep = 0;
+        renderCompact();
+      });
+    }
 
     let teamStep = 0;
     const teamClasses = ["research", "code", "test", "write"];
