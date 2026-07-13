@@ -2793,6 +2793,186 @@
       }
     }
 
+    .loop-engineering-page,
+    .tool-use-page,
+    .permission-stage-page {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.048) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 78% 18%, rgba(32, 139, 107, 0.24), transparent 30%),
+        var(--dark);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .loop-engineering-page .num,
+    .tool-use-page .num,
+    .permission-stage-page .num {
+      border-color: rgba(255,255,255,0.76);
+      background: rgba(255,255,255,0.92);
+      color: var(--dark);
+    }
+
+    .loop-engineering-page .kicker,
+    .tool-use-page .kicker,
+    .permission-stage-page .kicker {
+      border-color: rgba(205, 236, 255, 0.7);
+      background: oklch(0.91 0.035 231);
+      color: oklch(0.32 0.09 231);
+    }
+
+    .loop-engineering-page .tag,
+    .tool-use-page .tag,
+    .permission-stage-page .tag {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .loop-engineering-page h1,
+    .tool-use-page h2,
+    .permission-stage-page h2 {
+      color: rgba(255,255,255,0.96);
+    }
+
+    .loop-subtitle,
+    .tool-subtitle,
+    .perm-subtitle {
+      color: rgba(255,255,255,0.64);
+    }
+
+    .loop-canvas,
+    .tool-reference,
+    .permission-canvas {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 30px 86px rgba(0,0,0,0.2);
+    }
+
+    .artifact-panel,
+    .tool-live,
+    .perm-panel {
+      border: 1px solid rgba(80, 214, 164, 0.24);
+      background: linear-gradient(150deg, rgba(18, 49, 45, 0.98), rgba(21, 34, 48, 0.98));
+      color: rgba(255,255,255,0.92);
+      box-shadow: 0 30px 86px rgba(0,0,0,0.2);
+    }
+
+    .artifact-panel .artifact-copy,
+    .perm-panel .artifact-copy {
+      color: rgba(255,255,255,0.62);
+    }
+
+    .artifact-panel .artifact-code,
+    .perm-panel .artifact-code {
+      background: rgba(4, 12, 18, 0.62);
+      color: oklch(0.84 0.075 160);
+    }
+
+    .artifact-panel .step-counter,
+    .tool-live .step-counter,
+    .perm-panel .step-counter {
+      background: rgba(65, 213, 158, 0.16);
+      color: oklch(0.82 0.12 160);
+    }
+
+    .tool-use-page .slide-head {
+      grid-template-columns: 86px 1fr 190px;
+      align-items: center;
+    }
+
+    .tool-use-page h2 {
+      max-width: 1180px;
+      font-size: 58px;
+      line-height: 1.08;
+    }
+
+    .tool-subtitle {
+      margin-top: 12px;
+      max-width: 1040px;
+      font-size: 24px;
+      line-height: 1.42;
+    }
+
+    .tool-live-title h3,
+    .tool-call-card strong {
+      color: rgba(255,255,255,0.94);
+    }
+
+    .tool-reference-title h3 {
+      color: var(--ink);
+    }
+
+    .tool-step {
+      border-color: rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.62);
+    }
+
+    .tool-step.active {
+      border-color: var(--green);
+      background: rgba(65, 213, 158, 0.18);
+      color: oklch(0.84 0.105 160);
+    }
+
+    .tool-palette {
+      background: rgba(255,255,255,0.055);
+    }
+
+    .tool-option {
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.84);
+    }
+
+    .tool-option span {
+      color: rgba(255,255,255,0.52);
+    }
+
+    .tool-option.active {
+      border-color: var(--green);
+      background: rgba(65, 213, 158, 0.16);
+    }
+
+    .tool-call-card {
+      background: rgba(4, 12, 18, 0.62);
+    }
+
+    .tool-result-card {
+      background: rgba(65, 213, 158, 0.13);
+      color: rgba(255,255,255,0.76);
+    }
+
+    .perm-tool {
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.78);
+    }
+
+    .perm-tool.active {
+      border-color: var(--green);
+      background: rgba(65, 213, 158, 0.18);
+      color: oklch(0.84 0.105 160);
+    }
+
+    .perm-tool .chip-icon,
+    .mini-policy span {
+      min-width: 42px;
+      color: rgba(255,255,255,0.54);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .mini-policy {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.62);
+    }
+
+    .mini-policy.active {
+      color: oklch(0.86 0.1 160);
+      background: rgba(65, 213, 158, 0.15);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -2890,9 +3070,10 @@
           <div class="num">01</div>
           <div>
             <span class="kicker">Loop Engineering</span>
-            <h1>Agent Loop：循环到目标完成</h1>
-            <p class="loop-subtitle">目标进入上下文，模型判断下一步，工具产出结果，再回到上下文。</p>
+            <h1>Loop 把一次回答变成持续推进</h1>
+            <p class="loop-subtitle">目标进入上下文，模型判断下一步；每次工具结果都会回到现场，再判断一次。</p>
           </div>
+          <span class="tag">01 / 运行骨架</span>
         </header>
         <div class="loop-lab" id="loopEngineering">
           <div class="loop-canvas">
@@ -2994,14 +3175,16 @@
       </div>
     </section>
 
-    <section data-label="Tool Use" data-speaker-notes="这一页是在 Agent Loop 上加工具。核心循环没有变，变化只是当模型判断需要工具时，系统根据工具名分发到对应处理器。对非技术同事来说，可以把 TOOL_HANDLERS 理解成工具分发表。">
+    <section class="tool-use-page" data-label="Tool Use" data-speaker-notes="这一页是在 Agent Loop 上加工具。核心循环没有变，变化只是当模型判断需要工具时，系统根据工具名分发到对应处理器。对非技术同事来说，可以把 TOOL_HANDLERS 理解成工具分发表。">
       <div class="slide-grid">
         <header class="slide-head">
           <div class="num">02</div>
           <div>
-            <h2>Tool Use：循环不变，只加工具分发</h2>
+            <span class="kicker">Tool Use</span>
+            <h2>工具让 Loop 从“会想”变成“会做”</h2>
+            <p class="tool-subtitle">模型只负责判断要做什么；Harness 根据工具名，把动作分发给真正的处理器。</p>
           </div>
-          <span class="tag">s02 Tool Use</span>
+          <span class="tag">02 / 行动能力</span>
         </header>
         <div class="tool-use-stage">
           <div class="tool-reference">
@@ -3115,9 +3298,10 @@
           <div class="num">03</div>
           <div>
             <span class="kicker">Tool + Permission</span>
-            <h2>工具让 Agent 能动手，权限决定它能动到哪里</h2>
-            <p class="perm-subtitle">同一个 loop，加了工具就要加闸口：放行、确认、禁止。</p>
+            <h2>工具越多，越需要清楚的行动边界</h2>
+            <p class="perm-subtitle">同一个 Loop，加了工具就要加闸口：哪些自动放行，哪些必须确认，哪些直接禁止。</p>
           </div>
+          <span class="tag">03 / 风险边界</span>
         </header>
         <div class="permission-lab">
           <div class="permission-canvas">
@@ -3218,19 +3402,19 @@
             </div>
             <div class="artifact-body">
               <div class="perm-tool-list" id="permToolList">
-                <button class="perm-tool active" type="button" data-tool="read"><span class="chip-icon">📄</span>读取文档</button>
-                <button class="perm-tool" type="button" data-tool="search"><span class="chip-icon">🔍</span>检索信息</button>
-                <button class="perm-tool" type="button" data-tool="api"><span class="chip-icon">🔌</span>调用接口</button>
-                <button class="perm-tool" type="button" data-tool="shell"><span class="chip-icon">⚡</span>执行命令</button>
+                <button class="perm-tool active" type="button" data-tool="read"><span class="chip-icon">READ</span>读取文档</button>
+                <button class="perm-tool" type="button" data-tool="search"><span class="chip-icon">FIND</span>检索信息</button>
+                <button class="perm-tool" type="button" data-tool="api"><span class="chip-icon">API</span>调用接口</button>
+                <button class="perm-tool" type="button" data-tool="shell"><span class="chip-icon">CMD</span>执行命令</button>
               </div>
               <pre class="artifact-code" id="permArtifactCode">tool: read_file
 policy: auto
 result: 字段口径已确认</pre>
             </div>
             <div class="perm-policy-mini">
-              <div class="mini-policy active" data-mini="auto"><span>✅</span>自动</div>
-              <div class="mini-policy" data-mini="confirm"><span>⚠️</span>确认</div>
-              <div class="mini-policy" data-mini="block"><span>🚫</span>禁止</div>
+              <div class="mini-policy active" data-mini="auto"><span>AUTO</span>自动</div>
+              <div class="mini-policy" data-mini="confirm"><span>ASK</span>确认</div>
+              <div class="mini-policy" data-mini="block"><span>DENY</span>禁止</div>
             </div>
             <div class="perm-actions">
               <button class="ghost-btn" type="button" data-action="perm-reset">重置</button>
