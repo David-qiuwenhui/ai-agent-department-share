@@ -2795,7 +2795,8 @@
 
     .loop-engineering-page,
     .tool-use-page,
-    .permission-stage-page {
+    .permission-stage-page,
+    .todo-stage-page {
       background:
         linear-gradient(90deg, rgba(255,255,255,0.048) 1px, transparent 1px) 0 0 / 44px 44px,
         linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 44px 44px,
@@ -2806,7 +2807,8 @@
 
     .loop-engineering-page .num,
     .tool-use-page .num,
-    .permission-stage-page .num {
+    .permission-stage-page .num,
+    .todo-stage-page .num {
       border-color: rgba(255,255,255,0.76);
       background: rgba(255,255,255,0.92);
       color: var(--dark);
@@ -2814,7 +2816,8 @@
 
     .loop-engineering-page .kicker,
     .tool-use-page .kicker,
-    .permission-stage-page .kicker {
+    .permission-stage-page .kicker,
+    .todo-stage-page .kicker {
       border-color: rgba(205, 236, 255, 0.7);
       background: oklch(0.91 0.035 231);
       color: oklch(0.32 0.09 231);
@@ -2822,7 +2825,8 @@
 
     .loop-engineering-page .tag,
     .tool-use-page .tag,
-    .permission-stage-page .tag {
+    .permission-stage-page .tag,
+    .todo-stage-page .tag {
       border-color: rgba(255,255,255,0.16);
       background: rgba(255,255,255,0.07);
       color: rgba(255,255,255,0.7);
@@ -2830,19 +2834,22 @@
 
     .loop-engineering-page h1,
     .tool-use-page h2,
-    .permission-stage-page h2 {
+    .permission-stage-page h2,
+    .todo-stage-page h2 {
       color: rgba(255,255,255,0.96);
     }
 
     .loop-subtitle,
     .tool-subtitle,
-    .perm-subtitle {
+    .perm-subtitle,
+    .todo-subtitle {
       color: rgba(255,255,255,0.64);
     }
 
     .loop-canvas,
     .tool-reference,
-    .permission-canvas {
+    .permission-canvas,
+    .todo-canvas {
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.92);
       box-shadow: 0 30px 86px rgba(0,0,0,0.2);
@@ -2850,7 +2857,8 @@
 
     .artifact-panel,
     .tool-live,
-    .perm-panel {
+    .perm-panel,
+    .todo-demo {
       border: 1px solid rgba(80, 214, 164, 0.24);
       background: linear-gradient(150deg, rgba(18, 49, 45, 0.98), rgba(21, 34, 48, 0.98));
       color: rgba(255,255,255,0.92);
@@ -2870,7 +2878,8 @@
 
     .artifact-panel .step-counter,
     .tool-live .step-counter,
-    .perm-panel .step-counter {
+    .perm-panel .step-counter,
+    .todo-demo .step-counter {
       background: rgba(65, 213, 158, 0.16);
       color: oklch(0.82 0.12 160);
     }
@@ -2881,6 +2890,12 @@
     }
 
     .tool-use-page h2 {
+      max-width: 1180px;
+      font-size: 58px;
+      line-height: 1.08;
+    }
+
+    .todo-stage-page h2 {
       max-width: 1180px;
       font-size: 58px;
       line-height: 1.08;
@@ -2940,6 +2955,61 @@
     .tool-result-card {
       background: rgba(65, 213, 158, 0.13);
       color: rgba(255,255,255,0.76);
+    }
+
+    .todo-demo-head {
+      border-bottom-color: rgba(255,255,255,0.18);
+    }
+
+    .todo-demo-head h3 {
+      color: rgba(255,255,255,0.94);
+    }
+
+    .todo-demo-head p,
+    .todo-progress .meter-label,
+    .todo-empty {
+      color: rgba(255,255,255,0.62);
+    }
+
+    .todo-code {
+      background: rgba(4, 12, 18, 0.62);
+      color: oklch(0.84 0.075 160);
+    }
+
+    .todo-empty {
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .todo-item {
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.84);
+    }
+
+    .todo-item .tag {
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.58);
+    }
+
+    .todo-item.current {
+      border-color: var(--green);
+      background: rgba(65, 213, 158, 0.16);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .todo-item.done {
+      opacity: 0.66;
+    }
+
+    .todo-item.drift {
+      border-color: var(--red);
+      background: rgba(195, 64, 42, 0.17);
+    }
+
+    .meter {
+      background: rgba(255,255,255,0.1);
     }
 
     .perm-tool {
@@ -3429,11 +3499,11 @@ result: 字段口径已确认</pre>
         <header class="slide-head">
           <div class="num">04</div>
           <div>
-            <span class="kicker">s05 TodoWrite</span>
-            <h2>没有计划的 Agent，做着做着就偏了</h2>
-            <p class="todo-subtitle">复杂重构先写 TODO，把目标、步骤和进度固定在循环里。</p>
+            <span class="kicker">TodoWrite</span>
+            <h2>计划让 Loop 不被最新结果带偏</h2>
+            <p class="todo-subtitle">复杂任务先写 TODO，把目标、步骤和进度固定在循环里；提醒机制负责把注意力拉回计划。</p>
           </div>
-          <span class="tag">Plan + Nag</span>
+          <span class="tag">04 / 计划防偏航</span>
         </header>
         <div class="todo-lab">
           <div class="todo-canvas">
