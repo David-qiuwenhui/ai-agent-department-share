@@ -378,10 +378,20 @@
       min-height: 0;
       padding: 34px;
       border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.9);
-      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.045)),
+        rgba(12, 24, 38, 0.88);
+      color: rgba(255,255,255,0.91);
       box-shadow: 0 30px 86px rgba(0,0,0,0.2);
       border-radius: var(--radius-md);
+    }
+
+    .intro-card.chat-mode {
+      border-color: rgba(91, 192, 235, 0.28);
+      background:
+        linear-gradient(150deg, rgba(18, 45, 64, 0.95), rgba(15, 27, 42, 0.96)),
+        rgba(12, 24, 38, 0.92);
+      box-shadow: 0 30px 86px rgba(0,0,0,0.26);
     }
 
     .intro-card.agent-mode {
@@ -407,8 +417,8 @@
       place-items: center;
       padding: 0 13px;
       border-radius: var(--radius-sm);
-      background: color-mix(in oklch, var(--blue), white 84%);
-      color: oklch(0.34 0.095 231);
+      background: rgba(91, 192, 235, 0.16);
+      color: oklch(0.82 0.11 231);
       font-size: 16px;
       font-weight: 850;
       white-space: nowrap;
@@ -433,8 +443,8 @@
       gap: 16px;
       align-items: center;
       padding: 14px 16px;
-      border: 1px solid color-mix(in oklch, var(--blue), white 68%);
-      background: color-mix(in oklch, var(--blue), white 91%);
+      border: 1px solid rgba(91, 192, 235, 0.22);
+      background: rgba(255,255,255,0.075);
       border-radius: var(--radius-sm);
     }
 
@@ -443,8 +453,8 @@
       height: 42px;
       display: grid;
       place-items: center;
-      background: var(--blue);
-      color: var(--white);
+      background: oklch(0.57 0.13 231);
+      color: rgba(255,255,255,0.96);
       font-size: 20px;
       border-radius: 50%;
       font-variant-numeric: tabular-nums;
@@ -460,7 +470,7 @@
     .mode-step small {
       display: block;
       margin-top: 4px;
-      color: var(--muted);
+      color: rgba(255,255,255,0.58);
       font-size: 17px;
       font-weight: 720;
       line-height: 1.35;
@@ -485,8 +495,8 @@
       align-content: center;
       padding: 14px 18px;
       border-radius: var(--radius-sm);
-      background: var(--paper-2);
-      color: var(--muted);
+      background: rgba(91, 192, 235, 0.11);
+      color: rgba(255,255,255,0.72);
       font-size: 22px;
       line-height: 1.42;
       font-weight: 760;
