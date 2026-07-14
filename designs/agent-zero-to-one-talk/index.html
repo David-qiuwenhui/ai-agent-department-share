@@ -2509,6 +2509,397 @@
       color: oklch(0.88 0.12 62);
     }
 
+    .memory-page {
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.045) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 82% 18%, rgba(126, 78, 229, 0.16), transparent 31%),
+        var(--paper);
+    }
+
+    .memory-page .kicker {
+      border-color: color-mix(in oklch, var(--violet), white 35%);
+      background: color-mix(in oklch, var(--violet), white 86%);
+      color: oklch(0.38 0.11 292);
+    }
+
+    .memory-subtitle {
+      margin-top: 12px;
+      max-width: 1240px;
+      color: var(--muted);
+      font-size: 26px;
+      line-height: 1.46;
+      text-wrap: pretty;
+    }
+
+    .memory-stage {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 30px;
+      height: 100%;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .memory-arch,
+    .memory-live {
+      padding: 30px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+    }
+
+    .memory-arch {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+      min-height: 0;
+      background: var(--white);
+    }
+
+    .memory-head,
+    .memory-live-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .memory-head h3,
+    .memory-live-head h3 {
+      font-size: 30px;
+    }
+
+    .memory-pill {
+      min-height: 38px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 14px;
+      border: 1px solid color-mix(in oklch, var(--violet), white 28%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--violet), white 88%);
+      color: oklch(0.38 0.11 292);
+      font-size: 18px;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+
+    .memory-arch-map {
+      display: grid;
+      grid-template-columns: 1fr 38px 1.04fr 38px 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 14px;
+      min-height: 0;
+      align-items: center;
+    }
+
+    .memory-node {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      min-height: 98px;
+      padding: 14px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: oklch(0.985 0.01 231);
+      text-align: center;
+    }
+
+    .memory-node.memory-core {
+      border-color: var(--violet);
+      background: color-mix(in oklch, var(--violet), white 90%);
+      color: oklch(0.36 0.11 292);
+    }
+
+    .memory-node strong {
+      font-size: 24px;
+      line-height: 1.12;
+    }
+
+    .memory-node span {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .memory-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--violet);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .memory-store {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      padding: 18px;
+      border: 3px dashed var(--violet);
+      border-radius: var(--radius-md);
+      background: color-mix(in oklch, var(--violet), white 94%);
+    }
+
+    .memory-store-title {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: oklch(0.38 0.11 292);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .memory-file {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      min-height: 104px;
+      padding: 14px;
+      border: 2px solid var(--violet);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.72);
+      color: oklch(0.34 0.1 292);
+    }
+
+    .memory-file strong {
+      font-size: 21px;
+      line-height: 1.12;
+    }
+
+    .memory-file span {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 760;
+    }
+
+    .memory-cycle {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .memory-cycle-step {
+      min-height: 66px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(33, 40, 50, 0.055);
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.28;
+      font-weight: 780;
+    }
+
+    .memory-cycle-step b {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--violet);
+      color: white;
+      font-size: 16px;
+    }
+
+    .memory-live {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 14px;
+      min-height: 0;
+      background: linear-gradient(150deg, rgba(31, 25, 53, 0.98), rgba(19, 25, 39, 0.98));
+      color: rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .memory-live-head h3 {
+      color: rgba(255,255,255,0.94);
+    }
+
+    .memory-live .memory-pill {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+    }
+
+    .memory-loss {
+      display: grid;
+      grid-template-columns: 1fr 42px 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .memory-loss-card {
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      min-height: 126px;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .memory-loss-card strong {
+      color: rgba(255,255,255,0.54);
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .memory-loss-card span {
+      color: rgba(255,255,255,0.9);
+      font-size: 22px;
+      line-height: 1.28;
+      font-weight: 840;
+    }
+
+    .memory-loss-card.lost {
+      border-color: rgba(195, 64, 42, 0.48);
+      background: rgba(195, 64, 42, 0.12);
+    }
+
+    .memory-loss-arrow {
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.58);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .memory-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .memory-tabs .chip {
+      min-height: 48px;
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .memory-tabs .chip.active {
+      border-color: var(--violet);
+      background: color-mix(in oklch, var(--violet), transparent 72%);
+      color: oklch(0.84 0.12 292);
+      box-shadow: 0 0 0 4px rgba(126, 78, 229, 0.08);
+    }
+
+    .memory-live-card {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 12px;
+      min-height: 0;
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(126, 78, 229, 0.4);
+      background:
+        linear-gradient(90deg, rgba(126, 78, 229, 0.16), transparent 64%),
+        rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .memory-live-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 42%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transform: translateX(-110%);
+      animation: skill-scan 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      pointer-events: none;
+    }
+
+    .memory-live-card h3,
+    .memory-meta-grid,
+    .memory-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .memory-live-card h3 {
+      color: rgba(255,255,255,0.94);
+      font-size: 28px;
+    }
+
+    .memory-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 12px;
+    }
+
+    .memory-meta-item {
+      min-height: 64px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .memory-meta-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: rgba(255,255,255,0.52);
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .memory-meta-item span {
+      color: rgba(255,255,255,0.88);
+      font-size: 19px;
+      line-height: 1.24;
+      font-weight: 760;
+    }
+
+    .memory-content {
+      display: grid;
+      align-content: center;
+      min-height: 88px;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(14, 18, 28, 0.5);
+      color: rgba(255,255,255,0.86);
+      font-size: 21px;
+      line-height: 1.34;
+      font-weight: 780;
+    }
+
+    .memory-result {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 56px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(126, 78, 229, 0.16);
+      color: oklch(0.84 0.12 292);
+      font-size: 19px;
+      line-height: 1.28;
+      font-weight: 830;
+    }
+
+    .memory-result b {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: oklch(0.84 0.12 292);
+      color: var(--dark);
+      font-size: 18px;
+    }
+
     .team-board {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
@@ -4907,16 +5298,121 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section class="subagent-page" data-label="Subagent 协作" data-speaker-notes="这一页讲 Subagent 的核心机制。Parent Agent 不把完整对话历史交给子 Agent，而是只传一个 task 描述。Subagent 拿到的是全新的 messages[]，自己跑一段独立 loop，中间几十轮工具调用都不会污染 Parent。最后只提取摘要或最终文本，作为 tool_result 回到 Parent 的 messages[]。">
+    <section class="memory-page" data-label="Memory 记忆" data-speaker-notes="这一页讲 Memory。上一页的 Context Compact 能腾地方，但压缩一定会损失细节。Memory 是 Harness 层放在上下文窗口外的一层持久存储：把重要偏好、项目事实、参考位置写成文件，启动时只加载索引，需要时再加载相关记忆。">
       <div class="slide-grid">
         <header class="slide-head">
           <div class="num">07</div>
+          <div>
+            <span class="kicker">Memory</span>
+            <h2>压缩会丢细节，要有一层不丢的</h2>
+            <p class="memory-subtitle">文件仓库 + 索引 + 按需加载：Memory 不参与压缩，所以能跨压缩、跨会话积累知识。</p>
+          </div>
+          <span class="tag">07 / 持久记忆</span>
+        </header>
+
+        <div class="memory-stage">
+          <article class="memory-arch">
+            <div class="memory-head">
+              <h3>左侧：Memory 放在上下文窗口外</h3>
+              <span class="memory-pill">跨压缩，跨会话</span>
+            </div>
+
+            <div class="memory-arch-map">
+              <div class="memory-node">
+                <strong>messages[]</strong>
+                <span>当前任务现场，会被压缩</span>
+              </div>
+              <div class="memory-arrow">-></div>
+              <div class="memory-node">
+                <strong>压缩管线</strong>
+                <span>腾地方，但会丢细节</span>
+              </div>
+              <div class="memory-arrow">-></div>
+              <div class="memory-node memory-core">
+                <strong>Memory Loading</strong>
+                <span>按需把相关记忆放回现场</span>
+              </div>
+
+              <div class="memory-store">
+                <div class="memory-store-title">
+                  <span>.memory/ 文件仓库</span>
+                  <span>MEMORY.md 索引 + *.md 文件</span>
+                </div>
+                <div class="memory-file">
+                  <strong>1 存储</strong>
+                  <span>每条记忆是一个 .md 文件，带 name / type / description。</span>
+                </div>
+                <div class="memory-file">
+                  <strong>2 加载</strong>
+                  <span>索引常驻；LLM side-query 选择最相关的少数文件。</span>
+                </div>
+                <div class="memory-file">
+                  <strong>3 提取与整理</strong>
+                  <span>每轮结束提取新事实；文件多了再合并、去重、剪枝。</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="memory-cycle">
+              <div class="memory-cycle-step"><b>读</b><span>当前任务先读索引，知道有哪些记忆。</span></div>
+              <div class="memory-cycle-step"><b>取</b><span>只把相关记忆注入当前上下文。</span></div>
+              <div class="memory-cycle-step"><b>写</b><span>任务结束后，把稳定事实写回仓库。</span></div>
+            </div>
+          </article>
+
+          <aside class="memory-live">
+            <div class="memory-live-head">
+              <h3>右侧：压缩丢了，Memory 还在</h3>
+              <span class="memory-pill" id="memoryTypeLabel">user</span>
+            </div>
+
+            <div class="memory-loss">
+              <div class="memory-loss-card">
+                <strong>原始细节</strong>
+                <span id="memoryOriginal">用 tab 缩进，不要用空格。</span>
+              </div>
+              <div class="memory-loss-arrow">-></div>
+              <div class="memory-loss-card lost">
+                <strong>压缩摘要</strong>
+                <span id="memoryCompressed">用户有代码风格偏好。</span>
+              </div>
+            </div>
+
+            <div class="memory-tabs">
+              <button class="chip active" type="button" data-memory="user">你是谁</button>
+              <button class="chip" type="button" data-memory="feedback">怎么做事</button>
+              <button class="chip" type="button" data-memory="project">项目事实</button>
+              <button class="chip" type="button" data-memory="reference">东西在哪</button>
+            </div>
+
+            <div class="memory-live-card" id="memoryLiveCard">
+              <h3 id="memoryTitle">user / 代码风格偏好</h3>
+              <div class="memory-meta-grid">
+                <div class="memory-meta-item"><strong>file</strong><span id="memoryFile">.memory/user-code-style.md</span></div>
+                <div class="memory-meta-item"><strong>when_to_load</strong><span id="memoryWhen">涉及 Python / 代码编辑时加载</span></div>
+              </div>
+              <div class="memory-content" id="memoryContent">精确记忆：用户要求缩进使用 tab，不要把它泛化成“有风格偏好”。</div>
+            </div>
+
+            <div class="memory-result">
+              <b>稳</b>
+              <span id="memoryResult">autoCompact 可以压缩上下文，但这条偏好仍在 .memory/ 里；新会话也能按需找回来。</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="subagent-page" data-label="Subagent 协作" data-speaker-notes="这一页讲 Subagent 的核心机制。Parent Agent 不把完整对话历史交给子 Agent，而是只传一个 task 描述。Subagent 拿到的是全新的 messages[]，自己跑一段独立 loop，中间几十轮工具调用都不会污染 Parent。最后只提取摘要或最终文本，作为 tool_result 回到 Parent 的 messages[]。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">08</div>
           <div>
             <span class="kicker">Subagent</span>
             <h2>子 Agent 用独立 messages[]，只把最终摘要带回来</h2>
             <p class="subagent-subtitle">Parent 只派发 task 描述；Subagent 自己循环、自己调用工具，中间过程不污染主上下文。</p>
           </div>
-          <span class="tag">07 / 上下文隔离</span>
+          <span class="tag">08 / 上下文隔离</span>
         </header>
 
         <div class="subagent-map">
@@ -4980,7 +5476,7 @@ result: 字段口径已确认</pre>
     <section data-label="外部系统和长期运行" data-speaker-notes="再往后，Agent 不只是一次会话里的助手，而是可以接外部系统、后台运行、定时触发。MCP 可以理解成把外部能力接进统一工具池的一种方式。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">08</div>
+            <div class="num">09</div>
           <div>
             <h2>接入外部能力后，Agent 从会话工具变成任务系统</h2>
           </div>
@@ -5010,7 +5506,7 @@ result: 字段口径已确认</pre>
     <section data-label="完整路径" data-speaker-notes="最后收束。最小 Agent 很小，一个循环加一个工具就够了。真正可用的 Agent 不是另一个更神秘的东西，而是在这个循环外逐步补齐这些 Harness 能力。">
       <div class="slide-grid">
         <header class="slide-head">
-            <div class="num">09</div>
+            <div class="num">10</div>
           <div>
             <h2>机制很多，核心循环只有一个</h2>
           </div>
@@ -5024,8 +5520,9 @@ result: 字段口径已确认</pre>
             <div class="ladder-row" style="--level: 3; --layer-color: var(--violet);"><b>4</b><strong>Plan / Todo</strong></div>
             <div class="ladder-row" style="--level: 4; --layer-color: var(--red);"><b>5</b><strong>Skill Loading</strong></div>
             <div class="ladder-row" style="--level: 5; --layer-color: var(--green);"><b>6</b><strong>Context Compact</strong></div>
-            <div class="ladder-row" style="--level: 6; --layer-color: var(--blue);"><b>7</b><strong>Subagent + Team</strong></div>
-            <div class="ladder-row" style="--level: 7; --layer-color: var(--amber);"><b>8</b><strong>MCP + Task System</strong></div>
+            <div class="ladder-row" style="--level: 6; --layer-color: var(--violet);"><b>7</b><strong>Memory</strong></div>
+            <div class="ladder-row" style="--level: 7; --layer-color: var(--blue);"><b>8</b><strong>Subagent + Team</strong></div>
+            <div class="ladder-row" style="--level: 8; --layer-color: var(--amber);"><b>9</b><strong>MCP + Task System</strong></div>
           </div>
           <div class="summary-panel">
             <div class="quote">最小 Agent 只要一个循环。可用 Agent 需要一套 Harness。</div>
@@ -5039,7 +5536,7 @@ result: 字段口径已确认</pre>
   <aside class="speaker-console collapsed" id="speakerConsole" aria-label="演讲稿控制台">
     <div class="console-head">
       <strong id="consoleTitle">讲稿</strong>
-      <span class="console-page-count" id="consolePageCount">1/10</span>
+      <span class="console-page-count" id="consolePageCount">1/11</span>
       <button class="console-toggle" type="button" id="consoleToggle" aria-label="收起或展开讲稿">∧</button>
     </div>
     <div class="script-tabs" role="tablist" aria-label="讲稿模式">
@@ -5103,6 +5600,12 @@ result: 字段口径已确认</pre>
         beginner: "Agent 做大项目时，读文件、跑命令、调用工具，结果都会塞进 messages。上下文窗口总会满，满了 API 就会拒绝。所以 Harness 要在每次问模型前，先帮它腾地方。",
         technical: "Context Compact 是 LLM 调用前的预处理管线。先跑 0 API 的文本压缩：大 tool_result 落盘、裁掉中间旧消息、旧结果变占位；仍超过阈值时再调用 LLM 做 compact_history；如果 API 返回 prompt_too_long，再做 reactive_compact 重试。",
         business: "对业务团队来说，这页的直觉是：不压缩，Agent 就只能做小任务；有压缩，才可能在大项目里持续工作。压缩做得好，留下的是干净记忆，删掉的是不再有用的噪声。"
+      },
+      {
+        title: "Memory 记忆",
+        beginner: "压缩能腾地方，但一定会丢细节。比如“用 tab 缩进，不要用空格”，可能被压成“用户有代码风格偏好”。Memory 的作用，就是把这些不该丢的细节存到上下文窗口外。",
+        technical: "Memory 是 Harness 层的持久文件仓库：.memory/ 里存 MEMORY.md 索引和一组带 frontmatter 的 .md 文件。启动时索引常驻；运行时由 LLM side-query 选择少量相关文件注入；每轮结束后再做 extraction，文件变多时做 consolidation。",
+        business: "对业务团队来说，Memory 是长期知识资产。它可以保存用户偏好、做事反馈、项目事实和参考位置，不被一次压缩抹掉，也不会因为新开会话就归零。"
       },
       {
         title: "Subagent 协作",
@@ -5271,6 +5774,49 @@ result: 字段口径已确认</pre>
         classes: ["gone", "gone", "gone", "keep", "gone", "gone"]
       }
     ];
+
+    const memoryData = {
+      user: {
+        type: "user",
+        original: "用 tab 缩进，不要用空格。",
+        compressed: "用户有代码风格偏好。",
+        title: "user / 代码风格偏好",
+        file: ".memory/user-code-style.md",
+        when: "涉及 Python / 代码编辑时加载",
+        content: "精确记忆：用户要求缩进使用 tab，不要把它泛化成“有风格偏好”。",
+        result: "autoCompact 可以压缩上下文，但这条偏好仍在 .memory/ 里；新会话也能按需找回来。"
+      },
+      feedback: {
+        type: "feedback",
+        original: "不要 mock 数据库，要用真实测试库验证。",
+        compressed: "用户偏好更真实的测试。",
+        title: "feedback / 测试方式约束",
+        file: ".memory/feedback-testing.md",
+        when: "涉及测试、验证、CI 修复时加载",
+        content: "精确记忆：验证数据库相关逻辑时，优先连接真实测试库，不要用 mock 掩盖集成问题。",
+        result: "Memory 保存的是做事方式，不只是聊天记录；下次修测试时可以直接复用。"
+      },
+      project: {
+        type: "project",
+        original: "auth 重写是合规驱动，不能只按体验优化。",
+        compressed: "项目有 auth 重写背景。",
+        title: "project / 项目背景",
+        file: ".memory/project-auth-rewrite.md",
+        when: "涉及登录、权限、审计、合规时加载",
+        content: "精确记忆：auth 重写的核心驱动是合规和审计，不是单纯的用户体验优化。",
+        result: "项目事实跨会话保留，新会话不用重新解释业务背景。"
+      },
+      reference: {
+        type: "reference",
+        original: "pipeline bug 在 Linear INGEST-214，复现脚本在 tools/replay_ingest.ts。",
+        compressed: "有一个 pipeline bug 需要处理。",
+        title: "reference / 资料位置",
+        file: ".memory/reference-ingest-bug.md",
+        when: "涉及 pipeline、ingest、历史 bug 时加载",
+        content: "精确记忆：Linear INGEST-214 记录了 pipeline bug；复现入口是 tools/replay_ingest.ts。",
+        result: "Memory 不只记结论，也记“东西在哪”，让 Agent 下次能直接找到材料。"
+      }
+    };
 
     function setActiveWithin(container, selector, index) {
       const items = Array.from(container.querySelectorAll(selector));
@@ -5703,6 +6249,26 @@ result: 字段口径已确认</pre>
         renderCompact();
       });
     }
+
+    document.querySelectorAll("[data-memory]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-memory]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        const data = memoryData[button.dataset.memory];
+        document.getElementById("memoryTypeLabel").textContent = data.type;
+        document.getElementById("memoryOriginal").textContent = data.original;
+        document.getElementById("memoryCompressed").textContent = data.compressed;
+        document.getElementById("memoryTitle").textContent = data.title;
+        document.getElementById("memoryFile").textContent = data.file;
+        document.getElementById("memoryWhen").textContent = data.when;
+        document.getElementById("memoryContent").textContent = data.content;
+        document.getElementById("memoryResult").textContent = data.result;
+        const memoryCard = document.getElementById("memoryLiveCard");
+        memoryCard.style.animation = "none";
+        memoryCard.offsetHeight;
+        memoryCard.style.animation = "skill-load-pulse 520ms ease";
+      });
+    });
 
     let teamStep = 0;
     const teamClasses = ["research", "code", "test", "write"];
