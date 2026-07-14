@@ -4705,6 +4705,11 @@
       marker-end: url(#toolRefArrowGreen);
     }
 
+    .tool-ref-arrow.return {
+      stroke-dasharray: 7 7;
+      stroke-width: 2;
+    }
+
     .handler-chip {
       fill: oklch(0.955 0.028 160);
       stroke: var(--green);
@@ -5711,6 +5716,25 @@
     section[data-label] .loop-summary-chip strong,
     section[data-label] .loop-summary-arrow {
       color: oklch(0.78 0.12 231);
+    }
+
+    .skill-loading-page .skill-system-card {
+      border-color: rgba(65, 213, 158, 0.52);
+      background:
+        linear-gradient(180deg, rgba(65, 213, 158, 0.14), rgba(65, 213, 158, 0.07)),
+        rgba(11, 28, 25, 0.72);
+      color: rgba(255,255,255,0.9);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.06),
+        0 16px 34px rgba(0,0,0,0.18);
+    }
+
+    .skill-loading-page .skill-system-card strong {
+      color: oklch(0.86 0.12 160);
+    }
+
+    .skill-loading-page .skill-system-card span {
+      color: rgba(255,255,255,0.76);
     }
 
     .tool-use-page .tool-reference {
@@ -6757,6 +6781,163 @@
       min-height: 424px;
     }
 
+    .personal-visual-board {
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.22fr) minmax(420px, 0.78fr);
+      gap: 24px;
+    }
+
+    .personal-hero-art,
+    .personal-side-note {
+      min-height: 0;
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035)),
+        rgba(10, 20, 32, 0.84);
+      box-shadow: 0 30px 86px rgba(0,0,0,0.24);
+    }
+
+    .personal-hero-art {
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .personal-hero-art::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(7,13,22,0.34), transparent 44%),
+        linear-gradient(0deg, rgba(7,13,22,0.62), transparent 42%);
+      pointer-events: none;
+    }
+
+    .personal-art-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .personal-overlay {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      z-index: 2;
+      display: grid;
+      gap: 8px;
+      padding: 22px 24px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius-sm);
+      background: rgba(7, 14, 24, 0.72);
+      backdrop-filter: blur(12px);
+    }
+
+    .personal-overlay strong {
+      color: rgba(255,255,255,0.98);
+      font-size: 36px;
+      line-height: 1.08;
+    }
+
+    .personal-overlay span {
+      color: rgba(255,255,255,0.7);
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 740;
+    }
+
+    .personal-side-note {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 18px;
+      padding: 28px;
+      overflow: hidden;
+    }
+
+    .personal-side-note h3 {
+      color: rgba(255,255,255,0.96);
+      font-size: 36px;
+      line-height: 1.12;
+    }
+
+    .personal-side-lead {
+      color: rgba(255,255,255,0.62);
+      font-size: 22px;
+      line-height: 1.36;
+      font-weight: 740;
+    }
+
+    .personal-point-list {
+      display: grid;
+      gap: 12px;
+      align-content: end;
+    }
+
+    .personal-point {
+      min-height: 88px;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 15px 16px;
+      border: 1px solid color-mix(in oklch, var(--point-color), white 22%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--point-color), transparent 88%);
+    }
+
+    .personal-point b {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: color-mix(in oklch, var(--point-color), white 10%);
+      color: rgba(255,255,255,0.94);
+      font-size: 18px;
+      font-weight: 920;
+    }
+
+    .personal-point span {
+      color: rgba(255,255,255,0.82);
+      font-size: 22px;
+      line-height: 1.24;
+      font-weight: 800;
+    }
+
+    .personal-point em {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255,255,255,0.5);
+      font-size: 16px;
+      line-height: 1.22;
+      font-style: normal;
+      font-weight: 720;
+    }
+
+    .personal-mini-strip {
+      min-height: 68px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .personal-mini-strip div {
+      display: grid;
+      place-items: center;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.74);
+      font-size: 18px;
+      font-weight: 850;
+      text-align: center;
+    }
+
     @keyframes orbit-float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -6789,7 +6970,9 @@
       section[data-deck-active] .toolkit-side,
       section[data-deck-active] .coding-product,
       section[data-deck-active] .info-card,
-      section[data-deck-active] .wiki-card {
+      section[data-deck-active] .wiki-card,
+      section[data-deck-active] .personal-hero-art,
+      section[data-deck-active] .personal-side-note {
         animation: intro-rise 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
       }
 
@@ -6803,13 +6986,22 @@
       section[data-deck-active] .toolkit-side,
       section[data-deck-active] .coding-product:nth-child(2),
       section[data-deck-active] .info-card:nth-child(2),
-      section[data-deck-active] .wiki-card:nth-child(2) {
+      section[data-deck-active] .wiki-card:nth-child(2),
+      section[data-deck-active] .personal-side-note {
         animation-delay: 110ms;
       }
 
       section[data-deck-active] .info-card:nth-child(3) {
         animation-delay: 190ms;
       }
+
+      section[data-deck-active] .personal-point {
+        animation: intro-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      section[data-deck-active] .personal-point:nth-child(2) { animation-delay: 160ms; }
+      section[data-deck-active] .personal-point:nth-child(3) { animation-delay: 220ms; }
+      section[data-deck-active] .personal-point:nth-child(4) { animation-delay: 280ms; }
 
       section[data-deck-active] .orbit-node,
       section[data-deck-active] .signal-node,
@@ -7066,7 +7258,7 @@
               <path class="tool-ref-arrow" d="M 415 140 L 415 190"></path>
               <path class="tool-ref-arrow green" d="M 512 250 L 610 250"></path>
               <path class="tool-ref-arrow amber" d="M 415 310 L 415 360"></path>
-              <path class="tool-ref-arrow amber return" d="M 196 570 L 64 570 L 64 138 L 171 138"></path>
+              <path class="tool-ref-arrow amber return" d="M 196 520 L 74 520 L 74 88 L 86 88"></path>
 
               <rect class="tool-ref-box" x="86" y="38" width="170" height="100" rx="16"></rect>
               <text class="tool-ref-title" x="171" y="75">用户提问</text>
@@ -7105,7 +7297,7 @@
 
               <text class="tool-ref-small" x="536" y="228">否</text>
               <text class="tool-ref-small" x="438" y="340">是</text>
-              <text class="tool-ref-small" x="84" y="382" transform="rotate(-90 84 382)">工具结果回到 messages</text>
+              <text class="tool-ref-small" x="94" y="382" transform="rotate(-90 94 382)">工具结果回到 messages</text>
             </svg>
           </div>
 
@@ -7504,7 +7696,7 @@ result: 字段口径已确认</pre>
 
             <div class="skill-shelf">
               <button class="chip active" type="button" data-skill="review">代码审查</button>
-              <button class="chip" type="button" data-skill="slides">演示页</button>
+              <button class="chip" type="button" data-skill="slides">生成演示材料</button>
               <button class="chip" type="button" data-skill="debug">系统排障</button>
               <button class="chip" type="button" data-skill="wechat">生成周报</button>
             </div>
@@ -7770,7 +7962,7 @@ result: 字段口径已确认</pre>
           <div class="num">08</div>
           <div>
             <span class="kicker">System Prompt</span>
-            <h2>每次发给 Agent 的，是一整包运行现场</h2>
+            <h2>每次发给 LLM，是结构化的完整信息</h2>
             <p class="system-subtitle">Prompt 不是写死的一段话，而是由多个 section 在运行时组装：稳定段常驻，动态段按状态加载。</p>
           </div>
           <span class="tag">08 / 请求结构</span>
@@ -7881,7 +8073,7 @@ result: 字段口径已确认</pre>
           <div class="num">09</div>
           <div>
             <span class="kicker">Subagent</span>
-            <h2>子 Agent 用独立 messages[]，只把最终摘要带回来</h2>
+            <h2>子 Agent 用独立上下文，只把最终摘要带回来</h2>
             <p class="subagent-subtitle">Parent 只派发 task 描述；Subagent 自己循环、自己调用工具，中间过程不污染主上下文。</p>
           </div>
           <span class="tag">09 / 上下文隔离</span>
@@ -8116,48 +8308,29 @@ result: 字段口径已确认</pre>
           <span class="tag">12 / 工具链选择</span>
         </header>
 
-        <div class="toolkit-board visual-toolkit">
-          <article class="toolkit-main visual">
-            <div class="toolkit-principle">
-              <strong>少折腾工具，多沉淀工作流</strong>
-              <span>选第一梯队，把时间花在任务、上下文和验收上。</span>
-            </div>
+        <div class="personal-visual-board">
+          <figure class="personal-hero-art">
+            <img class="personal-art-img" src="imgs/workflow-toolchain.png" alt="AI 工具链选择图例">
+            <figcaption class="personal-overlay">
+              <strong>Top 1 工具优先</strong>
+              <span>工具能力变化太快，选择第一梯队，把时间花回任务设计和结果验收。</span>
+            </figcaption>
+          </figure>
 
-            <div class="tool-orbit">
-              <div class="orbit-core">
-                <strong>Top 1 工具优先</strong>
-                <span>节约探索成本</span>
-              </div>
-              <div class="orbit-node claude" style="--orbit-color: var(--blue);"><strong>Claude</strong><span>CLI / Desktop</span></div>
-              <div class="orbit-node codex" style="--orbit-color: var(--green);"><strong>Codex</strong><span>我的主力 coding</span></div>
-              <div class="orbit-node browser" style="--orbit-color: var(--amber);"><strong>Browser</strong><span>读页面 / 点页面</span></div>
-              <div class="orbit-node chatgpt" style="--orbit-color: var(--violet);"><strong>ChatGPT</strong><span>推演 / 写作 / 整理</span></div>
+          <aside class="personal-side-note">
+            <h3>我保留两个入口</h3>
+            <p class="personal-side-lead">不是收集工具，而是固定高质量入口，让每次任务都有稳定起点。</p>
+            <div class="personal-point-list">
+              <div class="personal-point" style="--point-color: var(--blue);"><b>1</b><span>创意落地与 AIGC<em>Claude、Codex、ChatGPT，CLI + Desktop 配合使用。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--green);"><b>2</b><span>真实页面能力<em>Browser 阅读与控制页面，让 Agent 进入真实工作现场。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--amber);"><b>3</b><span>个人生活助手<em>Hermes 连接微信、飞书、Telegram，随时对话和跟进。</em></span></div>
             </div>
-
-            <div class="decision-strip">
-              <div><strong>强能力</strong><span>CLI + Desktop</span></div>
-              <div><strong>真现场</strong><span>Browser 控制页面</span></div>
-              <div><strong>可复用</strong><span>固定入口和验收</span></div>
+            <div class="personal-mini-strip">
+              <div>少试错</div>
+              <div>高上限</div>
+              <div>可复用</div>
             </div>
-          </article>
-
-          <article class="toolkit-side">
-            <h3>个人生活助手：Hermes Agent</h3>
-            <div class="hermes-phone">
-              <div class="phone-top"><span>Hermes</span><span>always on</span></div>
-              <div class="chat-bubbles">
-                <div class="chat-bubble">帮我跟进这个研究主题</div>
-                <div class="chat-bubble agent">已整理资料，并生成待办</div>
-                <div class="chat-bubble">晚上提醒我补充结论</div>
-                <div class="chat-bubble agent">好的，已同步到个人知识库</div>
-              </div>
-              <div class="app-dock">
-                <div>微信</div>
-                <div>飞书</div>
-                <div>Telegram</div>
-              </div>
-            </div>
-          </article>
+          </aside>
         </div>
       </div>
     </section>
@@ -8174,54 +8347,29 @@ result: 字段口径已确认</pre>
           <span class="tag">13 / Web Coding 产物</span>
         </header>
 
-        <div class="coding-board">
-          <article class="coding-product visual" style="--product-color: var(--blue);">
-            <span class="product-tag">业务视角的 Postman</span>
-            <h3>面向 UAT 的接口验证工作台</h3>
-            <p class="product-desc">把接口验证翻译成业务能理解的任务流。</p>
-            <div class="product-screen">
-              <div class="screen-bar"><span>UAT Console</span><span>pass / diff / retry</span></div>
-              <div class="screen-body">
-                <div class="screen-sidebar">
-                  <div class="screen-pill">任务发布</div>
-                  <div class="screen-pill">接口调用</div>
-                  <div class="screen-pill">数据验证</div>
-                  <div class="screen-pill">结果留痕</div>
-                </div>
-                <div class="screen-main">
-                  <div class="screen-row hot">电子流状态校验</div>
-                  <div class="screen-row">请求参数自动组装</div>
-                  <div class="screen-row">返回字段口径检查</div>
-                  <div class="screen-row hot">差异报告生成</div>
-                </div>
-              </div>
-            </div>
-            <div class="impact-row"><div>业务任务</div><div>接口动作</div><div>验证结论</div></div>
-          </article>
+        <div class="personal-visual-board">
+          <figure class="personal-hero-art">
+            <img class="personal-art-img" src="imgs/workflow-vibe-coding.png" alt="AI coding 产物图例">
+            <figcaption class="personal-overlay">
+              <strong>把脑内想法推到可运行界面</strong>
+              <span>Agent 帮我从需求、页面、接口、验证一路推进到可演示的 Web 工具。</span>
+            </figcaption>
+          </figure>
 
-          <article class="coding-product visual" style="--product-color: var(--green);">
-            <span class="product-tag">个人 Agent 实验室</span>
-            <h3>用来学习 Agent 运行机制的自建系统</h3>
-            <p class="product-desc">把概念 coding 成可观察、可调试的运行现场。</p>
-            <div class="product-screen">
-              <div class="screen-bar"><span>Agent Lab</span><span>streaming / loop / tools</span></div>
-              <div class="screen-body">
-                <div class="screen-sidebar">
-                  <div class="screen-pill">messages[]</div>
-                  <div class="screen-pill">LLM</div>
-                  <div class="screen-pill">tool_use</div>
-                  <div class="screen-pill">tool_result</div>
-                </div>
-                <div class="screen-main">
-                  <div class="screen-row hot">流式输出观察</div>
-                  <div class="screen-row">状态切换记录</div>
-                  <div class="screen-row hot">工具回流复现</div>
-                  <div class="screen-row">中断恢复实验</div>
-                </div>
-              </div>
+          <aside class="personal-side-note">
+            <h3>两个产物方向</h3>
+            <p class="personal-side-lead">我更看重“能不能跑起来、能不能在真实场景继续迭代”。</p>
+            <div class="personal-point-list">
+              <div class="personal-point" style="--point-color: var(--blue);"><b>1</b><span>业务视角的 Postman<em>面向 UAT，把接口调用翻译成业务任务与验证结论。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--green);"><b>2</b><span>个人 Agent 实验室<em>研究流式接口、工具调用、循环推进和中断恢复。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--violet);"><b>3</b><span>Vibe Coding 的价值<em>先让东西出现，再用真实反馈打磨细节。</em></span></div>
             </div>
-            <div class="impact-row"><div>复现机制</div><div>观察过程</div><div>沉淀设计</div></div>
-          </article>
+            <div class="personal-mini-strip">
+              <div>想法</div>
+              <div>原型</div>
+              <div>验证</div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -8238,39 +8386,29 @@ result: 字段口径已确认</pre>
           <span class="tag">14 / 最新资讯与输入方式</span>
         </header>
 
-        <div class="info-board info-flow-board">
-          <div class="signal-pipeline">
-            <article class="signal-node" style="--signal-color: var(--blue);">
-              <div class="signal-icon">X</div>
-              <h3>前沿信号</h3>
-              <p>一线从业者、工具体验、落地案例。</p>
-            </article>
-            <div class="signal-arrow">-></div>
-            <article class="signal-node" style="--signal-color: var(--green);">
-              <div class="signal-icon">Voice</div>
-              <h3>低摩擦记录</h3>
-              <p>Typeless / 豆包语音输入，先把想法说出来。</p>
-            </article>
-            <div class="signal-arrow">-></div>
-            <article class="signal-node" style="--signal-color: var(--amber);">
-              <div class="signal-icon">Agent</div>
-              <h3>筛选整理</h3>
-              <p>归类、追问、补资料、生成研究主题。</p>
-            </article>
-            <div class="signal-arrow">-></div>
-            <article class="signal-node" style="--signal-color: var(--violet);">
-              <div class="signal-icon">Wiki</div>
-              <h3>沉淀复用</h3>
-              <p>进入知识库，后续能被报告和分享调用。</p>
-            </article>
-          </div>
+        <div class="personal-visual-board">
+          <figure class="personal-hero-art">
+            <img class="personal-art-img" src="imgs/workflow-info-flow.png" alt="AI 信息流图例">
+            <figcaption class="personal-overlay">
+              <strong>前沿信号要变成可复用材料</strong>
+              <span>从 X 获取输入，用语音降低记录成本，再交给 Agent 筛选、整理和入库。</span>
+            </figcaption>
+          </figure>
 
-          <div class="signal-footer">
-            <div>看到</div>
-            <div>说出</div>
-            <div>整理</div>
-            <div>连接</div>
-          </div>
+          <aside class="personal-side-note">
+            <h3>我的信息流</h3>
+            <p class="personal-side-lead">AI 信息密度太高，关键是让输入变成稳定链路，而不是临时收藏。</p>
+            <div class="personal-point-list">
+              <div class="personal-point" style="--point-color: var(--blue);"><b>1</b><span>x.com 前沿信号<em>工具体验、技术进展、落地方案、从业者一手观察。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--green);"><b>2</b><span>AI 语音输入<em>Typeless / 豆包语音输入，让思考先流出来。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--amber);"><b>3</b><span>Agent 负责整理<em>归类、追问、补资料，并转成可继续使用的研究主题。</em></span></div>
+            </div>
+            <div class="personal-mini-strip">
+              <div>看到</div>
+              <div>说出</div>
+              <div>沉淀</div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -8287,36 +8425,25 @@ result: 字段口径已确认</pre>
           <span class="tag">15 / 知识管理</span>
         </header>
 
-        <div class="wiki-board">
-          <article class="wiki-card wiki-architecture visual">
-            <h3>LLM Wiki 的运行结构</h3>
-            <div class="wiki-flow visual">
-              <div class="wiki-node" style="--wiki-color: var(--amber);"><strong>Raw Sources</strong><span>原始资料只读保存</span></div>
-              <div class="wiki-arrow">-></div>
-              <div class="wiki-node" style="--wiki-color: var(--green);"><strong>Agent Maintainer</strong><span>摘要、补链、发现矛盾</span></div>
-              <div class="wiki-arrow">-></div>
-              <div class="wiki-node" style="--wiki-color: var(--blue);"><strong>Markdown Wiki</strong><span>主题页、实体页、索引</span></div>
-              <div class="wiki-arrow">-></div>
-              <div class="wiki-node" style="--wiki-color: var(--violet);"><strong>Obsidian</strong><span>浏览、图谱、输出</span></div>
-            </div>
-            <div class="wiki-schema-row">
-              <div class="wiki-schema"><strong>AGENTS.md</strong><span>工作流约束</span></div>
-              <div class="wiki-schema"><strong>index.md</strong><span>导航入口</span></div>
-              <div class="wiki-schema"><strong>log.md</strong><span>维护记录</span></div>
-              <div class="wiki-schema"><strong>lint</strong><span>防链路腐化</span></div>
-            </div>
-          </article>
+        <div class="personal-visual-board">
+          <figure class="personal-hero-art">
+            <img class="personal-art-img" src="imgs/workflow-second-brain.png" alt="Obsidian 与 LLM Wiki 知识管理图例">
+            <figcaption class="personal-overlay">
+              <strong>第二大脑不是存资料，是维护连接</strong>
+              <span>Agent 把资料持续编译成 LLM Wiki，Obsidian 负责展示知识图谱。</span>
+            </figcaption>
+          </figure>
 
-          <article class="wiki-card wiki-side visual">
-            <h3>我的第二大脑</h3>
-            <div class="graph-panel large">
-              <div class="graph-label">知识图谱 = 长期积累后的可导航思考网络</div>
+          <aside class="personal-side-note">
+            <h3>Obsidian + LLM Wiki</h3>
+            <p class="personal-side-lead">资料先进入结构化 wiki，再通过图谱、索引和报告反复复用。</p>
+            <div class="personal-point-list">
+              <div class="personal-point" style="--point-color: var(--amber);"><b>1</b><span>Raw Sources 只读保存<em>网页、论文、聊天记录和原始素材不被直接改写。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--green);"><b>2</b><span>Agent 维护 Wiki<em>摘要、补链、发现矛盾、定期检查链接腐化。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--blue);"><b>3</b><span>Obsidian 展示图谱<em>知识库长到一定程度后，变成可导航的第二大脑。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--violet);"><b>4</b><span>输出从这里生长<em>知识报告、分享材料和研究结论都能复用这张网。</em></span></div>
             </div>
-            <div class="wiki-side-note">
-              <strong>Agent 定期更新连接</strong>
-              <span>研究报告、分享材料和知识整理，都从这里继续生长。</span>
-            </div>
-          </article>
+          </aside>
         </div>
       </div>
     </section>
@@ -8526,12 +8653,12 @@ result: 字段口径已确认</pre>
         detail: "加载后，Agent 才拿到完整审查方法：先看 diff，再按严重程度列问题，最后补充测试风险。"
       },
       slides: {
-        title: "演示页 Skill",
+        title: "生成演示材料 Skill",
         name: "slide-deck",
-        request: "把这段材料做成一页适合部门分享的演示页。",
-        when: "用户要生成 PPT、HTML 演讲稿或动态演示",
+        request: "把这段材料整理成一份适合部门分享的演示材料。",
+        when: "用户要生成 PPT、HTML 演讲稿、演示材料或动态演示",
         loaded: "目录只告诉模型有这个能力；版式和验证细则按需加载。",
-        detail: "加载后，Agent 会按演示页方式工作：先定叙事，再做版式、讲稿、交互效果和截图验证。"
+        detail: "加载后，Agent 会按演示材料方式工作：先定叙事，再做版式、讲稿、交互效果和截图验证。"
       },
       debug: {
         title: "系统排障 Skill",
@@ -8621,7 +8748,7 @@ result: 字段口径已确认</pre>
         compressed: "项目是 HTML 演示材料。",
         title: "项目规范 / PROJECT.md",
         file: ".memory/PROJECT.md",
-        when: "涉及演示页结构、导出或视觉统一时加载",
+        when: "涉及演示材料结构、导出或视觉统一时加载",
         content: "精确记忆：这份材料是 deck-stage 驱动的静态 HTML deck，优先保持文字可直接编辑，按 1920x1080 画布验证。",
         result: "项目规范跨会话保留，新会话不用重新解释技术约束。"
       },
