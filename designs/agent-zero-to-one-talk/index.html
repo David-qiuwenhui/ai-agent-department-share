@@ -5742,6 +5742,175 @@
       fill: rgba(98, 74, 30, 0.12);
     }
 
+    /* Framework diagram readability pass for the remaining dark-theme slides. */
+    .loop-engineering-page .loop-canvas,
+    .permission-stage-page .permission-canvas,
+    .todo-stage-page .todo-canvas {
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
+        rgba(14, 22, 34, 0.86);
+    }
+
+    .loop-engineering-page .loop-diagram-svg text,
+    .permission-stage-page .perm-diagram-svg text,
+    .todo-stage-page .todo-diagram-svg text {
+      fill: rgba(255,255,255,0.9);
+    }
+
+    .loop-engineering-page .loop-diagram-svg .node-meta,
+    .permission-stage-page .node-meta,
+    .todo-stage-page .todo-meta {
+      fill: rgba(255,255,255,0.58);
+    }
+
+    .loop-engineering-page .loop-diagram-svg .small-label,
+    .permission-stage-page .small-label,
+    .todo-stage-page .todo-note {
+      fill: oklch(0.84 0.12 62);
+    }
+
+    .loop-engineering-page .loop-diagram-svg .node-shape,
+    .permission-stage-page .node-blue .node-shape,
+    .permission-stage-page .node-muted .node-shape,
+    .todo-stage-page .todo-box {
+      fill: rgba(255,255,255,0.075);
+    }
+
+    .loop-engineering-page .loop-diagram-svg .node-amber .node-shape,
+    .permission-stage-page .node-amber .node-shape,
+    .todo-stage-page .todo-box.amber {
+      fill: rgba(199, 138, 36, 0.14);
+    }
+
+    .loop-engineering-page .loop-diagram-svg .node-green .node-shape,
+    .permission-stage-page .node-green .node-shape,
+    .todo-stage-page .todo-box.green {
+      fill: rgba(65, 213, 158, 0.14);
+    }
+
+    .loop-engineering-page .loop-diagram-svg [data-loop-node].active .node-shape {
+      fill: rgba(42, 101, 239, 0.18);
+    }
+
+    .loop-engineering-page .loop-diagram-svg .node-amber.active .node-shape {
+      fill: rgba(199, 138, 36, 0.2);
+    }
+
+    .loop-engineering-page .loop-diagram-svg .node-green.active .node-shape {
+      fill: rgba(65, 213, 158, 0.22);
+    }
+
+    .permission-stage-page .node-red .node-shape {
+      fill: rgba(195, 64, 42, 0.16);
+    }
+
+    .permission-stage-page .node-red .node-title,
+    .permission-stage-page .node-red .node-meta {
+      fill: oklch(0.78 0.12 25);
+    }
+
+    .permission-stage-page .perm-gate-box {
+      fill: rgba(195, 64, 42, 0.1);
+    }
+
+    .permission-stage-page .perm-gate-step {
+      fill: rgba(199, 138, 36, 0.14);
+    }
+
+    .permission-stage-page .perm-gate-step.deny {
+      fill: rgba(195, 64, 42, 0.16);
+    }
+
+    .permission-stage-page .perm-gate-step.approve {
+      fill: rgba(65, 213, 158, 0.14);
+    }
+
+    .permission-stage-page .label-chip {
+      fill: rgba(8, 14, 22, 0.92);
+      stroke: rgba(255,255,255,0.14);
+    }
+
+    .permission-stage-page .perm-banner,
+    .todo-stage-page .todo-banner {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+    }
+
+    .permission-stage-page .perm-note,
+    .todo-stage-page .todo-nag {
+      background: rgba(199, 138, 36, 0.12);
+      color: oklch(0.84 0.12 62);
+    }
+
+    .permission-stage-page .perm-note strong,
+    .todo-stage-page .todo-nag strong {
+      color: oklch(0.88 0.13 62);
+    }
+
+    .todo-stage-page .todo-handler-box {
+      fill: rgba(65, 213, 158, 0.1);
+    }
+
+    .compact-page .compact-node[style] {
+      background: rgba(199, 138, 36, 0.14) !important;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .compact-page .compact-pipeline {
+      background: rgba(199, 138, 36, 0.08);
+      border-color: rgba(199, 138, 36, 0.62);
+    }
+
+    .compact-page .compact-pipeline-title {
+      color: rgba(255,255,255,0.86);
+    }
+
+    .compact-page .compact-layer-card {
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.86);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+
+    .compact-page .compact-layer-card span {
+      color: rgba(255,255,255,0.58);
+    }
+
+    .subagent-page .agent-domain.parent {
+      border-color: rgba(255,255,255,0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
+        rgba(14, 22, 34, 0.86);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .subagent-page .agent-domain.parent .agent-block,
+    .subagent-page .agent-domain.parent .tool-handler {
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.88);
+    }
+
+    .subagent-page .agent-domain.parent .agent-block span,
+    .subagent-page .agent-domain.parent .tool-handler span {
+      color: rgba(255,255,255,0.58);
+    }
+
+    .subagent-page .parent-tools {
+      background: rgba(42, 101, 239, 0.09);
+      border-color: var(--blue);
+    }
+
+    .subagent-page .tool-handler.subspawn {
+      background: rgba(126, 78, 229, 0.14);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .subagent-page .tool-result-return {
+      background: rgba(65, 213, 158, 0.16);
+      color: oklch(0.84 0.12 160);
+    }
+
     @media (prefers-reduced-motion: no-preference) {
       section[data-deck-active] .slide-head {
         animation: intro-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
