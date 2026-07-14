@@ -6413,6 +6413,358 @@
       font-size: 25px;
     }
 
+    .visual-toolkit {
+      grid-template-columns: 1fr 0.8fr;
+    }
+
+    .toolkit-main.visual {
+      position: relative;
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+    }
+
+    .toolkit-main.visual::before {
+      content: "";
+      position: absolute;
+      inset: 90px 80px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .tool-orbit {
+      position: relative;
+      min-height: 420px;
+    }
+
+    .orbit-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 260px;
+      min-height: 152px;
+      display: grid;
+      place-items: center;
+      gap: 8px;
+      padding: 24px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(42, 101, 239, 0.96), rgba(65, 213, 158, 0.78));
+      color: white;
+      text-align: center;
+      box-shadow: 0 24px 80px rgba(42, 101, 239, 0.28);
+      z-index: 2;
+    }
+
+    .orbit-core strong {
+      font-size: 34px;
+      line-height: 1.08;
+    }
+
+    .orbit-core span {
+      color: rgba(255,255,255,0.74);
+      font-size: 18px;
+      font-weight: 780;
+    }
+
+    .orbit-node {
+      position: absolute;
+      width: 190px;
+      min-height: 94px;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      padding: 16px;
+      border: 1px solid color-mix(in oklch, var(--orbit-color), white 34%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--orbit-color), transparent 84%);
+      color: rgba(255,255,255,0.9);
+      text-align: center;
+      box-shadow: 0 18px 46px rgba(0,0,0,0.18);
+    }
+
+    .orbit-node strong {
+      font-size: 26px;
+      line-height: 1.08;
+    }
+
+    .orbit-node span {
+      color: rgba(255,255,255,0.58);
+      font-size: 15px;
+      font-weight: 780;
+    }
+
+    .orbit-node.claude { left: 4%; top: 8%; }
+    .orbit-node.codex { right: 4%; top: 8%; }
+    .orbit-node.browser { left: 7%; bottom: 8%; }
+    .orbit-node.chatgpt { right: 7%; bottom: 8%; }
+
+    .decision-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .decision-strip div {
+      min-height: 76px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.72);
+      font-size: 17px;
+      font-weight: 760;
+      line-height: 1.18;
+    }
+
+    .decision-strip strong {
+      color: rgba(255,255,255,0.94);
+      font-size: 22px;
+    }
+
+    .hermes-phone {
+      min-height: 386px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid rgba(65, 213, 158, 0.28);
+      border-radius: 28px;
+      background: rgba(7, 15, 24, 0.52);
+      box-shadow: inset 0 0 0 8px rgba(255,255,255,0.035);
+    }
+
+    .phone-top {
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255,255,255,0.48);
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .chat-bubbles {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+    }
+
+    .chat-bubble {
+      max-width: 78%;
+      min-height: 58px;
+      display: grid;
+      align-content: center;
+      padding: 12px 14px;
+      border-radius: 16px 16px 16px 4px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.78);
+      font-size: 18px;
+      line-height: 1.26;
+      font-weight: 780;
+    }
+
+    .chat-bubble.agent {
+      justify-self: end;
+      border-radius: 16px 16px 4px 16px;
+      background: rgba(65, 213, 158, 0.18);
+      color: oklch(0.84 0.12 160);
+    }
+
+    .app-dock {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .app-dock div {
+      min-height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.72);
+      font-size: 17px;
+      font-weight: 850;
+    }
+
+    .coding-product.visual {
+      grid-template-rows: auto auto 1fr auto;
+    }
+
+    .product-screen {
+      min-height: 310px;
+      display: grid;
+      grid-template-rows: 42px 1fr;
+      border: 1px solid color-mix(in oklch, var(--product-color), white 26%);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: rgba(7, 14, 24, 0.46);
+    }
+
+    .screen-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 14px;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.58);
+      font-size: 15px;
+      font-weight: 840;
+    }
+
+    .screen-body {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .screen-sidebar,
+    .screen-main {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .screen-pill,
+    .screen-row {
+      min-height: 40px;
+      display: grid;
+      align-content: center;
+      padding: 0 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.68);
+      font-size: 16px;
+      font-weight: 820;
+    }
+
+    .screen-row.hot {
+      background: color-mix(in oklch, var(--product-color), transparent 78%);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .impact-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .impact-row div {
+      min-height: 66px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--product-color), transparent 86%);
+      color: rgba(255,255,255,0.82);
+      font-size: 19px;
+      font-weight: 860;
+      text-align: center;
+    }
+
+    .info-flow-board {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr auto;
+    }
+
+    .signal-pipeline {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .signal-node {
+      min-height: 360px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 16px;
+      padding: 28px;
+      border: 1px solid color-mix(in oklch, var(--signal-color), white 32%);
+      border-radius: var(--radius-md);
+      background:
+        radial-gradient(circle at 78% 18%, color-mix(in oklch, var(--signal-color), transparent 70%), transparent 30%),
+        rgba(255,255,255,0.06);
+      box-shadow: 0 30px 76px rgba(0,0,0,0.18);
+    }
+
+    .signal-icon {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: color-mix(in oklch, var(--signal-color), transparent 76%);
+      color: color-mix(in oklch, var(--signal-color), white 20%);
+      font-size: 28px;
+      font-weight: 950;
+    }
+
+    .signal-node h3 {
+      font-size: 34px;
+    }
+
+    .signal-node p {
+      align-self: end;
+      color: rgba(255,255,255,0.64);
+      font-size: 24px;
+      line-height: 1.34;
+      font-weight: 760;
+    }
+
+    .signal-arrow {
+      color: rgba(255,255,255,0.62);
+      font-size: 34px;
+      font-weight: 950;
+    }
+
+    .signal-footer {
+      min-height: 86px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .signal-footer div {
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.76);
+      font-size: 22px;
+      font-weight: 850;
+    }
+
+    .wiki-card.visual {
+      overflow: hidden;
+    }
+
+    .wiki-architecture.visual {
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .wiki-flow.visual .wiki-node {
+      min-height: 190px;
+    }
+
+    .graph-panel.large {
+      min-height: 424px;
+    }
+
+    @keyframes orbit-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes soft-pulse {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.18); }
+    }
+
     @media (prefers-reduced-motion: no-preference) {
       section[data-deck-active] .slide-head {
         animation: intro-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -6455,6 +6807,24 @@
 
       section[data-deck-active] .info-card:nth-child(3) {
         animation-delay: 190ms;
+      }
+
+      section[data-deck-active] .orbit-node,
+      section[data-deck-active] .signal-node,
+      section[data-deck-active] .wiki-node {
+        animation: orbit-float 3600ms ease-in-out infinite;
+      }
+
+      section[data-deck-active] .orbit-node:nth-child(odd),
+      section[data-deck-active] .signal-node:nth-child(5),
+      section[data-deck-active] .wiki-node:nth-child(5) {
+        animation-delay: 520ms;
+      }
+
+      section[data-deck-active] .orbit-core,
+      section[data-deck-active] .screen-row.hot,
+      section[data-deck-active] .signal-arrow {
+        animation: soft-pulse 2200ms ease-in-out infinite;
       }
     }
 
@@ -7749,56 +8119,46 @@ result: 字段口径已确认</pre>
           <span class="tag">12 / 工具链选择</span>
         </header>
 
-        <div class="toolkit-board">
-          <article class="toolkit-main">
+        <div class="toolkit-board visual-toolkit">
+          <article class="toolkit-main visual">
             <div class="toolkit-principle">
-              <strong>选择原则：Top 1 级别工具优先</strong>
-              <span>工具能力每天都在演进，过度比较会吞掉真正该投入到工作流里的时间。</span>
+              <strong>少折腾工具，多沉淀工作流</strong>
+              <span>选第一梯队，把时间花在任务、上下文和验收上。</span>
             </div>
 
-            <div class="tool-family-grid">
-              <div class="tool-family" style="--family-color: var(--blue);">
-                <h3>创意落地与 AIGC</h3>
-                <div class="tool-stack">
-                  <div class="tool-item">
-                    <strong>Claude</strong>
-                    <div class="mode-row"><span>CLI</span><span>Desktop</span><span>Browser</span></div>
-                    <p>适合创意落地、页面生成、可视化标注和浏览器页面阅读控制。</p>
-                  </div>
-                  <div class="tool-item">
-                    <strong>Codex / ChatGPT</strong>
-                    <div class="mode-row"><span>CLI</span><span>Desktop</span><span>主力工具</span></div>
-                    <p>我目前最主要的 coding、资料整理、方案推演和复杂任务推进工具。</p>
-                  </div>
-                </div>
+            <div class="tool-orbit">
+              <div class="orbit-core">
+                <strong>Top 1 工具优先</strong>
+                <span>节约探索成本</span>
               </div>
+              <div class="orbit-node claude" style="--orbit-color: var(--blue);"><strong>Claude</strong><span>CLI / Desktop</span></div>
+              <div class="orbit-node codex" style="--orbit-color: var(--green);"><strong>Codex</strong><span>我的主力 coding</span></div>
+              <div class="orbit-node browser" style="--orbit-color: var(--amber);"><strong>Browser</strong><span>读页面 / 点页面</span></div>
+              <div class="orbit-node chatgpt" style="--orbit-color: var(--violet);"><strong>ChatGPT</strong><span>推演 / 写作 / 整理</span></div>
+            </div>
 
-              <div class="tool-family" style="--family-color: var(--green);">
-                <h3>把工具变成工作方式</h3>
-                <div class="tool-stack">
-                  <div class="tool-item">
-                    <strong>不是追新，而是稳定复用</strong>
-                    <p>同一类任务固定入口、固定提示、固定验收方式，才能不断积累效率。</p>
-                  </div>
-                  <div class="tool-item">
-                    <strong>Browser 能力是分水岭</strong>
-                    <p>能读页面、点页面、截页面后，Agent 才真正进入真实工作现场。</p>
-                  </div>
-                </div>
-              </div>
+            <div class="decision-strip">
+              <div><strong>强能力</strong><span>CLI + Desktop</span></div>
+              <div><strong>真现场</strong><span>Browser 控制页面</span></div>
+              <div><strong>可复用</strong><span>固定入口和验收</span></div>
             </div>
           </article>
 
           <article class="toolkit-side">
             <h3>个人生活助手：Hermes Agent</h3>
-            <div class="hermes-map">
-              <div class="hermes-node">微信</div>
-              <div class="hermes-node">飞书</div>
-              <div class="hermes-node">Telegram</div>
-            </div>
-            <div class="assistant-note">
-              <strong>随时可以对话的生活小助手</strong>
-              <span>我会把偏生活、偏研究、偏个人导向的任务交给它：查资料、做整理、提醒事项、沉淀想法。</span>
+            <div class="hermes-phone">
+              <div class="phone-top"><span>Hermes</span><span>always on</span></div>
+              <div class="chat-bubbles">
+                <div class="chat-bubble">帮我跟进这个研究主题</div>
+                <div class="chat-bubble agent">已整理资料，并生成待办</div>
+                <div class="chat-bubble">晚上提醒我补充结论</div>
+                <div class="chat-bubble agent">好的，已同步到个人知识库</div>
+              </div>
+              <div class="app-dock">
+                <div>微信</div>
+                <div>飞书</div>
+                <div>Telegram</div>
+              </div>
             </div>
           </article>
         </div>
@@ -7818,28 +8178,52 @@ result: 字段口径已确认</pre>
         </header>
 
         <div class="coding-board">
-          <article class="coding-product" style="--product-color: var(--blue);">
+          <article class="coding-product visual" style="--product-color: var(--blue);">
             <span class="product-tag">业务视角的 Postman</span>
             <h3>面向 UAT 的接口验证工作台</h3>
-            <p class="product-desc">给 IT 团队和业务用户使用，围绕任务发布、外部接口调用和数据验证做一层更贴近业务语义的封装。</p>
-            <div class="product-flow">
-              <div class="product-step"><b>1</b><span>用户按业务任务发起验证</span></div>
-              <div class="product-step"><b>2</b><span>系统调用外部接口并记录过程</span></div>
-              <div class="product-step"><b>3</b><span>对返回数据做口径校验和差异判断</span></div>
+            <p class="product-desc">把接口验证翻译成业务能理解的任务流。</p>
+            <div class="product-screen">
+              <div class="screen-bar"><span>UAT Console</span><span>pass / diff / retry</span></div>
+              <div class="screen-body">
+                <div class="screen-sidebar">
+                  <div class="screen-pill">任务发布</div>
+                  <div class="screen-pill">接口调用</div>
+                  <div class="screen-pill">数据验证</div>
+                  <div class="screen-pill">结果留痕</div>
+                </div>
+                <div class="screen-main">
+                  <div class="screen-row hot">电子流状态校验</div>
+                  <div class="screen-row">请求参数自动组装</div>
+                  <div class="screen-row">返回字段口径检查</div>
+                  <div class="screen-row hot">差异报告生成</div>
+                </div>
+              </div>
             </div>
-            <div class="product-foot">它解决的是“业务同事不想读接口文档，但需要确认流程和数据对不对”。</div>
+            <div class="impact-row"><div>业务任务</div><div>接口动作</div><div>验证结论</div></div>
           </article>
 
-          <article class="coding-product" style="--product-color: var(--green);">
+          <article class="coding-product visual" style="--product-color: var(--green);">
             <span class="product-tag">个人 Agent 实验室</span>
             <h3>用来学习 Agent 运行机制的自建系统</h3>
-            <p class="product-desc">我会把对 Agent 的理解做成可运行实验：流式接口如何处理、Loop 如何推进、工具结果如何回流。</p>
-            <div class="product-flow">
-              <div class="product-step"><b>1</b><span>复现 Agent loop 与 tool_result 回流</span></div>
-              <div class="product-step"><b>2</b><span>观察流式输出、状态切换和中断恢复</span></div>
-              <div class="product-step"><b>3</b><span>把学习结论沉淀成下一轮工具设计</span></div>
+            <p class="product-desc">把概念 coding 成可观察、可调试的运行现场。</p>
+            <div class="product-screen">
+              <div class="screen-bar"><span>Agent Lab</span><span>streaming / loop / tools</span></div>
+              <div class="screen-body">
+                <div class="screen-sidebar">
+                  <div class="screen-pill">messages[]</div>
+                  <div class="screen-pill">LLM</div>
+                  <div class="screen-pill">tool_use</div>
+                  <div class="screen-pill">tool_result</div>
+                </div>
+                <div class="screen-main">
+                  <div class="screen-row hot">流式输出观察</div>
+                  <div class="screen-row">状态切换记录</div>
+                  <div class="screen-row hot">工具回流复现</div>
+                  <div class="screen-row">中断恢复实验</div>
+                </div>
+              </div>
             </div>
-            <div class="product-foot">它更像我的练功场：不是只看文章，而是把机制 coding 出来、跑起来、拆开看。</div>
+            <div class="impact-row"><div>复现机制</div><div>观察过程</div><div>沉淀设计</div></div>
           </article>
         </div>
       </div>
@@ -7857,39 +8241,39 @@ result: 字段口径已确认</pre>
           <span class="tag">14 / 最新资讯与输入方式</span>
         </header>
 
-        <div class="info-board">
-          <article class="info-card" style="--info-color: var(--blue);">
-            <div class="info-symbol">X</div>
-            <h3>x.com 是我的前沿雷达</h3>
-            <p>国内外 AI 从业者会持续分享最新工具体验、模型进展、产品方案和真实落地案例。</p>
-            <div class="info-list">
-              <div>关注一线实践者，而不只关注新闻标题</div>
-              <div>看工具怎么被真实使用，而不只看发布会</div>
-              <div>把高频出现的概念沉淀成研究主题</div>
-            </div>
-          </article>
+        <div class="info-board info-flow-board">
+          <div class="signal-pipeline">
+            <article class="signal-node" style="--signal-color: var(--blue);">
+              <div class="signal-icon">X</div>
+              <h3>前沿信号</h3>
+              <p>一线从业者、工具体验、落地案例。</p>
+            </article>
+            <div class="signal-arrow">-></div>
+            <article class="signal-node" style="--signal-color: var(--green);">
+              <div class="signal-icon">Voice</div>
+              <h3>低摩擦记录</h3>
+              <p>Typeless / 豆包语音输入，先把想法说出来。</p>
+            </article>
+            <div class="signal-arrow">-></div>
+            <article class="signal-node" style="--signal-color: var(--amber);">
+              <div class="signal-icon">Agent</div>
+              <h3>筛选整理</h3>
+              <p>归类、追问、补资料、生成研究主题。</p>
+            </article>
+            <div class="signal-arrow">-></div>
+            <article class="signal-node" style="--signal-color: var(--violet);">
+              <div class="signal-icon">Wiki</div>
+              <h3>沉淀复用</h3>
+              <p>进入知识库，后续能被报告和分享调用。</p>
+            </article>
+          </div>
 
-          <article class="info-card" style="--info-color: var(--green);">
-            <div class="info-symbol">Voice</div>
-            <h3>AI 语音输入降低思考成本</h3>
-            <p>Typeless、豆包语音输入法这类工具，让我先沉浸在想法本身，而不是被打字速度打断。</p>
-            <div class="info-list">
-              <div>快速把灵感、判断、问题转成文本</div>
-              <div>减少“组织语言”对思考链路的消耗</div>
-              <div>把口述草稿交给 Agent 继续结构化</div>
-            </div>
-          </article>
-
-          <article class="info-card" style="--info-color: var(--amber);">
-            <div class="info-symbol">Agent</div>
-            <h3>输入最终要进入知识系统</h3>
-            <p>我不希望资讯停留在收藏夹里，而是让 Agent 帮我判断、归类、补链路，变成后续可复用的知识。</p>
-            <div class="info-list">
-              <div>信息流：看到 -> 记录 -> 整理 -> 连接</div>
-              <div>输出流：问题 -> 研究 -> 报告 -> 分享</div>
-              <div>知识不是存起来，而是能被再次调用</div>
-            </div>
-          </article>
+          <div class="signal-footer">
+            <div>看到</div>
+            <div>说出</div>
+            <div>整理</div>
+            <div>连接</div>
+          </div>
         </div>
       </div>
     </section>
@@ -7907,33 +8291,33 @@ result: 字段口径已确认</pre>
         </header>
 
         <div class="wiki-board">
-          <article class="wiki-card wiki-architecture">
+          <article class="wiki-card wiki-architecture visual">
             <h3>LLM Wiki 的运行结构</h3>
-            <div class="wiki-flow">
-              <div class="wiki-node" style="--wiki-color: var(--amber);"><strong>Raw Sources</strong><span>文章、论文、聊天记录、语音转写；只读，不直接改</span></div>
+            <div class="wiki-flow visual">
+              <div class="wiki-node" style="--wiki-color: var(--amber);"><strong>Raw Sources</strong><span>原始资料只读保存</span></div>
               <div class="wiki-arrow">-></div>
-              <div class="wiki-node" style="--wiki-color: var(--green);"><strong>Agent Maintainer</strong><span>阅读、摘要、交叉引用、发现矛盾、更新页面</span></div>
+              <div class="wiki-node" style="--wiki-color: var(--green);"><strong>Agent Maintainer</strong><span>摘要、补链、发现矛盾</span></div>
               <div class="wiki-arrow">-></div>
-              <div class="wiki-node" style="--wiki-color: var(--blue);"><strong>Markdown Wiki</strong><span>主题页、实体页、比较表、研究结论、知识链接</span></div>
+              <div class="wiki-node" style="--wiki-color: var(--blue);"><strong>Markdown Wiki</strong><span>主题页、实体页、索引</span></div>
               <div class="wiki-arrow">-></div>
-              <div class="wiki-node" style="--wiki-color: var(--violet);"><strong>Obsidian</strong><span>浏览、Graph View、Dataview、输出报告</span></div>
+              <div class="wiki-node" style="--wiki-color: var(--violet);"><strong>Obsidian</strong><span>浏览、图谱、输出</span></div>
             </div>
             <div class="wiki-schema-row">
-              <div class="wiki-schema"><strong>AGENTS.md</strong><span>约束结构和工作流</span></div>
-              <div class="wiki-schema"><strong>index.md</strong><span>内容目录和入口</span></div>
-              <div class="wiki-schema"><strong>log.md</strong><span>摄入、查询、维护记录</span></div>
-              <div class="wiki-schema"><strong>lint</strong><span>防止孤页、过期和链路腐化</span></div>
+              <div class="wiki-schema"><strong>AGENTS.md</strong><span>工作流约束</span></div>
+              <div class="wiki-schema"><strong>index.md</strong><span>导航入口</span></div>
+              <div class="wiki-schema"><strong>log.md</strong><span>维护记录</span></div>
+              <div class="wiki-schema"><strong>lint</strong><span>防链路腐化</span></div>
             </div>
           </article>
 
-          <article class="wiki-card wiki-side">
+          <article class="wiki-card wiki-side visual">
             <h3>我的第二大脑</h3>
-            <div class="graph-panel">
+            <div class="graph-panel large">
               <div class="graph-label">知识图谱 = 长期积累后的可导航思考网络</div>
             </div>
             <div class="wiki-side-note">
               <strong>Agent 定期更新连接</strong>
-              <span>后续做知识整理、研究报告、分享材料时，Agent 可以基于这个知识库检索、补链、生成和反查。</span>
+              <span>研究报告、分享材料和知识整理，都从这里继续生长。</span>
             </div>
           </article>
         </div>
