@@ -2900,6 +2900,357 @@
       font-size: 18px;
     }
 
+    .system-prompt-page {
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.045) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 80% 18%, rgba(38, 102, 226, 0.15), transparent 31%),
+        var(--paper);
+    }
+
+    .system-prompt-page .kicker {
+      border-color: color-mix(in oklch, var(--blue), white 35%);
+      background: color-mix(in oklch, var(--blue), white 86%);
+      color: oklch(0.35 0.1 231);
+    }
+
+    .system-subtitle {
+      margin-top: 12px;
+      max-width: 1240px;
+      color: var(--muted);
+      font-size: 26px;
+      line-height: 1.46;
+      text-wrap: pretty;
+    }
+
+    .system-stage {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 30px;
+      height: 100%;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .system-arch,
+    .system-live {
+      padding: 30px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+    }
+
+    .system-arch {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+      min-height: 0;
+      background: var(--white);
+    }
+
+    .system-head,
+    .system-live-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .system-head h3,
+    .system-live-head h3 {
+      font-size: 30px;
+    }
+
+    .system-pill {
+      min-height: 38px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 14px;
+      border: 1px solid color-mix(in oklch, var(--blue), white 28%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--blue), white 88%);
+      color: oklch(0.35 0.1 231);
+      font-size: 18px;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+
+    .system-arch-map {
+      display: grid;
+      grid-template-columns: 1fr 38px 1.14fr 38px 1fr;
+      grid-template-rows: auto auto;
+      gap: 14px;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .system-node,
+    .system-section-card {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      min-height: 96px;
+      padding: 14px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: oklch(0.985 0.01 231);
+      text-align: center;
+    }
+
+    .system-node.assembler {
+      border-color: var(--violet);
+      background: color-mix(in oklch, var(--violet), white 91%);
+      color: oklch(0.36 0.11 292);
+    }
+
+    .system-node strong,
+    .system-section-card strong {
+      font-size: 23px;
+      line-height: 1.12;
+    }
+
+    .system-node span,
+    .system-section-card span {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .system-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .system-sections {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 18px;
+      border: 3px solid var(--blue);
+      border-radius: var(--radius-md);
+      background: color-mix(in oklch, var(--blue), white 94%);
+    }
+
+    .system-sections-title {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: oklch(0.35 0.1 231);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .system-section-card {
+      min-height: 98px;
+      text-align: left;
+      border-color: var(--section-color);
+      background: color-mix(in oklch, var(--section-color), white 88%);
+      color: color-mix(in oklch, var(--section-color), black 30%);
+    }
+
+    .system-rule-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .system-rule {
+      min-height: 62px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(33, 40, 50, 0.055);
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.28;
+      font-weight: 780;
+    }
+
+    .system-rule b {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      font-size: 16px;
+    }
+
+    .system-live {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 12px;
+      min-height: 0;
+      padding: 28px;
+      background: linear-gradient(150deg, rgba(26, 34, 54, 0.98), rgba(16, 24, 38, 0.98));
+      color: rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .system-live-head h3 {
+      color: rgba(255,255,255,0.94);
+    }
+
+    .system-live .system-pill {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+    }
+
+    .system-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .system-tabs .chip {
+      min-height: 48px;
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .system-tabs .chip.active {
+      border-color: var(--blue);
+      background: color-mix(in oklch, var(--blue), transparent 72%);
+      color: oklch(0.82 0.11 231);
+      box-shadow: 0 0 0 4px rgba(38, 102, 226, 0.08);
+    }
+
+    .request-stack {
+      display: grid;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .request-layer {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 48px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.72);
+      font-size: 17px;
+      font-weight: 780;
+      transition: opacity 200ms ease, transform 200ms ease, border-color 200ms ease, background 200ms ease;
+    }
+
+    .request-layer.active {
+      border-color: var(--layer-color);
+      background: color-mix(in oklch, var(--layer-color), transparent 84%);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .request-layer.muted {
+      opacity: 0.42;
+    }
+
+    .request-layer b {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--layer-color);
+      color: var(--dark);
+      font-size: 16px;
+    }
+
+    .request-layer strong {
+      font-size: 19px;
+    }
+
+    .request-layer span {
+      color: rgba(255,255,255,0.58);
+    }
+
+    .system-preview-card {
+      display: grid;
+      gap: 10px;
+      min-height: 142px;
+      padding: 14px;
+      border: 1px solid rgba(38, 102, 226, 0.38);
+      border-radius: var(--radius-sm);
+      background:
+        linear-gradient(90deg, rgba(38, 102, 226, 0.16), transparent 64%),
+        rgba(255,255,255,0.06);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .system-preview-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 42%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transform: translateX(-110%);
+      animation: skill-scan 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      pointer-events: none;
+    }
+
+    .system-preview-card h3,
+    .system-preview-list {
+      position: relative;
+      z-index: 1;
+    }
+
+    .system-preview-card h3 {
+      color: rgba(255,255,255,0.94);
+      font-size: 24px;
+    }
+
+    .system-preview-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .system-preview-list div {
+      min-height: 28px;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: var(--radius-sm);
+      background: rgba(14, 18, 28, 0.5);
+      color: rgba(255,255,255,0.74);
+      font-size: 15px;
+      font-weight: 760;
+    }
+
+    .system-preview-list strong {
+      color: oklch(0.82 0.11 231);
+    }
+
+    .system-result {
+      min-height: 50px;
+      display: grid;
+      align-content: center;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(38, 102, 226, 0.14);
+      color: oklch(0.82 0.11 231);
+      font-size: 18px;
+      line-height: 1.28;
+      font-weight: 830;
+    }
+
     .team-board {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
@@ -3019,6 +3370,669 @@
       color: inherit;
       opacity: 0.72;
       font-size: 18px;
+    }
+
+    .mcp-page {
+      background:
+        linear-gradient(90deg, rgba(33, 40, 50, 0.045) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(33, 40, 50, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 82% 20%, rgba(65, 213, 158, 0.15), transparent 32%),
+        var(--paper);
+    }
+
+    .mcp-page .kicker {
+      border-color: color-mix(in oklch, var(--green), white 35%);
+      background: color-mix(in oklch, var(--green), white 86%);
+      color: oklch(0.32 0.09 160);
+    }
+
+    .mcp-subtitle,
+    .finale-subtitle {
+      margin-top: 12px;
+      max-width: 1240px;
+      color: var(--muted);
+      font-size: 26px;
+      line-height: 1.46;
+      text-wrap: pretty;
+    }
+
+    .mcp-stage {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 30px;
+      height: 100%;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .mcp-arch,
+    .mcp-live {
+      padding: 30px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+    }
+
+    .mcp-arch {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 14px;
+      min-height: 0;
+      background: var(--white);
+    }
+
+    .mcp-head,
+    .mcp-live-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .mcp-head h3,
+    .mcp-live-head h3 {
+      font-size: 30px;
+    }
+
+    .mcp-pill {
+      min-height: 38px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 14px;
+      border: 1px solid color-mix(in oklch, var(--green), white 28%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--green), white 88%);
+      color: oklch(0.32 0.09 160);
+      font-size: 18px;
+      font-weight: 860;
+      white-space: nowrap;
+    }
+
+    .mcp-definition {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: center;
+      min-height: 82px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--green), white 84%), rgba(255,255,255,0.92));
+      border: 2px solid color-mix(in oklch, var(--green), white 22%);
+    }
+
+    .mcp-definition strong {
+      color: oklch(0.31 0.09 160);
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    .mcp-definition span {
+      color: var(--muted);
+      font-size: 21px;
+      line-height: 1.32;
+      font-weight: 780;
+    }
+
+    .mcp-arch-map {
+      display: grid;
+      grid-template-columns: 1fr 38px 1.08fr 38px 1fr;
+      grid-template-rows: auto auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .mcp-node,
+    .mcp-server-card {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      min-height: 84px;
+      padding: 14px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: oklch(0.985 0.01 231);
+      text-align: center;
+    }
+
+    .mcp-node.protocol {
+      border-color: var(--green);
+      background: color-mix(in oklch, var(--green), white 90%);
+      color: oklch(0.31 0.09 160);
+    }
+
+    .mcp-node strong,
+    .mcp-server-card strong {
+      font-size: 22px;
+      line-height: 1.12;
+    }
+
+    .mcp-node span,
+    .mcp-server-card span {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .mcp-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .mcp-servers {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 16px;
+      border: 3px solid var(--green);
+      border-radius: var(--radius-md);
+      background: color-mix(in oklch, var(--green), white 94%);
+    }
+
+    .mcp-servers-title {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: oklch(0.32 0.09 160);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .mcp-server-card {
+      min-height: 84px;
+      text-align: left;
+      border-color: var(--server-color);
+      background: color-mix(in oklch, var(--server-color), white 88%);
+      color: color-mix(in oklch, var(--server-color), black 30%);
+    }
+
+    .mcp-rule-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .mcp-rule {
+      min-height: 68px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(33, 40, 50, 0.055);
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.28;
+      font-weight: 780;
+    }
+
+    .mcp-rule b {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font-size: 16px;
+    }
+
+    .mcp-live {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto auto;
+      gap: 14px;
+      min-height: 0;
+      background: linear-gradient(150deg, rgba(23, 39, 44, 0.98), rgba(18, 27, 39, 0.98));
+      color: rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .mcp-live-head h3 {
+      color: rgba(255,255,255,0.94);
+    }
+
+    .mcp-live .mcp-pill {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+    }
+
+    .mcp-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mcp-tabs .chip {
+      min-height: 48px;
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .mcp-tabs .chip.active {
+      border-color: var(--green);
+      background: color-mix(in oklch, var(--green), transparent 72%);
+      color: oklch(0.84 0.11 160);
+      box-shadow: 0 0 0 4px rgba(65, 213, 158, 0.08);
+    }
+
+    .mcp-call-card {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 12px;
+      min-height: 0;
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(65, 213, 158, 0.38);
+      background:
+        linear-gradient(90deg, rgba(65, 213, 158, 0.15), transparent 64%),
+        rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mcp-call-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 42%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transform: translateX(-110%);
+      animation: skill-scan 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      pointer-events: none;
+    }
+
+    .mcp-call-card h3,
+    .mcp-call-flow,
+    .mcp-result-box {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mcp-call-card h3 {
+      color: rgba(255,255,255,0.94);
+      font-size: 28px;
+    }
+
+    .mcp-call-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .mcp-flow-step {
+      min-height: 66px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.08);
+      text-align: center;
+      color: rgba(255,255,255,0.78);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .mcp-flow-step strong {
+      color: rgba(255,255,255,0.92);
+      font-size: 19px;
+      line-height: 1.08;
+    }
+
+    .mcp-flow-step span {
+      color: rgba(255,255,255,0.52);
+      font-size: 14px;
+      line-height: 1.12;
+    }
+
+    .mcp-flow-arrow {
+      color: oklch(0.84 0.11 160);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .mcp-result-box {
+      display: grid;
+      align-content: center;
+      min-height: 134px;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(14, 18, 28, 0.5);
+      color: rgba(255,255,255,0.84);
+      font-size: 22px;
+      line-height: 1.34;
+      font-weight: 780;
+    }
+
+    .mcp-result {
+      min-height: 56px;
+      display: grid;
+      align-content: center;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(65, 213, 158, 0.13);
+      color: oklch(0.84 0.11 160);
+      font-size: 19px;
+      line-height: 1.28;
+      font-weight: 830;
+    }
+
+    .mcp-boundary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      color: rgba(255,255,255,0.7);
+      font-size: 16px;
+      line-height: 1.22;
+      font-weight: 780;
+    }
+
+    .mcp-boundary div {
+      min-height: 56px;
+      display: grid;
+      align-content: center;
+      gap: 3px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mcp-boundary strong {
+      color: rgba(255,255,255,0.9);
+      font-size: 18px;
+    }
+
+    .finale-page {
+      background:
+        linear-gradient(90deg, rgba(42, 101, 239, 0.055) 1px, transparent 1px) 0 0 / 48px 48px,
+        linear-gradient(rgba(42, 101, 239, 0.04) 1px, transparent 1px) 0 0 / 48px 48px,
+        var(--paper);
+    }
+
+    .finale-page .kicker {
+      border-color: color-mix(in oklch, var(--blue), white 35%);
+      background: color-mix(in oklch, var(--blue), white 88%);
+      color: oklch(0.37 0.13 252);
+    }
+
+    .finale-stage {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 18px;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .engineer-compare {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+      min-height: 0;
+    }
+
+    .engineer-card {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      gap: 12px;
+      min-height: 0;
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.13);
+      overflow: hidden;
+    }
+
+    .engineer-card.loop {
+      border: 3px solid var(--blue);
+    }
+
+    .engineer-card.harness {
+      border: 3px solid var(--green);
+      background:
+        radial-gradient(circle at 90% 12%, rgba(65, 213, 158, 0.16), transparent 30%),
+        var(--white);
+    }
+
+    .engineer-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .engineer-title h3 {
+      font-size: 36px;
+      line-height: 1.08;
+    }
+
+    .engineer-title span {
+      min-height: 38px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(33, 40, 50, 0.07);
+      color: var(--muted);
+      font-size: 20px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .engineer-card p {
+      color: var(--muted);
+      font-size: 21px;
+      line-height: 1.32;
+      text-wrap: pretty;
+    }
+
+    .engineer-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .engineer-point {
+      min-height: 58px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(33, 40, 50, 0.055);
+    }
+
+    .engineer-point strong {
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.12;
+    }
+
+    .engineer-point span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.16;
+      font-weight: 760;
+    }
+
+    .loop-mini {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-rows: 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+      justify-items: center;
+      min-height: 0;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      background: oklch(0.975 0.012 247);
+    }
+
+    .loop-mini-node {
+      width: 172px;
+      min-height: 70px;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      padding: 12px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      text-align: center;
+    }
+
+    .loop-mini-node strong {
+      color: var(--blue);
+      font-size: 23px;
+    }
+
+    .loop-mini-node span {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 760;
+    }
+
+    .loop-mini-arrow {
+      color: var(--blue);
+      font-size: 28px;
+      font-weight: 950;
+    }
+
+    .loop-summary-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      align-self: stretch;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      background: oklch(0.975 0.012 247);
+      min-height: 0;
+    }
+
+    .loop-summary-chip {
+      min-height: 76px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      padding: 10px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      text-align: center;
+    }
+
+    .loop-summary-chip strong {
+      color: var(--blue);
+      font-size: 22px;
+      line-height: 1.08;
+    }
+
+    .loop-summary-chip span {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 760;
+    }
+
+    .loop-summary-arrow {
+      color: var(--blue);
+      font-size: 23px;
+      font-weight: 950;
+    }
+
+    .harness-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      align-content: center;
+      min-height: 0;
+    }
+
+    .harness-chip {
+      min-height: 58px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      padding: 9px 10px;
+      border: 2px solid color-mix(in oklch, var(--chip-color), white 18%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--chip-color), white 88%);
+      color: color-mix(in oklch, var(--chip-color), black 28%);
+    }
+
+    .harness-chip strong {
+      font-size: 18px;
+      line-height: 1.12;
+    }
+
+    .harness-chip span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.18;
+      font-weight: 760;
+    }
+
+    .finale-bottom {
+      display: grid;
+      grid-template-columns: 0.88fr 1.08fr 1.04fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .finale-principle,
+    .finale-formula,
+    .finale-answer {
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      min-height: 96px;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 1px 3px rgba(25, 29, 36, 0.11);
+    }
+
+    .finale-principle strong,
+    .finale-formula strong,
+    .finale-answer strong {
+      color: var(--ink);
+      font-size: 25px;
+      line-height: 1.18;
+    }
+
+    .finale-principle span,
+    .finale-formula span,
+    .finale-answer span {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .finale-answer {
+      background: linear-gradient(135deg, oklch(0.32 0.08 247), oklch(0.55 0.14 252));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .finale-answer strong {
+      color: white;
+    }
+
+    .finale-answer span {
+      color: rgba(255,255,255,0.7);
     }
 
     .summary-board {
@@ -5403,16 +6417,127 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section class="subagent-page" data-label="Subagent 协作" data-speaker-notes="这一页讲 Subagent 的核心机制。Parent Agent 不把完整对话历史交给子 Agent，而是只传一个 task 描述。Subagent 拿到的是全新的 messages[]，自己跑一段独立 loop，中间几十轮工具调用都不会污染 Parent。最后只提取摘要或最终文本，作为 tool_result 回到 Parent 的 messages[]。">
+    <section class="system-prompt-page" data-label="System Prompt 组装" data-speaker-notes="这一页讲 System Prompt。每次用户发给 Agent 的不是一句话，而是一整包运行现场：system prompt 的各个 section、messages 历史、工具定义、工作区状态、记忆和系统提醒。重点是 prompt 不是写死的，而是在运行时按当前状态组装。">
       <div class="slide-grid">
         <header class="slide-head">
           <div class="num">08</div>
+          <div>
+            <span class="kicker">System Prompt</span>
+            <h2>每次发给 Agent 的，是一整包运行现场</h2>
+            <p class="system-subtitle">Prompt 不是写死的一段话，而是由多个 section 在运行时组装：稳定段常驻，动态段按状态加载。</p>
+          </div>
+          <span class="tag">08 / 请求结构</span>
+        </header>
+
+        <div class="system-stage">
+          <article class="system-arch">
+            <div class="system-head">
+              <h3>左侧：System Prompt 运行时组装</h3>
+              <span class="system-pill">分段 + 按需 + 缓存</span>
+            </div>
+
+            <div class="system-arch-map">
+              <div class="system-node">
+                <strong>context</strong>
+                <span>工具、工作区、记忆、模式</span>
+              </div>
+              <div class="system-arrow">-></div>
+              <div class="system-node assembler">
+                <strong>assemble_system_prompt()</strong>
+                <span>按真实状态拼 section</span>
+              </div>
+              <div class="system-arrow">-></div>
+              <div class="system-node">
+                <strong>API Request</strong>
+                <span>system + messages + tools</span>
+              </div>
+
+              <div class="system-sections">
+                <div class="system-sections-title">
+                  <span>PROMPT_SECTIONS</span>
+                  <span>不是关键词猜测，是状态驱动</span>
+                </div>
+                <div class="system-section-card" style="--section-color: var(--blue);">
+                  <strong>identity</strong>
+                  <span>你是谁、怎么做事。始终加载。</span>
+                </div>
+                <div class="system-section-card" style="--section-color: var(--green);">
+                  <strong>tools</strong>
+                  <span>实际启用的工具列表。始终加载。</span>
+                </div>
+                <div class="system-section-card" style="--section-color: var(--amber);">
+                  <strong>workspace</strong>
+                  <span>当前目录、项目现场。始终加载。</span>
+                </div>
+                <div class="system-section-card" style="--section-color: var(--violet);">
+                  <strong>memory</strong>
+                  <span>存在相关记忆时，按需加载。</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="system-rule-row">
+              <div class="system-rule"><b>1</b><span>稳定 section 放前面，利于缓存。</span></div>
+              <div class="system-rule"><b>2</b><span>动态 section 看真实状态，不搜关键词。</span></div>
+              <div class="system-rule"><b>3</b><span>每轮更新 context，再决定是否重组。</span></div>
+            </div>
+          </article>
+
+          <aside class="system-live">
+            <div class="system-live-head">
+              <h3>右侧：一次请求包里有什么</h3>
+              <span class="system-pill" id="systemModeLabel">基础任务</span>
+            </div>
+
+            <div class="system-tabs">
+              <button class="chip active" type="button" data-system-mode="base">基础任务</button>
+              <button class="chip" type="button" data-system-mode="memory">带记忆</button>
+              <button class="chip" type="button" data-system-mode="mcp">外部工具</button>
+            </div>
+
+            <div class="request-stack" id="requestStack">
+              <div class="request-layer active" data-layer="system" style="--layer-color: var(--blue);">
+                <b>1</b><strong>system prompt</strong><span id="systemSections">identity + tools + workspace</span>
+              </div>
+              <div class="request-layer active" data-layer="messages" style="--layer-color: var(--green);">
+                <b>2</b><strong>messages[]</strong><span>历史对话 + 当前用户任务</span>
+              </div>
+              <div class="request-layer active" data-layer="tools" style="--layer-color: var(--amber);">
+                <b>3</b><strong>tools schema</strong><span id="toolSchemaSummary">bash / read / write / edit</span>
+              </div>
+              <div class="request-layer muted" data-layer="memory" style="--layer-color: var(--violet);">
+                <b>4</b><strong>memory section</strong><span id="memorySectionSummary">无相关记忆，不加载</span>
+              </div>
+              <div class="request-layer active" data-layer="reminder" style="--layer-color: var(--red);">
+                <b>5</b><strong>system-reminder</strong><span id="reminderSummary">日期、git 状态、项目规则</span>
+              </div>
+            </div>
+
+            <div class="system-preview-card" id="systemPreviewCard">
+              <h3 id="systemPreviewTitle">assembled sections: identity, tools, workspace</h3>
+              <div class="system-preview-list">
+                <div><strong>system</strong><span id="systemPreviewSystem">稳定段常驻，动态段暂不加载</span></div>
+                <div><strong>messages</strong><span id="systemPreviewMessages">用户：请读取 README.md</span></div>
+                <div><strong>cache</strong><span id="systemPreviewCache">context 未变时命中缓存</span></div>
+              </div>
+            </div>
+
+            <div class="system-result" id="systemResult">点睛：Agent 每轮不是只看用户一句话，而是看完整运行现场。</div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="subagent-page" data-label="Subagent 协作" data-speaker-notes="这一页讲 Subagent 的核心机制。Parent Agent 不把完整对话历史交给子 Agent，而是只传一个 task 描述。Subagent 拿到的是全新的 messages[]，自己跑一段独立 loop，中间几十轮工具调用都不会污染 Parent。最后只提取摘要或最终文本，作为 tool_result 回到 Parent 的 messages[]。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">09</div>
           <div>
             <span class="kicker">Subagent</span>
             <h2>子 Agent 用独立 messages[]，只把最终摘要带回来</h2>
             <p class="subagent-subtitle">Parent 只派发 task 描述；Subagent 自己循环、自己调用工具，中间过程不污染主上下文。</p>
           </div>
-          <span class="tag">08 / 上下文隔离</span>
+          <span class="tag">09 / 上下文隔离</span>
         </header>
 
         <div class="subagent-map">
@@ -5473,60 +6598,160 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section data-label="外部系统和长期运行" data-speaker-notes="再往后，Agent 不只是一次会话里的助手，而是可以接外部系统、后台运行、定时触发。MCP 可以理解成把外部能力接进统一工具池的一种方式。">
-      <div class="slide-grid">
-        <header class="slide-head">
-            <div class="num">09</div>
-          <div>
-            <h2>接入外部能力后，Agent 从会话工具变成任务系统</h2>
-          </div>
-          <span class="tag">s13 Background + s14 Cron + s19 MCP</span>
-        </header>
-        <div class="connector-board">
-          <div class="connector-panel">
-            <h3>外部能力接入同一个工具池</h3>
-            <div class="connector-grid" id="connectorGrid">
-              <div class="connector active"><strong>文件系统</strong><span>读写项目材料</span></div>
-              <div class="connector"><strong>浏览器</strong><span>查看页面状态</span></div>
-              <div class="connector"><strong>内部 API</strong><span>查询业务数据</span></div>
-              <div class="connector"><strong>数据库</strong><span>检索结构化记录</span></div>
-              <div class="connector"><strong>日历任务</strong><span>按时间触发</span></div>
-              <div class="connector"><strong>消息系统</strong><span>通知人与团队</span></div>
-            </div>
-          </div>
-          <div class="summary-panel">
-            <h3>同一个循环，更多运行形态</h3>
-            <p>慢任务可以放后台，未来任务可以定时触发，外部工具可以通过 MCP 或内部 API 接入。核心仍然是：模型决定下一步，Harness 负责安全执行。</p>
-            <button class="action-btn" type="button" data-action="connector-next">点亮一个能力</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section data-label="完整路径" data-speaker-notes="最后收束。最小 Agent 很小，一个循环加一个工具就够了。真正可用的 Agent 不是另一个更神秘的东西，而是在这个循环外逐步补齐这些 Harness 能力。">
+    <section class="mcp-page" data-label="MCP 外部能力" data-speaker-notes="这一页讲 MCP。它不是一个新模型，也不是把所有插件塞进 prompt。MCP 更像 Harness 和外部系统之间的统一协议：Server 暴露工具目录，Client 发起调用，Harness 管权限，结果仍然作为 tool_result 回到同一个 Agent Loop。">
       <div class="slide-grid">
         <header class="slide-head">
             <div class="num">10</div>
           <div>
-            <h2>机制很多，核心循环只有一个</h2>
+            <span class="kicker">MCP</span>
+            <h2>MCP 把外部能力接成 Agent 可用的工具协议</h2>
+            <p class="mcp-subtitle">外部世界不直接塞进模型，而是由 MCP Server 暴露工具目录；Harness 发现、授权、调用，再把结果送回循环。</p>
           </div>
-          <span class="tag">s20 Comprehensive</span>
+          <span class="tag">10 / 外部能力协议</span>
         </header>
-        <div class="summary-board">
-          <div class="layer-ladder">
-            <div class="ladder-row" style="--level: 0; --layer-color: var(--blue);"><b>1</b><strong>Agent Loop</strong></div>
-            <div class="ladder-row" style="--level: 1; --layer-color: var(--green);"><b>2</b><strong>Tool Use</strong></div>
-            <div class="ladder-row" style="--level: 2; --layer-color: var(--amber);"><b>3</b><strong>Permission</strong></div>
-            <div class="ladder-row" style="--level: 3; --layer-color: var(--violet);"><b>4</b><strong>Plan / Todo</strong></div>
-            <div class="ladder-row" style="--level: 4; --layer-color: var(--red);"><b>5</b><strong>Skill Loading</strong></div>
-            <div class="ladder-row" style="--level: 5; --layer-color: var(--green);"><b>6</b><strong>Context Compact</strong></div>
-            <div class="ladder-row" style="--level: 6; --layer-color: var(--violet);"><b>7</b><strong>Memory</strong></div>
-            <div class="ladder-row" style="--level: 7; --layer-color: var(--blue);"><b>8</b><strong>Subagent + Team</strong></div>
-            <div class="ladder-row" style="--level: 8; --layer-color: var(--amber);"><b>9</b><strong>MCP + Task System</strong></div>
+        <div class="mcp-stage">
+          <article class="mcp-arch">
+            <div class="mcp-head">
+              <h3>MCP 在 Harness 里的位置</h3>
+              <span class="mcp-pill">协议层，不是新模型</span>
+            </div>
+
+            <div class="mcp-definition">
+              <strong>Model Context Protocol</strong>
+              <span>统一描述外部工具：有哪些能力、参数怎么传、结果怎么返回、哪些动作需要权限。</span>
+            </div>
+
+            <div class="mcp-arch-map">
+              <div class="mcp-node"><strong>Agent Loop</strong><span>输出 tool_use</span></div>
+              <div class="mcp-arrow">-></div>
+              <div class="mcp-node protocol"><strong>Harness / MCP Client</strong><span>发现、授权、分发</span></div>
+              <div class="mcp-arrow">-></div>
+              <div class="mcp-node"><strong>tool_result</strong><span>观察回到 messages[]</span></div>
+
+              <div class="mcp-servers">
+                <div class="mcp-servers-title"><span>MCP Servers</span><span>把不同系统变成同一种接口</span></div>
+                <div class="mcp-server-card" style="--server-color: var(--blue);"><strong>Browser</strong><span>查看页面 / 点击 / 截图</span></div>
+                <div class="mcp-server-card" style="--server-color: var(--green);"><strong>Database</strong><span>查询结构化数据</span></div>
+                <div class="mcp-server-card" style="--server-color: var(--violet);"><strong>Internal API</strong><span>连接业务系统</span></div>
+                <div class="mcp-server-card" style="--server-color: var(--amber);"><strong>Files / Search</strong><span>读取知识和资料</span></div>
+              </div>
+            </div>
+
+            <div class="mcp-rule-row">
+              <div class="mcp-rule"><b>1</b><span><strong>可发现</strong><br>Server 暴露工具 schema</span></div>
+              <div class="mcp-rule"><b>2</b><span><strong>可调用</strong><br>tool_use 被转发执行</span></div>
+              <div class="mcp-rule"><b>3</b><span><strong>可治理</strong><br>权限和审计留在 Harness</span></div>
+            </div>
+          </article>
+
+          <article class="mcp-live">
+            <div class="mcp-live-head">
+              <h3>一次 MCP 调用长什么样</h3>
+              <span class="mcp-pill" id="mcpModeLabel">浏览器能力</span>
+            </div>
+
+            <div class="mcp-tabs" role="tablist" aria-label="MCP 示例">
+              <button class="chip active" type="button" data-mcp="browser">浏览器</button>
+              <button class="chip" type="button" data-mcp="database">数据库</button>
+              <button class="chip" type="button" data-mcp="api">内部系统</button>
+            </div>
+
+            <div class="mcp-call-card" id="mcpCallCard">
+              <h3 id="mcpCallTitle">检查页面是否正常渲染</h3>
+              <div class="mcp-call-flow">
+                <div class="mcp-flow-step"><strong id="mcpToolName">browser.screenshot</strong><span>tool_use</span></div>
+                <div class="mcp-flow-arrow">-></div>
+                <div class="mcp-flow-step"><strong id="mcpServerName">Browser Server</strong><span>执行外部动作</span></div>
+                <div class="mcp-flow-arrow">-></div>
+                <div class="mcp-flow-step"><strong id="mcpSystemName">网页状态</strong><span>真实世界反馈</span></div>
+              </div>
+              <div class="mcp-result-box" id="mcpResultBox">返回截图和 DOM 状态，Agent 判断标题遮挡、按钮是否可见，再决定要不要修改样式。</div>
+            </div>
+
+            <div class="mcp-result" id="mcpResult">关键点：MCP 扩展的是 Harness 能力，核心循环仍然不变。</div>
+
+            <div class="mcp-boundary">
+              <div><strong>不是替代 Loop</strong><span>模型仍然判断下一步，MCP 只扩展可行动范围。</span></div>
+              <div><strong>不是绕过权限</strong><span>读写、发布、调用内部系统仍然由 Harness 审批。</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="finale-page" data-label="Loop + Harness 总结" data-speaker-notes="最后收束。今天讲的所有机制可以归成两类工作：Loop Engineer 负责让模型持续判断、行动、观察和停止；Harness Engineer 负责把工具、权限、计划、技能、压缩、记忆、系统提示词、子 Agent 和 MCP 接在循环外面。Loop 解决会不会做，Harness 解决能不能安全、持续、可评估地做。两者结合，Agent 才能从会话工具变成任务系统。">
+      <div class="slide-grid">
+        <header class="slide-head">
+            <div class="num">11</div>
+          <div>
+            <span class="kicker">Summary</span>
+            <h2>Agent 的核心，是 Loop Engineer + Harness Engineer</h2>
+            <p class="finale-subtitle">Loop 让模型持续推进；Harness 给它工具、边界、上下文和外部系统。今天所有机制，基本都能放进这两类工作。</p>
           </div>
-          <div class="summary-panel">
-            <div class="quote">最小 Agent 只要一个循环。可用 Agent 需要一套 Harness。</div>
-            <p>对业务团队来说，建设 Agent 的关键不是“写一个万能提示词”，而是为具体任务建设可行动、可控、可评估、可迭代的工作环境。</p>
+          <span class="tag">11 / 分享总结</span>
+        </header>
+        <div class="finale-stage">
+          <div class="engineer-compare">
+            <article class="engineer-card loop">
+              <div class="engineer-title">
+                <h3>Loop Engineer</h3>
+                <span>让模型持续推进</span>
+              </div>
+              <p>关注的是一圈怎么跑：读现场、判断下一步、调用工具、观察结果，直到能给出最终交付。</p>
+              <div class="engineer-points">
+                <div class="engineer-point"><strong>状态</strong><span>messages[] 保存任务现场</span></div>
+                <div class="engineer-point"><strong>动作</strong><span>tool_use 表达下一步</span></div>
+                <div class="engineer-point"><strong>停止</strong><span>判断何时 final answer</span></div>
+              </div>
+              <div class="loop-summary-line">
+                <div class="loop-summary-chip"><strong>messages[]</strong><span>任务现场</span></div>
+                <div class="loop-summary-arrow">-></div>
+                <div class="loop-summary-chip"><strong>LLM</strong><span>判断下一步</span></div>
+                <div class="loop-summary-arrow">-></div>
+                <div class="loop-summary-chip"><strong>tool_use</strong><span>行动请求</span></div>
+                <div class="loop-summary-arrow">-></div>
+                <div class="loop-summary-chip"><strong>tool_result</strong><span>观察回流</span></div>
+              </div>
+            </article>
+
+            <article class="engineer-card harness">
+              <div class="engineer-title">
+                <h3>Harness Engineer</h3>
+                <span>让行动可控可持续</span>
+              </div>
+              <p>关注的是循环外的运行环境：哪些能力可用、哪些动作要确认、上下文如何维护、外部系统如何接入。</p>
+              <div class="engineer-points">
+                <div class="engineer-point"><strong>能力</strong><span>工具、Skill、MCP</span></div>
+                <div class="engineer-point"><strong>边界</strong><span>权限、审计、风险分级</span></div>
+                <div class="engineer-point"><strong>连续性</strong><span>Todo、Compact、Memory</span></div>
+              </div>
+              <div class="harness-grid">
+                <div class="harness-chip" style="--chip-color: var(--green);"><strong>Tool + Permission</strong><span>手和边界</span></div>
+                <div class="harness-chip" style="--chip-color: var(--violet);"><strong>Todo + Hook</strong><span>计划和提醒</span></div>
+                <div class="harness-chip" style="--chip-color: var(--amber);"><strong>Skill Loading</strong><span>按需说明书</span></div>
+                <div class="harness-chip" style="--chip-color: var(--red);"><strong>Context Compact</strong><span>上下文腾地方</span></div>
+                <div class="harness-chip" style="--chip-color: var(--violet);"><strong>Memory</strong><span>不丢细节</span></div>
+                <div class="harness-chip" style="--chip-color: var(--blue);"><strong>System Prompt</strong><span>组装运行现场</span></div>
+                <div class="harness-chip" style="--chip-color: var(--blue);"><strong>Subagent</strong><span>拆分子任务</span></div>
+                <div class="harness-chip" style="--chip-color: var(--green);"><strong>MCP</strong><span>接入外部系统</span></div>
+                <div class="harness-chip" style="--chip-color: var(--amber);"><strong>Evaluation</strong><span>观察和迭代</span></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="finale-bottom">
+            <div class="finale-principle">
+              <strong>最小闭环</strong>
+              <span>先跑通 messages -> LLM -> tool_use -> tool_result。</span>
+            </div>
+            <div class="finale-formula">
+              <strong>逐步补 Harness</strong>
+              <span>按风险和收益补工具、权限、记忆、子任务和外部系统。</span>
+            </div>
+            <div class="finale-answer">
+              <strong>最终目标</strong>
+              <span>不是万能聊天框，而是可交付、可解释、可迭代的任务系统。</span>
+            </div>
           </div>
         </div>
       </div>
@@ -5536,7 +6761,7 @@ result: 字段口径已确认</pre>
   <aside class="speaker-console collapsed" id="speakerConsole" aria-label="演讲稿控制台">
     <div class="console-head">
       <strong id="consoleTitle">讲稿</strong>
-      <span class="console-page-count" id="consolePageCount">1/11</span>
+      <span class="console-page-count" id="consolePageCount">1/12</span>
       <button class="console-toggle" type="button" id="consoleToggle" aria-label="收起或展开讲稿">∧</button>
     </div>
     <div class="script-tabs" role="tablist" aria-label="讲稿模式">
@@ -5608,22 +6833,28 @@ result: 字段口径已确认</pre>
         business: "对业务团队来说，Memory 是长期知识资产。它可以保存用户偏好、做事反馈、项目事实和参考位置，不被一次压缩抹掉，也不会因为新开会话就归零。"
       },
       {
+        title: "System Prompt 组装",
+        beginner: "到这里我们可以点睛一下：每次你给 Agent 发一句话，模型看到的并不只有这一句话。系统会把身份、工具、工作目录、记忆、历史消息和当前任务一起打包，组成一次完整请求。",
+        technical: "s10 的核心是把硬编码 SYSTEM 拆成 PROMPT_SECTIONS。identity、tools、workspace 始终加载；memory 等动态 section 根据 context 的真实状态加载。context 不变就命中缓存，变了再重新 assemble_system_prompt。",
+        business: "这页把前面的能力串起来：工具、计划、技能、压缩、记忆，都不是散落的功能，而是在每次请求前被 Harness 组装成模型能理解的运行现场。"
+      },
+      {
         title: "Subagent 协作",
         beginner: "Subagent 可以理解成把一小段任务交给一个新的助手。它不会继承主对话的所有历史，只拿到 task 描述，然后自己查资料、调用工具、整理结果。中间过程不带回来，最后只把摘要交给主人。",
         technical: "Subagent 的核心是 fresh messages。Parent 调用 task 工具时，只传 task description；子 Agent 建立 messages = [task]，独立跑自己的 loop。中间 30 轮工具调用和结果都丢弃，只把 extract_text 或 summary 作为 tool_result 回到 Parent。",
         business: "对团队任务来说，这相当于让主流程保持干净。研究、验证、总结可以交给子任务完成，但主 Agent 只接收可用结论，不被所有中间日志淹没。"
       },
       {
-        title: "外部系统和长期运行",
-        beginner: "如果 Agent 只在一个聊天窗口里工作，它还是临时助手。接入外部系统、后台任务和定时触发以后，它才开始像一个真正的任务系统。",
-        technical: "MCP 可以理解成外部能力接入工具池的标准化方式。后台任务和 Cron 则让 Agent 不必阻塞在慢操作上，也能在未来时间点被重新唤醒。",
-        business: "落到业务里，就是 Agent 能查内部系统、能等待结果、能定时巡检、能通知人。它开始进入真实流程，而不只是生成一段文字。"
+        title: "MCP 外部能力",
+        beginner: "MCP 可以理解成外部能力的统一插座。Agent 不需要自己懂浏览器、数据库或内部系统，只要知道有哪些工具能用；真正连接外部世界的，是一个个 MCP Server。",
+        technical: "技术上，MCP 把外部能力包装成可发现的 tool schema。Agent 仍然输出 tool_use，MCP Client 负责转发调用，Server 执行动作，结果以 tool_result 回到 messages[]。核心 loop 不变，扩展的是 Harness 的行动边界。",
+        business: "落到业务里，MCP 的价值是把内部系统、知识库、浏览器和数据源接成同一种接口。这样 Agent 不只是会聊天，而是能在真实系统里查询、校验和推进任务，同时权限仍然留在 Harness。"
       },
       {
-        title: "完整路径",
-        beginner: "最后我们收束一下。最小 Agent 很小，一个循环和一个工具就够了。真正可用的 Agent，是在这个循环外面逐步补上这些能力。",
-        technical: "s20 的重点是，前面的机制并没有改变核心循环。Tool、Permission、Hook、Todo、Skill、Context、Memory、Subagent、MCP 都是 Harness 层能力，服务于同一个 loop。",
-        business: "如果要把 Agent 用进部门工作，建议不要从万能助手开始。先选一个具体任务，跑通最小闭环，再按风险和收益逐步加工具、权限、记忆和系统接入。"
+        title: "Loop + Harness 总结",
+        beginner: "最后我们把所有内容收束成两类工作：Loop Engineer 负责让模型一轮轮判断、行动、观察和停止；Harness Engineer 负责给它工具、边界、上下文、记忆、子任务和外部系统。",
+        technical: "前面所有机制都可以放进这个框架：Loop 是 messages -> LLM -> tool_use -> tool_result 的核心循环；Harness 是工具分发、权限、Todo、Skill、Compact、Memory、System Prompt、Subagent 和 MCP 这些运行层能力。",
+        business: "所以做 Agent 不是写一个万能提示词，而是为具体任务建设运行环境。先跑通最小闭环，再按风险和收益补 Harness，最后从会话工具走向可交付、可解释、可迭代的任务系统。"
       }
     ];
 
@@ -5815,6 +7046,78 @@ result: 字段口径已确认</pre>
         when: "涉及 pipeline、ingest、历史 bug 时加载",
         content: "精确记忆：Linear INGEST-214 记录了 pipeline bug；复现入口是 tools/replay_ingest.ts。",
         result: "Memory 不只记结论，也记“东西在哪”，让 Agent 下次能直接找到材料。"
+      }
+    };
+
+    const systemPromptModes = {
+      base: {
+        label: "基础任务",
+        sections: "identity + tools + workspace",
+        tools: "bash / read / write / edit",
+        memory: "无相关记忆，不加载",
+        reminder: "日期、git 状态、项目规则",
+        activeLayers: ["system", "messages", "tools", "reminder"],
+        title: "assembled sections: identity, tools, workspace",
+        system: "稳定段常驻，动态段暂不加载",
+        messages: "用户：请读取 README.md",
+        cache: "context 未变时命中缓存",
+        result: "点睛：Agent 每轮不是只看用户一句话，而是看完整运行现场。"
+      },
+      memory: {
+        label: "带记忆",
+        sections: "identity + tools + workspace + memory",
+        tools: "bash / read / write / load_skill",
+        memory: ".memory/MEMORY.md 命中，注入相关记忆",
+        reminder: "当前日期 + 工作区 + 用户偏好",
+        activeLayers: ["system", "messages", "tools", "memory", "reminder"],
+        title: "assembled sections: identity, tools, workspace, memory",
+        system: "memory section 按真实文件状态加载",
+        messages: "用户：继续按我的代码风格改文件",
+        cache: "动态段变化，只重组必要部分",
+        result: "Memory、Skill、Context 都会在这里汇合成模型真正看到的现场。"
+      },
+      mcp: {
+        label: "外部工具",
+        sections: "identity + tools + workspace + mcp",
+        tools: "bash / read / browser / database / mcp",
+        memory: "无关记忆不加载，避免噪音",
+        reminder: "MCP 状态变化，动态 section 重新生成",
+        activeLayers: ["system", "messages", "tools", "reminder"],
+        title: "assembled sections: identity, tools, workspace, mcp",
+        system: "工具和外部连接状态决定 prompt 内容",
+        messages: "用户：查内部系统并整理结论",
+        cache: "静态段复用缓存，动态段按状态更新",
+        result: "Prompt 是运行时配置，不是写死的一段长文本。"
+      }
+    };
+
+    const mcpModes = {
+      browser: {
+        label: "浏览器能力",
+        title: "检查页面是否正常渲染",
+        tool: "browser.screenshot",
+        server: "Browser Server",
+        system: "网页状态",
+        detail: "Client 按 schema 调用浏览器 Server，拿回截图和 DOM 状态；Agent 再判断标题遮挡、按钮是否可见。",
+        result: "关键点：外部反馈变成 tool_result，继续回到同一个 Agent Loop。"
+      },
+      database: {
+        label: "数据库能力",
+        title: "查询客户流程是否卡住",
+        tool: "db.query",
+        server: "Database Server",
+        system: "业务数据",
+        detail: "Server 执行受控查询，只返回允许字段；Agent 拿到结构化结果后，判断是否补充查询或生成报告。",
+        result: "关键点：模型不直连数据库，MCP Server 承担连接，Harness 保留边界。"
+      },
+      api: {
+        label: "内部系统",
+        title: "调用审批系统创建任务",
+        tool: "workflow.create",
+        server: "Internal API Server",
+        system: "审批流",
+        detail: "涉及写入的动作先进入确认分支；用户确认后，Server 调内部 API，并把任务编号返回给 Agent。",
+        result: "关键点：能接系统，不等于无边界执行；Harness 仍然负责审批和审计。"
       }
     };
 
@@ -6270,6 +7573,62 @@ result: 字段口径已确认</pre>
       });
     });
 
+    function renderSystemPromptMode(modeName) {
+      const data = systemPromptModes[modeName];
+      if (!data) return;
+      document.getElementById("systemModeLabel").textContent = data.label;
+      document.getElementById("systemSections").textContent = data.sections;
+      document.getElementById("toolSchemaSummary").textContent = data.tools;
+      document.getElementById("memorySectionSummary").textContent = data.memory;
+      document.getElementById("reminderSummary").textContent = data.reminder;
+      document.getElementById("systemPreviewTitle").textContent = data.title;
+      document.getElementById("systemPreviewSystem").textContent = data.system;
+      document.getElementById("systemPreviewMessages").textContent = data.messages;
+      document.getElementById("systemPreviewCache").textContent = data.cache;
+      document.getElementById("systemResult").textContent = data.result;
+      document.querySelectorAll("#requestStack .request-layer").forEach((layer) => {
+        const active = data.activeLayers.includes(layer.dataset.layer);
+        layer.classList.toggle("active", active);
+        layer.classList.toggle("muted", !active);
+      });
+      const card = document.getElementById("systemPreviewCard");
+      card.style.animation = "none";
+      card.offsetHeight;
+      card.style.animation = "skill-load-pulse 520ms ease";
+    }
+
+    document.querySelectorAll("[data-system-mode]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-system-mode]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderSystemPromptMode(button.dataset.systemMode);
+      });
+    });
+
+    function renderMcpMode(modeName) {
+      const data = mcpModes[modeName];
+      if (!data) return;
+      document.getElementById("mcpModeLabel").textContent = data.label;
+      document.getElementById("mcpCallTitle").textContent = data.title;
+      document.getElementById("mcpToolName").textContent = data.tool;
+      document.getElementById("mcpServerName").textContent = data.server;
+      document.getElementById("mcpSystemName").textContent = data.system;
+      document.getElementById("mcpResultBox").textContent = data.detail;
+      document.getElementById("mcpResult").textContent = data.result;
+      const card = document.getElementById("mcpCallCard");
+      card.style.animation = "none";
+      card.offsetHeight;
+      card.style.animation = "skill-load-pulse 520ms ease";
+    }
+
+    document.querySelectorAll("[data-mcp]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-mcp]").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderMcpMode(button.dataset.mcp);
+      });
+    });
+
     let teamStep = 0;
     const teamClasses = ["research", "code", "test", "write"];
     const teamNextButton = document.querySelector("[data-action='team-next']");
@@ -6293,15 +7652,19 @@ result: 字段口径已确认</pre>
 
     let connectorStep = 1;
     const connectors = Array.from(document.querySelectorAll("#connectorGrid .connector"));
-    document.querySelector("[data-action='connector-next']").addEventListener("click", () => {
-      connectors[Math.min(connectorStep, connectors.length - 1)].classList.add("active");
-      connectorStep = Math.min(connectorStep + 1, connectors.length);
-    });
+    const connectorNextButton = document.querySelector("[data-action='connector-next']");
+    if (connectorNextButton) {
+      connectorNextButton.addEventListener("click", () => {
+        connectors[Math.min(connectorStep, connectors.length - 1)].classList.add("active");
+        connectorStep = Math.min(connectorStep + 1, connectors.length);
+      });
+    }
 
     renderLoopEngine();
     renderToolUse();
     renderPermissionTool("read");
     renderTasks();
+    renderMcpMode("browser");
     renderScript();
     if (window.customElements && customElements.whenDefined) {
       customElements.whenDefined("deck-stage").then(() => requestAnimationFrame(syncScriptToActiveSlide));
