@@ -5921,6 +5921,498 @@
       color: oklch(0.84 0.12 160);
     }
 
+    .personal-page {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.048) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+        radial-gradient(circle at 80% 20%, rgba(42, 101, 239, 0.24), transparent 28%),
+        radial-gradient(circle at 18% 88%, rgba(65, 213, 158, 0.18), transparent 26%),
+        var(--dark);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .personal-page .num {
+      border-color: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.92);
+      color: var(--dark);
+    }
+
+    .personal-page .kicker,
+    .personal-page .tag {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .personal-page h2 {
+      color: rgba(255,255,255,0.96);
+    }
+
+    .personal-subtitle {
+      margin-top: 14px;
+      max-width: 1200px;
+      color: rgba(255,255,255,0.62);
+      font-size: 25px;
+      line-height: 1.38;
+      text-wrap: pretty;
+    }
+
+    .toolkit-board,
+    .coding-board,
+    .info-board,
+    .wiki-board {
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      gap: 24px;
+    }
+
+    .toolkit-board {
+      grid-template-columns: 1.08fr 0.92fr;
+    }
+
+    .toolkit-main,
+    .toolkit-side,
+    .coding-product,
+    .info-card,
+    .wiki-card {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
+        rgba(12, 22, 34, 0.82);
+      box-shadow: 0 30px 86px rgba(0,0,0,0.22);
+    }
+
+    .toolkit-main {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 18px;
+      padding: 26px;
+      min-height: 0;
+    }
+
+    .toolkit-principle {
+      min-height: 96px;
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      padding: 18px 22px;
+      border-radius: var(--radius-sm);
+      background: rgba(42, 101, 239, 0.14);
+      color: rgba(255,255,255,0.86);
+      font-size: 23px;
+      line-height: 1.3;
+      font-weight: 780;
+    }
+
+    .toolkit-principle strong {
+      color: rgba(255,255,255,0.96);
+      font-size: 30px;
+      line-height: 1.12;
+    }
+
+    .tool-family-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      min-height: 0;
+    }
+
+    .tool-family {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+      min-height: 0;
+      padding: 20px;
+      border: 1px solid color-mix(in oklch, var(--family-color), white 34%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--family-color), transparent 86%);
+    }
+
+    .tool-family h3,
+    .toolkit-side h3,
+    .coding-product h3,
+    .info-card h3,
+    .wiki-card h3 {
+      color: rgba(255,255,255,0.95);
+      font-size: 31px;
+      line-height: 1.14;
+    }
+
+    .tool-stack {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .tool-item {
+      display: grid;
+      gap: 7px;
+      min-height: 122px;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.78);
+      font-size: 18px;
+      line-height: 1.28;
+      font-weight: 720;
+    }
+
+    .tool-item strong {
+      color: rgba(255,255,255,0.96);
+      font-size: 25px;
+      line-height: 1.12;
+    }
+
+    .mode-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mode-row span,
+    .mini-chip {
+      display: inline-grid;
+      place-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+      font-weight: 830;
+      white-space: nowrap;
+    }
+
+    .toolkit-side {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      padding: 26px;
+      background:
+        radial-gradient(circle at 86% 16%, rgba(65, 213, 158, 0.16), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
+        rgba(12, 22, 34, 0.82);
+    }
+
+    .hermes-map {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-content: center;
+    }
+
+    .hermes-node {
+      min-height: 112px;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(65, 213, 158, 0.12);
+      color: oklch(0.84 0.12 160);
+      font-size: 22px;
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.18;
+    }
+
+    .assistant-note {
+      min-height: 112px;
+      display: grid;
+      align-content: center;
+      gap: 7px;
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.68);
+      font-size: 20px;
+      line-height: 1.34;
+      font-weight: 760;
+    }
+
+    .assistant-note strong {
+      color: rgba(255,255,255,0.96);
+      font-size: 27px;
+    }
+
+    .coding-board {
+      grid-template-columns: 0.95fr 1.05fr;
+    }
+
+    .coding-product {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 18px;
+      padding: 28px;
+      min-height: 0;
+    }
+
+    .product-tag {
+      width: max-content;
+      min-height: 36px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0 13px;
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--product-color), transparent 84%);
+      color: color-mix(in oklch, var(--product-color), white 30%);
+      font-size: 16px;
+      font-weight: 860;
+    }
+
+    .product-desc {
+      color: rgba(255,255,255,0.68);
+      font-size: 24px;
+      line-height: 1.38;
+      font-weight: 760;
+    }
+
+    .product-flow {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+    }
+
+    .product-step {
+      min-height: 70px;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.84);
+      font-size: 22px;
+      font-weight: 840;
+    }
+
+    .product-step b {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--product-color);
+      color: white;
+      font-size: 18px;
+    }
+
+    .product-foot {
+      min-height: 72px;
+      display: grid;
+      align-content: center;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--product-color), transparent 86%);
+      color: rgba(255,255,255,0.76);
+      font-size: 20px;
+      line-height: 1.32;
+      font-weight: 780;
+    }
+
+    .info-board {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .info-card {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 18px;
+      min-height: 0;
+      padding: 26px;
+    }
+
+    .info-symbol {
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--info-color), transparent 82%);
+      color: color-mix(in oklch, var(--info-color), white 20%);
+      font-size: 29px;
+      font-weight: 950;
+    }
+
+    .info-card p {
+      color: rgba(255,255,255,0.66);
+      font-size: 23px;
+      line-height: 1.42;
+      font-weight: 740;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 12px;
+      align-content: end;
+    }
+
+    .info-list div {
+      min-height: 62px;
+      display: grid;
+      align-content: center;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.78);
+      font-size: 19px;
+      line-height: 1.26;
+      font-weight: 790;
+    }
+
+    .wiki-board {
+      grid-template-columns: 1.18fr 0.82fr;
+    }
+
+    .wiki-card {
+      min-height: 0;
+      padding: 26px;
+    }
+
+    .wiki-architecture {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      min-height: 0;
+    }
+
+    .wiki-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .wiki-node {
+      min-height: 168px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      padding: 18px;
+      border: 1px solid color-mix(in oklch, var(--wiki-color), white 34%);
+      border-radius: var(--radius-sm);
+      background: color-mix(in oklch, var(--wiki-color), transparent 88%);
+      text-align: center;
+    }
+
+    .wiki-node strong {
+      color: rgba(255,255,255,0.94);
+      font-size: 25px;
+      line-height: 1.15;
+    }
+
+    .wiki-node span {
+      color: rgba(255,255,255,0.58);
+      font-size: 17px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .wiki-arrow {
+      color: rgba(255,255,255,0.54);
+      font-size: 30px;
+      font-weight: 950;
+    }
+
+    .wiki-schema-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .wiki-schema {
+      min-height: 82px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      padding: 13px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.075);
+    }
+
+    .wiki-schema strong {
+      color: rgba(255,255,255,0.9);
+      font-size: 19px;
+    }
+
+    .wiki-schema span {
+      color: rgba(255,255,255,0.56);
+      font-size: 15px;
+      line-height: 1.18;
+      font-weight: 740;
+    }
+
+    .wiki-side {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+    }
+
+    .graph-panel {
+      position: relative;
+      min-height: 330px;
+      border-radius: var(--radius-sm);
+      background:
+        radial-gradient(circle at 28% 28%, rgba(65, 213, 158, 0.34), transparent 4%),
+        radial-gradient(circle at 58% 38%, rgba(42, 101, 239, 0.38), transparent 4%),
+        radial-gradient(circle at 42% 68%, rgba(199, 138, 36, 0.34), transparent 4%),
+        radial-gradient(circle at 76% 66%, rgba(126, 78, 229, 0.34), transparent 4%),
+        rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+
+    .graph-panel::before,
+    .graph-panel::after {
+      content: "";
+      position: absolute;
+      inset: 22%;
+      border: 1px solid rgba(255,255,255,0.16);
+      transform: rotate(18deg);
+    }
+
+    .graph-panel::after {
+      inset: 34% 14% 30% 30%;
+      transform: rotate(-22deg);
+    }
+
+    .graph-label {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      right: 18px;
+      min-height: 56px;
+      display: grid;
+      align-content: center;
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(8, 14, 22, 0.78);
+      color: rgba(255,255,255,0.82);
+      font-size: 20px;
+      font-weight: 850;
+    }
+
+    .wiki-side-note {
+      min-height: 112px;
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(65, 213, 158, 0.12);
+      color: rgba(255,255,255,0.74);
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 760;
+    }
+
+    .wiki-side-note strong {
+      color: oklch(0.84 0.12 160);
+      font-size: 25px;
+    }
+
     @media (prefers-reduced-motion: no-preference) {
       section[data-deck-active] .slide-head {
         animation: intro-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -5938,7 +6430,12 @@
       section[data-deck-active] .mcp-arch,
       section[data-deck-active] .mcp-live,
       section[data-deck-active] .engineer-card,
-      section[data-deck-active] .finale-bottom {
+      section[data-deck-active] .finale-bottom,
+      section[data-deck-active] .toolkit-main,
+      section[data-deck-active] .toolkit-side,
+      section[data-deck-active] .coding-product,
+      section[data-deck-active] .info-card,
+      section[data-deck-active] .wiki-card {
         animation: intro-rise 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
       }
 
@@ -5948,8 +6445,16 @@
       section[data-deck-active] .system-live,
       section[data-deck-active] .mcp-live,
       section[data-deck-active] .engineer-card:nth-child(2),
-      section[data-deck-active] .finale-bottom {
+      section[data-deck-active] .finale-bottom,
+      section[data-deck-active] .toolkit-side,
+      section[data-deck-active] .coding-product:nth-child(2),
+      section[data-deck-active] .info-card:nth-child(2),
+      section[data-deck-active] .wiki-card:nth-child(2) {
         animation-delay: 110ms;
+      }
+
+      section[data-deck-active] .info-card:nth-child(3) {
+        animation-delay: 190ms;
       }
     }
 
@@ -7231,6 +7736,209 @@ result: 字段口径已确认</pre>
         </div>
       </div>
     </section>
+
+    <section class="personal-page" data-label="我的 AI 工具链" data-speaker-notes="这一页进入个人实践部分。重点不是罗列所有工具，而是强调选择策略：工具变化太快，普通人不应该把时间花在横向试错上。我会优先选业界第一梯队工具，把注意力放在任务、工作流和产出上。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">12</div>
+          <div>
+            <span class="kicker">My Workflow</span>
+            <h2>工具变化太快，我倾向直接选第一梯队</h2>
+            <p class="personal-subtitle">省下工具摸索时间，把精力放回任务设计、上下文组织、结果验证和持续产出。</p>
+          </div>
+          <span class="tag">12 / 工具链选择</span>
+        </header>
+
+        <div class="toolkit-board">
+          <article class="toolkit-main">
+            <div class="toolkit-principle">
+              <strong>选择原则：Top 1 级别工具优先</strong>
+              <span>工具能力每天都在演进，过度比较会吞掉真正该投入到工作流里的时间。</span>
+            </div>
+
+            <div class="tool-family-grid">
+              <div class="tool-family" style="--family-color: var(--blue);">
+                <h3>创意落地与 AIGC</h3>
+                <div class="tool-stack">
+                  <div class="tool-item">
+                    <strong>Claude</strong>
+                    <div class="mode-row"><span>CLI</span><span>Desktop</span><span>Browser</span></div>
+                    <p>适合创意落地、页面生成、可视化标注和浏览器页面阅读控制。</p>
+                  </div>
+                  <div class="tool-item">
+                    <strong>Codex / ChatGPT</strong>
+                    <div class="mode-row"><span>CLI</span><span>Desktop</span><span>主力工具</span></div>
+                    <p>我目前最主要的 coding、资料整理、方案推演和复杂任务推进工具。</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-family" style="--family-color: var(--green);">
+                <h3>把工具变成工作方式</h3>
+                <div class="tool-stack">
+                  <div class="tool-item">
+                    <strong>不是追新，而是稳定复用</strong>
+                    <p>同一类任务固定入口、固定提示、固定验收方式，才能不断积累效率。</p>
+                  </div>
+                  <div class="tool-item">
+                    <strong>Browser 能力是分水岭</strong>
+                    <p>能读页面、点页面、截页面后，Agent 才真正进入真实工作现场。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="toolkit-side">
+            <h3>个人生活助手：Hermes Agent</h3>
+            <div class="hermes-map">
+              <div class="hermes-node">微信</div>
+              <div class="hermes-node">飞书</div>
+              <div class="hermes-node">Telegram</div>
+            </div>
+            <div class="assistant-note">
+              <strong>随时可以对话的生活小助手</strong>
+              <span>我会把偏生活、偏研究、偏个人导向的任务交给它：查资料、做整理、提醒事项、沉淀想法。</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="personal-page" data-label="Vibe Coding 产物" data-speaker-notes="这一页讲我用 AI coding 实际做出来的一些东西。重点不是炫技术，而是说明 Agent 帮我把想法快速变成可用的 Web 工具，再在真实场景里继续打磨。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">13</div>
+          <div>
+            <span class="kicker">Vibe Coding</span>
+            <h2>我用 AI coding 做出的两个方向：业务工具与个人 Agent</h2>
+            <p class="personal-subtitle">从想法、页面、接口、验证到迭代，Agent 让很多原本停在脑内的需求快速落到可运行产物。</p>
+          </div>
+          <span class="tag">13 / Web Coding 产物</span>
+        </header>
+
+        <div class="coding-board">
+          <article class="coding-product" style="--product-color: var(--blue);">
+            <span class="product-tag">业务视角的 Postman</span>
+            <h3>面向 UAT 的接口验证工作台</h3>
+            <p class="product-desc">给 IT 团队和业务用户使用，围绕任务发布、外部接口调用和数据验证做一层更贴近业务语义的封装。</p>
+            <div class="product-flow">
+              <div class="product-step"><b>1</b><span>用户按业务任务发起验证</span></div>
+              <div class="product-step"><b>2</b><span>系统调用外部接口并记录过程</span></div>
+              <div class="product-step"><b>3</b><span>对返回数据做口径校验和差异判断</span></div>
+            </div>
+            <div class="product-foot">它解决的是“业务同事不想读接口文档，但需要确认流程和数据对不对”。</div>
+          </article>
+
+          <article class="coding-product" style="--product-color: var(--green);">
+            <span class="product-tag">个人 Agent 实验室</span>
+            <h3>用来学习 Agent 运行机制的自建系统</h3>
+            <p class="product-desc">我会把对 Agent 的理解做成可运行实验：流式接口如何处理、Loop 如何推进、工具结果如何回流。</p>
+            <div class="product-flow">
+              <div class="product-step"><b>1</b><span>复现 Agent loop 与 tool_result 回流</span></div>
+              <div class="product-step"><b>2</b><span>观察流式输出、状态切换和中断恢复</span></div>
+              <div class="product-step"><b>3</b><span>把学习结论沉淀成下一轮工具设计</span></div>
+            </div>
+            <div class="product-foot">它更像我的练功场：不是只看文章，而是把机制 coding 出来、跑起来、拆开看。</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="personal-page" data-label="AI 信息输入" data-speaker-notes="这一页讲信息输入。我主要从 X 获取最前沿的信息，因为上面有大量国内外 AI 从业者分享工具体验、技术进展和落地方案。同时我会用语音输入法降低记录成本，把思考先变成文字，再交给 Agent 做整理。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">14</div>
+          <div>
+            <span class="kicker">Information Flow</span>
+            <h2>我的 AI 信息获取，核心是前沿信号 + 低摩擦记录</h2>
+            <p class="personal-subtitle">信息量太大时，关键不是“看更多”，而是把输入、记录、筛选和沉淀做成稳定链路。</p>
+          </div>
+          <span class="tag">14 / 最新资讯与输入方式</span>
+        </header>
+
+        <div class="info-board">
+          <article class="info-card" style="--info-color: var(--blue);">
+            <div class="info-symbol">X</div>
+            <h3>x.com 是我的前沿雷达</h3>
+            <p>国内外 AI 从业者会持续分享最新工具体验、模型进展、产品方案和真实落地案例。</p>
+            <div class="info-list">
+              <div>关注一线实践者，而不只关注新闻标题</div>
+              <div>看工具怎么被真实使用，而不只看发布会</div>
+              <div>把高频出现的概念沉淀成研究主题</div>
+            </div>
+          </article>
+
+          <article class="info-card" style="--info-color: var(--green);">
+            <div class="info-symbol">Voice</div>
+            <h3>AI 语音输入降低思考成本</h3>
+            <p>Typeless、豆包语音输入法这类工具，让我先沉浸在想法本身，而不是被打字速度打断。</p>
+            <div class="info-list">
+              <div>快速把灵感、判断、问题转成文本</div>
+              <div>减少“组织语言”对思考链路的消耗</div>
+              <div>把口述草稿交给 Agent 继续结构化</div>
+            </div>
+          </article>
+
+          <article class="info-card" style="--info-color: var(--amber);">
+            <div class="info-symbol">Agent</div>
+            <h3>输入最终要进入知识系统</h3>
+            <p>我不希望资讯停留在收藏夹里，而是让 Agent 帮我判断、归类、补链路，变成后续可复用的知识。</p>
+            <div class="info-list">
+              <div>信息流：看到 -> 记录 -> 整理 -> 连接</div>
+              <div>输出流：问题 -> 研究 -> 报告 -> 分享</div>
+              <div>知识不是存起来，而是能被再次调用</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="personal-page" data-label="Obsidian + LLM Wiki" data-speaker-notes="这一页讲知识管理。Karpathy 的 LLM Wiki 方法论强调：不要每次都从原始文档临时检索，而是让 LLM 维护一个持续演化的 Markdown wiki。我的做法是 Agent 负责整理、交叉引用和定期健康检查，Obsidian 负责展示和浏览。知识库成长到一定程度后，它会形成知识图谱，也就是我的第二大脑。">
+      <div class="slide-grid">
+        <header class="slide-head">
+          <div class="num">15</div>
+          <div>
+            <span class="kicker">Second Brain</span>
+            <h2>Obsidian 展示知识图谱，Agent 维护 LLM Wiki</h2>
+            <p class="personal-subtitle">资料不是一次性问答，而是被持续编译成 Markdown wiki；链接、矛盾、索引和更新都由 Agent 维护。</p>
+          </div>
+          <span class="tag">15 / 知识管理</span>
+        </header>
+
+        <div class="wiki-board">
+          <article class="wiki-card wiki-architecture">
+            <h3>LLM Wiki 的运行结构</h3>
+            <div class="wiki-flow">
+              <div class="wiki-node" style="--wiki-color: var(--amber);"><strong>Raw Sources</strong><span>文章、论文、聊天记录、语音转写；只读，不直接改</span></div>
+              <div class="wiki-arrow">-></div>
+              <div class="wiki-node" style="--wiki-color: var(--green);"><strong>Agent Maintainer</strong><span>阅读、摘要、交叉引用、发现矛盾、更新页面</span></div>
+              <div class="wiki-arrow">-></div>
+              <div class="wiki-node" style="--wiki-color: var(--blue);"><strong>Markdown Wiki</strong><span>主题页、实体页、比较表、研究结论、知识链接</span></div>
+              <div class="wiki-arrow">-></div>
+              <div class="wiki-node" style="--wiki-color: var(--violet);"><strong>Obsidian</strong><span>浏览、Graph View、Dataview、输出报告</span></div>
+            </div>
+            <div class="wiki-schema-row">
+              <div class="wiki-schema"><strong>AGENTS.md</strong><span>约束结构和工作流</span></div>
+              <div class="wiki-schema"><strong>index.md</strong><span>内容目录和入口</span></div>
+              <div class="wiki-schema"><strong>log.md</strong><span>摄入、查询、维护记录</span></div>
+              <div class="wiki-schema"><strong>lint</strong><span>防止孤页、过期和链路腐化</span></div>
+            </div>
+          </article>
+
+          <article class="wiki-card wiki-side">
+            <h3>我的第二大脑</h3>
+            <div class="graph-panel">
+              <div class="graph-label">知识图谱 = 长期积累后的可导航思考网络</div>
+            </div>
+            <div class="wiki-side-note">
+              <strong>Agent 定期更新连接</strong>
+              <span>后续做知识整理、研究报告、分享材料时，Agent 可以基于这个知识库检索、补链、生成和反查。</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
   </deck-stage>
 
   <aside class="speaker-console collapsed" id="speakerConsole" aria-label="演讲稿控制台">
@@ -7330,6 +8038,30 @@ result: 字段口径已确认</pre>
         beginner: "最后我们把所有内容收束成两类工作：Loop Engineer 负责让模型一轮轮判断、行动、观察和停止；Harness Engineer 负责给它工具、边界、上下文、记忆、子任务和外部系统。",
         technical: "前面所有机制都可以放进这个框架：Loop 是 messages -> LLM -> tool_use -> tool_result 的核心循环；Harness 是工具分发、权限、Todo、Skill、Compact、Memory、System Prompt、Subagent 和 MCP 这些运行层能力。",
         business: "所以做 Agent 不是写一个万能提示词，而是为具体任务建设运行环境。先跑通最小闭环，再按风险和收益补 Harness，最后从会话工具走向可交付、可解释、可迭代的任务系统。"
+      },
+      {
+        title: "我的 AI 工具链",
+        beginner: "最后补充一下我平时怎么用 AI 工具。工具太多、变化太快，所以我的建议是直接选第一梯队，把摸索工具的时间省下来，花在任务设计、上下文整理和结果验证上。",
+        technical: "我主要分两类：创意落地和 AIGC 方向用 Claude、Codex、ChatGPT 这类 CLI 和 Desktop 工具；生活助手方向用 Hermes Agent，通过微信、飞书、Telegram 这类入口随时对话。",
+        business: "对团队来说，重点不是每周换一个新工具，而是形成稳定工作流。选择强工具只是第一步，更重要的是把它嵌入日常任务、知识管理和业务验证。"
+      },
+      {
+        title: "Vibe Coding 产物",
+        beginner: "这些工具不是只用来聊天，我也用它们 coding 出了一些东西。一个是业务视角的 Postman，用来做 UAT 接口验证；另一个是我个人的 Agent 实验室，用来学习流式接口和 Agent loop。",
+        technical: "业务 Postman 关注接口调用、任务发布和数据验证的封装；个人 Agent 更关注运行机制实验，比如 tool_result 如何回到上下文、流式输出如何驱动界面状态。",
+        business: "这里想表达的是，AI coding 的价值不是替代软件工程，而是把想法更快变成可验证原型。原型跑起来以后，业务反馈就会变得非常具体。"
+      },
+      {
+        title: "AI 信息输入",
+        beginner: "我获取 AI 信息主要靠 x.com，因为很多一线从业者会分享最新工具、模型进展和落地经验。同时我会用 AI 语音输入法，把想法快速变成文字。",
+        technical: "信息链路大概是：x.com 获取信号，语音输入降低记录成本，Agent 做整理、分类和补充，再把值得保留的内容进入知识库。这样信息不会停留在收藏夹里。",
+        business: "AI 时代信息量很大，关键不是看得多，而是形成输入到沉淀的流程。否则信息只会制造焦虑，不会变成判断力。"
+      },
+      {
+        title: "Obsidian + LLM Wiki",
+        beginner: "最后讲我的知识管理。我的做法是 Agent 负责整理知识，Obsidian 负责展示结果。知识库到一定程度后，会形成知识图谱，就像我的第二大脑。",
+        technical: "LLM Wiki 的核心是持久 Markdown wiki：raw sources 只读，Agent 维护主题页、实体页、索引和日志，AGENTS.md 约束工作流，定期 lint 检查孤页、过期结论和断掉的链接。",
+        business: "这套方法的价值是让知识持续复利。后续做研究报告、材料整理或方案输出时，Agent 不再从零开始，而是基于已经编译好的第二大脑继续工作。"
       }
     ];
 
