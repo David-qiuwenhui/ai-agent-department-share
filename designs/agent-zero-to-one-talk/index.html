@@ -2940,12 +2940,14 @@
     .memory-result b {
       display: grid;
       place-items: center;
-      width: 30px;
+      min-width: 52px;
       height: 30px;
+      padding: 0 10px;
       border-radius: 999px;
       background: oklch(0.84 0.12 292);
       color: var(--dark);
-      font-size: 18px;
+      font-size: 16px;
+      white-space: nowrap;
     }
 
     .system-prompt-page {
@@ -6900,7 +6902,7 @@
               </div>
               <div class="mode-step">
                 <b>4</b>
-                <div><span>调整并收束</span><small>反复推进，直到结果可交付</small></div>
+                <div><span>调整并总结</span><small>反复推进，直到结果可交付</small></div>
               </div>
             </div>
             <p class="mode-foot">价值不是“更会聊天”，而是让复杂工作变成可观察、可控制的循环。</p>
@@ -7015,7 +7017,7 @@
                 <h3 id="loopArtifactTitle">目标进入循环</h3>
                 <p class="artifact-copy" id="loopArtifactCopy">输入变成任务目标。</p>
               </div>
-              <div class="step-counter" id="loopStepCounter">1 / 7</div>
+              <div class="step-counter" id="loopStepCounter">1 / 8</div>
             </div>
             <div class="artifact-body">
               <pre class="artifact-code" id="loopArtifactCode">用户：帮我写一份日报</pre>
@@ -7064,7 +7066,7 @@
               <path class="tool-ref-arrow" d="M 415 140 L 415 190"></path>
               <path class="tool-ref-arrow green" d="M 512 250 L 610 250"></path>
               <path class="tool-ref-arrow amber" d="M 415 310 L 415 360"></path>
-              <path class="tool-ref-arrow amber" d="M 196 520 L 62 520 L 62 88 L 86 88"></path>
+              <path class="tool-ref-arrow amber return" d="M 196 570 L 64 570 L 64 138 L 171 138"></path>
 
               <rect class="tool-ref-box" x="86" y="38" width="170" height="100" rx="16"></rect>
               <text class="tool-ref-title" x="171" y="75">用户提问</text>
@@ -7098,16 +7100,12 @@
               <text class="tool-ref-meta" x="310" y="522">写入文件</text>
 
               <rect class="handler-chip" x="438" y="482" width="160" height="52" rx="12"></rect>
-              <text class="tool-ref-title tool-ref-code" x="518" y="500">edit_file</text>
-              <text class="tool-ref-meta" x="518" y="522">编辑文件</text>
-
-              <rect class="handler-chip" x="334" y="540" width="160" height="52" rx="12"></rect>
-              <text class="tool-ref-title tool-ref-code" x="414" y="558">glob</text>
-              <text class="tool-ref-meta" x="414" y="581">查找文件</text>
+              <text class="tool-ref-title tool-ref-code" x="518" y="500">glob</text>
+              <text class="tool-ref-meta" x="518" y="522">查找文件</text>
 
               <text class="tool-ref-small" x="536" y="228">否</text>
               <text class="tool-ref-small" x="438" y="340">是</text>
-              <text class="tool-ref-small" x="86" y="380" transform="rotate(-90 86 380)">工具结果回到 messages</text>
+              <text class="tool-ref-small" x="84" y="382" transform="rotate(-90 84 382)">工具结果回到 messages</text>
             </svg>
           </div>
 
@@ -7120,7 +7118,7 @@
               <div class="tool-step active" data-tool-step="0">用户输入目标</div>
               <div class="tool-step" data-tool-step="1">操作范围判断</div>
               <div class="tool-step" data-tool-step="2">使用工具分发</div>
-              <div class="tool-step" data-tool-step="3">处理结果回传</div>
+                <div class="tool-step" data-tool-step="3">结果回到上下文</div>
             </div>
             <div class="tool-live-main">
               <div class="tool-palette">
@@ -7128,7 +7126,6 @@
                 <div class="tool-option" data-tool-option="glob"><strong>glob</strong><span>查找文件</span></div>
                 <div class="tool-option" data-tool-option="read_file"><strong>read_file</strong><span>读取文件</span></div>
                 <div class="tool-option" data-tool-option="write_file"><strong>write_file</strong><span>写入文件</span></div>
-                <div class="tool-option" data-tool-option="edit_file"><strong>edit_file</strong><span>编辑文件</span></div>
               </div>
               <div class="tool-live-output">
                 <div class="tool-call-card">
@@ -7206,7 +7203,7 @@
                 <text class="node-title" x="671" y="58">check_permission()</text>
 
                 <rect class="perm-gate-step deny" id="permGateBlock" x="596" y="82" width="150" height="42" rx="9"></rect>
-                <text class="node-meta" x="671" y="103">闸门 1：拒绝列表</text>
+                <text class="node-meta" x="671" y="103">闸门 1：禁止清单</text>
 
                 <rect class="perm-gate-step" id="permGateAuto" x="596" y="140" width="150" height="42" rx="9"></rect>
                 <text class="node-meta" x="671" y="161">闸门 2：规则匹配</text>
@@ -7229,15 +7226,15 @@
 
               <g class="node-green">
                 <rect class="node-shape" x="318" y="250" width="172" height="72" rx="36"></rect>
-                <text class="node-title" x="404" y="280">不用工具</text>
-                <text class="node-meta" x="404" y="304">直接返回</text>
+                <text class="node-title" x="404" y="280">直接返回结果</text>
+                <text class="node-meta" x="404" y="304">无需调用工具</text>
               </g>
 
               <text class="small-label" x="268" y="70">读上下文</text>
               <text class="small-label" x="528" y="70">需要工具</text>
               <text class="small-label" x="803" y="100">通过</text>
               <rect class="label-chip" x="640" y="288" width="120" height="24" rx="6"></rect>
-              <text class="small-label" x="700" y="300">拒绝 / 回传</text>
+              <text class="small-label" x="700" y="300">不执行 / 说明原因</text>
               <rect class="label-chip" x="430" y="412" width="164" height="24" rx="6"></rect>
               <text class="small-label" x="512" y="424">结果回到 messages</text>
             </svg>
@@ -7260,7 +7257,7 @@
                 <button class="perm-tool active" type="button" data-tool="read"><span class="chip-icon">READ</span>读取文档</button>
                 <button class="perm-tool" type="button" data-tool="search"><span class="chip-icon">FIND</span>检索信息</button>
                 <button class="perm-tool" type="button" data-tool="api"><span class="chip-icon">API</span>调用接口</button>
-                <button class="perm-tool" type="button" data-tool="shell"><span class="chip-icon">CMD</span>执行命令</button>
+                <button class="perm-tool" type="button" data-tool="shell"><span class="chip-icon">DEL</span>删除文件</button>
               </div>
               <pre class="artifact-code" id="permArtifactCode">tool: read_file
 policy: auto
@@ -7331,15 +7328,15 @@ result: 字段口径已确认</pre>
               <text class="todo-meta" x="509" y="140">PreToolUse</text>
 
               <rect class="todo-handler-box" x="610" y="34" width="118" height="252" rx="18"></rect>
-              <text class="todo-title" x="669" y="68">工具池</text>
-              <rect class="todo-box" x="630" y="92" width="78" height="36" rx="8"></rect>
-              <text class="todo-meta" x="669" y="110">read / write</text>
-              <rect class="todo-box" x="630" y="142" width="78" height="36" rx="8"></rect>
-              <text class="todo-meta" x="669" y="160">edit / glob</text>
-              <rect class="todo-box green" x="628" y="198" width="82" height="46" rx="10"></rect>
-              <text class="todo-title" x="669" y="216">todo</text>
-              <text class="todo-meta" x="669" y="236">任务清单</text>
-              <text class="todo-note" x="669" y="266">s05 新增</text>
+              <text class="todo-title" x="669" y="68">任务工具</text>
+              <rect class="todo-box green" x="624" y="92" width="90" height="58" rx="10"></rect>
+              <text class="todo-title" x="669" y="114">todo</text>
+              <text class="todo-meta" x="669" y="136">任务清单</text>
+              <rect class="todo-box" x="630" y="166" width="78" height="34" rx="8"></rect>
+              <text class="todo-meta" x="669" y="183">read / write</text>
+              <rect class="todo-box" x="630" y="212" width="78" height="34" rx="8"></rect>
+              <text class="todo-meta" x="669" y="229">glob</text>
+              <text class="todo-note" x="669" y="266">TODO 优先</text>
 
               <rect class="todo-box amber" x="410" y="300" width="202" height="66" rx="14"></rect>
               <text class="todo-title" x="511" y="326">tool_result</text>
@@ -7347,16 +7344,16 @@ result: 字段口径已确认</pre>
 
               <rect class="todo-box green" x="220" y="236" width="168" height="76" rx="38"></rect>
               <text class="todo-title" x="304" y="266">返回结果</text>
-              <text class="todo-meta" x="304" y="290">不需要工具</text>
+              <text class="todo-meta" x="304" y="290">不使用工具</text>
 
               <rect class="label-chip" x="190" y="90" width="30" height="28" rx="7"></rect>
               <text class="small-label" x="205" y="104">读</text>
               <rect class="label-chip" x="390" y="90" width="40" height="28" rx="7"></rect>
-              <text class="small-label" x="410" y="104">要工具</text>
+              <text class="small-label" x="410" y="104">使用工具</text>
               <rect class="label-chip" x="586" y="90" width="28" height="28" rx="7"></rect>
               <text class="small-label" x="600" y="104">分发</text>
               <rect class="label-chip" x="278" y="188" width="52" height="28" rx="7"></rect>
-              <text class="small-label" x="304" y="202">不用工具</text>
+              <text class="small-label" x="304" y="202">不使用工具</text>
               <rect class="label-chip" x="276" y="392" width="142" height="28" rx="7"></rect>
               <text class="small-label" x="347" y="406">结果回到 messages</text>
             </svg>
@@ -7509,7 +7506,7 @@ result: 字段口径已确认</pre>
               <button class="chip active" type="button" data-skill="review">代码审查</button>
               <button class="chip" type="button" data-skill="slides">演示页</button>
               <button class="chip" type="button" data-skill="debug">系统排障</button>
-              <button class="chip" type="button" data-skill="wechat">公众号发布</button>
+              <button class="chip" type="button" data-skill="wechat">生成周报</button>
             </div>
 
             <div class="skill-loader">
@@ -7540,22 +7537,22 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section class="compact-page" data-label="上下文压缩" data-speaker-notes="这一页讲 Context Compact。Agent 做大项目会不断把文件内容、命令输出和工具结果塞进 messages[]，上下文窗口总会满。Harness 层要在 LLM 调用前插入压缩管线：先跑便宜的文本处理，再在必要时调用 LLM 摘要，最后还有 prompt_too_long 的应急兜底。">
+    <section class="compact-page" data-label="上下文压缩" data-speaker-notes="这一页讲 Context Compact。Agent 做大项目会不断把文件内容、命令输出和工具结果塞进 messages[]，上下文窗口总会满。Harness 层要在 LLM 调用前压缩上下文：优先使用成本小的方式做处理，再在必要时调用 LLM 摘要，最后还有 prompt_too_long 的应急兜底。">
       <div class="slide-grid">
         <header class="slide-head">
           <div class="num">06</div>
           <div>
             <span class="kicker">Context Compact</span>
             <h2>上下文总会满，要有办法腾地方</h2>
-            <p class="compact-subtitle">四层压缩策略：便宜的先跑，贵的后跑。Harness 层负责压缩，换来干净的记忆和更长的会话。</p>
+            <p class="compact-subtitle">四层压缩策略：优先使用成本小的方式做处理。Harness 层负责压缩，换来干净的记忆和更长的会话。</p>
           </div>
-          <span class="tag">06 / 压缩管线</span>
+          <span class="tag">06 / 压缩上下文</span>
         </header>
         <div class="compact-stage">
           <article class="compact-arch">
             <div class="compact-head">
               <h3>左侧：压缩插在 LLM 调用前</h3>
-              <span class="compact-pill">便宜先跑，贵的后跑</span>
+              <span class="compact-pill">优先使用成本小的方式做处理</span>
             </div>
 
             <div class="compact-arch-map">
@@ -7565,7 +7562,7 @@ result: 字段口径已确认</pre>
               </div>
               <div class="compact-arrow">-></div>
               <div class="compact-node" style="border-color: var(--amber); background: oklch(0.98 0.028 82);">
-                <strong>压缩管线</strong>
+                <strong>压缩上下文</strong>
                 <span>每次调用 LLM 前先腾地方</span>
               </div>
               <div class="compact-arrow">-></div>
@@ -7581,7 +7578,7 @@ result: 字段口径已确认</pre>
                 </div>
                 <div class="compact-layer-card" style="--layer-color: var(--green);">
                   <strong>L3 tool_result_budget</strong>
-                  <span>大结果落盘，只留预览</span>
+                  <span>处理结果数据体积较大的做归档，只留预览路径信息</span>
                 </div>
                 <div class="compact-layer-card" style="--layer-color: var(--blue);">
                   <strong>L1 snip_compact</strong>
@@ -7601,11 +7598,11 @@ result: 字段口径已确认</pre>
             <div class="compact-trigger-row">
               <div class="compact-trigger">
                 <div class="trigger-mark" style="--mark-color: var(--green);">1</div>
-                <div><strong>每轮自动：</strong>L3/L1/L2，0 API。</div>
+                <div><strong>每轮自动：</strong>L3/L1/L2<br>0 API。</div>
               </div>
               <div class="compact-trigger">
                 <div class="trigger-mark" style="--mark-color: var(--amber);">2</div>
-                <div><strong>阈值触发：</strong>L4 摘要，1 API。</div>
+                <div><strong>阈值触发：</strong>L4 摘要<br>1 API。</div>
               </div>
               <div class="compact-trigger">
                 <div class="trigger-mark" style="--mark-color: var(--red);">3</div>
@@ -7684,7 +7681,7 @@ result: 字段口径已确认</pre>
               </div>
               <div class="memory-arrow">-></div>
               <div class="memory-node">
-                <strong>压缩管线</strong>
+                <strong>压缩上下文</strong>
                 <span>腾地方，但会丢细节</span>
               </div>
               <div class="memory-arrow">-></div>
@@ -7759,7 +7756,7 @@ result: 字段口径已确认</pre>
             </div>
 
             <div class="memory-result">
-              <b>稳</b>
+              <b>总结</b>
               <span id="memoryResult">autoCompact 可以压缩上下文，但角色、习惯、规范和文件位置仍能从 Memory 找回来。</span>
             </div>
           </aside>
@@ -8390,7 +8387,7 @@ result: 字段口径已确认</pre>
       {
         title: "上下文压缩",
         beginner: "Agent 做大项目时，读文件、跑命令、调用工具，结果都会塞进 messages。上下文窗口总会满，满了 API 就会拒绝。所以 Harness 要在每次问模型前，先帮它腾地方。",
-        technical: "Context Compact 是 LLM 调用前的预处理管线。先跑 0 API 的文本压缩：大 tool_result 落盘、裁掉中间旧消息、旧结果变占位；仍超过阈值时再调用 LLM 做 compact_history；如果 API 返回 prompt_too_long，再做 reactive_compact 重试。",
+        technical: "Context Compact 是 LLM 调用前的预处理机制。优先使用成本小的方式做处理：大 tool_result 归档、裁掉中间旧消息、旧结果变占位；仍超过阈值时再调用 LLM 做 compact_history；如果 API 返回 prompt_too_long，再做 reactive_compact 重试。",
         business: "对业务团队来说，这页的直觉是：不压缩，Agent 就只能做小任务；有压缩，才可能在大项目里持续工作。压缩做得好，留下的是干净记忆，删掉的是不再有用的噪声。"
       },
       {
@@ -8475,11 +8472,11 @@ result: 字段口径已确认</pre>
         ]
       },
       shell: {
-        title: "执行命令",
+        title: "删除文件",
         risk: "高风险",
         copy: [
-          "Agent 可以运行本地脚本、测试或构建命令，观察真实输出。",
-          "涉及写入、删除、发布的命令必须走权限审批。"
+          "Agent 请求删除本地文件，可能造成不可恢复的数据损失。",
+          "命中禁止清单后，Harness 直接拦截，并把原因返回上下文。"
         ]
       }
     };
@@ -8510,12 +8507,12 @@ result: 字段口径已确认</pre>
         code: "tool: call_api\npolicy: confirm\nresult: 等待用户确认后执行"
       },
       shell: {
-        title: "执行命令",
-        copy: "可能改动环境，高风险拦截。",
+        title: "删除文件",
+        copy: "高风险破坏性动作，直接禁止。",
         risk: "高风险",
         riskLevel: "high",
         highlightEdge: "block",
-        code: "tool: run_bash\npolicy: block\nresult: 已拦截危险命令"
+        code: "tool: delete_file\npolicy: block\nresult: 已拦截删除请求，保留原文件"
       }
     };
 
@@ -8545,12 +8542,12 @@ result: 字段口径已确认</pre>
         detail: "加载后，Agent 先复现问题、收集日志和差异，再定位根因，避免看到报错就猜修复。"
       },
       wechat: {
-        title: "公众号发布 Skill",
-        name: "post-to-wechat",
-        request: "把这篇 Markdown 整理一下，然后发布到公众号。",
-        when: "用户要发布公众号、图文或文章",
-        loaded: "发布规则不常用；只有发布任务命中时才读取完整步骤。",
-        detail: "加载后，Agent 知道如何转换 Markdown、处理外链引用、检查图片，并按发布渠道执行。"
+        title: "生成周报 Skill",
+        name: "weekly-report",
+        request: "根据这周的任务记录，帮我生成一份周报。",
+        when: "用户要生成周报、日报、项目进展总结",
+        loaded: "周报模板和总结口径不常驻；只有报告生成任务命中时才读取。",
+        detail: "加载后，Agent 会按固定结构整理本周完成事项、风险阻塞、下周计划和需要同步的结论。"
       }
     };
 
@@ -8564,11 +8561,11 @@ result: 字段口径已确认</pre>
         classes: ["", "", "", "keep", "", ""]
       },
       {
-        label: "L3 / 大结果落盘",
+        label: "L3 / 大结果归档",
         meter: "72%",
         fill: "72%",
         color: "var(--amber)",
-        status: "先把 500KB 的大 tool_result 落到磁盘，messages[] 里只留预览和路径，0 API。",
+        status: "处理结果数据体积较大的做归档，messages[] 里只留预览路径信息，0 API。",
         classes: ["trimmed", "trimmed", "", "keep", "trimmed", ""]
       },
       {
@@ -8800,11 +8797,18 @@ result: 字段口径已确认</pre>
         edges: [4, 5, 1]
       },
       {
+        title: "模型再次判断",
+        copy: "大模型先阅读工具结果，再决定是否结束。",
+        code: 'messages 已包含 tool_result\nLLM 再次判断：材料够了\n下一步：返回最终结果',
+        node: 2,
+        edges: [1]
+      },
+      {
         title: "返回结果",
         copy: "目标完成，循环停止。",
-        code: 'LLM 再次判断：材料够了\nfinal answer:\n生成日报草稿',
+        code: 'final answer:\n生成日报草稿',
         node: 6,
-        edges: [1, 2, 6]
+        edges: [2, 6]
       }
     ];
 
