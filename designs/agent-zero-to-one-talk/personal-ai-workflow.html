@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>从 0 到 1 建设一个 Agent</title>
+  <title>我的 AI 工具链与知识管理</title>
   <style>
     deck-stage:not(:defined) { visibility: hidden; }
 
@@ -7034,1278 +7034,163 @@
 </head>
 <body>
   <deck-stage width="1920" height="1080" no-rail>
-    <section class="intro-page" data-label="00 Chat vs Agent" data-speaker-notes="这一页作为专题引入。先不要急着讲技术细节，只建立一个直觉：Chat 模式更像一次问答，Agent 模式是围绕目标持续推进。后面所有页面，都是在拆这个持续推进到底由哪些工程能力支撑。">
-      <div class="intro-stage">
+    <section class="personal-page" data-label="我的 AI 工具链" data-speaker-notes="这一页进入个人实践部分。重点不是罗列所有工具，而是强调选择策略：工具变化太快，普通人不应该把时间花在横向试错上。我会优先选业界第一梯队工具，把注意力放在任务、工作流和产出上。">
+      <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">00</div>
+          <div class="num">12</div>
           <div>
-            <span class="kicker">专题引入</span>
-            <h2>Chat 是一次回答，Agent 是一段可推进的任务过程</h2>
+            <span class="kicker">My Workflow</span>
+            <h2>工具变化太快，我倾向直接选第一梯队</h2>
+            <p class="personal-subtitle">省下工具摸索时间，把精力放回任务设计、上下文组织、结果验证和持续产出。</p>
           </div>
-          <span class="tag">从使用体验进入工程结构</span>
+          <span class="tag">12 / 工具链选择</span>
         </header>
 
-        <div class="intro-compare">
-          <article class="intro-card chat-mode">
-            <div class="intro-card-head">
-              <h3>Chat 模式</h3>
-              <span class="mode-chip">你问，我答</span>
+        <div class="personal-visual-board">
+          <figure class="personal-hero-art">
+            <img class="personal-art-img" src="imgs/workflow-toolchain.png" alt="AI 工具链选择图例">
+            <figcaption class="personal-overlay">
+              <strong>Top 1 工具优先</strong>
+              <span>工具能力变化太快，选择第一梯队，把时间花回任务设计和结果验收。</span>
+            </figcaption>
+          </figure>
+
+          <aside class="personal-side-note">
+            <h3>我保留两个入口</h3>
+            <p class="personal-side-lead">不是收集工具，而是固定高质量入口，让每次任务都有稳定起点。</p>
+            <div class="personal-point-list">
+              <div class="personal-point" style="--point-color: var(--blue);"><b>1</b><span>创意落地与 AIGC<em>Claude、Codex、ChatGPT，CLI + Desktop 配合使用。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--green);"><b>2</b><span>真实页面能力<em>Browser 阅读与控制页面，让 Agent 进入真实工作现场。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--amber);"><b>3</b><span>个人生活助手<em>Hermes 连接微信、飞书、Telegram，随时对话和跟进。</em></span></div>
             </div>
-            <div class="mode-flow">
-              <div class="mode-step">
-                <b>1</b>
-                <div><span>描述问题</span><small>把上下文一次性交给模型</small></div>
-              </div>
-              <div class="mode-step">
-                <b>2</b>
-                <div><span>得到回答</span><small>解释、总结、生成一段内容</small></div>
-              </div>
-              <div class="mode-step">
-                <b>3</b>
-                <div><span>人决定下一步</span><small>继续追问、复制结果、手动执行</small></div>
-              </div>
-            </div>
-            <p class="mode-foot">擅长把话说清楚；任务推进仍主要靠人接力。</p>
-          </article>
-
-          <div class="intro-pivot">
-            <div class="pivot-line"></div>
-            <div class="pivot-mark">差异不在<br>模型名字</div>
-            <div class="pivot-line"></div>
-          </div>
-
-          <article class="intro-card agent-mode">
-            <div class="intro-card-head">
-              <h3>Agent 模式</h3>
-              <span class="mode-chip">给目标，跑闭环</span>
-            </div>
-            <div class="mode-flow">
-              <div class="mode-step">
-                <b>1</b>
-                <div><span>理解目标</span><small>把“要达成什么”放进任务现场</small></div>
-              </div>
-              <div class="mode-step">
-                <b>2</b>
-                <div><span>选择行动</span><small>读资料、调工具、拆计划、请求确认</small></div>
-              </div>
-              <div class="mode-step">
-                <b>3</b>
-                <div><span>观察结果</span><small>把工具输出带回上下文继续判断</small></div>
-              </div>
-              <div class="mode-step">
-                <b>4</b>
-                <div><span>调整并总结</span><small>反复推进，直到结果可交付</small></div>
-              </div>
-            </div>
-            <p class="mode-foot">价值不是“更会聊天”，而是让复杂工作变成可观察、可控制的循环。</p>
-          </article>
-        </div>
-
-        <div class="intro-thread">
-          <strong>接下来拆开</strong>
-          <span class="thread-item">Loop</span>
-          <span class="thread-item">Tool Use</span>
-          <span class="thread-item">Permission</span>
-          <span class="thread-item">Todo</span>
-          <span class="thread-item">Context</span>
-          <span class="thread-item">Subagent</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="loop-engineering-page" data-label="Loop Engineering" data-speaker-notes="这一页先讲 Loop Engineering。大模型不是一次性把任务做完，而是在一个循环里不断读取上下文、决定是否调用工具、观察结果，再回到上下文，直到模型判断目标已经完成。">
-      <div class="loop-engineering">
-        <header class="slide-head">
-          <div class="num">01</div>
-          <div>
-            <span class="kicker">Loop Engineering</span>
-            <h1>Loop 把一次回答变成持续推进</h1>
-            <p class="loop-subtitle">目标进入上下文，模型判断下一步；每次工具结果都会回到现场，再判断一次。</p>
-          </div>
-          <span class="tag">01 / 运行骨架</span>
-        </header>
-        <div class="loop-lab" id="loopEngineering">
-          <div class="loop-canvas">
-            <div class="loop-banner">Agent Loop - 一个 while 循环驱动整个 agent</div>
-
-            <svg class="loop-diagram-svg" viewBox="0 0 920 560" role="img" aria-label="Agent Loop 动态流程图">
-              <defs>
-                <marker id="loopArrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8994a3"></path>
-                </marker>
-                <marker id="loopArrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b76a8"></path>
-                </marker>
-                <marker id="loopArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#bd6a18"></path>
-                </marker>
-                <marker id="loopArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#13815c"></path>
-                </marker>
-              </defs>
-
-              <path class="loop-edge blue active" data-loop-edge="0" d="M 180 92 L 180 132"></path>
-              <path class="loop-edge blue" data-loop-edge="1" d="M 280 178 L 378 178"></path>
-              <path class="loop-edge amber" data-loop-edge="2" d="M 490 234 L 490 270"></path>
-              <path class="loop-edge amber" data-loop-edge="3" d="M 490 390 L 490 432"></path>
-              <path class="loop-edge amber" data-loop-edge="4" d="M 350 472 L 58 472"></path>
-              <path class="loop-edge amber" data-loop-edge="5" d="M 58 472 L 58 178 L 80 178"></path>
-              <path class="loop-edge green" data-loop-edge="6" d="M 610 330 L 690 330"></path>
-
-              <g class="node-blue active" data-loop-node="0">
-                <rect class="node-shape" x="90" y="18" width="180" height="74" rx="16"></rect>
-                <text class="node-title" x="180" y="45">用户目标</text>
-                <text class="node-meta" x="180" y="70">帮我写一份日报</text>
-              </g>
-
-              <g class="node-slate" data-loop-node="1">
-                <rect class="node-shape" x="80" y="132" width="200" height="92" rx="16"></rect>
-                <text class="node-title" x="180" y="161">消息列表</text>
-                <text class="node-meta" x="180" y="188">messages[]</text>
-                <text class="node-meta" x="180" y="209">任务现场</text>
-              </g>
-
-              <g class="node-blue" data-loop-node="2">
-                <rect class="node-shape" x="378" y="118" width="224" height="120" rx="16"></rect>
-                <text class="node-title" x="490" y="151">大模型</text>
-                <text class="node-meta" x="490" y="181">阅读消息历史</text>
-                <text class="node-meta" x="490" y="208">做出判断</text>
-              </g>
-
-              <g class="node-amber" data-loop-node="3">
-                <polygon class="node-shape" points="490,270 610,330 490,390 370,330"></polygon>
-                <text class="node-title" x="490" y="312">用文件工具吗？</text>
-                <text class="node-meta" x="490" y="340">读取 / 写入</text>
-                <text class="node-meta" x="490" y="360">read / write</text>
-              </g>
-
-              <g class="node-amber" data-loop-node="4">
-                <rect class="node-shape" x="350" y="432" width="280" height="88" rx="16"></rect>
-                <text class="node-title" x="490" y="463">执行工具</text>
-                <text class="node-meta" x="490" y="491">查记录 / 整理素材</text>
-              </g>
-
-              <g class="node-green" data-loop-node="6">
-                <rect class="node-shape" x="690" y="288" width="178" height="84" rx="42"></rect>
-                <text class="node-title" x="779" y="320">返回结果</text>
-                <text class="node-meta" x="779" y="348">日报草稿</text>
-              </g>
-
-              <text class="small-label" x="632" y="310">否</text>
-              <text class="small-label" x="524" y="414">是</text>
-              <text class="small-label" x="190" y="444">工具结果</text>
-              <text class="small-label" x="190" y="466">回到消息列表</text>
-            </svg>
-
-            <div class="loop-core-note">
-              <strong>核心：</strong>
-              <span>模型负责判断，系统负责执行。结果回到消息列表，再判断一次。</span>
-            </div>
-          </div>
-
-          <aside class="artifact-panel">
-            <div class="artifact-head">
-              <div>
-                <h3 id="loopArtifactTitle">目标进入循环</h3>
-                <p class="artifact-copy" id="loopArtifactCopy">输入变成任务目标。</p>
-              </div>
-              <div class="step-counter" id="loopStepCounter">1 / 8</div>
-            </div>
-            <div class="artifact-body">
-              <pre class="artifact-code" id="loopArtifactCode">用户：帮我写一份日报</pre>
-            </div>
-            <div class="artifact-actions">
-              <button class="ghost-btn" type="button" data-action="loop-engine-reset">重置</button>
-              <button class="ghost-btn" type="button" data-action="loop-engine-auto">自动播放</button>
-              <button class="ghost-btn primary" type="button" data-action="loop-engine-next">下一步</button>
+            <div class="personal-mini-strip">
+              <div>少试错</div>
+              <div>高上限</div>
+              <div>可复用</div>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
-    <section class="tool-use-page" data-label="Tool Use" data-speaker-notes="这一页是在 Agent Loop 上加工具。核心循环没有变，变化只是当模型判断需要工具时，系统根据工具名分发到对应处理器。对非技术同事来说，可以把 TOOL_HANDLERS 理解成工具分发表。">
+    <section class="personal-page" data-label="Vibe Coding 产物" data-speaker-notes="这一页讲我用 AI coding 实际做出来的一些东西。重点不是炫技术，而是说明 Agent 帮我把想法快速变成可用的 Web 工具，再在真实场景里继续打磨。">
       <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">02</div>
+          <div class="num">13</div>
           <div>
-            <span class="kicker">Tool Use</span>
-            <h2>工具让 Loop 从“会想”变成“会做”</h2>
-            <p class="tool-subtitle">模型只负责判断要做什么；Harness 根据工具名，把动作分发给真正的处理器。</p>
+            <span class="kicker">Vibe Coding</span>
+            <h2>我用 AI coding 做出的两个方向：业务工具与个人 Agent</h2>
+            <p class="personal-subtitle">从想法、页面、接口、验证到迭代，Agent 让很多原本停在脑内的需求快速落到可运行产物。</p>
           </div>
-          <span class="tag">02 / 行动能力</span>
+          <span class="tag">13 / Web Coding 产物</span>
         </header>
-        <div class="tool-use-stage">
-          <div class="tool-reference">
-            <div class="tool-reference-title">
-              <h3>参照结构</h3>
-              <span class="mini-tag">Loop 保留，新增 TOOL_HANDLERS</span>
+
+        <div class="personal-visual-board">
+          <figure class="personal-hero-art">
+            <img class="personal-art-img" src="imgs/workflow-vibe-coding.png" alt="AI coding 产物图例">
+            <figcaption class="personal-overlay">
+              <strong>把脑内想法推到可运行界面</strong>
+              <span>Agent 帮我从需求、页面、接口、验证一路推进到可演示的 Web 工具。</span>
+            </figcaption>
+          </figure>
+
+          <aside class="personal-side-note">
+            <h3>两个产物方向</h3>
+            <p class="personal-side-lead">我更看重“能不能跑起来、能不能在真实场景继续迭代”。</p>
+            <div class="personal-point-list">
+              <div class="personal-point" style="--point-color: var(--blue);"><b>1</b><span>业务视角的 Postman<em>面向 UAT，把接口调用翻译成业务任务与验证结论。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--green);"><b>2</b><span>个人 Agent 实验室<em>研究流式接口、工具调用、循环推进和中断恢复。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--violet);"><b>3</b><span>Vibe Coding 的价值<em>先让东西出现，再用真实反馈打磨细节。</em></span></div>
             </div>
-            <svg class="tool-ref-svg" viewBox="0 0 760 620" role="img" aria-label="Tool Use 参照结构">
-              <defs>
-                <marker id="toolRefArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8d99a6"></path>
-                </marker>
-                <marker id="toolRefArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#bd6a18"></path>
-                </marker>
-                <marker id="toolRefArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#13815c"></path>
-                </marker>
-              </defs>
-
-              <path class="tool-ref-arrow" d="M 150 88 L 314 88"></path>
-              <path class="tool-ref-arrow" d="M 415 140 L 415 190"></path>
-              <path class="tool-ref-arrow green" d="M 512 250 L 610 250"></path>
-              <path class="tool-ref-arrow amber" d="M 415 310 L 415 360"></path>
-              <path class="tool-ref-arrow amber return" d="M 196 520 L 74 520 L 74 88 L 86 88"></path>
-
-              <rect class="tool-ref-box" x="86" y="38" width="170" height="100" rx="16"></rect>
-              <text class="tool-ref-title" x="171" y="75">用户提问</text>
-              <text class="tool-ref-meta" x="171" y="108">messages[] 消息列表</text>
-
-              <rect class="tool-ref-box" x="314" y="38" width="202" height="112" rx="16"></rect>
-              <text class="tool-ref-title" x="415" y="76">大模型 LLM</text>
-              <text class="tool-ref-meta" x="415" y="112">判断是否用工具</text>
-
-              <polygon class="tool-ref-decision" points="415,190 512,250 415,310 318,250"></polygon>
-              <text class="tool-ref-title" x="415" y="244">tool_use?</text>
-              <text class="tool-ref-meta" x="415" y="272">是否调用工具</text>
-
-              <rect class="tool-ref-result" x="610" y="207" width="126" height="86" rx="42"></rect>
-              <text class="tool-ref-title" x="673" y="241">返回结果</text>
-              <text class="tool-ref-meta" x="673" y="268">结束</text>
-
-              <rect class="tool-ref-map" x="196" y="352" width="438" height="246" rx="18"></rect>
-              <text class="tool-ref-title" x="415" y="392">TOOL_HANDLERS 工具分发表</text>
-
-              <rect class="handler-chip primary" x="230" y="414" width="160" height="52" rx="12"></rect>
-              <text class="tool-ref-title tool-ref-code" x="310" y="432">bash</text>
-              <text class="tool-ref-meta" x="310" y="454">执行命令</text>
-
-              <rect class="handler-chip" x="438" y="414" width="160" height="52" rx="12"></rect>
-              <text class="tool-ref-title tool-ref-code" x="518" y="432">read_file</text>
-              <text class="tool-ref-meta" x="518" y="454">读取文件</text>
-
-              <rect class="handler-chip" x="230" y="482" width="160" height="52" rx="12"></rect>
-              <text class="tool-ref-title tool-ref-code" x="310" y="500">write_file</text>
-              <text class="tool-ref-meta" x="310" y="522">写入文件</text>
-
-              <rect class="handler-chip" x="438" y="482" width="160" height="52" rx="12"></rect>
-              <text class="tool-ref-title tool-ref-code" x="518" y="500">glob</text>
-              <text class="tool-ref-meta" x="518" y="522">查找文件</text>
-
-              <text class="tool-ref-small" x="536" y="228">否</text>
-              <text class="tool-ref-small" x="438" y="340">是</text>
-              <text class="tool-ref-small" x="94" y="382" transform="rotate(-90 94 382)">工具结果回到 messages</text>
-            </svg>
-          </div>
-
-          <div class="tool-live" id="toolUseDemo">
-            <div class="tool-live-title">
-              <h3 id="toolUseTitle">动态示例</h3>
-              <span class="step-counter" id="toolUseStepCounter">1 / 5</span>
-            </div>
-            <div class="tool-step-strip">
-              <div class="tool-step active" data-tool-step="0">用户输入目标</div>
-              <div class="tool-step" data-tool-step="1">操作范围判断</div>
-              <div class="tool-step" data-tool-step="2">使用工具分发</div>
-                <div class="tool-step" data-tool-step="3">结果回到上下文</div>
-            </div>
-            <div class="tool-live-main">
-              <div class="tool-palette">
-                <div class="tool-option" data-tool-option="bash"><strong>bash</strong><span>执行命令</span></div>
-                <div class="tool-option" data-tool-option="glob"><strong>glob</strong><span>查找文件</span></div>
-                <div class="tool-option" data-tool-option="read_file"><strong>read_file</strong><span>读取文件</span></div>
-                <div class="tool-option" data-tool-option="write_file"><strong>write_file</strong><span>写入文件</span></div>
-              </div>
-              <div class="tool-live-output">
-                <div class="tool-call-card">
-                  <strong id="toolUseCall">用户：帮我写一份日报</strong>
-                  <span id="toolUseReason">目标进入消息列表</span>
-                </div>
-                <div class="tool-result-card" id="toolUseResult">等待模型判断下一步。</div>
-              </div>
-            </div>
-            <div class="tool-use-actions">
-              <button class="ghost-btn" type="button" data-action="tool-use-reset">重置</button>
-              <button class="ghost-btn primary" type="button" data-action="tool-use-next">下一步</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="permission-stage-page" data-label="工具和边界" data-speaker-notes="第二步是给 Agent 手和脚。工具越多，能力越大，但风险也越大。所以工具层通常要和权限层一起讲：会做什么，以及什么情况下不能自己做。">
-      <div class="permission-stage">
-        <header class="slide-head">
-          <div class="num">03</div>
-          <div>
-            <span class="kicker">Tool + Permission</span>
-            <h2>工具越多，越需要清楚的行动边界</h2>
-            <p class="perm-subtitle">同一个 Loop，加了工具就要加闸口：哪些自动放行，哪些必须确认，哪些直接禁止。</p>
-          </div>
-          <span class="tag">03 / 风险边界</span>
-        </header>
-        <div class="permission-lab">
-          <div class="permission-canvas">
-            <div class="perm-banner">工具调用必须穿过权限闸口</div>
-            <svg class="perm-diagram-svg" viewBox="0 0 920 520" role="img" aria-label="工具调用与权限闸口流程图">
-              <defs>
-                <marker id="permArrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8994a3"></path>
-                </marker>
-                <marker id="permArrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b76a8"></path>
-                </marker>
-                <marker id="permArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#bd6a18"></path>
-                </marker>
-                <marker id="permArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#13815c"></path>
-                </marker>
-                <marker id="permArrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#a8301f"></path>
-                </marker>
-              </defs>
-
-              <!-- 循环保留：messages -> LLM -> 权限 -> 工具 -> result -> messages -->
-              <path class="perm-edge blue active" d="M 228 86 L 322 86"></path>
-              <path class="perm-edge amber active" d="M 488 86 L 566 86"></path>
-              <path class="perm-edge green" id="permEdgeAuto" d="M 776 114 L 824 114"></path>
-              <path class="perm-edge amber" id="permEdgeConfirm" d="M 710 262 L 710 318 L 744 318 L 744 332"></path>
-              <path class="perm-edge red" id="permEdgeBlock" d="M 632 262 L 632 318 L 656 318 L 656 332"></path>
-              <path class="perm-edge dashed" d="M 824 204 L 824 428 L 128 428 L 128 128"></path>
-              <path class="perm-edge dashed" d="M 700 394 L 700 428"></path>
-
-              <g class="node-blue active">
-                <rect class="node-shape" x="64" y="42" width="164" height="88" rx="16"></rect>
-                <text class="node-title" x="146" y="78">messages[]</text>
-                <text class="node-meta" x="146" y="106">消息列表</text>
-              </g>
-
-              <g class="node-blue">
-                <rect class="node-shape" x="322" y="36" width="166" height="100" rx="16"></rect>
-                <text class="node-title" x="405" y="76">LLM</text>
-                <text class="node-meta" x="405" y="106">判断要用工具</text>
-              </g>
-
-              <g>
-                <rect class="perm-gate-box" x="566" y="24" width="210" height="238" rx="18"></rect>
-                <text class="node-title" x="671" y="58">check_permission()</text>
-
-                <rect class="perm-gate-step deny" id="permGateBlock" x="596" y="82" width="150" height="42" rx="9"></rect>
-                <text class="node-meta" x="671" y="103">闸门 1：禁止清单</text>
-
-                <rect class="perm-gate-step" id="permGateAuto" x="596" y="140" width="150" height="42" rx="9"></rect>
-                <text class="node-meta" x="671" y="161">闸门 2：规则匹配</text>
-
-                <rect class="perm-gate-step approve" id="permGateConfirm" x="596" y="198" width="150" height="42" rx="9"></rect>
-                <text class="node-meta" x="671" y="219">闸门 3：用户确认</text>
-              </g>
-
-              <g class="node-blue" id="permNodeAuto">
-                <rect class="node-shape" x="824" y="72" width="84" height="132" rx="16"></rect>
-                <text class="node-title" x="866" y="120">工具</text>
-                <text class="node-meta" x="866" y="150">handler</text>
-                <text class="node-meta" x="866" y="176">执行</text>
-              </g>
-
-              <g class="node-amber" id="permNodeConfirm">
-                <rect class="node-shape" x="570" y="332" width="260" height="62" rx="14"></rect>
-                <text class="node-title" x="700" y="363">tool_result</text>
-              </g>
-
-              <g class="node-green">
-                <rect class="node-shape" x="318" y="250" width="172" height="72" rx="36"></rect>
-                <text class="node-title" x="404" y="280">直接返回结果</text>
-                <text class="node-meta" x="404" y="304">无需调用工具</text>
-              </g>
-
-              <text class="small-label" x="268" y="70">读上下文</text>
-              <text class="small-label" x="528" y="70">需要工具</text>
-              <text class="small-label" x="803" y="100">通过</text>
-              <rect class="label-chip" x="640" y="288" width="120" height="24" rx="6"></rect>
-              <text class="small-label" x="700" y="300">不执行 / 说明原因</text>
-              <rect class="label-chip" x="430" y="412" width="164" height="24" rx="6"></rect>
-              <text class="small-label" x="512" y="424">结果回到 messages</text>
-            </svg>
-            <div class="perm-note">
-              <strong>核心：</strong>
-              <span>工具决定能力边界，权限决定行动边界。结果都回到上下文。</span>
-            </div>
-          </div>
-
-          <aside class="artifact-panel perm-panel">
-            <div class="artifact-head">
-              <div>
-                <h3 id="permArtifactTitle">读取文档</h3>
-                <p class="artifact-copy" id="permArtifactCopy">只读查询，自动放行。</p>
-              </div>
-              <div class="step-counter" id="permRiskBadge" data-risk="low">低风险</div>
-            </div>
-            <div class="artifact-body">
-              <div class="perm-tool-list" id="permToolList">
-                <button class="perm-tool active" type="button" data-tool="read"><span class="chip-icon">READ</span>读取文档</button>
-                <button class="perm-tool" type="button" data-tool="search"><span class="chip-icon">FIND</span>检索信息</button>
-                <button class="perm-tool" type="button" data-tool="api"><span class="chip-icon">API</span>调用接口</button>
-                <button class="perm-tool" type="button" data-tool="shell"><span class="chip-icon">DEL</span>删除文件</button>
-              </div>
-              <pre class="artifact-code" id="permArtifactCode">tool: read_file
-policy: auto
-result: 字段口径已确认</pre>
-            </div>
-            <div class="perm-policy-mini">
-              <div class="mini-policy active" data-mini="auto"><span>AUTO</span>自动</div>
-              <div class="mini-policy" data-mini="confirm"><span>ASK</span>确认</div>
-              <div class="mini-policy" data-mini="block"><span>DENY</span>禁止</div>
-            </div>
-            <div class="perm-actions">
-              <button class="ghost-btn" type="button" data-action="perm-reset">重置</button>
+            <div class="personal-mini-strip">
+              <div>想法</div>
+              <div>原型</div>
+              <div>验证</div>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
-    <section class="todo-stage-page" data-label="TodoWrite" data-speaker-notes="这一页讲 TodoWrite。复杂任务如果没有外显计划，Agent 很容易被最新的工具结果带偏。TodoWrite 把计划变成可观察状态，还能通过提醒机制把模型拉回原始目标。">
-      <div class="todo-stage">
+    <section class="personal-page" data-label="AI 信息输入" data-speaker-notes="这一页讲信息输入。我主要从 X 获取最前沿的信息，因为上面有大量国内外 AI 从业者分享工具体验、技术进展和落地方案。同时我会用语音输入法降低记录成本，把思考先变成文字，再交给 Agent 做整理。">
+      <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">04</div>
+          <div class="num">14</div>
           <div>
-            <span class="kicker">TodoWrite</span>
-            <h2>计划让 Loop 不被最新结果带偏</h2>
-            <p class="todo-subtitle">复杂任务先写 TODO，把目标、步骤和进度固定在循环里；提醒机制负责把注意力拉回计划。</p>
+            <span class="kicker">Information Flow</span>
+            <h2>我的 AI 信息获取，核心是前沿信号 + 低摩擦记录</h2>
+            <p class="personal-subtitle">信息量太大时，关键不是“看更多”，而是把输入、记录、筛选和沉淀做成稳定链路。</p>
           </div>
-          <span class="tag">04 / 计划防偏航</span>
+          <span class="tag">14 / 最新资讯与输入方式</span>
         </header>
-        <div class="todo-lab">
-          <div class="todo-canvas">
-            <div class="todo-banner">TodoWrite：循环不变，多一个任务清单工具</div>
-            <svg class="todo-diagram-svg" viewBox="0 0 760 460" role="img" aria-label="TodoWrite 机制流程图">
-              <defs>
-                <marker id="todoArrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#8994a3"></path>
-                </marker>
-                <marker id="todoArrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b76a8"></path>
-                </marker>
-                <marker id="todoArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#13815c"></path>
-                </marker>
-                <marker id="todoArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#bd6a18"></path>
-                </marker>
-              </defs>
 
-              <path class="todo-edge blue" d="M 184 106 L 226 106"></path>
-              <path class="todo-edge amber" d="M 382 106 L 438 106"></path>
-              <path class="todo-edge green" d="M 580 106 L 610 106"></path>
-              <path class="todo-edge green" d="M 676 286 L 676 330 L 612 330"></path>
-              <path class="todo-edge dashed no-arrow" d="M 510 366 L 510 408 L 86 408 L 86 150"></path>
-              <path class="todo-edge" d="M 304 158 L 304 236"></path>
+        <div class="personal-visual-board">
+          <figure class="personal-hero-art">
+            <img class="personal-art-img" src="imgs/workflow-info-flow.png" alt="AI 信息流图例">
+            <figcaption class="personal-overlay">
+              <strong>前沿信号要变成可复用材料</strong>
+              <span>从 X 获取输入，用语音降低记录成本，再交给 Agent 筛选、整理和入库。</span>
+            </figcaption>
+          </figure>
 
-              <rect class="todo-box" x="34" y="62" width="150" height="88" rx="16"></rect>
-              <text class="todo-title" x="109" y="98">messages[]</text>
-              <text class="todo-meta" x="109" y="126">目标 + 现场</text>
-
-              <rect class="todo-box" x="226" y="54" width="156" height="104" rx="16"></rect>
-              <text class="todo-title" x="304" y="92">LLM</text>
-              <text class="todo-meta" x="304" y="120">判断下一步</text>
-              <text class="todo-meta" x="304" y="142">是否用工具？</text>
-
-              <rect class="todo-box green" x="438" y="56" width="142" height="100" rx="16"></rect>
-              <text class="todo-title" x="509" y="90">Hooks</text>
-              <text class="todo-meta" x="509" y="118">工具前检查</text>
-              <text class="todo-meta" x="509" y="140">PreToolUse</text>
-
-              <rect class="todo-handler-box" x="610" y="34" width="118" height="252" rx="18"></rect>
-              <text class="todo-title" x="669" y="68">任务工具</text>
-              <rect class="todo-box green" x="624" y="92" width="90" height="58" rx="10"></rect>
-              <text class="todo-title" x="669" y="114">todo</text>
-              <text class="todo-meta" x="669" y="136">任务清单</text>
-              <rect class="todo-box" x="630" y="166" width="78" height="34" rx="8"></rect>
-              <text class="todo-meta" x="669" y="183">read / write</text>
-              <rect class="todo-box" x="630" y="212" width="78" height="34" rx="8"></rect>
-              <text class="todo-meta" x="669" y="229">glob</text>
-              <text class="todo-note" x="669" y="266">TODO 优先</text>
-
-              <rect class="todo-box amber" x="410" y="300" width="202" height="66" rx="14"></rect>
-              <text class="todo-title" x="511" y="326">tool_result</text>
-              <text class="todo-meta" x="511" y="350">结果 + TODO 状态</text>
-
-              <rect class="todo-box green" x="220" y="236" width="168" height="76" rx="38"></rect>
-              <text class="todo-title" x="304" y="266">返回结果</text>
-              <text class="todo-meta" x="304" y="290">不使用工具</text>
-
-              <rect class="label-chip" x="190" y="90" width="30" height="28" rx="7"></rect>
-              <text class="small-label" x="205" y="104">读</text>
-              <rect class="label-chip" x="390" y="90" width="40" height="28" rx="7"></rect>
-              <text class="small-label" x="410" y="104">使用工具</text>
-              <rect class="label-chip" x="586" y="90" width="28" height="28" rx="7"></rect>
-              <text class="small-label" x="600" y="104">分发</text>
-              <rect class="label-chip" x="278" y="188" width="52" height="28" rx="7"></rect>
-              <text class="small-label" x="304" y="202">不使用工具</text>
-              <rect class="label-chip" x="276" y="392" width="142" height="28" rx="7"></rect>
-              <text class="small-label" x="347" y="406">结果回到 messages</text>
-            </svg>
-            <div class="todo-nag">
-              <strong>Nag Reminder</strong>
-              <span>连续几轮没更新 todo_write，系统会提醒模型：先回到计划，再继续。</span>
+          <aside class="personal-side-note">
+            <h3>我的信息流</h3>
+            <p class="personal-side-lead">AI 信息密度太高，关键是让输入变成稳定链路，而不是临时收藏。</p>
+            <div class="personal-point-list">
+              <div class="personal-point" style="--point-color: var(--blue);"><b>1</b><span>x.com 前沿信号<em>工具体验、技术进展、落地方案、从业者一手观察。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--green);"><b>2</b><span>AI 语音输入<em>Typeless / 豆包语音输入，让思考先流出来。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--amber);"><b>3</b><span>Agent 负责整理<em>归类、追问、补资料，并转成可继续使用的研究主题。</em></span></div>
             </div>
-          </div>
-
-          <aside class="todo-demo">
-            <div class="todo-demo-head">
-              <div>
-                <h3 id="todoNarrativeTitle">复杂任务进入循环</h3>
-                <p id="todoNarrativeCopy">没有 TODO 时，目标只压在 messages 里。</p>
-              </div>
-              <div class="step-counter" id="todoStepCounter">1 / 7</div>
-            </div>
-            <div class="todo-demo-main">
-              <pre class="todo-code" id="todoArtifactCode">用户：把所有 Python 文件改成 snake_case，然后跑测试，修好失败。</pre>
-              <div class="todo-progress">
-                <div class="meter-label"><span>计划完成度</span><strong id="progressLabel">0%</strong></div>
-                <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
-              </div>
-              <div class="todo-list" id="taskList">
-                <div class="todo-empty">
-                  TODO 尚未创建<br>
-                  目标只在 messages[] 里
-                </div>
-                <div class="todo-item current">
-                  <div class="check">1</div>
-                  <strong>列出 Python 文件</strong>
-                  <span class="tag">当前</span>
-                </div>
-                <div class="todo-item">
-                  <div class="check">2</div>
-                  <strong>统一 snake_case 命名</strong>
-                  <span class="tag">等待</span>
-                </div>
-                <div class="todo-item">
-                  <div class="check">3</div>
-                  <strong>运行测试</strong>
-                  <span class="tag">等待</span>
-                </div>
-                <div class="todo-item">
-                  <div class="check">4</div>
-                  <strong>修复失败并回查命名</strong>
-                  <span class="tag">等待</span>
-                </div>
-              </div>
-            </div>
-            <div class="inline-actions">
-              <button class="ghost-btn primary" type="button" data-action="task-next">下一步</button>
-              <button class="ghost-btn" type="button" data-action="task-reset">重置</button>
+            <div class="personal-mini-strip">
+              <div>看到</div>
+              <div>说出</div>
+              <div>沉淀</div>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
-    <section class="skill-loading-page" data-label="Skill 按需加载" data-speaker-notes="这一页讲 Skill Loading。不要把所有专项知识一次性塞进 prompt。启动时只把技能目录放进 SYSTEM，让模型知道有哪些说明书；真正命中某个任务时，再调用 load_skill 读取完整 SKILL.md，把内容作为 tool_result 带回循环。">
+    <section class="personal-page" data-label="Obsidian + LLM Wiki" data-speaker-notes="这一页讲知识管理。Karpathy 的 LLM Wiki 方法论强调：不要每次都从原始文档临时检索，而是让 LLM 维护一个持续演化的 Markdown wiki。我的做法是 Agent 负责整理、交叉引用和定期健康检查，Obsidian 负责展示和浏览。知识库成长到一定程度后，它会形成知识图谱，也就是我的第二大脑。">
       <div class="slide-grid">
         <header class="slide-head">
-          <div class="num">05</div>
+          <div class="num">15</div>
           <div>
-            <span class="kicker">Skill Loading</span>
-            <h2>Skill Loading — 用到的时候才加载</h2>
-            <p class="skill-subtitle">Agent 启动时只看“技能目录”；当任务真的需要某项技能时，再打开完整说明书。</p>
+            <span class="kicker">Second Brain</span>
+            <h2>Obsidian 展示知识图谱，Agent 维护 LLM Wiki</h2>
+            <p class="personal-subtitle">资料不是一次性问答，而是被持续编译成 Markdown wiki；链接、矛盾、索引和更新都由 Agent 维护。</p>
           </div>
-          <span class="tag">05 / 按需加载</span>
+          <span class="tag">15 / 知识管理</span>
         </header>
-        <div class="skill-stage">
-          <article class="skill-arch">
-            <div class="skill-arch-head">
-              <h3>左侧：循环不变，只多一个入口</h3>
-              <span class="skill-mini-tag">目录常驻，正文按需</span>
-            </div>
 
-            <div class="skill-arch-map">
-              <div class="skill-node">
-                <strong>messages[]</strong>
-                <span>当前任务现场</span>
-              </div>
-              <div class="skill-arrow">-></div>
-              <div class="skill-node">
-                <strong>LLM</strong>
-                <span>判断</span>
-              </div>
-              <div class="skill-arrow">-></div>
-              <div class="skill-hook">
-                <strong>trigger_hooks</strong>
-                <span>工具前检查</span>
-              </div>
-              <div class="skill-arrow">-></div>
-              <div class="skill-toolbox">
-                <strong>TOOL_HANDLERS</strong>
-                <div class="skill-tool-pills">
-                  <div class="skill-tool-pill">bash · read · write</div>
-                  <div class="skill-tool-pill">edit · glob · todo</div>
-                  <div class="skill-tool-pill">task / subagent</div>
-                  <div class="skill-tool-pill load">load_skill</div>
-                </div>
-              </div>
+        <div class="personal-visual-board">
+          <figure class="personal-hero-art">
+            <img class="personal-art-img" src="imgs/workflow-second-brain.png" alt="Obsidian 与 LLM Wiki 知识管理图例">
+            <figcaption class="personal-overlay">
+              <strong>第二大脑不是存资料，是维护连接</strong>
+              <span>Agent 把资料持续编译成 LLM Wiki，Obsidian 负责展示知识图谱。</span>
+            </figcaption>
+          </figure>
 
-              <div class="skill-return">tool_result 追加回 messages[]，循环继续</div>
-
-              <div class="skill-system-row">
-                <div class="skill-system-card">
-                  <strong>1 build_system()</strong>
-                  <span>启动时扫描 skills，只注入名称和触发条件。</span>
-                </div>
-                <div class="skill-system-card">
-                  <strong>2 load_skill(name)</strong>
-                  <span>运行时读取 SKILL.md，把完整方法带回当前任务。</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="skill-structure-strip">
-              <div class="skill-structure-card" style="--structure-color: var(--blue);">
-                <strong>SKILL.md</strong>
-                <span>一个技能一份说明书</span>
-              </div>
-              <div class="skill-structure-card" style="--structure-color: var(--green);">
-                <strong>启动扫描</strong>
-                <span>只读 name、description、path，生成技能目录。</span>
-              </div>
-              <div class="skill-structure-card" style="--structure-color: var(--amber);">
-                <strong>命中加载</strong>
-                <span>读取完整正文：步骤、约束、引用、脚本。</span>
-              </div>
-              <div class="skill-structure-card" style="--structure-color: var(--violet);">
-                <strong>tool_result</strong>
-                <span>回到 messages[]</span>
-              </div>
-            </div>
-          </article>
-
-          <aside class="skill-live">
-            <div class="skill-live-head">
-              <h3>右侧：运行时才打开说明书</h3>
-              <span class="skill-mini-tag">点击切换任务</span>
-            </div>
-
-            <div class="skill-request">
-              <strong>用户任务</strong>
-              <span id="skillRequest">帮我审一下这个 PR，重点看风险和测试。</span>
-            </div>
-
-            <div class="skill-shelf">
-              <button class="chip active" type="button" data-skill="review">代码审查</button>
-              <button class="chip" type="button" data-skill="slides">生成演示材料</button>
-              <button class="chip" type="button" data-skill="debug">系统排障</button>
-              <button class="chip" type="button" data-skill="wechat">生成周报</button>
-            </div>
-
-            <div class="skill-loader">
-              <div class="skill-loader-step active">看目录</div>
-              <div class="skill-loader-arrow">-></div>
-              <div class="skill-loader-step active">命中 Skill</div>
-              <div class="skill-loader-arrow">-></div>
-              <div class="skill-loader-step active">加载全文</div>
-            </div>
-
-            <div class="skill-loaded-card" id="skillLoadedCard">
-              <h3 id="skillTitle">代码审查 Skill</h3>
-              <div class="skill-manifest">
-                <div class="manifest-item"><strong>name</strong><span id="skillName">review</span></div>
-                <div class="manifest-item"><strong>description</strong><span id="skillWhen">用户要求 review、审查 PR 或评估风险</span></div>
-              </div>
-              <div class="loaded-skill" id="loadedSkill">
-                加载后，Agent 才拿到完整审查方法：先看 diff，再按严重程度列问题，最后补充测试风险。
-              </div>
-            </div>
-
-            <div class="skill-cost-note">
-              <b>按需</b>
-              <span id="skillLoaded">目录约 100 tokens 常驻；完整说明约 2000 tokens，命中后才花。</span>
+          <aside class="personal-side-note">
+            <h3>Obsidian + LLM Wiki</h3>
+            <p class="personal-side-lead">资料先进入结构化 wiki，再通过图谱、索引和报告反复复用。</p>
+            <div class="personal-point-list">
+              <div class="personal-point" style="--point-color: var(--amber);"><b>1</b><span>Raw Sources 只读保存<em>网页、论文、聊天记录和原始素材不被直接改写。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--green);"><b>2</b><span>Agent 维护 Wiki<em>摘要、补链、发现矛盾、定期检查链接腐化。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--blue);"><b>3</b><span>Obsidian 展示图谱<em>知识库长到一定程度后，变成可导航的第二大脑。</em></span></div>
+              <div class="personal-point" style="--point-color: var(--violet);"><b>4</b><span>输出从这里生长<em>知识报告、分享材料和研究结论都能复用这张网。</em></span></div>
             </div>
           </aside>
         </div>
       </div>
     </section>
-
-    <section class="compact-page" data-label="上下文压缩" data-speaker-notes="这一页讲 Context Compact。Agent 做大项目会不断把文件内容、命令输出和工具结果塞进 messages[]，上下文窗口总会满。Harness 层要在 LLM 调用前压缩上下文：优先使用成本小的方式做处理，再在必要时调用 LLM 摘要，最后还有 prompt_too_long 的应急兜底。">
-      <div class="slide-grid">
-        <header class="slide-head">
-          <div class="num">06</div>
-          <div>
-            <span class="kicker">Context Compact</span>
-            <h2>上下文总会满，要有办法腾地方</h2>
-            <p class="compact-subtitle">四层压缩策略：优先使用成本小的方式做处理。Harness 层负责压缩，换来干净的记忆和更长的会话。</p>
-          </div>
-          <span class="tag">06 / 压缩上下文</span>
-        </header>
-        <div class="compact-stage">
-          <article class="compact-arch">
-            <div class="compact-head">
-              <h3>左侧：压缩插在 LLM 调用前</h3>
-              <span class="compact-pill">优先使用成本小的方式做处理</span>
-            </div>
-
-            <div class="compact-arch-map">
-              <div class="compact-node">
-                <strong>messages[]</strong>
-                <span>文件、命令、工具结果都堆在这里</span>
-              </div>
-              <div class="compact-arrow">-></div>
-              <div class="compact-node" style="border-color: var(--amber); background: oklch(0.98 0.028 82);">
-                <strong>压缩上下文</strong>
-                <span>每次调用 LLM 前先腾地方</span>
-              </div>
-              <div class="compact-arrow">-></div>
-              <div class="compact-node">
-                <strong>LLM</strong>
-                <span>拿到更干净的上下文</span>
-              </div>
-
-              <div class="compact-pipeline">
-                <div class="compact-pipeline-title">
-                  <span>四层策略</span>
-                  <span>0 API -> 1 API -> 应急裁剪</span>
-                </div>
-                <div class="compact-layer-card" style="--layer-color: var(--green);">
-                  <strong>L3 tool_result_budget</strong>
-                  <span>处理结果数据体积较大的做归档，只留预览路径信息</span>
-                </div>
-                <div class="compact-layer-card" style="--layer-color: var(--blue);">
-                  <strong>L1 snip_compact</strong>
-                  <span>消息太多，裁掉中间</span>
-                </div>
-                <div class="compact-layer-card" style="--layer-color: var(--blue);">
-                  <strong>L2 micro_compact</strong>
-                  <span>旧工具结果变占位</span>
-                </div>
-                <div class="compact-layer-card" style="--layer-color: var(--red);">
-                  <strong>L4 compact_history</strong>
-                  <span>仍超阈值，LLM 摘要</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="compact-trigger-row">
-              <div class="compact-trigger">
-                <div class="trigger-mark" style="--mark-color: var(--green);">1</div>
-                <div><strong>每轮自动：</strong>L3/L1/L2<br>0 API。</div>
-              </div>
-              <div class="compact-trigger">
-                <div class="trigger-mark" style="--mark-color: var(--amber);">2</div>
-                <div><strong>阈值触发：</strong>L4 摘要<br>1 API。</div>
-              </div>
-              <div class="compact-trigger">
-                <div class="trigger-mark" style="--mark-color: var(--red);">3</div>
-                <div><strong>异常兜底：</strong>prompt_too_long 后裁剪重试。</div>
-              </div>
-            </div>
-          </article>
-
-          <aside class="compact-live">
-            <div class="compact-live-head">
-              <h3>右侧：上下文快满时怎么救</h3>
-              <span class="compact-pill" id="compactStepLabel">未压缩</span>
-            </div>
-
-            <div class="compact-problem">
-              <b>!</b>
-              <div>
-                <strong>Agent 跑着跑着不动了</strong>
-                <span>读 30 个文件、跑 20 条命令，输出全堆进 messages[]，API 报 prompt_too_long。</span>
-              </div>
-            </div>
-
-            <div class="compact-meter-card">
-              <div class="compact-meter-head">
-                <span>上下文窗口占用</span>
-                <strong id="contextMeterLabel">96%</strong>
-              </div>
-              <div class="context-meter">
-                <div class="context-meter-fill" id="contextMeterFill"></div>
-              </div>
-            </div>
-
-            <div class="compact-message-stack" id="compactMessageStack">
-              <div class="compact-msg"><span>read</span><strong>1000 行文件</strong><span>4000 tokens</span></div>
-              <div class="compact-msg"><span>read</span><strong>30 个文件内容</strong><span>96K</span></div>
-              <div class="compact-msg"><span>bash</span><strong>20 条命令输出</strong><span>42K</span></div>
-              <div class="compact-msg keep"><span>goal</span><strong>当前目标和约束</strong><span>保留</span></div>
-              <div class="compact-msg"><span>tool</span><strong>旧 tool_result</strong><span>可压缩</span></div>
-              <div class="compact-msg"><span>history</span><strong>早期对话中段</strong><span>可裁掉</span></div>
-            </div>
-
-            <div class="compact-status" id="compactStatus">不压缩，Agent 根本没法在大项目里干活。</div>
-
-            <div class="compact-actions">
-              <button class="ghost-btn" type="button" data-action="compact-reset">重置</button>
-              <button class="ghost-btn primary" type="button" data-action="compact-next">跑下一层压缩</button>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="memory-page" data-label="Memory 记忆" data-speaker-notes="这一页讲 Memory。上一页的 Context Compact 能腾地方，但压缩一定会损失细节。Memory 是 Harness 层放在上下文窗口外的一层持久存储：把用户角色定义、Agent 角色定义、用户的作业习惯、项目内工作方式、关键文件摆放的位置写成文件，启动时只加载索引，需要时再加载相关记忆。">
-      <div class="slide-grid">
-        <header class="slide-head">
-          <div class="num">07</div>
-          <div>
-            <span class="kicker">Memory</span>
-            <h2>压缩会丢细节，要有一层不丢的</h2>
-            <p class="memory-subtitle">文件仓库 + 索引 + 按需加载：Memory 不参与压缩，所以能跨压缩、跨会话积累知识。</p>
-          </div>
-          <span class="tag">07 / 持久记忆</span>
-        </header>
-
-        <div class="memory-stage">
-          <article class="memory-arch">
-            <div class="memory-head">
-              <h3>左侧：Memory 放在上下文窗口外</h3>
-              <span class="memory-pill">跨压缩，跨会话</span>
-            </div>
-
-            <div class="memory-arch-map">
-              <div class="memory-node">
-                <strong>messages[]</strong>
-                <span>当前任务现场，会被压缩</span>
-              </div>
-              <div class="memory-arrow">-></div>
-              <div class="memory-node">
-                <strong>压缩上下文</strong>
-                <span>腾地方，但会丢细节</span>
-              </div>
-              <div class="memory-arrow">-></div>
-              <div class="memory-node memory-core">
-                <strong>Memory Loading</strong>
-                <span>按需把相关记忆放回现场</span>
-              </div>
-
-              <div class="memory-store">
-                <div class="memory-store-title">
-                  <span>.memory/ 文件仓库</span>
-                  <span>示例映射：USER.md / SOUL.md / MEMORY.md / AGENTS.md / REFERENCES.md</span>
-                </div>
-                <div class="memory-file">
-                  <strong>USER.md</strong>
-                  <span>用户角色定义、业务背景和沟通偏好。</span>
-                </div>
-                <div class="memory-file">
-                  <strong>SOUL.md</strong>
-                  <span>Agent 角色定义、工作口径和行为边界。</span>
-                </div>
-                <div class="memory-file">
-                  <strong>MEMORY.md</strong>
-                  <span>长期索引、用户反馈和做事方式。</span>
-                </div>
-                <div class="memory-file">
-                  <strong>AGENTS.md</strong>
-                  <span>Agent 在这个项目里应该怎么工作。</span>
-                </div>
-                <div class="memory-file">
-                  <strong>REFERENCES.md</strong>
-                  <span>关键文件、入口、资料摆放位置。</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="memory-cycle">
-              <div class="memory-cycle-step"><b>读</b><span>当前任务先读索引，知道有哪些记忆。</span></div>
-              <div class="memory-cycle-step"><b>取</b><span>只把相关记忆注入当前上下文。</span></div>
-              <div class="memory-cycle-step"><b>写</b><span>任务结束后，把稳定事实写回仓库。</span></div>
-            </div>
-          </article>
-
-          <aside class="memory-live">
-            <div class="memory-live-head">
-              <h3>右侧：压缩丢了，Memory 还在</h3>
-              <span class="memory-pill" id="memoryTypeLabel">role</span>
-            </div>
-
-            <div class="memory-loss">
-              <div class="memory-loss-card">
-                <strong>原始细节</strong>
-                <span id="memoryOriginal">这次分享面向部门同事，要技术讲清楚，也要业务能听懂。</span>
-              </div>
-              <div class="memory-loss-arrow">-></div>
-              <div class="memory-loss-card lost">
-                <strong>压缩摘要</strong>
-                <span id="memoryCompressed">用户在准备 Agent 分享。</span>
-              </div>
-            </div>
-
-            <div class="memory-tabs">
-              <button class="chip active" type="button" data-memory="user">角色定义</button>
-              <button class="chip" type="button" data-memory="feedback">用户的作业习惯</button>
-              <button class="chip" type="button" data-memory="project">项目工作方式</button>
-              <button class="chip" type="button" data-memory="reference">关键文件摆放的位置</button>
-            </div>
-
-            <div class="memory-live-card" id="memoryLiveCard">
-              <h3 id="memoryTitle">用户角色 / USER.md + Agent 角色 / SOUL.md</h3>
-              <div class="memory-meta-grid">
-                <div class="memory-meta-item"><strong>example_file</strong><span id="memoryFile">.memory/USER.md + SOUL.md</span></div>
-                <div class="memory-meta-item"><strong>when_to_load</strong><span id="memoryWhen">判断用户背景和 Agent 口径时加载</span></div>
-              </div>
-              <div class="memory-content" id="memoryContent">精确记忆：USER.md 记录用户是谁、面向谁；SOUL.md 记录 Agent 应该以什么角色、口径和边界协作。</div>
-            </div>
-
-            <div class="memory-result">
-              <b>总结</b>
-              <span id="memoryResult">autoCompact 可以压缩上下文，但角色、习惯、规范和文件位置仍能从 Memory 找回来。</span>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="system-prompt-page" data-label="System Prompt 组装" data-speaker-notes="这一页讲 System Prompt。每次用户发给 Agent 的不是一句话，而是一整包运行现场：system prompt 的各个 section、messages 历史、工具定义、工作区状态、记忆和系统提醒。重点是 prompt 不是写死的，而是在运行时按当前状态组装。">
-      <div class="slide-grid">
-        <header class="slide-head">
-          <div class="num">08</div>
-          <div>
-            <span class="kicker">System Prompt</span>
-            <h2>每次发给 LLM，是结构化的完整信息</h2>
-            <p class="system-subtitle">Prompt 不是写死的一段话，而是由多个 section 在运行时组装：稳定段常驻，动态段按状态加载。</p>
-          </div>
-          <span class="tag">08 / 请求结构</span>
-        </header>
-
-        <div class="system-stage">
-          <article class="system-arch">
-            <div class="system-head">
-              <h3>左侧：System Prompt 运行时组装</h3>
-              <span class="system-pill">分段 + 按需 + 缓存</span>
-            </div>
-
-            <div class="system-arch-map">
-              <div class="system-node">
-                <strong>context</strong>
-                <span>工具、工作区、记忆、模式</span>
-              </div>
-              <div class="system-arrow">-></div>
-              <div class="system-node assembler">
-                <strong>assemble_system_prompt()</strong>
-                <span>按真实状态拼 section</span>
-              </div>
-              <div class="system-arrow">-></div>
-              <div class="system-node">
-                <strong>API Request</strong>
-                <span>system + messages + tools</span>
-              </div>
-
-              <div class="system-sections">
-                <div class="system-sections-title">
-                  <span>PROMPT_SECTIONS</span>
-                  <span>不是关键词猜测，是状态驱动</span>
-                </div>
-                <div class="system-section-card" style="--section-color: var(--blue);">
-                  <strong>identity</strong>
-                  <span>角色定义、作业习惯。始终加载。</span>
-                </div>
-                <div class="system-section-card" style="--section-color: var(--green);">
-                  <strong>tools</strong>
-                  <span>实际启用的工具列表。始终加载。</span>
-                </div>
-                <div class="system-section-card" style="--section-color: var(--amber);">
-                  <strong>workspace</strong>
-                  <span>当前目录、项目现场。始终加载。</span>
-                </div>
-                <div class="system-section-card" style="--section-color: var(--violet);">
-                  <strong>memory</strong>
-                  <span>存在相关记忆时，按需加载。</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="system-rule-row">
-              <div class="system-rule"><b>1</b><span>稳定 section 放前面，利于缓存。</span></div>
-              <div class="system-rule"><b>2</b><span>动态 section 看真实状态，不搜关键词。</span></div>
-              <div class="system-rule"><b>3</b><span>每轮更新 context，再决定是否重组。</span></div>
-            </div>
-          </article>
-
-          <aside class="system-live">
-            <div class="system-live-head">
-              <h3>右侧：一次请求包里有什么</h3>
-              <span class="system-pill" id="systemModeLabel">基础任务</span>
-            </div>
-
-            <div class="system-tabs">
-              <button class="chip active" type="button" data-system-mode="base">基础任务</button>
-              <button class="chip" type="button" data-system-mode="memory">带记忆</button>
-              <button class="chip" type="button" data-system-mode="mcp">外部工具</button>
-            </div>
-
-            <div class="request-stack" id="requestStack">
-              <div class="request-layer active" data-layer="system" style="--layer-color: var(--blue);">
-                <b>1</b><strong>system prompt</strong><span id="systemSections">identity + tools + workspace</span>
-              </div>
-              <div class="request-layer active" data-layer="messages" style="--layer-color: var(--green);">
-                <b>2</b><strong>messages[]</strong><span>历史对话 + 当前用户任务</span>
-              </div>
-              <div class="request-layer active" data-layer="tools" style="--layer-color: var(--amber);">
-                <b>3</b><strong>tools schema</strong><span id="toolSchemaSummary">bash / read / write / edit</span>
-              </div>
-              <div class="request-layer muted" data-layer="memory" style="--layer-color: var(--violet);">
-                <b>4</b><strong>memory section</strong><span id="memorySectionSummary">无相关记忆，不加载</span>
-              </div>
-              <div class="request-layer active" data-layer="reminder" style="--layer-color: var(--red);">
-                <b>5</b><strong>system-reminder</strong><span id="reminderSummary">日期、git 状态、项目规则</span>
-              </div>
-            </div>
-
-            <div class="system-preview-card" id="systemPreviewCard">
-              <h3 id="systemPreviewTitle">assembled sections: identity, tools, workspace</h3>
-              <div class="system-preview-list">
-                <div><strong>system</strong><span id="systemPreviewSystem">稳定段常驻，动态段暂不加载</span></div>
-                <div><strong>messages</strong><span id="systemPreviewMessages">用户：请读取 README.md</span></div>
-                <div><strong>cache</strong><span id="systemPreviewCache">context 未变时命中缓存</span></div>
-              </div>
-            </div>
-
-            <div class="system-result" id="systemResult">点睛：Agent 每轮不是只看用户一句话，而是看完整运行现场。</div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="subagent-page" data-label="Subagent 协作" data-speaker-notes="这一页讲 Subagent 的核心机制。Parent Agent 不把完整对话历史交给子 Agent，而是只传一个 task 描述。Subagent 拿到的是全新的 messages[]，自己跑一段独立 loop，中间几十轮工具调用都不会污染 Parent。最后只提取摘要或最终文本，作为 tool_result 回到 Parent 的 messages[]。">
-      <div class="slide-grid">
-        <header class="slide-head">
-          <div class="num">09</div>
-          <div>
-            <span class="kicker">Subagent</span>
-            <h2>子 Agent 用独立上下文，只把最终摘要带回来</h2>
-            <p class="subagent-subtitle">Parent 只派发 task 描述；Subagent 自己循环、自己调用工具，中间过程不污染主上下文。</p>
-          </div>
-          <span class="tag">09 / 上下文隔离</span>
-        </header>
-
-        <div class="subagent-map">
-          <article class="agent-domain parent">
-            <h3>Parent Agent</h3>
-            <div class="parent-flow">
-              <div class="agent-row">
-                <div class="agent-block"><strong>messages[]</strong><span>主任务现场</span></div>
-                <div class="flow-arrow-text">-></div>
-                <div class="agent-block"><strong>LLM</strong><span>判断是否 tool_use</span></div>
-              </div>
-
-              <div class="parent-tools">
-                <h4>TOOL_HANDLERS</h4>
-                <div class="tool-grid">
-                  <div class="tool-handler"><strong>基础工具</strong><span>bash / read / write / edit / glob</span></div>
-                  <div class="tool-handler subspawn"><strong>task -> spawn</strong><span>创建子 Agent</span></div>
-                </div>
-              </div>
-
-              <div class="tool-result-return">tool_result<br><span>append messages[]</span></div>
-            </div>
-          </article>
-
-          <div class="subagent-bridge">
-            <div class="bridge-line"></div>
-            <div class="bridge-pill" style="--pill-color: var(--violet);">1 task 描述</div>
-            <div class="bridge-line"></div>
-            <div class="bridge-pill" style="--pill-color: var(--green);">2 summary</div>
-            <div class="bridge-line"></div>
-          </div>
-
-          <article class="agent-domain sub">
-            <h3>Subagent（全新上下文）</h3>
-            <div class="sub-flow">
-              <div class="sub-top">
-                <div class="sub-block"><strong>messages = [task]</strong><span>fresh，不继承父对话</span></div>
-                <div class="flow-arrow-text">-></div>
-                <div class="sub-block"><strong>LLM</strong><span>独立判断下一步</span></div>
-              </div>
-
-              <div class="sub-loop-box">
-                <strong>自己的 while 循环（最多 30 轮）</strong>
-                <span>bash · read · write · edit · glob</span>
-                <small>无 task -> 禁止递归 spawn</small>
-              </div>
-
-              <div class="discard-box">中间 30+ 轮工具调用 + 结果<br>全部丢弃</div>
-              <div class="summary-box">只提取最后一段文本 -> 返回给 Parent</div>
-            </div>
-          </article>
-
-          <div class="subagent-legend">
-            <div class="legend-line" style="--legend-color: oklch(0.78 0.13 292);"><strong>s05 保留：</strong>循环、hook、todo_write、基础工具</div>
-            <div class="legend-line" style="--legend-color: oklch(0.82 0.115 160);"><strong>s06 新增：</strong>task 工具 + spawn_subagent()，独立 messages[]，只回传摘要</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="mcp-page" data-label="MCP 外部能力" data-speaker-notes="这一页讲 MCP。它不是一个新模型，也不是把所有插件塞进 prompt。MCP 更像 Harness 和外部系统之间的统一协议：Server 暴露工具目录，Client 发起调用，Harness 管权限，结果仍然作为 tool_result 回到同一个 Agent Loop。">
-      <div class="slide-grid">
-        <header class="slide-head">
-            <div class="num">10</div>
-          <div>
-            <span class="kicker">MCP</span>
-            <h2>MCP 把外部能力接成 Agent 可用的工具协议</h2>
-            <p class="mcp-subtitle">外部世界不直接塞进模型，而是由 MCP Server 暴露工具目录；Harness 发现、授权、调用，再把结果送回循环。</p>
-          </div>
-          <span class="tag">10 / 外部能力协议</span>
-        </header>
-        <div class="mcp-stage">
-          <article class="mcp-arch">
-            <div class="mcp-head">
-              <h3>MCP 在 Harness 里的位置</h3>
-              <span class="mcp-pill">协议层，不是新模型</span>
-            </div>
-
-            <div class="mcp-definition">
-              <strong>Model Context Protocol</strong>
-              <span>统一描述外部工具：有哪些能力、参数怎么传、结果怎么返回、哪些动作需要权限。</span>
-            </div>
-
-            <div class="mcp-arch-map">
-              <div class="mcp-node"><strong>Agent Loop</strong><span>输出 tool_use</span></div>
-              <div class="mcp-arrow">-></div>
-              <div class="mcp-node protocol"><strong>Harness / MCP Client</strong><span>发现、授权、分发</span></div>
-              <div class="mcp-arrow">-></div>
-              <div class="mcp-node"><strong>tool_result</strong><span>观察回到 messages[]</span></div>
-
-              <div class="mcp-servers">
-                <div class="mcp-servers-title"><span>MCP Servers</span><span>把不同系统变成同一种接口</span></div>
-                <div class="mcp-server-card" style="--server-color: var(--blue);"><strong>Browser</strong><span>查看页面 / 点击 / 截图</span></div>
-                <div class="mcp-server-card" style="--server-color: var(--green);"><strong>Database</strong><span>查询结构化数据</span></div>
-                <div class="mcp-server-card" style="--server-color: var(--violet);"><strong>Internal API</strong><span>连接业务系统</span></div>
-                <div class="mcp-server-card" style="--server-color: var(--amber);"><strong>Files / Search</strong><span>读取知识和资料</span></div>
-              </div>
-            </div>
-
-            <div class="mcp-rule-row">
-              <div class="mcp-rule"><b>1</b><span><strong>可发现</strong><br>Server 暴露工具 schema</span></div>
-              <div class="mcp-rule"><b>2</b><span><strong>可调用</strong><br>tool_use 被转发执行</span></div>
-              <div class="mcp-rule"><b>3</b><span><strong>可治理</strong><br>权限和审计留在 Harness</span></div>
-            </div>
-          </article>
-
-          <article class="mcp-live">
-            <div class="mcp-live-head">
-              <h3>一次 MCP 调用长什么样</h3>
-              <span class="mcp-pill" id="mcpModeLabel">浏览器能力</span>
-            </div>
-
-            <div class="mcp-tabs" role="tablist" aria-label="MCP 示例">
-              <button class="chip active" type="button" data-mcp="browser">浏览器</button>
-              <button class="chip" type="button" data-mcp="database">数据库</button>
-              <button class="chip" type="button" data-mcp="api">内部系统</button>
-            </div>
-
-            <div class="mcp-call-card" id="mcpCallCard">
-              <h3 id="mcpCallTitle">检查页面是否正常渲染</h3>
-              <div class="mcp-call-flow">
-                <div class="mcp-flow-step"><strong id="mcpToolName">browser.screenshot</strong><span>tool_use</span></div>
-                <div class="mcp-flow-arrow">-></div>
-                <div class="mcp-flow-step"><strong id="mcpServerName">Browser Server</strong><span>执行外部动作</span></div>
-                <div class="mcp-flow-arrow">-></div>
-                <div class="mcp-flow-step"><strong id="mcpSystemName">网页状态</strong><span>真实世界反馈</span></div>
-              </div>
-              <div class="mcp-result-box" id="mcpResultBox">返回截图和 DOM 状态，Agent 判断标题遮挡、按钮是否可见，再决定要不要修改样式。</div>
-            </div>
-
-            <div class="mcp-result" id="mcpResult">关键点：MCP 扩展的是 Harness 能力，核心循环仍然不变。</div>
-
-            <div class="mcp-boundary">
-              <div><strong>不是替代 Loop</strong><span>模型仍然判断下一步，MCP 只扩展可行动范围。</span></div>
-              <div><strong>不是绕过权限</strong><span>读写、发布、调用内部系统仍然由 Harness 审批。</span></div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="finale-page" data-label="Loop + Harness 总结" data-speaker-notes="最后收束。今天讲的所有机制可以归成两类工作：Loop Engineer 负责让模型持续判断、行动、观察和停止；Harness Engineer 负责把工具、权限、计划、技能、压缩、记忆、系统提示词、子 Agent 和 MCP 接在循环外面。Loop 解决会不会做，Harness 解决能不能安全、持续、可评估地做。两者结合，Agent 才能从会话工具变成任务系统。">
-      <div class="slide-grid">
-        <header class="slide-head">
-            <div class="num">11</div>
-          <div>
-            <span class="kicker">Summary</span>
-            <h2>Agent 的核心，是 Loop Engineer + Harness Engineer</h2>
-            <p class="finale-subtitle">Loop 让模型持续推进；Harness 给它工具、边界、上下文和外部系统。今天所有机制，基本都能放进这两类工作。</p>
-          </div>
-          <span class="tag">11 / 分享总结</span>
-        </header>
-        <div class="finale-stage">
-          <div class="engineer-compare">
-            <article class="engineer-card loop">
-              <div class="engineer-title">
-                <h3>Loop Engineer</h3>
-                <span>让模型持续推进</span>
-              </div>
-              <p>关注的是一圈怎么跑：读现场、判断下一步、调用工具、观察结果，直到能给出最终交付。</p>
-              <div class="engineer-points">
-                <div class="engineer-point"><strong>状态</strong><span>messages[] 保存任务现场</span></div>
-                <div class="engineer-point"><strong>动作</strong><span>tool_use 表达下一步</span></div>
-                <div class="engineer-point"><strong>停止</strong><span>判断何时 final answer</span></div>
-              </div>
-              <div class="loop-summary-line">
-                <div class="loop-summary-chip"><strong>messages[]</strong><span>任务现场</span></div>
-                <div class="loop-summary-arrow">-></div>
-                <div class="loop-summary-chip"><strong>LLM</strong><span>判断下一步</span></div>
-                <div class="loop-summary-arrow">-></div>
-                <div class="loop-summary-chip"><strong>tool_use</strong><span>行动请求</span></div>
-                <div class="loop-summary-arrow">-></div>
-                <div class="loop-summary-chip"><strong>tool_result</strong><span>观察回流</span></div>
-              </div>
-            </article>
-
-            <article class="engineer-card harness">
-              <div class="engineer-title">
-                <h3>Harness Engineer</h3>
-                <span>让行动可控可持续</span>
-              </div>
-              <p>关注的是循环外的运行环境：哪些能力可用、哪些动作要确认、上下文如何维护、外部系统如何接入。</p>
-              <div class="engineer-points">
-                <div class="engineer-point"><strong>能力</strong><span>工具、Skill、MCP</span></div>
-                <div class="engineer-point"><strong>边界</strong><span>权限、审计、风险分级</span></div>
-                <div class="engineer-point"><strong>连续性</strong><span>Todo、Compact、Memory</span></div>
-              </div>
-              <div class="harness-grid">
-                <div class="harness-chip" style="--chip-color: var(--green);"><strong>Tool + Permission</strong><span>手和边界</span></div>
-                <div class="harness-chip" style="--chip-color: var(--violet);"><strong>Todo + Hook</strong><span>计划和提醒</span></div>
-                <div class="harness-chip" style="--chip-color: var(--amber);"><strong>Skill Loading</strong><span>按需说明书</span></div>
-                <div class="harness-chip" style="--chip-color: var(--red);"><strong>Context Compact</strong><span>上下文腾地方</span></div>
-                <div class="harness-chip" style="--chip-color: var(--violet);"><strong>Memory</strong><span>不丢细节</span></div>
-                <div class="harness-chip" style="--chip-color: var(--blue);"><strong>System Prompt</strong><span>组装运行现场</span></div>
-                <div class="harness-chip" style="--chip-color: var(--blue);"><strong>Subagent</strong><span>拆分子任务</span></div>
-                <div class="harness-chip" style="--chip-color: var(--green);"><strong>MCP</strong><span>接入外部系统</span></div>
-                <div class="harness-chip" style="--chip-color: var(--amber);"><strong>Evaluation</strong><span>观察和迭代</span></div>
-              </div>
-            </article>
-          </div>
-
-          <div class="finale-bottom">
-            <div class="finale-principle">
-              <strong>最小闭环</strong>
-              <span>先跑通 messages -> LLM -> tool_use -> tool_result。</span>
-            </div>
-            <div class="finale-formula">
-              <strong>逐步补 Harness</strong>
-              <span>按风险和收益补工具、权限、记忆、子任务和外部系统。</span>
-            </div>
-            <div class="finale-answer">
-              <strong>最终目标</strong>
-              <span>不是万能聊天框，而是可交付、可解释、可迭代的任务系统。</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </deck-stage>
 
   <aside class="speaker-console collapsed" id="speakerConsole" aria-label="演讲稿控制台">
     <div class="console-head">
       <strong id="consoleTitle">讲稿</strong>
-      <span class="console-page-count" id="consolePageCount">1/12</span>
+      <span class="console-page-count" id="consolePageCount">1/4</span>
       <button class="console-toggle" type="button" id="consoleToggle" aria-label="收起或展开讲稿">∧</button>
     </div>
     <div class="script-tabs" role="tablist" aria-label="讲稿模式">
@@ -8329,347 +7214,30 @@ result: 字段口径已确认</pre>
 
     const scripts = [
       {
-        title: "Chat vs Agent",
-        beginner: "我们先从大家最熟悉的 Chat 开始。Chat 模式更像一次问答：你把问题说清楚，它给你一个回答。Agent 的变化，是它拿到一个目标以后，会自己判断下一步、调用工具、观察结果，再继续推进。",
-        technical: "从运行结构看，Chat 通常是一轮 completion。Agent 是多轮循环，模型输出里可能包含 tool_use，Harness 执行工具，把 tool_result 追加回 messages，然后继续请求模型。",
-        business: "这页想先建立兴趣点：Agent 的价值不是把回答写得更长，而是把一个需要多步推进的工作，变成可观察、可控制、可交付的任务过程。后面我们就拆它背后的 Loop、工具、权限、计划和上下文。"
+        title: "我的 AI 工具链",
+        beginner: "最后补充一下我平时怎么用 AI 工具。工具太多、变化太快，所以我的建议是直接选第一梯队，把摸索工具的时间省下来，花在任务设计、上下文整理和结果验证上。",
+        technical: "我主要分两类：创意落地和 AIGC 方向用 Claude、Codex、ChatGPT 这类 CLI 和 Desktop 工具；生活助手方向用 Hermes Agent，通过微信、飞书、Telegram 这类入口随时对话。",
+        business: "对团队来说，重点不是每周换一个新工具，而是形成稳定工作流。选择强工具只是第一步，更重要的是把它嵌入日常任务、知识管理和业务验证。"
       },
       {
-        title: "Loop Engineering",
-        beginner: "现在把刚才的 Agent 模式拆开看。AI 做事不是一次性完成，而是一圈一圈地推进：先看目标和现场，再想下一步，要工具就调用工具，工具结果回来以后再想一次。什么时候停？当模型判断目标已经完成，就返回结果。",
-        technical: "这里的 Loop Engineering 可以理解为 Agent 的运行骨架。messages 是任务现场，LLM 负责判断 stop_reason。如果需要工具，就产生 tool_call，系统执行后把 tool_result 追加回 messages，再进入下一轮。",
-        business: "这页把第 0 页的直觉落到结构上：Agent 不是一个神奇按钮，而是一种循环推进任务的机制。只要我们能看见每轮的目标、判断、行动和结果，就能管理它、优化它，也能解释它为什么这么做。"
+        title: "Vibe Coding 产物",
+        beginner: "这些工具不是只用来聊天，我也用它们 coding 出了一些东西。一个是业务视角的 Postman，用来做 UAT 接口验证；另一个是我个人的 Agent 实验室，用来学习流式接口和 Agent loop。",
+        technical: "业务 Postman 关注接口调用、任务发布和数据验证的封装；个人 Agent 更关注运行机制实验，比如 tool_result 如何回到上下文、流式输出如何驱动界面状态。",
+        business: "这里想表达的是，AI coding 的价值不是替代软件工程，而是把想法更快变成可验证原型。原型跑起来以后，业务反馈就会变得非常具体。"
       },
       {
-        title: "Tool Use",
-        beginner: "这一页只加一个东西：工具分发。循环还是刚才那个循环。区别是模型说我要用某个工具，系统就根据工具名找到对应处理器，比如 read_file 是读取文件，write_file 是写入文件。",
-        technical: "Tool Use 的关键是 TOOL_HANDLERS。模型输出 tool_use，里面带工具名和参数。Harness 根据名称 dispatch 到对应 handler，执行后把 tool_result 追加回 messages。",
-        business: "对非技术同事来说，可以把工具池理解为一组可调用的办公动作。AI 判断要做哪一步，系统负责把这个动作交给真正会执行的工具。"
+        title: "AI 信息输入",
+        beginner: "我获取 AI 信息主要靠 x.com，因为很多一线从业者会分享最新工具、模型进展和落地经验。同时我会用 AI 语音输入法，把想法快速变成文字。",
+        technical: "信息链路大概是：x.com 获取信号，语音输入降低记录成本，Agent 做整理、分类和补充，再把值得保留的内容进入知识库。这样信息不会停留在收藏夹里。",
+        business: "AI 时代信息量很大，关键不是看得多，而是形成输入到沉淀的流程。否则信息只会制造焦虑，不会变成判断力。"
       },
       {
-        title: "工具和边界",
-        beginner: "工具就是 Agent 的手。没有工具，它只能说。有了工具，它可以读文档、查系统、调接口。但手越多，越要知道什么能碰，什么不能碰。",
-        technical: "工具层最好做成 dispatch map 或 registry。每个工具有名称、输入 schema、说明和 handler。权限层在 handler 前判断 allow、ask 或 deny，避免把安全逻辑散落到 prompt 里。",
-        business: "企业里最关心的是边界。比如读取报表可以自动做，提交审批必须确认，删除数据应该禁止。这样的权限设计，比单纯提高模型能力更关键。"
-      },
-      {
-        title: "TodoWrite",
-        beginner: "复杂任务最怕做着做着偏题。比如本来要把 Python 文件改成 snake_case，测试失败一多，模型可能只顾着修测试，忘了最初目标。TodoWrite 就像任务白板，让模型每一步都能回到计划。",
-        technical: "TodoWrite 本质上是把计划状态外显成工具结果。todo_write 更新 pending、in_progress、completed；如果模型多轮没有更新 TODO，Nag Reminder 会把提醒注入 messages，迫使循环回到计划。",
-        business: "这页的业务直觉是：大任务必须有可见进度。人可以看见 Agent 做到哪一步、为什么转向、有没有忘记目标。计划不是文档负担，而是防偏航机制。"
-      },
-      {
-        title: "Skill 按需加载",
-        beginner: "Skill 可以理解成一套专项说明书。Agent 启动时不用背完所有说明书，只要先看到目录：技能叫什么、适合什么任务、文件在哪里。等用户任务真的命中某一项，再把完整 SKILL.md 打开。",
-        technical: "Skill Loading 是两层设计：启动扫描只读取 SKILL.md 的 frontmatter 和路径，例如 name、description、path；内容层通过 load_skill(name) 读取完整正文，包括步骤、约束、引用和脚本，再作为 tool_result 回到 messages。",
-        business: "这对企业知识管理很有启发。制度、流程、模板不需要全部塞进一个超长提示词，而是做成按需加载的能力库：知道在哪里，需要时才展开。"
-      },
-      {
-        title: "上下文压缩",
-        beginner: "Agent 做大项目时，读文件、跑命令、调用工具，结果都会塞进 messages。上下文窗口总会满，满了 API 就会拒绝。所以 Harness 要在每次问模型前，先帮它腾地方。",
-        technical: "Context Compact 是 LLM 调用前的预处理机制。优先使用成本小的方式做处理：大 tool_result 归档、裁掉中间旧消息、旧结果变占位；仍超过阈值时再调用 LLM 做 compact_history；如果 API 返回 prompt_too_long，再做 reactive_compact 重试。",
-        business: "对业务团队来说，这页的直觉是：不压缩，Agent 就只能做小任务；有压缩，才可能在大项目里持续工作。压缩做得好，留下的是干净记忆，删掉的是不再有用的噪声。"
-      },
-      {
-        title: "Memory 记忆",
-        beginner: "压缩能腾地方，但一定会丢细节。Memory 的作用，就是把不该丢的长期信息存到上下文窗口外，比如用户角色定义、Agent 角色定义、用户的作业习惯、项目内工作方式，以及关键文件摆放的位置。",
-        technical: "Memory 是 Harness 层的持久文件仓库：可以用 MEMORY.md 做索引，用 USER.md、SOUL.md、AGENTS.md、REFERENCES.md 这类文件承载不同类型的长期信息。启动时索引常驻；运行时由 LLM side-query 选择少量相关文件注入。",
-        business: "对业务团队来说，Memory 是长期知识资产。它保存的不是闲聊记录，而是用户角色、Agent 角色、习惯、项目工作方式和资料位置；这些信息不被一次压缩抹掉，也不会因为新开会话就归零。"
-      },
-      {
-        title: "System Prompt 组装",
-        beginner: "到这里我们可以点睛一下：每次你给 Agent 发一句话，模型看到的并不只有这一句话。系统会把身份、工具、工作目录、记忆、历史消息和当前任务一起打包，组成一次完整请求。",
-        technical: "s10 的核心是把硬编码 SYSTEM 拆成 PROMPT_SECTIONS。identity、tools、workspace 始终加载；memory 等动态 section 根据 context 的真实状态加载。context 不变就命中缓存，变了再重新 assemble_system_prompt。",
-        business: "这页把前面的能力串起来：工具、计划、技能、压缩、记忆，都不是散落的功能，而是在每次请求前被 Harness 组装成模型能理解的运行现场。"
-      },
-      {
-        title: "Subagent 协作",
-        beginner: "Subagent 可以理解成把一小段任务交给一个新的助手。它不会继承主对话的所有历史，只拿到 task 描述，然后自己查资料、调用工具、整理结果。中间过程不带回来，最后只把摘要交给主人。",
-        technical: "Subagent 的核心是 fresh messages。Parent 调用 task 工具时，只传 task description；子 Agent 建立 messages = [task]，独立跑自己的 loop。中间 30 轮工具调用和结果都丢弃，只把 extract_text 或 summary 作为 tool_result 回到 Parent。",
-        business: "对团队任务来说，这相当于让主流程保持干净。研究、验证、总结可以交给子任务完成，但主 Agent 只接收可用结论，不被所有中间日志淹没。"
-      },
-      {
-        title: "MCP 外部能力",
-        beginner: "MCP 可以理解成外部能力的统一插座。Agent 不需要自己懂浏览器、数据库或内部系统，只要知道有哪些工具能用；真正连接外部世界的，是一个个 MCP Server。",
-        technical: "技术上，MCP 把外部能力包装成可发现的 tool schema。Agent 仍然输出 tool_use，MCP Client 负责转发调用，Server 执行动作，结果以 tool_result 回到 messages[]。核心 loop 不变，扩展的是 Harness 的行动边界。",
-        business: "落到业务里，MCP 的价值是把内部系统、知识库、浏览器和数据源接成同一种接口。这样 Agent 不只是会聊天，而是能在真实系统里查询、校验和推进任务，同时权限仍然留在 Harness。"
-      },
-      {
-        title: "Loop + Harness 总结",
-        beginner: "最后我们把所有内容收束成两类工作：Loop Engineer 负责让模型一轮轮判断、行动、观察和停止；Harness Engineer 负责给它工具、边界、上下文、记忆、子任务和外部系统。",
-        technical: "前面所有机制都可以放进这个框架：Loop 是 messages -> LLM -> tool_use -> tool_result 的核心循环；Harness 是工具分发、权限、Todo、Skill、Compact、Memory、System Prompt、Subagent 和 MCP 这些运行层能力。",
-        business: "所以做 Agent 不是写一个万能提示词，而是为具体任务建设运行环境。先跑通最小闭环，再按风险和收益补 Harness，最后从会话工具走向可交付、可解释、可迭代的任务系统。"
-      },
-
-    ];
-
-    const toolData = {
-      read: {
-        title: "读取文档",
-        risk: "低风险",
-        copy: [
-          "Agent 读取两条电子流的字段说明，确认“当前节点”和“归档状态”的口径。",
-          "观察结果被追加回上下文，模型据此继续判断下一步。"
-        ]
-      },
-      search: {
-        title: "检索信息",
-        risk: "低风险",
-        copy: [
-          "Agent 检索流程制度和历史案例，确认哪些差异属于正常情况。",
-          "检索结果不会直接当结论，而是作为证据进入下一轮判断。"
-        ]
-      },
-      api: {
-        title: "调用接口",
-        risk: "中风险",
-        copy: [
-          "Agent 调用内部查询接口，读取电子流状态和停留时间。",
-          "如果接口会改变外部状态，需要进入人工确认分支。"
-        ]
-      },
-      shell: {
-        title: "删除文件",
-        risk: "高风险",
-        copy: [
-          "Agent 请求删除本地文件，可能造成不可恢复的数据损失。",
-          "命中禁止清单后，Harness 直接拦截，并把原因返回上下文。"
-        ]
-      }
-    };
-
-    const permToolData = {
-      read: {
-        title: "读取文档",
-        copy: "只读查询，自动放行。",
-        risk: "低风险",
-        riskLevel: "low",
-        highlightEdge: "auto",
-        code: "tool: read_file\npolicy: auto\nresult: 字段口径已确认"
-      },
-      search: {
-        title: "检索信息",
-        copy: "只读检索，自动放行。",
-        risk: "低风险",
-        riskLevel: "low",
-        highlightEdge: "auto",
-        code: "tool: web_search\npolicy: auto\nresult: 找到 3 条制度依据"
-      },
-      api: {
-        title: "调用接口",
-        copy: "可能访问内部系统，需要确认。",
-        risk: "中风险",
-        riskLevel: "medium",
-        highlightEdge: "confirm",
-        code: "tool: call_api\npolicy: confirm\nresult: 等待用户确认后执行"
-      },
-      shell: {
-        title: "删除文件",
-        copy: "高风险破坏性动作，直接禁止。",
-        risk: "高风险",
-        riskLevel: "high",
-        highlightEdge: "block",
-        code: "tool: delete_file\npolicy: block\nresult: 已拦截删除请求，保留原文件"
-      }
-    };
-
-    const skillData = {
-      review: {
-        title: "代码审查 Skill",
-        name: "review",
-        request: "帮我审一下这个 PR，重点看风险和测试。",
-        when: "用户要求 review、审查 PR 或评估风险",
-        loaded: "目录约 100 tokens 常驻；完整说明约 2000 tokens，命中后才花。",
-        detail: "加载后，Agent 才拿到完整审查方法：先看 diff，再按严重程度列问题，最后补充测试风险。"
-      },
-      slides: {
-        title: "生成演示材料 Skill",
-        name: "slide-deck",
-        request: "把这段材料整理成一份适合部门分享的演示材料。",
-        when: "用户要生成 PPT、HTML 演讲稿、演示材料或动态演示",
-        loaded: "目录只告诉模型有这个能力；版式和验证细则按需加载。",
-        detail: "加载后，Agent 会按演示材料方式工作：先定叙事，再做版式、讲稿、交互效果和截图验证。"
-      },
-      debug: {
-        title: "系统排障 Skill",
-        name: "debug",
-        request: "这个页面突然打不开了，帮我找出真正原因。",
-        when: "用户报告错误、失败、异常或回归",
-        loaded: "只有出现故障时，才加载排障流程和证据清单。",
-        detail: "加载后，Agent 先复现问题、收集日志和差异，再定位根因，避免看到报错就猜修复。"
-      },
-      wechat: {
-        title: "生成周报 Skill",
-        name: "weekly-report",
-        request: "根据这周的任务记录，帮我生成一份周报。",
-        when: "用户要生成周报、日报、项目进展总结",
-        loaded: "周报模板和总结口径不常驻；只有报告生成任务命中时才读取。",
-        detail: "加载后，Agent 会按固定结构整理本周完成事项、风险阻塞、下周计划和需要同步的结论。"
-      }
-    };
-
-    const compactFrames = [
-      {
-        label: "未压缩",
-        meter: "96%",
-        fill: "96%",
-        color: "var(--red)",
-        status: "不压缩，Agent 根本没法在大项目里干活。",
-        classes: ["", "", "", "keep", "", ""]
-      },
-      {
-        label: "L3 / 大结果归档",
-        meter: "72%",
-        fill: "72%",
-        color: "var(--amber)",
-        status: "处理结果数据体积较大的做归档，messages[] 里只留预览路径信息，0 API。",
-        classes: ["trimmed", "trimmed", "", "keep", "trimmed", ""]
-      },
-      {
-        label: "L1 + L2 / 裁旧占位",
-        meter: "44%",
-        fill: "44%",
-        color: "var(--blue)",
-        status: "消息太多就裁掉中间；旧工具结果变成占位符，保留最近 3 条完整结果，0 API。",
-        classes: ["gone", "trimmed", "trimmed", "keep", "gone", "gone"]
-      },
-      {
-        label: "L4 / LLM 摘要",
-        meter: "24%",
-        fill: "24%",
-        color: "var(--green)",
-        status: "仍超阈值时才调用 LLM，把旧对话压成一条摘要。贵，所以后跑。",
-        classes: ["gone", "gone", "trimmed", "keep", "gone", "gone"]
-      },
-      {
-        label: "应急兜底",
-        meter: "18%",
-        fill: "18%",
-        color: "var(--green)",
-        status: "如果 API 仍返回 prompt_too_long，就做 reactive_compact，保留最后任务现场后重试。",
-        classes: ["gone", "gone", "gone", "keep", "gone", "gone"]
+        title: "Obsidian + LLM Wiki",
+        beginner: "最后讲我的知识管理。我的做法是 Agent 负责整理知识，Obsidian 负责展示结果。知识库到一定程度后，会形成知识图谱，就像我的第二大脑。",
+        technical: "LLM Wiki 的核心是持久 Markdown wiki：raw sources 只读，Agent 维护主题页、实体页、索引和日志，AGENTS.md 约束工作流，定期 lint 检查孤页、过期结论和断掉的链接。",
+        business: "这套方法的价值是让知识持续复利。后续做研究报告、材料整理或方案输出时，Agent 不再从零开始，而是基于已经编译好的第二大脑继续工作。"
       }
     ];
-
-    const memoryData = {
-      user: {
-        type: "role",
-        original: "这次分享面向部门同事，要技术讲清楚，也要业务能听懂。",
-        compressed: "用户在准备 Agent 分享。",
-        title: "用户角色 / USER.md + Agent 角色 / SOUL.md",
-        file: ".memory/USER.md + SOUL.md",
-        when: "判断用户背景和 Agent 口径时加载",
-        content: "精确记忆：USER.md 记录用户是谁、面向谁；SOUL.md 记录 Agent 应该以什么角色、口径和边界协作。",
-        result: "Memory 让 Agent 记住“我在帮谁、我是谁、应该用什么口径”。"
-      },
-      feedback: {
-        type: "habit",
-        original: "改材料时先整体看一遍逻辑，再集中处理细节。",
-        compressed: "用户希望整体优化。",
-        title: "用户的作业习惯 / MEMORY.md",
-        file: ".memory/MEMORY.md",
-        when: "涉及修改材料、代码或方案时加载",
-        content: "精确记忆：用户偏好先通读全局、找逻辑问题，再集中修文案、样式和动效，不希望零散改。",
-        result: "Memory 保存的是做事方式，不只是聊天记录；下次接类似任务可以直接复用。"
-      },
-      project: {
-        type: "project",
-        original: "这份 deck 用 deck-stage，页面是 1920x1080 的静态 HTML。",
-        compressed: "项目是 HTML 演示材料。",
-        title: "项目工作方式 / AGENTS.md",
-        file: ".memory/AGENTS.md",
-        when: "涉及项目内如何行动、验证或协作时加载",
-        content: "精确记忆：AGENTS.md 说明 Agent 在这个项目里应该怎么工作，比如遵守 deck-stage 结构、保持文字可编辑、按 1920x1080 画布验证。",
-        result: "项目内工作方式跨会话保留，新会话不用重新解释 Agent 应该怎么推进。"
-      },
-      reference: {
-        type: "reference",
-        original: "主文件在 designs/agent-zero-to-one-talk/index.html，截图也放在同目录。",
-        compressed: "材料文件在 designs 目录。",
-        title: "关键文件摆放的位置 / REFERENCES.md",
-        file: ".memory/REFERENCES.md",
-        when: "涉及继续修改这份分享材料时加载",
-        content: "精确记忆：主 deck 在 designs/agent-zero-to-one-talk/index.html，预览图在同目录，deck-stage.js 是导航和缩放组件。",
-        result: "Memory 不只记结论，也记关键文件摆放的位置，让 Agent 下次能直接找到材料。"
-      }
-    };
-
-    const systemPromptModes = {
-      base: {
-        label: "基础任务",
-        sections: "identity + tools + workspace",
-        tools: "bash / read / write / edit",
-        memory: "无相关记忆，不加载",
-        reminder: "日期、git 状态、项目规则",
-        activeLayers: ["system", "messages", "tools", "reminder"],
-        title: "assembled sections: identity, tools, workspace",
-        system: "稳定段常驻，动态段暂不加载",
-        messages: "用户：请读取 README.md",
-        cache: "context 未变时命中缓存",
-        result: "点睛：Agent 每轮不是只看用户一句话，而是看完整运行现场。"
-      },
-      memory: {
-        label: "带记忆",
-        sections: "identity + tools + workspace + memory",
-        tools: "bash / read / write / load_skill",
-        memory: ".memory/MEMORY.md 命中，注入相关记忆",
-        reminder: "当前日期 + 工作区 + 用户偏好",
-        activeLayers: ["system", "messages", "tools", "memory", "reminder"],
-        title: "assembled sections: identity, tools, workspace, memory",
-        system: "memory section 按真实文件状态加载",
-        messages: "用户：继续按我的代码风格改文件",
-        cache: "动态段变化，只重组必要部分",
-        result: "Memory、Skill、Context 都会在这里汇合成模型真正看到的现场。"
-      },
-      mcp: {
-        label: "外部工具",
-        sections: "identity + tools + workspace + mcp",
-        tools: "bash / read / browser / database / mcp",
-        memory: "无关记忆不加载，避免噪音",
-        reminder: "MCP 状态变化，动态 section 重新生成",
-        activeLayers: ["system", "messages", "tools", "reminder"],
-        title: "assembled sections: identity, tools, workspace, mcp",
-        system: "工具和外部连接状态决定 prompt 内容",
-        messages: "用户：查内部系统并整理结论",
-        cache: "静态段复用缓存，动态段按状态更新",
-        result: "Prompt 是运行时配置，不是写死的一段长文本。"
-      }
-    };
-
-    const mcpModes = {
-      browser: {
-        label: "浏览器能力",
-        title: "检查页面是否正常渲染",
-        tool: "browser.screenshot",
-        server: "Browser Server",
-        system: "网页状态",
-        detail: "Client 按 schema 调用浏览器 Server，拿回截图和 DOM 状态；Agent 再判断标题遮挡、按钮是否可见。",
-        result: "关键点：外部反馈变成 tool_result，继续回到同一个 Agent Loop。"
-      },
-      database: {
-        label: "数据库能力",
-        title: "查询客户流程是否卡住",
-        tool: "db.query",
-        server: "Database Server",
-        system: "业务数据",
-        detail: "Server 执行受控查询，只返回允许字段；Agent 拿到结构化结果后，判断是否补充查询或生成报告。",
-        result: "关键点：模型不直连数据库，MCP Server 承担连接，Harness 保留边界。"
-      },
-      api: {
-        label: "内部系统",
-        title: "调用审批系统创建任务",
-        tool: "workflow.create",
-        server: "Internal API Server",
-        system: "审批流",
-        detail: "涉及写入的动作先进入确认分支；用户确认后，Server 调内部 API，并把任务编号返回给 Agent。",
-        result: "关键点：能接系统，不等于无边界执行；Harness 仍然负责审批和审计。"
-      }
-    };
-
-    function setActiveWithin(container, selector, index) {
-      const items = Array.from(container.querySelectorAll(selector));
-      items.forEach((item, i) => item.classList.toggle("active", i === index));
-    }
 
     function renderScript() {
       const item = scripts[currentSlide] || scripts[0];
@@ -8685,14 +7253,14 @@ result: 字段口径已确认</pre>
       const slides = Array.from(document.querySelectorAll("deck-stage > section"));
       const activeIndex = slides.findIndex((slide) => slide.hasAttribute("data-deck-active"));
       if (activeIndex >= 0) {
-        currentSlide = activeIndex;
+        currentSlide = Math.min(activeIndex, scripts.length - 1);
       }
       renderScript();
       window.postMessage({ slideIndexChanged: currentSlide }, "*");
     }
 
     deck.addEventListener("slidechange", (event) => {
-      currentSlide = event.detail.index;
+      currentSlide = Math.min(event.detail.index, scripts.length - 1);
       renderScript();
       window.postMessage({ slideIndexChanged: currentSlide }, "*");
     });
@@ -8706,522 +7274,13 @@ result: 字段口径已确认</pre>
 
     consoleToggle.addEventListener("click", () => {
       speakerConsole.classList.toggle("collapsed");
-      consoleToggle.textContent = speakerConsole.classList.contains("collapsed") ? "∧" : "∨";
       renderScript();
     });
 
-    const loopEngineSteps = [
-      {
-        title: "目标",
-        copy: "输入变成任务目标。",
-        code: '用户：帮我写一份日报',
-        node: 0,
-        edges: [0]
-      },
-      {
-        title: "消息列表",
-        copy: "任务现场被保存。",
-        code: 'messages = [\n  { role: "user", content: "帮我写一份日报" }\n]',
-        node: 1,
-        edges: [0, 1]
-      },
-      {
-        title: "模型判断",
-        copy: "模型阅读历史，做出判断。",
-        code: '模型阅读消息历史\n判断：需要先收集今天做了什么\n返回：tool_call',
-        node: 2,
-        edges: [1, 2]
-      },
-      {
-        title: "是否使用文件工具",
-        copy: "判断是否读取或写入文件。",
-        code: 'need_tool = true\n使用文件读取工具：收集素材\n使用文件写入工具：保存日报',
-        node: 3,
-        edges: [2, 3]
-      },
-      {
-        title: "工具调用",
-        copy: "系统执行动作。",
-        code: 'tool_call: read_work_log\n输入：今天的任务记录\n输出：完成事项、阻塞、明日计划',
-        node: 4,
-        edges: [3, 4]
-      },
-      {
-        title: "观察结果",
-        copy: "结果回到现场。",
-        code: 'tool_result:\n完成 3 项需求评审\n修复 1 个线上问题\n明日继续联调\n\n结果追加到 messages',
-        node: 1,
-        edges: [4, 5, 1]
-      },
-      {
-        title: "模型再次判断",
-        copy: "大模型先阅读工具结果，再决定是否结束。",
-        code: 'messages 已包含 tool_result\nLLM 再次判断：材料够了\n下一步：返回最终结果',
-        node: 2,
-        edges: [1]
-      },
-      {
-        title: "返回结果",
-        copy: "目标完成，循环停止。",
-        code: 'final answer:\n生成日报草稿',
-        node: 6,
-        edges: [2, 6]
-      }
-    ];
-
-    let loopEngineStep = 0;
-    let loopEngineTimer = null;
-
-    function renderLoopEngine() {
-      const step = loopEngineSteps[loopEngineStep];
-      document.querySelectorAll("[data-loop-node]").forEach((node) => {
-        const isActive = Number(node.getAttribute("data-loop-node")) === step.node;
-        node.classList.toggle("active", isActive);
-        node.classList.toggle("dim", !isActive);
-      });
-      document.querySelectorAll("[data-loop-edge]").forEach((edge) => {
-        edge.classList.toggle("active", step.edges.includes(Number(edge.getAttribute("data-loop-edge"))));
-      });
-      document.getElementById("loopArtifactTitle").textContent = step.title;
-      document.getElementById("loopArtifactCopy").textContent = step.copy;
-      document.getElementById("loopArtifactCode").textContent = step.code;
-      document.getElementById("loopStepCounter").textContent = `${loopEngineStep + 1} / ${loopEngineSteps.length}`;
-    }
-
-    function stopLoopEngineAuto() {
-      if (loopEngineTimer) {
-        clearInterval(loopEngineTimer);
-        loopEngineTimer = null;
-      }
-      const autoButton = document.querySelector("[data-action='loop-engine-auto']");
-      if (autoButton) autoButton.textContent = "自动播放";
-    }
-
-    document.querySelector("[data-action='loop-engine-next']").addEventListener("click", () => {
-      stopLoopEngineAuto();
-      loopEngineStep = (loopEngineStep + 1) % loopEngineSteps.length;
-      renderLoopEngine();
+    window.addEventListener("hashchange", () => setTimeout(syncScriptToActiveSlide, 80));
+    customElements.whenDefined("deck-stage").then(() => {
+      requestAnimationFrame(() => setTimeout(syncScriptToActiveSlide, 80));
     });
-
-    document.querySelector("[data-action='loop-engine-reset']").addEventListener("click", () => {
-      stopLoopEngineAuto();
-      loopEngineStep = 0;
-      renderLoopEngine();
-    });
-
-    document.querySelector("[data-action='loop-engine-auto']").addEventListener("click", (event) => {
-      if (loopEngineTimer) {
-        stopLoopEngineAuto();
-        return;
-      }
-      event.currentTarget.textContent = "暂停";
-      loopEngineTimer = setInterval(() => {
-        loopEngineStep = (loopEngineStep + 1) % loopEngineSteps.length;
-        renderLoopEngine();
-      }, 1400);
-    });
-
-    const toolUseSteps = [
-      {
-        title: "目标进入消息列表",
-        call: "用户：帮我写一份日报",
-        reason: "目标进入 messages[] 消息列表",
-        result: "模型还没有调用工具。",
-        activeTool: "",
-        activeStep: 0
-      },
-      {
-        title: "模型判断需要查资料",
-        call: "LLM：我需要先找到今天的记录",
-        reason: "选择 glob，查找文件",
-        result: "tool_use: glob(pattern: \"*日报素材*\")",
-        activeTool: "glob",
-        activeStep: 1
-      },
-      {
-        title: "分发到读取工具",
-        call: "TOOL_HANDLERS[\"read_file\"]",
-        reason: "read_file，读取文件",
-        result: "读到：需求评审 3 项，线上问题 1 个，明日继续联调。",
-        activeTool: "read_file",
-        activeStep: 2
-      },
-      {
-        title: "分发到写入工具",
-        call: "TOOL_HANDLERS[\"write_file\"]",
-        reason: "write_file，写入文件",
-        result: "写入：daily-report.md 日报草稿。",
-        activeTool: "write_file",
-        activeStep: 2
-      },
-      {
-        title: "工具结果回到消息列表",
-        call: "tool_result -> messages[]",
-        reason: "结果回流，模型继续判断",
-        result: "模型看到日报已生成，返回最终结果。",
-        activeTool: "",
-        activeStep: 3
-      }
-    ];
-
-    let toolUseStep = 0;
-
-    function renderToolUse() {
-      const step = toolUseSteps[toolUseStep];
-      document.getElementById("toolUseTitle").textContent = step.title;
-      document.getElementById("toolUseStepCounter").textContent = `${toolUseStep + 1} / ${toolUseSteps.length}`;
-      document.getElementById("toolUseCall").textContent = step.call;
-      document.getElementById("toolUseReason").textContent = step.reason;
-      document.getElementById("toolUseResult").textContent = step.result;
-      document.querySelectorAll("[data-tool-option]").forEach((item) => {
-        item.classList.toggle("active", item.getAttribute("data-tool-option") === step.activeTool);
-      });
-      document.querySelectorAll("[data-tool-step]").forEach((item) => {
-        item.classList.toggle("active", Number(item.getAttribute("data-tool-step")) === step.activeStep);
-      });
-    }
-
-    document.querySelector("[data-action='tool-use-next']").addEventListener("click", () => {
-      toolUseStep = (toolUseStep + 1) % toolUseSteps.length;
-      renderToolUse();
-    });
-
-    document.querySelector("[data-action='tool-use-reset']").addEventListener("click", () => {
-      toolUseStep = 0;
-      renderToolUse();
-    });
-
-    function renderPermissionTool(toolKey) {
-      const data = permToolData[toolKey];
-      if (!data) return;
-
-      document.querySelectorAll(".perm-tool").forEach((item) => {
-        item.classList.toggle("active", item.dataset.tool === toolKey);
-      });
-      document.getElementById("permArtifactTitle").textContent = data.title;
-      document.getElementById("permArtifactCopy").textContent = data.copy;
-      document.getElementById("permArtifactCode").textContent = data.code;
-
-      const badge = document.getElementById("permRiskBadge");
-      badge.textContent = data.risk;
-      badge.dataset.risk = data.riskLevel;
-
-      ["auto", "confirm", "block"].forEach((level) => {
-        const suffix = level.charAt(0).toUpperCase() + level.slice(1);
-        const edge = document.getElementById("permEdge" + suffix);
-        const gate = document.getElementById("permGate" + suffix);
-        const node = document.getElementById("permNode" + suffix);
-        if (edge) edge.classList.toggle("active", level === data.highlightEdge);
-        if (gate) gate.classList.toggle("active", level === data.highlightEdge);
-        if (node) node.classList.toggle("active", level === data.highlightEdge);
-      });
-
-      document.getElementById("permNodeConfirm").classList.toggle("active", data.highlightEdge !== "auto");
-      document.querySelectorAll(".mini-policy").forEach((item) => {
-        item.classList.toggle("active", item.dataset.mini === data.highlightEdge);
-      });
-    }
-
-    // 第 4 页：权限页工具切换
-    document.querySelectorAll(".perm-tool").forEach((button) => {
-      button.addEventListener("click", () => renderPermissionTool(button.dataset.tool));
-    });
-
-    document.querySelector("[data-action='perm-reset']").addEventListener("click", () => {
-      renderPermissionTool("read");
-    });
-
-        document.querySelectorAll("[data-tool]:not(.perm-tool)").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll("[data-tool]").forEach((item) => item.classList.remove("active"));
-        button.classList.add("active");
-        const data = toolData[button.dataset.tool];
-        
-        // Update output panel
-        const riskEl = document.getElementById("toolRisk");
-        document.getElementById("toolTitle").textContent = data.title;
-        riskEl.textContent = data.risk;
-        riskEl.dataset.risk = data.riskLevel;
-        document.getElementById("toolReadout").innerHTML = data.copy.map((line) => `<p>${line}</p>`).join("");
-        
-        // Update flow step label
-        document.getElementById("flowToolStep").textContent = data.toolStep;
-        
-        // Update policy card highlights
-        document.querySelectorAll("[data-policy-level]").forEach((card) => {
-          card.classList.remove("is-active");
-        });
-        data.policyHighlight.forEach((level) => {
-          const card = document.querySelector(`[data-policy-level="${level}"]`);
-          if (card) card.classList.add("is-active");
-        });
-      });
-    });
-
-    const todoFrames = [
-      {
-        title: "复杂任务进入循环",
-        copy: "没有 TODO 时，目标只压在 messages 里。",
-        code: "用户：把所有 Python 文件改成 snake_case，然后跑测试，修好失败。",
-        progress: 0,
-        empty: true,
-        states: ["current", "waiting", "waiting", "waiting"]
-      },
-      {
-        title: "先写 TODO",
-        copy: "先把长任务拆成可见检查点。",
-        code: "tool: todo_write\n1. 列出 Python 文件\n2. 统一 snake_case 命名\n3. 运行测试\n4. 修复失败并回查命名",
-        progress: 0,
-        states: ["current", "waiting", "waiting", "waiting"]
-      },
-      {
-        title: "开始执行命名",
-        copy: "先找文件，再逐个改成 snake_case。",
-        code: "tool_result:\nfound: 12 Python files\nrenamed: 3 / 12 files\nnext: 继续完成命名",
-        progress: 25,
-        states: ["done", "current", "waiting", "waiting"]
-      },
-      {
-        title: "提前跑测试，注意力被抢走",
-        copy: "测试失败很抢眼，但命名还没做完。",
-        code: "tool_result:\npytest: 2 failed\n风险：snake_case 只完成 3 / 12，模型开始盯着报错",
-        progress: 25,
-        states: ["done", "drift", "current", "waiting"]
-      },
-      {
-        title: "提醒它回到计划",
-        copy: "Nag Reminder 把注意力拉回 TODO。",
-        code: "reminder: Update your todos.\n系统：你已经多轮没有更新 todo_write，先回到计划。",
-        progress: 25,
-        states: ["done", "current", "waiting", "waiting"]
-      },
-      {
-        title: "先补完命名，再修失败",
-        copy: "任务顺序恢复，不再边改名边修测试。",
-        code: "tool_result:\nrenamed: 12 / 12 files\npytest: 2 failed\nnext: 现在再修失败并回查命名",
-        progress: 75,
-        states: ["done", "done", "done", "current"]
-      },
-      {
-        title: "回到计划完成收尾",
-        copy: "修测试后再回查命名，避免只修失败、不收目标。",
-        code: "tool: todo_write\nstep 4: completed\nresult: snake_case 检查通过，测试通过",
-        progress: 100,
-        states: ["done", "done", "done", "done"]
-      }
-    ];
-
-    let taskStep = 0;
-    const tasks = Array.from(document.querySelectorAll("#taskList .todo-item"));
-    const taskList = document.getElementById("taskList");
-    const progressLabel = document.getElementById("progressLabel");
-    const meterFill = document.getElementById("meterFill");
-
-    function renderTasks() {
-      const frame = todoFrames[taskStep];
-      if (taskList) taskList.classList.toggle("is-empty", Boolean(frame.empty));
-      tasks.forEach((task, index) => {
-        const state = frame.states[index] || "waiting";
-        const done = state === "done";
-        const current = state === "current";
-        const drift = state === "drift";
-        task.classList.toggle("done", done);
-        task.classList.toggle("current", current);
-        task.classList.toggle("drift", drift);
-        task.querySelector(".check").textContent = done ? "✓" : drift ? "!" : String(index + 1);
-        task.querySelector(".tag").textContent = drift ? "偏航" : done ? "完成" : current ? "当前" : "等待";
-      });
-      const progress = frame.progress;
-      if (progressLabel) progressLabel.textContent = `${progress}%`;
-      if (meterFill) meterFill.style.setProperty("--progress", `${progress}%`);
-      document.getElementById("todoNarrativeTitle").textContent = frame.title;
-      document.getElementById("todoNarrativeCopy").textContent = frame.copy;
-      document.getElementById("todoArtifactCode").textContent = frame.code;
-      document.getElementById("todoStepCounter").textContent = `${taskStep + 1} / ${todoFrames.length}`;
-    }
-
-    document.querySelector("[data-action='task-next']").addEventListener("click", () => {
-      taskStep = Math.min(taskStep + 1, todoFrames.length - 1);
-      renderTasks();
-    });
-
-    document.querySelector("[data-action='task-reset']").addEventListener("click", () => {
-      taskStep = 0;
-      renderTasks();
-    });
-
-    document.querySelectorAll("[data-skill]").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll("[data-skill]").forEach((item) => item.classList.remove("active"));
-        button.classList.add("active");
-        const data = skillData[button.dataset.skill];
-        document.getElementById("skillRequest").textContent = data.request;
-        document.getElementById("skillTitle").textContent = data.title;
-        document.getElementById("skillName").textContent = data.name;
-        document.getElementById("skillWhen").textContent = data.when;
-        document.getElementById("skillLoaded").textContent = data.loaded;
-        document.getElementById("loadedSkill").textContent = data.detail;
-        const loadedCard = document.getElementById("skillLoadedCard");
-        loadedCard.style.animation = "none";
-        loadedCard.offsetHeight;
-        loadedCard.style.animation = "skill-load-pulse 520ms ease";
-      });
-    });
-
-    let compactStep = 0;
-    function renderCompact() {
-      const frame = compactFrames[compactStep];
-      const meterFill = document.getElementById("contextMeterFill");
-      const meterLabel = document.getElementById("contextMeterLabel");
-      const stepLabel = document.getElementById("compactStepLabel");
-      const status = document.getElementById("compactStatus");
-      if (!meterFill || !meterLabel || !stepLabel || !status) return;
-      meterFill.style.setProperty("--context-fill", frame.fill);
-      meterFill.style.setProperty("--context-color", frame.color);
-      meterLabel.textContent = frame.meter;
-      stepLabel.textContent = frame.label;
-      status.textContent = frame.status;
-      document.querySelectorAll("#compactMessageStack .compact-msg").forEach((msg, index) => {
-        msg.classList.remove("trimmed", "gone");
-        if (frame.classes[index]) msg.classList.add(frame.classes[index]);
-      });
-    }
-
-    renderCompact();
-
-    const compactNextButton = document.querySelector("[data-action='compact-next']");
-    const compactResetButton = document.querySelector("[data-action='compact-reset']");
-    if (compactNextButton) {
-      compactNextButton.addEventListener("click", () => {
-        compactStep = Math.min(compactStep + 1, compactFrames.length - 1);
-        renderCompact();
-      });
-    }
-
-    if (compactResetButton) {
-      compactResetButton.addEventListener("click", () => {
-        compactStep = 0;
-        renderCompact();
-      });
-    }
-
-    document.querySelectorAll("[data-memory]").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll("[data-memory]").forEach((item) => item.classList.remove("active"));
-        button.classList.add("active");
-        const data = memoryData[button.dataset.memory];
-        document.getElementById("memoryTypeLabel").textContent = data.type;
-        document.getElementById("memoryOriginal").textContent = data.original;
-        document.getElementById("memoryCompressed").textContent = data.compressed;
-        document.getElementById("memoryTitle").textContent = data.title;
-        document.getElementById("memoryFile").textContent = data.file;
-        document.getElementById("memoryWhen").textContent = data.when;
-        document.getElementById("memoryContent").textContent = data.content;
-        document.getElementById("memoryResult").textContent = data.result;
-        const memoryCard = document.getElementById("memoryLiveCard");
-        memoryCard.style.animation = "none";
-        memoryCard.offsetHeight;
-        memoryCard.style.animation = "skill-load-pulse 520ms ease";
-      });
-    });
-
-    function renderSystemPromptMode(modeName) {
-      const data = systemPromptModes[modeName];
-      if (!data) return;
-      document.getElementById("systemModeLabel").textContent = data.label;
-      document.getElementById("systemSections").textContent = data.sections;
-      document.getElementById("toolSchemaSummary").textContent = data.tools;
-      document.getElementById("memorySectionSummary").textContent = data.memory;
-      document.getElementById("reminderSummary").textContent = data.reminder;
-      document.getElementById("systemPreviewTitle").textContent = data.title;
-      document.getElementById("systemPreviewSystem").textContent = data.system;
-      document.getElementById("systemPreviewMessages").textContent = data.messages;
-      document.getElementById("systemPreviewCache").textContent = data.cache;
-      document.getElementById("systemResult").textContent = data.result;
-      document.querySelectorAll("#requestStack .request-layer").forEach((layer) => {
-        const active = data.activeLayers.includes(layer.dataset.layer);
-        layer.classList.toggle("active", active);
-        layer.classList.toggle("muted", !active);
-      });
-      const card = document.getElementById("systemPreviewCard");
-      card.style.animation = "none";
-      card.offsetHeight;
-      card.style.animation = "skill-load-pulse 520ms ease";
-    }
-
-    document.querySelectorAll("[data-system-mode]").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll("[data-system-mode]").forEach((item) => item.classList.remove("active"));
-        button.classList.add("active");
-        renderSystemPromptMode(button.dataset.systemMode);
-      });
-    });
-
-    function renderMcpMode(modeName) {
-      const data = mcpModes[modeName];
-      if (!data) return;
-      document.getElementById("mcpModeLabel").textContent = data.label;
-      document.getElementById("mcpCallTitle").textContent = data.title;
-      document.getElementById("mcpToolName").textContent = data.tool;
-      document.getElementById("mcpServerName").textContent = data.server;
-      document.getElementById("mcpSystemName").textContent = data.system;
-      document.getElementById("mcpResultBox").textContent = data.detail;
-      document.getElementById("mcpResult").textContent = data.result;
-      const card = document.getElementById("mcpCallCard");
-      card.style.animation = "none";
-      card.offsetHeight;
-      card.style.animation = "skill-load-pulse 520ms ease";
-    }
-
-    document.querySelectorAll("[data-mcp]").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll("[data-mcp]").forEach((item) => item.classList.remove("active"));
-        button.classList.add("active");
-        renderMcpMode(button.dataset.mcp);
-      });
-    });
-
-    let teamStep = 0;
-    const teamClasses = ["research", "code", "test", "write"];
-    const teamNextButton = document.querySelector("[data-action='team-next']");
-    const teamResetButton = document.querySelector("[data-action='team-reset']");
-    if (teamNextButton) {
-      teamNextButton.addEventListener("click", () => {
-        document.querySelectorAll("#agentRing .avatar").forEach((avatar) => avatar.classList.remove("active"));
-        const activeClass = teamClasses[teamStep % teamClasses.length];
-        const activeAvatar = document.querySelector(`#agentRing .${activeClass}`);
-        if (activeAvatar) activeAvatar.classList.add("active");
-        teamStep += 1;
-      });
-    }
-
-    if (teamResetButton) {
-      teamResetButton.addEventListener("click", () => {
-        teamStep = 0;
-        document.querySelectorAll("#agentRing .avatar").forEach((avatar) => avatar.classList.remove("active"));
-      });
-    }
-
-    let connectorStep = 1;
-    const connectors = Array.from(document.querySelectorAll("#connectorGrid .connector"));
-    const connectorNextButton = document.querySelector("[data-action='connector-next']");
-    if (connectorNextButton) {
-      connectorNextButton.addEventListener("click", () => {
-        connectors[Math.min(connectorStep, connectors.length - 1)].classList.add("active");
-        connectorStep = Math.min(connectorStep + 1, connectors.length);
-      });
-    }
-
-    renderLoopEngine();
-    renderToolUse();
-    renderPermissionTool("read");
-    renderTasks();
-    renderMcpMode("browser");
-    renderScript();
-    if (window.customElements && customElements.whenDefined) {
-      customElements.whenDefined("deck-stage").then(() => requestAnimationFrame(syncScriptToActiveSlide));
-    }
-    setTimeout(syncScriptToActiveSlide, 250);
   </script>
 </body>
 </html>
