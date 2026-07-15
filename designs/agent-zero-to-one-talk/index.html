@@ -8222,13 +8222,13 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section class="finale-page" data-label="Loop + Harness 总结" data-speaker-notes="最后收束。今天讲的所有机制可以归成两类工作：Loop Engineer 负责让模型持续判断、行动、观察和停止；Harness Engineer 负责把工具、权限、计划、技能、压缩、记忆、系统提示词、子 Agent 和 MCP 接在循环外面。Loop 解决会不会做，Harness 解决能不能安全、持续、可评估地做。两者结合，Agent 才能从会话工具变成任务系统。">
+    <section class="finale-page" data-label="Loop + Harness 总结" data-speaker-notes="最后收束。今天讲的所有机制可以归成两类工作：Loop Engineering 负责让模型持续判断、行动、观察和停止；Harness Engineering 负责把工具、权限、计划、技能、压缩、记忆、系统提示词、子 Agent 和 MCP 接在循环外面。Loop 解决会不会做，Harness 解决能不能安全、持续、可评估地做。两者结合，Agent 才能从会话工具变成任务系统。">
       <div class="slide-grid">
         <header class="slide-head">
             <div class="num">11</div>
           <div>
             <span class="kicker">Summary</span>
-            <h2>Agent 的核心，是 Loop Engineer + Harness Engineer</h2>
+            <h2>Agent 的核心，是 Loop Engineering + Harness Engineering</h2>
             <p class="finale-subtitle">Loop 让模型持续推进；Harness 给它工具、边界、上下文和外部系统。今天所有机制，基本都能放进这两类工作。</p>
           </div>
           <span class="tag">11 / 分享总结</span>
@@ -8237,7 +8237,7 @@ result: 字段口径已确认</pre>
           <div class="engineer-compare">
             <article class="engineer-card loop">
               <div class="engineer-title">
-                <h3>Loop Engineer</h3>
+                <h3>Loop Engineering</h3>
                 <span>让模型持续推进</span>
               </div>
               <p>关注的是一圈怎么跑：读现场、判断下一步、调用工具、观察结果，直到能给出最终交付。</p>
@@ -8259,7 +8259,7 @@ result: 字段口径已确认</pre>
 
             <article class="engineer-card harness">
               <div class="engineer-title">
-                <h3>Harness Engineer</h3>
+                <h3>Harness Engineering</h3>
                 <span>让行动可控可持续</span>
               </div>
               <p>关注的是循环外的运行环境：哪些能力可用、哪些动作要确认、上下文如何维护、外部系统如何接入。</p>
@@ -8396,7 +8396,7 @@ result: 字段口径已确认</pre>
       },
       {
         title: "Loop + Harness 总结",
-        beginner: "最后我们把所有内容收束成两类工作：Loop Engineer 负责让模型一轮轮判断、行动、观察和停止；Harness Engineer 负责给它工具、边界、上下文、记忆、子任务和外部系统。",
+        beginner: "最后我们把所有内容收束成两类工作：Loop Engineering 负责让模型一轮轮判断、行动、观察和停止；Harness Engineering 负责给它工具、边界、上下文、记忆、子任务和外部系统。",
         technical: "前面所有机制都可以放进这个框架：Loop 是 messages -> LLM -> tool_use -> tool_result 的核心循环；Harness 是工具分发、权限、Todo、Skill、Compact、Memory、System Prompt、Subagent 和 MCP 这些运行层能力。",
         business: "所以做 Agent 不是写一个万能提示词，而是为具体任务建设运行环境。先跑通最小闭环，再按风险和收益补 Harness，最后从会话工具走向可交付、可解释、可迭代的任务系统。"
       },
