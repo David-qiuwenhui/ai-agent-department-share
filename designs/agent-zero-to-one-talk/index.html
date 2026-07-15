@@ -2674,7 +2674,7 @@
     .memory-store {
       grid-column: 1 / -1;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 12px;
       padding: 18px;
       border: 3px dashed var(--violet);
@@ -7847,7 +7847,7 @@ result: 字段口径已确认</pre>
       </div>
     </section>
 
-    <section class="memory-page" data-label="Memory 记忆" data-speaker-notes="这一页讲 Memory。上一页的 Context Compact 能腾地方，但压缩一定会损失细节。Memory 是 Harness 层放在上下文窗口外的一层持久存储：把用户的角色定义、用户的作业习惯、项目规范、关键文件摆放的位置写成文件，启动时只加载索引，需要时再加载相关记忆。">
+    <section class="memory-page" data-label="Memory 记忆" data-speaker-notes="这一页讲 Memory。上一页的 Context Compact 能腾地方，但压缩一定会损失细节。Memory 是 Harness 层放在上下文窗口外的一层持久存储：把用户角色定义、Agent 角色定义、用户的作业习惯、项目内工作方式、关键文件摆放的位置写成文件，启动时只加载索引，需要时再加载相关记忆。">
       <div class="slide-grid">
         <header class="slide-head">
           <div class="num">07</div>
@@ -7885,19 +7885,23 @@ result: 字段口径已确认</pre>
               <div class="memory-store">
                 <div class="memory-store-title">
                   <span>.memory/ 文件仓库</span>
-                  <span>示例映射：SOUL.md / MEMORY.md / PROJECT.md / REFERENCES.md</span>
+                  <span>示例映射：USER.md / SOUL.md / MEMORY.md / AGENTS.md / REFERENCES.md</span>
+                </div>
+                <div class="memory-file">
+                  <strong>USER.md</strong>
+                  <span>用户角色定义、业务背景和沟通偏好。</span>
                 </div>
                 <div class="memory-file">
                   <strong>SOUL.md</strong>
-                  <span>用户角色定义、沟通偏好和作业习惯。</span>
+                  <span>Agent 角色定义、工作口径和行为边界。</span>
                 </div>
                 <div class="memory-file">
                   <strong>MEMORY.md</strong>
                   <span>长期索引、用户反馈和做事方式。</span>
                 </div>
                 <div class="memory-file">
-                  <strong>PROJECT.md</strong>
-                  <span>项目规范、技术栈、验收方式。</span>
+                  <strong>AGENTS.md</strong>
+                  <span>Agent 在这个项目里应该怎么工作。</span>
                 </div>
                 <div class="memory-file">
                   <strong>REFERENCES.md</strong>
@@ -7932,19 +7936,19 @@ result: 字段口径已确认</pre>
             </div>
 
             <div class="memory-tabs">
-              <button class="chip active" type="button" data-memory="user">用户的角色定义</button>
+              <button class="chip active" type="button" data-memory="user">角色定义</button>
               <button class="chip" type="button" data-memory="feedback">用户的作业习惯</button>
-              <button class="chip" type="button" data-memory="project">项目规范</button>
+              <button class="chip" type="button" data-memory="project">项目工作方式</button>
               <button class="chip" type="button" data-memory="reference">关键文件摆放的位置</button>
             </div>
 
             <div class="memory-live-card" id="memoryLiveCard">
-              <h3 id="memoryTitle">用户的角色定义 / SOUL.md</h3>
+              <h3 id="memoryTitle">用户角色 / USER.md + Agent 角色 / SOUL.md</h3>
               <div class="memory-meta-grid">
-                <div class="memory-meta-item"><strong>example_file</strong><span id="memoryFile">.memory/SOUL.md</span></div>
-                <div class="memory-meta-item"><strong>when_to_load</strong><span id="memoryWhen">判断角色口径和沟通深度时加载</span></div>
+                <div class="memory-meta-item"><strong>example_file</strong><span id="memoryFile">.memory/USER.md + SOUL.md</span></div>
+                <div class="memory-meta-item"><strong>when_to_load</strong><span id="memoryWhen">判断用户背景和 Agent 口径时加载</span></div>
               </div>
-              <div class="memory-content" id="memoryContent">精确记忆：用户是部门内做 Agent 分享的负责人，需要兼顾技术深度和业务可理解性。</div>
+              <div class="memory-content" id="memoryContent">精确记忆：USER.md 记录用户是谁、面向谁；SOUL.md 记录 Agent 应该以什么角色、口径和边界协作。</div>
             </div>
 
             <div class="memory-result">
@@ -8519,9 +8523,9 @@ result: 字段口径已确认</pre>
       },
       {
         title: "Memory 记忆",
-        beginner: "压缩能腾地方，但一定会丢细节。Memory 的作用，就是把不该丢的长期信息存到上下文窗口外，比如用户的角色定义、用户的作业习惯、项目规范，以及关键文件摆放的位置。",
-        technical: "Memory 是 Harness 层的持久文件仓库：可以用 MEMORY.md 做索引，用 SOUL.md、PROJECT.md、REFERENCES.md 这类文件承载不同类型的长期信息。启动时索引常驻；运行时由 LLM side-query 选择少量相关文件注入。",
-        business: "对业务团队来说，Memory 是长期知识资产。它保存的不是闲聊记录，而是角色、习惯、规范和资料位置；这些信息不被一次压缩抹掉，也不会因为新开会话就归零。"
+        beginner: "压缩能腾地方，但一定会丢细节。Memory 的作用，就是把不该丢的长期信息存到上下文窗口外，比如用户角色定义、Agent 角色定义、用户的作业习惯、项目内工作方式，以及关键文件摆放的位置。",
+        technical: "Memory 是 Harness 层的持久文件仓库：可以用 MEMORY.md 做索引，用 USER.md、SOUL.md、AGENTS.md、REFERENCES.md 这类文件承载不同类型的长期信息。启动时索引常驻；运行时由 LLM side-query 选择少量相关文件注入。",
+        business: "对业务团队来说，Memory 是长期知识资产。它保存的不是闲聊记录，而是用户角色、Agent 角色、习惯、项目工作方式和资料位置；这些信息不被一次压缩抹掉，也不会因为新开会话就归零。"
       },
       {
         title: "System Prompt 组装",
@@ -8726,11 +8730,11 @@ result: 字段口径已确认</pre>
         type: "role",
         original: "这次分享面向部门同事，要技术讲清楚，也要业务能听懂。",
         compressed: "用户在准备 Agent 分享。",
-        title: "用户的角色定义 / SOUL.md",
-        file: ".memory/SOUL.md",
-        when: "判断角色口径和沟通深度时加载",
-        content: "精确记忆：用户是部门内做 Agent 分享的负责人，需要兼顾技术深度和业务可理解性。",
-        result: "Memory 让 Agent 记住“我在帮谁、面向谁、应该用什么口径”。"
+        title: "用户角色 / USER.md + Agent 角色 / SOUL.md",
+        file: ".memory/USER.md + SOUL.md",
+        when: "判断用户背景和 Agent 口径时加载",
+        content: "精确记忆：USER.md 记录用户是谁、面向谁；SOUL.md 记录 Agent 应该以什么角色、口径和边界协作。",
+        result: "Memory 让 Agent 记住“我在帮谁、我是谁、应该用什么口径”。"
       },
       feedback: {
         type: "habit",
@@ -8746,11 +8750,11 @@ result: 字段口径已确认</pre>
         type: "project",
         original: "这份 deck 用 deck-stage，页面是 1920x1080 的静态 HTML。",
         compressed: "项目是 HTML 演示材料。",
-        title: "项目规范 / PROJECT.md",
-        file: ".memory/PROJECT.md",
-        when: "涉及演示材料结构、导出或视觉统一时加载",
-        content: "精确记忆：这份材料是 deck-stage 驱动的静态 HTML deck，优先保持文字可直接编辑，按 1920x1080 画布验证。",
-        result: "项目规范跨会话保留，新会话不用重新解释技术约束。"
+        title: "项目工作方式 / AGENTS.md",
+        file: ".memory/AGENTS.md",
+        when: "涉及项目内如何行动、验证或协作时加载",
+        content: "精确记忆：AGENTS.md 说明 Agent 在这个项目里应该怎么工作，比如遵守 deck-stage 结构、保持文字可编辑、按 1920x1080 画布验证。",
+        result: "项目内工作方式跨会话保留，新会话不用重新解释 Agent 应该怎么推进。"
       },
       reference: {
         type: "reference",
